@@ -35,7 +35,7 @@ func TestCreateAndDeleteApplication(t *testing.T) {
 					URL:  "https://foo.com/foobar",
 				},
 			},
-			shouldError: false,
+			shouldError: true,
 		},
 		{
 			name: "create valid private application",
@@ -57,6 +57,9 @@ func TestCreateAndDeleteApplication(t *testing.T) {
 	}
 	client.SetToken(token)
 	for _, tc := range tests {
+		// POST /applications
+		// Verify success (optionally check GET /applications to confirm in DB)
+		// Delete application
 		t.Log(tc.name) // Placeholder
 		err = application.CreateApplication(client, &tc.application)
 		if err != nil && !tc.shouldError {
@@ -66,8 +69,8 @@ func TestCreateAndDeleteApplication(t *testing.T) {
 			t.Fatalf("expected error and didn't get it")
 		}
 		err = application.DeleteApplication(client, tc.application.ID)
-		// POST /applications
-		// Verify success (optionally check GET /applications to confirm in DB)
-		// Delete application
+		if err != nil && !tc.shouldError {
+			t.Fatalf("unexpected error: %v", err.Error())
+		}
 	}
 }
