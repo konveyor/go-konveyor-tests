@@ -29,7 +29,7 @@ func TestCreateAndDeleteApplication(t *testing.T) {
 		{
 			name: "create invalid application",
 			application: api.Application{
-				Name: "bad-app",
+				Name: "",
 				Repository: &api.Repository{
 					Kind: "foobar",
 					URL:  "https://foo.com/foobar",
