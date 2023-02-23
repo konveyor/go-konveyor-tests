@@ -2,7 +2,7 @@ module github.com/konveyor/go-konveyor-tests
 
 go 1.18
 
-require github.com/konveyor/tackle2-hub v0.0.0-20230214175307-54c9422e54df
+require github.com/konveyor/tackle2-hub v0.0.0-20230223012753-243220995ae4
 
 require (
 	github.com/Nerzal/gocloak/v10 v10.0.1 // indirect
