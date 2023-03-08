@@ -2,7 +2,7 @@
 
 Initialy forked from https://github.com/konveyor/go-konveyor-tests, prefer to be named **konveyor/go-api-tests**.
 
-## CI status
+## Test status
 
 [![End-To-End API Test](https://github.com/aufi/go-konveyor-tests/actions/workflows/e2e-api-test.yml/badge.svg?branch=main)](https://github.com/aufi/go-konveyor-tests/actions/workflows/e2e-api-test.yml)
 
@@ -29,7 +29,7 @@ $ make test
 Run test manually example:
 
 ```
-$ export HUB_ENDPOINT="http://${MINIKUBE_IP}/hub"   # TODO: user/password variables
+$ export HUB_ENDPOINT="http://${MINIKUBE_IP}/hub"   # TODO: Allow set user&password variables
 $ go test -v developer/applications-inventory/applications_create_test.go
 ```
 

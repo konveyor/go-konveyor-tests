@@ -1,11 +1,11 @@
-TESTS_ROOT ?= ./e2e-api-tests
-VENDOR_DIR ?= ${TESTS_ROOT}/vendor
+VENDOR_DIR ?= /tmp/konveyor-vendor
 ARCH ?= amd64
 MINIKUBE_IP ?= `minikube ip`
 
 # Setup local minikube with tackle - work in progress (TODO: enable auth)
 # This is for local setup, CI uses shared github actions
 setup:
+	mkdir -p ${VENDOR_DIR}
 	curl https://raw.githubusercontent.com/konveyor/tackle2-operator/main/hack/start-minikube.sh -Lo ${VENDOR_DIR}/start-minikube.sh  && chmod +x ${VENDOR_DIR}/start-minikube.sh
 	curl https://raw.githubusercontent.com/konveyor/tackle2-operator/main/hack/install-tackle.sh -Lo ${VENDOR_DIR}/install-tackle.sh && chmod +x ${VENDOR_DIR}/install-tackle.sh
 	${VENDOR_DIR}/start-minikube.sh && \
