@@ -17,5 +17,4 @@ clean:
 
 # Execute end-to-end testsuite
 test:
-	export HUB_ENDPOINT="http://${MINIKUBE_IP}/hub"
-	go test -v ./...
+	HUB_ENDPOINT="http://${MINIKUBE_IP}/hub" go test -v ./...

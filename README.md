@@ -29,7 +29,7 @@ $ make test
 Run test manually example:
 
 ```
-$ export HUB_ENDPOINT="http://${MINIKUBE_IP}/hub"   # TODO: Allow set user&password variables
+$ export HUB_ENDPOINT="http://`minikube ip`/hub"   # TODO: Allow set user&password variables
 $ go test -v developer/applications-inventory/applications_create_test.go
 ```
 
