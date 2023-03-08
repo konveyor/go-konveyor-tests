@@ -1,9 +1,22 @@
-package auth
+package util
 
 import (
+	"os"
+
 	"github.com/konveyor/tackle2-hub/addon"
 	"github.com/konveyor/tackle2-hub/api"
 )
+
+// Add with and without login/token creation
+func NewHubClient() (client *addon.Client, err error) {
+	client = addon.NewClient(os.Getenv("HUB_ENDPOINT"), "")
+	token, err := login(client, "admin", "foobar")
+	if err != nil {
+		return
+	}
+	client.SetToken(token)
+	return
+}
 
 type LoginObject struct {
 	User     string `json:"user"`
@@ -12,7 +25,7 @@ type LoginObject struct {
 }
 
 // Login performs a login request to the hub and returns a token
-func Login(client *addon.Client, username, password string) (string, error) {
+func login(client *addon.Client, username, password string) (string, error) {
 	login := LoginObject{User: username, Password: password}
 	err := client.Post(api.AuthLoginRoot, &login)
 	if err != nil {

@@ -2,7 +2,7 @@ module github.com/konveyor/go-konveyor-tests
 
 go 1.18
 
-require github.com/konveyor/tackle2-hub v0.0.0-20230223012753-243220995ae4
+require github.com/konveyor/tackle2-hub v0.0.0-20230227200834-5cf6c3f78dfc
 
 require (
 	github.com/Nerzal/gocloak/v10 v10.0.1 // indirect
@@ -28,6 +28,7 @@ require (
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/konveyor/controller v0.8.0 // indirect
+	github.com/konveyor/tackle2-addon-windup v0.0.0-20230303142819-9b0052d80adc // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
 	github.com/mattn/go-sqlite3 v1.14.14 // indirect
