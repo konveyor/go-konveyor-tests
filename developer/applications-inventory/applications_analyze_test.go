@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/konveyor/go-konveyor-tests/util"
+	"github.com/konveyor/go-konveyor-tests/pkg/util"
 	"github.com/konveyor/tackle2-hub/api"
 )
 

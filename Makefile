@@ -6,6 +6,8 @@ MINIKUBE_IP ?= `minikube ip`
 # This is for local setup, CI uses shared github actions
 setup:
 	mkdir -p ${VENDOR_DIR}
+	rm -rf ${VENDOR_DIR}/start-minikube.sh
+	rm -rf ${VENDOR_DIR}/install-tackle.sh
 	curl https://raw.githubusercontent.com/konveyor/tackle2-operator/main/hack/start-minikube.sh -Lo ${VENDOR_DIR}/start-minikube.sh  && chmod +x ${VENDOR_DIR}/start-minikube.sh
 	curl https://raw.githubusercontent.com/konveyor/tackle2-operator/main/hack/install-tackle.sh -Lo ${VENDOR_DIR}/install-tackle.sh && chmod +x ${VENDOR_DIR}/install-tackle.sh
 	${VENDOR_DIR}/start-minikube.sh && \
