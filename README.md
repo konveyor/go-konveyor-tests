@@ -2,6 +2,8 @@
 
 Initialy forked from https://github.com/konveyor/go-konveyor-tests, prefer to be named **konveyor/go-api-tests**.
 
+Background for this test suite come from Hub API tests https://github.com/konveyor/tackle2-hub/pull/268.
+
 ## Test status
 
 [![End-To-End API Test](https://github.com/aufi/go-konveyor-tests/actions/workflows/e2e-api-test.yml/badge.svg?branch=main)](https://github.com/aufi/go-konveyor-tests/actions/workflows/e2e-api-test.yml)
