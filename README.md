@@ -1,6 +1,4 @@
-# Golang API test suite for Konveyor
-
-Initialy forked from https://github.com/konveyor/go-konveyor-tests, prefer to be named **konveyor/go-api-tests**.
+# Golang API test suite for Konveyor [WIP]
 
 Background for this test suite come from Hub API tests https://github.com/konveyor/tackle2-hub/pull/268.
 
