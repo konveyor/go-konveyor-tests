@@ -2,7 +2,9 @@
 
 Background for this test suite come from Hub API tests https://github.com/konveyor/tackle2-hub/pull/268.
 
-Application Analysis integration test example: https://github.com/konveyor/tackle2-hub/pull/268/files#diff-fcd2bf711a00447192da2d46171f15d0bb6302397b523e0ba92ac9f61bbb8ff7
+Application Analysis integration test example: https://github.com/konveyor/tackle2-hub/blob/main/test/integration/applications-inventory/analysis/windup_basic_test.go
+
+Full hub provided test "framework": [https://github.com/konveyor/tackle2-hub/pull/268/files#diff-fcd2bf711a00447192da2d46171f15d0bb6302397b523e0ba92ac9f61bbb8ff7](https://github.com/konveyor/tackle2-hub/tree/main/test)
 
 ## Test status
 
