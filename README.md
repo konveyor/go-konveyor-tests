@@ -1,4 +1,17 @@
-# Golang API test suite for Konveyor [WIP]
+# Golang API test suite for Konveyor
+
+This repository contains application-level tests for Konveyor. That means test focusing on integration of multiple components and real-world Koveyor use-cases. Basic components tests should be placed and executed in their own repositories.
+
+Test are organized in packages/directories by the high-level Konveyor features.
+
+Tests require running Konveyor/MTA installation (e.g. Minikube works great for test development purposes).
+
+## Test status
+
+[![End-To-End API Test](https://github.com/aufi/go-konveyor-tests/actions/workflows/e2e-api-test.yml/badge.svg?branch=main)](https://github.com/aufi/go-konveyor-tests/actions/workflows/e2e-api-test.yml)
+
+
+## Contribution guidelines
 
 Background for this test suite come from Hub API tests https://github.com/konveyor/tackle2-hub/pull/268.
 
@@ -6,9 +19,6 @@ Application Analysis integration test example: https://github.com/konveyor/tackl
 
 Full hub provided test "framework": [https://github.com/konveyor/tackle2-hub/pull/268/files#diff-fcd2bf711a00447192da2d46171f15d0bb6302397b523e0ba92ac9f61bbb8ff7](https://github.com/konveyor/tackle2-hub/tree/main/test)
 
-## Test status
-
-[![End-To-End API Test](https://github.com/aufi/go-konveyor-tests/actions/workflows/e2e-api-test.yml/badge.svg?branch=main)](https://github.com/aufi/go-konveyor-tests/actions/workflows/e2e-api-test.yml)
 
 ## Local test suite execution
 
@@ -33,8 +43,8 @@ $ make test
 Run test manually example:
 
 ```
-$ export HUB_ENDPOINT="http://`minikube ip`/hub"   # TODO: Allow set user&password variables
-$ go test -v developer/applications-inventory/applications_create_test.go
+$ export HUB_BASE_URL="http://`minikube ip`/hub"
+$ go test -v analysis/windup_basic_test.go
 ```
 
 ## Code of Conduct

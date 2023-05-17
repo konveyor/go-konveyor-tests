@@ -17,6 +17,9 @@ setup:
 clean:
 	minikube delete || true
 
-# Execute end-to-end testsuite
-test:
-	HUB_ENDPOINT="http://${MINIKUBE_IP}/hub" go test -v ./...
+# Execute application analysis tests.
+test-analysis:
+	HUB_BASE_URL="http://${MINIKUBE_IP}/hub" go test -v ./analysis/...
+
+# Execute all tests.
+test-all: test-analysis

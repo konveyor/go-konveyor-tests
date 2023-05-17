@@ -1,0 +1,22 @@
+name: Test nightly
+
+on:
+  schedule:
+    - cron: '14 0 * * *'
+      
+jobs:
+  test-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: start-minikube
+        uses: konveyor/tackle2-operator/.github/actions/start-minikube@main
+      - name: install-tackle
+        uses: konveyor/tackle2-operator/.github/actions/install-tackle@main
+        with:
+          tackle-hub-image: tackle2-hub:latest
+          tackle-image-pull-policy: IfNotPresent
+      - uses: actions/setup-go@v3
+        with:
+          go-version: '1.19'
+      - run: make test-analysis
