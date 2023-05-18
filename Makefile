@@ -23,3 +23,7 @@ test-analysis:
 
 # Execute all tests.
 test-all: test-analysis
+
+# Update Hub dependency with latest binding and api.
+update-hub:
+	go get -u github.com/konveyor/tackle2-hub@main
