@@ -107,8 +107,8 @@ github.com/kisielk/errcheck v1.5.0/go.mod h1:pFxgyoBC7bSaBwPgfKdkLd5X25qrDl4LWUI
 github.com/kisielk/gotool v1.0.0/go.mod h1:XhKaO+MFFWcvkIS/tQcRk01m1F5IRFswLeQ+oQHNcck=
 github.com/klauspost/cpuid/v2 v2.0.9 h1:lgaqFMSdTdQYdZ04uHyN2d/eKdOMyi2YLSvlQIBFYa4=
 github.com/klauspost/cpuid/v2 v2.0.9/go.mod h1:FInQzS24/EEf25PyTYn52gqo7WaD8xa0213Md/qVLRg=
-github.com/konveyor/tackle2-hub v0.1.2-0.20230518195404-5e39c8efad05 h1:tOdk1WyaIRWD2CTYkyPw/gZpYTeZyXL5WIVmUYQrExI=
-github.com/konveyor/tackle2-hub v0.1.2-0.20230518195404-5e39c8efad05/go.mod h1:FtXCHfgeWmOmfmcMVt6uebDNK7QPILRXGg4Y4vFSaK0=
+github.com/konveyor/tackle2-hub v0.1.2-0.20230518212519-840262860b06 h1:8WNcTFOoDXubrUpm4fBFZEluWVvr7UFJNANVx99fwgs=
+github.com/konveyor/tackle2-hub v0.1.2-0.20230518212519-840262860b06/go.mod h1:FtXCHfgeWmOmfmcMVt6uebDNK7QPILRXGg4Y4vFSaK0=
 github.com/kr/pretty v0.2.0/go.mod h1:ipq/a2n7PKx3OHsz4KJII5eveXtPO4qwEXGdVfWzfnI=
 github.com/kr/pretty v0.2.1 h1:Fmg33tUaq4/8ym9TJN1x7sLJnHVwhP33CNkpYV/7rwI=
 github.com/kr/pretty v0.2.1/go.mod h1:ipq/a2n7PKx3OHsz4KJII5eveXtPO4qwEXGdVfWzfnI=
