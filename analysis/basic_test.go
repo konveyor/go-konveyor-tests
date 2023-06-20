@@ -7,7 +7,6 @@ import (
 	"time"
 
 	"github.com/konveyor/tackle2-hub/api"
-	"github.com/konveyor/tackle2-hub/test/api/application"
 	"github.com/konveyor/tackle2-hub/test/assert"
 )
 
@@ -15,52 +14,9 @@ import (
 // Test application analysis
 // "Basic" means that there no other dependencies than the application itself (no need prepare credentials, proxy, etc)
 func TestBasicAnalysis(t *testing.T) {
-	tests := []TC{
-		{
-			Name:        "Pathfinder cloud-readiness",
-			Application: application.PathfinderGit,
-			Task: api.Task{
-				Addon: "windup",
-				State: "Ready",
-			},
-			TaskData: `{
-				"mode": {
-					"artifact": "",
-					"binary": false,
-					"withDeps": false,
-					"diva": true
-				},
-				"output": "/windup/report",
-				"rules": {
-					"path": "",
-					"tags": {
-						"excluded": [ ]
-					}
-				},
-				"scope": {
-					"packages": {
-						"excluded": [ ],
-						"included": [ ]
-					},
-					"withKnown": false
-				},
-				"sources": [ ],
-				"targets": [
-					"cloud-readiness"
-				]
-			  }`,
-			ReportContent: map[string][]string {
-				"/windup/report/index.html": {
-					"5\nstory points",
-				    "5\nCloud Mandatory",
-					"9\nInformation",
-				},
-			},
-		},
-	}
 
 	// Test using "richclient" methods (preffered way).
-	for _, tc := range tests {
+	for _, tc := range BasicTests {
 		t.Run(tc.Name, func(t *testing.T) {
 			// Create the application.
 			assert.Should(t, RichClient.Application.Create(&tc.Application))
@@ -71,6 +27,7 @@ func TestBasicAnalysis(t *testing.T) {
 			assert.Should(t, RichClient.Task.Create(&tc.Task))
 
 			// Wait until task finishes
+			//t.Parallel()
 			var task *api.Task
 			var err error
 			for i := 0; i < Retry; i++ {
@@ -97,7 +54,7 @@ func TestBasicAnalysis(t *testing.T) {
 			}
 
 			// Cleanup.
-			assert.Must(t, RichClient.Application.Delete(tc.Application.ID))
+		//	assert.Must(t, RichClient.Application.Delete(tc.Application.ID))
 		})
 	}
 }
