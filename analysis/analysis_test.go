@@ -13,10 +13,10 @@ import (
 //
 // Test application analysis
 // "Basic" means that there no other dependencies than the application itself (no need prepare credentials, proxy, etc)
-func TestBasicAnalysis(t *testing.T) {
+func TestApplicationAnalysis(t *testing.T) {
 
 	// Test using "richclient" methods (preffered way).
-	for _, tc := range BasicTests {
+	for _, tc := range TestCases {
 		t.Run(tc.Name, func(t *testing.T) {
 			// Create the application.
 			assert.Should(t, RichClient.Application.Create(&tc.Application))
@@ -54,7 +54,7 @@ func TestBasicAnalysis(t *testing.T) {
 			}
 
 			// Cleanup.
-		//	assert.Must(t, RichClient.Application.Delete(tc.Application.ID))
+			assert.Must(t, RichClient.Application.Delete(tc.Application.ID))
 		})
 	}
 }

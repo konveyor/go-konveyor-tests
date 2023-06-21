@@ -2,19 +2,23 @@ package analysis
 
 import (
 	"github.com/konveyor/tackle2-hub/api"
-	"github.com/konveyor/tackle2-hub/test/api/application"
 )
 
 //
 // Test application analysis
-var BasicTests = []TC{
+var TestCases = []TC{
 	{
 		Name:        "Pathfinder cloud-readiness",
-		Application: application.PathfinderGit,
-		Task: api.Task{
-			Addon: "windup",
-			State: "Ready",
+		Application: api.Application{
+			Name:        "Pathfinder",
+			Description: "Tackle Pathfinder application.",
+			Repository: &api.Repository{
+				Kind:   "git",
+				URL:    "https://github.com/konveyor/tackle-pathfinder.git",
+				Branch: "1.2.0",
+			},
 		},
+		Task: WindupReady,
 		TaskData: defaultTaskData,
 		ReportContent: map[string][]string{
 			"/windup/report/index.html": {
@@ -38,10 +42,7 @@ var BasicTests = []TC{
 			},
 			
 		},
-		Task: api.Task{
-			Addon: "windup",
-			State: "Ready",
-		},
+		Task: WindupReady,
 		TaskData: defaultTaskData,
 		ReportContent: map[string][]string{
 			"/windup/report/index.html": {
@@ -51,6 +52,13 @@ var BasicTests = []TC{
 			},
 		},
 	},
+}
+
+//
+// Shared parameters.
+var WindupReady = api.Task{
+	Addon: "windup",
+	State: "Ready",
 }
 
 var defaultTaskData = `{
