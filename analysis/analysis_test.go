@@ -6,6 +6,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/konveyor/go-konveyor-tests/utils/uniq"
 	"github.com/konveyor/tackle2-hub/api"
 	"github.com/konveyor/tackle2-hub/test/assert"
 )
@@ -16,9 +17,15 @@ import (
 func TestApplicationAnalysis(t *testing.T) {
 
 	// Test using "richclient" methods (preffered way).
-	for _, tc := range TestCases {
-		t.Run(tc.Name, func(t *testing.T) {
+	for _, testcase := range TestCases {
+
+		t.Run(testcase.Name, func(t *testing.T) {
+			// Prepare parallel execution.
+			tc := testcase
+			t.Parallel()
+
 			// Create the application.
+			uniq.ApplicationName(&tc.Application)
 			assert.Should(t, RichClient.Application.Create(&tc.Application))
 
 			// Prepare and submit the analyze task.
@@ -26,8 +33,9 @@ func TestApplicationAnalysis(t *testing.T) {
 			tc.Task.Application = &api.Ref{ID: tc.Application.ID}
 			assert.Should(t, RichClient.Task.Create(&tc.Task))
 
+						
+
 			// Wait until task finishes
-			//t.Parallel()
 			var task *api.Task
 			var err error
 			for i := 0; i < Retry; i++ {
