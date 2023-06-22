@@ -47,6 +47,9 @@ Run test manually example:
 $ export HUB_BASE_URL="http://`minikube ip`/hub"
 $ go test -v analysis/windup_basic_test.go
 ```
+
+For parallel analysis test execution, set ```export PARALLEL=1```.
+
 ## Konveyor CI status
 
 See https://github.com/konveyor/ci

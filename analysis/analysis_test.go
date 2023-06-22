@@ -2,6 +2,7 @@ package analysis
 
 import (
 	"encoding/json"
+	"os"
 	"strings"
 	"testing"
 	"time"
@@ -20,9 +21,12 @@ func TestApplicationAnalysis(t *testing.T) {
 	for _, testcase := range TestCases {
 
 		t.Run(testcase.Name, func(t *testing.T) {
-			// Prepare parallel execution.
+			// Prepare parallel execution if env variable PARALLEL is set.
 			tc := testcase
-			//t.Parallel()
+			_, parallel := os.LookupEnv("PARALLEL")
+			if parallel {
+				t.Parallel()
+			}
 
 			// Create the application.
 			uniq.ApplicationName(&tc.Application)
