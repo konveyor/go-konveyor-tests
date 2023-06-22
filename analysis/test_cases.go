@@ -5,10 +5,10 @@ import (
 )
 
 //
-// Test application analysis
+// Test cases for Application Analysis
 var TestCases = []TC{
 	{
-		Name:        "Pathfinder cloud-readiness",
+		Name: "Pathfinder cloud-readiness with tagger",
 		Application: api.Application{
 			Name:        "Pathfinder",
 			Description: "Tackle Pathfinder application.",
@@ -18,7 +18,7 @@ var TestCases = []TC{
 				Branch: "1.2.0",
 			},
 		},
-		Task: WindupReady,
+		Task:     WindupReady,
 		TaskData: defaultTaskData,
 		ReportContent: map[string][]string{
 			"/windup/report/index.html": {
@@ -27,22 +27,27 @@ var TestCases = []TC{
 				"9\nInformation",
 			},
 		},
-		//ExpectedTags: []api.Tag{
-		//	{id: 121, Name: "CDI", source: "Analysis"},
-		//},
+		AnalysisTags: []api.Tag{
+			{Name: "CDI"},
+			{Name: "HTML"},
+			{Name: "Properties"},
+			{Name: "JPA entities"},
+			{Name: "JAX-RS"},
+			{Name: "Bean Validation"},
+			{Name: "Application Properties File"},
+		},
 	},
 	{
-		Name:        "Petclinic cloud-readiness",
+		Name: "Petclinic cloud-readiness with tagger",
 		Application: api.Application{
-			Name: "Petclinic",
+			Name:        "Petclinic",
 			Description: "Spring framework app",
 			Repository: &api.Repository{
-				Kind:   "git",
-				URL:    "https://github.com/savitharaghunathan/spring-framework-petclinic.git",
+				Kind: "git",
+				URL:  "https://github.com/savitharaghunathan/spring-framework-petclinic.git",
 			},
-			
 		},
-		Task: WindupReady,
+		Task:     WindupReady,
 		TaskData: defaultTaskData,
 		ReportContent: map[string][]string{
 			"/windup/report/index.html": {
@@ -51,8 +56,18 @@ var TestCases = []TC{
 				"4\nInformation",
 			},
 		},
+		AnalysisTags: []api.Tag{
+			{Name: "Spring MVC"},
+			{Name: "CSS"},
+			{Name: "Properties"},
+			{Name: "Spring JMX"},
+			{Name: "JPA entities"},
+			{Name: "Spring Data JPA"},
+			{Name: "JSP Page"},
+		},
 	},
 }
+
 
 //
 // Shared parameters.
