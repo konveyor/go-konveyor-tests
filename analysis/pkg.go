@@ -38,6 +38,7 @@ type TC struct {
 	Task          api.Task
 	TaskData      string
 	ReportContent map[string][]string
+	AnalysisTags  []api.Tag
 }
 
 func getReportText(t *testing.T, tc *TC, path string) (text string) {

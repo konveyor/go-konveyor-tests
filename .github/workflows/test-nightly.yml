@@ -13,9 +13,6 @@ jobs:
         uses: konveyor/tackle2-operator/.github/actions/start-minikube@main
       - name: install-tackle
         uses: konveyor/tackle2-operator/.github/actions/install-tackle@main
-        with:
-          tackle-hub-image: tackle2-hub:latest
-          tackle-image-pull-policy: IfNotPresent
       - uses: actions/setup-go@v3
         with:
           go-version: '1.19'

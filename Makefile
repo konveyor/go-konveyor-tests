@@ -19,7 +19,7 @@ clean:
 
 # Execute application analysis tests.
 test-analysis:
-	HUB_BASE_URL="http://${MINIKUBE_IP}/hub" go test -count=1 -p 2 -timeout 7200s -v ./analysis/...
+	HUB_BASE_URL="http://${MINIKUBE_IP}/hub" go test -count=1 -timeout 7200s -v ./analysis/...
 
 # Execute all tests.
 test-all: test-analysis
