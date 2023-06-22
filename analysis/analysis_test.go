@@ -22,7 +22,7 @@ func TestApplicationAnalysis(t *testing.T) {
 		t.Run(testcase.Name, func(t *testing.T) {
 			// Prepare parallel execution.
 			tc := testcase
-			t.Parallel()
+			//t.Parallel()
 
 			// Create the application.
 			uniq.ApplicationName(&tc.Application)
