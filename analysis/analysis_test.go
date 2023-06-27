@@ -1,25 +1,21 @@
 package analysis
 
 import (
-	"encoding/json"
 	"os"
 	"strings"
 	"testing"
 	"time"
 
-	"github.com/konveyor/go-konveyor-tests/utils/uniq"
+	"github.com/konveyor/go-konveyor-tests/hack/addon"
+	"github.com/konveyor/go-konveyor-tests/hack/uniq"
 	"github.com/konveyor/tackle2-hub/api"
 	"github.com/konveyor/tackle2-hub/test/assert"
 )
 
-//
 // Test application analysis
-// "Basic" means that there no other dependencies than the application itself (no need prepare credentials, proxy, etc)
 func TestApplicationAnalysis(t *testing.T) {
-
 	// Test using "richclient" methods (preffered way).
 	for _, testcase := range TestCases {
-
 		t.Run(testcase.Name, func(t *testing.T) {
 			// Prepare parallel execution if env variable PARALLEL is set.
 			tc := testcase
@@ -32,9 +28,32 @@ func TestApplicationAnalysis(t *testing.T) {
 			uniq.ApplicationName(&tc.Application)
 			assert.Should(t, RichClient.Application.Create(&tc.Application))
 
+			// Prepare custom rules.
+			for i := range tc.CustomRules {
+				r := &tc.CustomRules[i]
+				// ruleFiles := []api.File{}
+				rules := []api.Rule{}
+				for _, rule := range r.Rules {
+					ruleFile, err := RichClient.File.Put(rule.File.Name)
+					assert.Should(t, err)
+					rules = append(rules, api.Rule{
+						File: &api.Ref{
+							ID: ruleFile.ID,
+						},
+					})
+					// ruleFiles = append(ruleFiles, *ruleFile)
+				}
+				r.Rules = rules
+				assert.Should(t, RichClient.RuleSet.Create(r))
+			}
+
 			// Prepare and submit the analyze task.
-			json.Unmarshal([]byte(tc.TaskData), &tc.Task.Data)
 			tc.Task.Application = &api.Ref{ID: tc.Application.ID}
+			taskData := tc.Task.Data.(addon.Data)
+			for _, r := range tc.CustomRules {
+				taskData.Rules.RuleSets = append(taskData.Rules.RuleSets, api.Ref{ID: r.ID, Name: r.Name})
+			}
+			tc.Task.Data = taskData
 			assert.Should(t, RichClient.Task.Create(&tc.Task))
 
 			// Wait until task finishes
@@ -81,8 +100,16 @@ func TestApplicationAnalysis(t *testing.T) {
 				t.Errorf("Analysis Tags don't match. Got:\n  %v\nexpected:\n  %v\n", gotApp.Tags, tc.AnalysisTags)
 			}
 
-			// Cleanup.
+			// Cleanup Application.
 			assert.Must(t, RichClient.Application.Delete(tc.Application.ID))
+
+			// Cleanup custom rules and their files.
+			for _, r := range tc.CustomRules {
+				assert.Should(t, RichClient.RuleSet.Delete(r.ID))
+				for _, rl := range r.Rules {
+					assert.Should(t, RichClient.File.Delete(rl.File.ID))
+				}
+			}
 		})
 	}
 }

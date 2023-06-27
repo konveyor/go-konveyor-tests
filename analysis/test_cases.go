@@ -1,11 +1,12 @@
 package analysis
 
 import (
+	"github.com/konveyor/go-konveyor-tests/hack/addon"
 	"github.com/konveyor/tackle2-hub/api"
 )
 
 //
-// Test cases for Application Analysis
+// Test cases for Application Analysis.
 var TestCases = []TC{
 	{
 		Name: "Pathfinder cloud-readiness with tagger",
@@ -18,8 +19,7 @@ var TestCases = []TC{
 				Branch: "1.2.0",
 			},
 		},
-		Task:     WindupReady,
-		TaskData: defaultTaskData,
+		Task:     Windup,
 		ReportContent: map[string][]string{
 			"/windup/report/index.html": {
 				"5\nstory points",
@@ -38,17 +38,17 @@ var TestCases = []TC{
 		},
 	},
 	{
-		Name: "Petclinic cloud-readiness with tagger",
+		Name: "Petclinic cloud-readiness with tagger main",
 		Application: api.Application{
 			Name:        "Petclinic",
 			Description: "Spring framework app",
 			Repository: &api.Repository{
 				Kind: "git",
 				URL:  "https://github.com/savitharaghunathan/spring-framework-petclinic.git",
+				Branch: "main",
 			},
 		},
-		Task:     WindupReady,
-		TaskData: defaultTaskData,
+		Task:     Windup,
 		ReportContent: map[string][]string{
 			"/windup/report/index.html": {
 				"5\nstory points",
@@ -66,42 +66,91 @@ var TestCases = []TC{
 			{Name: "JSP Page"},
 		},
 	},
+	{
+		Name: "Petclinic legacy cloud-readiness with tagger and hazelcast custom rules",
+		Application: api.Application{
+			Name:        "Petclinic",
+			Description: "Spring framework app",
+			Repository: &api.Repository{
+				Kind: "git",
+				URL:  "https://github.com/savitharaghunathan/spring-framework-petclinic.git",
+				Branch: "legacy",
+			},
+		},
+		CustomRules: []api.RuleSet{
+			{
+				Name: "Hazelcast Java distributed session store ruleset.",
+				Custom: true,
+				Image: api.Ref{
+					ID: 1,
+				},
+				Rules: []api.Rule{
+					{
+						File: &api.Ref{
+							Name: "./data/hz.windup.xml",
+						},
+					},
+				},
+			},
+		},
+		Task:     Windup,
+		ReportContent: map[string][]string{
+			"/windup/report/index.html": {
+				"12\nstory points",
+				"8\nCloud Mandatory",
+				"13\nInformation",
+			},
+		},
+		AnalysisTags: []api.Tag{
+			{Name: "Java EE JAXB"},
+			{Name: "Servlet"},
+			{Name: "Spring MVC"},
+			{Name: "Spring JMX"},
+			{Name: "Common Annotations"},
+			{Name: "Properties"},
+			{Name: "JPA entities"},
+			{Name: "Spring Data JPA"},
+			{Name: "Bean Validation"},
+			{Name: "JSP Page"},
+		},
+	},
 }
-
 
 //
 // Shared parameters.
-var WindupReady = api.Task{
+var Windup = api.Task{
 	Addon: "windup",
-	State: "Ready",
+	State: "Ready",	// Created / Ready
+	Data: defaultTaskData,
 }
 
-var defaultTaskData = `{
-	"mode": {
-		"artifact": "",
-		"binary": false,
-		"withDeps": false,
-		"diva": true
+var defaultTaskData = addon.Data{
+	Output: "/windup/report",
+	Mode: addon.Mode{
+		Artifact: "",
+		Binary: false,
+		WithDeps: false,
+		Diva: true,
 	},
-	"output": "/windup/report",
-	"rules": {
-		"path": "",
-		"tags": {
-			"excluded": [ ]
-		}
+	Sources: []string{},
+	Targets: []string{"cloud-readiness"},
+	Scope: addon.Scope{
+		WithKnown: false,
+		//Packages: {
+		//	Included: []string{},
+		//	Excluded: []string{},
+		//},
 	},
-	"scope": {
-		"packages": {
-			"excluded": [ ],
-			"included": [ ]
+	Rules: addon.Rules{
+		Path: "",
+		Labels: []string{
+			"cloud-readiness",
 		},
-		"withKnown": false
+		//Tags: {
+		//	Excluded: []string{},
+		//},
 	},
-	"sources": [ ],
-	"tagger": {
-		"enabled": true
+	Tagger: addon.Tagger{
+		Enabled: true,
 	},
-	"targets": [
-		"cloud-readiness"
-	]
-  }`
+}
