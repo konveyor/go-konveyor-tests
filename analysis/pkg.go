@@ -28,15 +28,19 @@ func init() {
 	RichClient = client.PrepareRichClient()
 
 	// Access REST client directly (some test API call need it)
-	Client = RichClient.Client()
+	Client = RichClient.Client
 }
 
 // Test cases for Application Analysis.
 type TC struct {
 	Name          string
-	Application   api.Application
+	// Application and other test data declaration.
+	Application   api.Application	// Required.
+	CustomRules   []api.RuleSet
+	// Analysis parameters.
 	Task          api.Task
 	TaskData      string
+	// After-analysis assertions.
 	ReportContent map[string][]string
 	AnalysisTags  []api.Tag
 }

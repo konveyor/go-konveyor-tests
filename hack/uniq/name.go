@@ -26,3 +26,9 @@ func RandString(lenght int) string {
 func ApplicationName(r *api.Application) {
 	r.Name = fmt.Sprintf("%s %s", r.Name, RandString(5))
 }
+
+//
+// Append random 3 chars to RuleSet Name.
+func RuleSetName(r *api.RuleSet) {
+	r.Name = fmt.Sprintf("%s %s", r.Name, RandString(3))
+}
