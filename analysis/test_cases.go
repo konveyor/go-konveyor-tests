@@ -19,7 +19,7 @@ var TestCases = []TC{
 				Branch: "1.2.0",
 			},
 		},
-		Task:     Windup,
+		Task: Analyze,
 		ReportContent: map[string][]string{
 			"/windup/report/index.html": {
 				"5\nstory points",
@@ -43,12 +43,12 @@ var TestCases = []TC{
 			Name:        "Petclinic",
 			Description: "Spring framework app",
 			Repository: &api.Repository{
-				Kind: "git",
-				URL:  "https://github.com/savitharaghunathan/spring-framework-petclinic.git",
+				Kind:   "git",
+				URL:    "https://github.com/savitharaghunathan/spring-framework-petclinic.git",
 				Branch: "main",
 			},
 		},
-		Task:     Windup,
+		Task: Analyze,
 		ReportContent: map[string][]string{
 			"/windup/report/index.html": {
 				"5\nstory points",
@@ -72,14 +72,14 @@ var TestCases = []TC{
 			Name:        "Petclinic",
 			Description: "Spring framework app",
 			Repository: &api.Repository{
-				Kind: "git",
-				URL:  "https://github.com/savitharaghunathan/spring-framework-petclinic.git",
+				Kind:   "git",
+				URL:    "https://github.com/savitharaghunathan/spring-framework-petclinic.git",
 				Branch: "legacy",
 			},
 		},
 		CustomRules: []api.RuleSet{
 			{
-				Name: "Hazelcast Java distributed session store ruleset.",
+				Name:   "Hazelcast Java distributed session store ruleset.",
 				Custom: true,
 				Image: api.Ref{
 					ID: 1,
@@ -93,7 +93,7 @@ var TestCases = []TC{
 				},
 			},
 		},
-		Task:     Windup,
+		Task: Analyze,
 		ReportContent: map[string][]string{
 			"/windup/report/index.html": {
 				"12\nstory points",
@@ -116,25 +116,24 @@ var TestCases = []TC{
 	},
 }
 
-//
 // Shared parameters.
 var Addons = []string{
-	"windup",	// legacy windup analyzer
-//	"analyzer",	// LSP analyzer
+	"windup", // legacy windup analyzer
+	// "analyzer",	// LSP analyzer
 }
 
-var Windup = api.Task{
-	State: "Ready",	// Created / Ready
-	Data: defaultTaskData,
+var Analyze = api.Task{
+	State: "Ready", // Created / Ready
+	Data:  defaultTaskData,
 }
 
 var defaultTaskData = addon.Data{
 	Output: "/windup/report",
 	Mode: addon.Mode{
 		Artifact: "",
-		Binary: false,
+		Binary:   false,
 		WithDeps: false,
-		Diva: true,
+		Diva:     true,
 	},
 	Sources: []string{},
 	Targets: []string{"cloud-readiness"},
