@@ -5,7 +5,6 @@ import (
 	"github.com/konveyor/tackle2-hub/api"
 )
 
-//
 // Test cases for Application Analysis.
 var TestCases = []TC{
 	{
@@ -25,6 +24,35 @@ var TestCases = []TC{
 				"5\nstory points",
 				"5\nCloud Mandatory",
 				"9\nInformation",
+			},
+		},
+		Analysis: api.Analysis{
+			Effort: 5,
+			Issues: []api.Issue{
+				{
+					Category:    "cloud-mandatory",
+					Description: "Trivial change or 1-1 library swap",
+					Effort:      5,
+					Name:        "File system - Java IO",
+				},
+				{
+					Category:    "information",
+					Description: "Info",
+					Effort:      0,
+					Name:        "Application properties file detected",
+				},
+				{
+					Category:    "information",
+					Description: "Info",
+					Effort:      0,
+					Name:        "Bean Validation",
+				},
+				{
+					Category:    "information",
+					Description: "Info",
+					Effort:      0,
+					Name:        "Maven POM (pom.xml)",
+				},
 			},
 		},
 		AnalysisTags: []api.Tag{
@@ -54,6 +82,41 @@ var TestCases = []TC{
 				"5\nstory points",
 				"5\nCloud Mandatory",
 				"4\nInformation",
+			},
+		},
+		Analysis: api.Analysis{
+			Effort: 5,
+			Issues: []api.Issue{
+				{
+					Category:    "cloud-mandatory",
+					Description: "Trivial change or 1-1 library swap",
+					Effort:      5,
+					Name:        "File system - Java IO",
+				},
+				{
+					Category:    "information",
+					Description: "Info",
+					Effort:      0,
+					Name:        "Embedded Spring Data JPA",
+				},
+				{
+					Category:    "information",
+					Description: "Info",
+					Effort:      0,
+					Name:        "Embedded framework - Spring MVC",
+				},
+				{
+					Category:    "information",
+					Description: "Info",
+					Effort:      0,
+					Name:        "Maven POM (pom.xml)",
+				},
+				{
+					Category:    "information",
+					Description: "Info",
+					Effort:      0,
+					Name:        "Spring JMX configuration detected",
+				},
 			},
 		},
 		AnalysisTags: []api.Tag{
@@ -99,6 +162,77 @@ var TestCases = []TC{
 				"12\nstory points",
 				"8\nCloud Mandatory",
 				"13\nInformation",
+			},
+		},
+		Analysis: api.Analysis{
+			Effort: 12,
+			Issues: []api.Issue{
+				{
+					Category:    "cloud-mandatory",
+					Description: "Complex change with documented solution",
+					Effort:      6,
+					Name:        "Embedded Hazelcast",
+				},
+				{
+					Category:    "cloud-mandatory",
+					Description: "Trivial change or 1-1 library swap",
+					Effort:      1,
+					Name:        "Embedded Hazelcast dependencies",
+				},
+				{
+					Category:    "cloud-mandatory",
+					Description: "Trivial change or 1-1 library swap",
+					Effort:      5,
+					Name:        "File system - Java IO",
+				},
+				{
+					Category:    "information",
+					Description: "Info",
+					Effort:      0,
+					Name:        "Bean Validation",
+				},
+				{
+					Category:    "information",
+					Description: "Info",
+					Effort:      0,
+					Name:        "Common Annotations",
+				},
+				{
+					Category:    "information",
+					Description: "Info",
+					Effort:      0,
+					Name:        "Embedded Spring Data JPA",
+				},
+				{
+					Category:    "information",
+					Description: "Info",
+					Effort:      0,
+					Name:        "Embedded framework - Spring MVC",
+				},
+				{
+					Category:    "information",
+					Description: "Info",
+					Effort:      0,
+					Name:        "JAXB",
+				},
+				{
+					Category:    "information",
+					Description: "Info",
+					Effort:      0,
+					Name:        "Java Servlet",
+				},
+				{
+					Category:    "information",
+					Description: "Info",
+					Effort:      0,
+					Name:        "Maven POM (pom.xml)",
+				},
+				{
+					Category:    "information",
+					Description: "Info",
+					Effort:      0,
+					Name:        "Spring JMX configuration detected",
+				},
 			},
 		},
 		AnalysisTags: []api.Tag{

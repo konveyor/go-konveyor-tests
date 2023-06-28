@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/PuerkitoBio/goquery v1.8.1
 	github.com/gocolly/colly v1.2.0
-	github.com/konveyor/tackle2-hub v0.2.1-0.20230622161619-908a0a350015
+	github.com/konveyor/tackle2-hub v0.2.1-0.20230627223342-1747a2022128
 )
 
 require (
