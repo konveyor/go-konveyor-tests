@@ -16,22 +16,12 @@ import (
 	"github.com/konveyor/tackle2-hub/test/assert"
 )
 
-var (
-	// Setup Hub API client
-	RichClient *binding.RichClient
-	TempDir string
-	err error	// TODO remove
-)
+// Setup Hub API client
+var RichClient *binding.RichClient
 
 func init() {
 	// Prepare RichClient and login to Hub API (configured from env variables).
 	RichClient = client.PrepareRichClient()
-
-	// Prepare temp directory.
-	TempDir, err = os.MkdirTemp("/tmp", "_windup_report")
-	if err != nil {
-		panic(err.Error())
-	}
 }
 
 func ParseWindupReportIssues(t *testing.T, appId uint) (issues []api.Issue) {
@@ -66,11 +56,18 @@ func Parse(t *testing.T, appId uint) (analysis api.Analysis) {
 
 // Get report file and return reader.
 func downloadReport(t *testing.T, appId uint, path string) (reader *bufio.Reader) {
-	fileName := filepath.Join(TempDir, filepath.Base(path))
-	err := RichClient.Application.Bucket(appId).Get(path, TempDir)
+	// Prepare temp directory.
+	tempDir, err := os.MkdirTemp("/tmp", fmt.Sprintf("app_%d_windup_report", appId))
+	if err != nil {
+		panic(err.Error())
+	}
+	fileName := filepath.Join(tempDir, filepath.Base(path))
+	// Download the file from bucket.
+	err = RichClient.Application.Bucket(appId).Get(path, tempDir)
 	assert.Must(t, err)
 	f, err := os.Open(fileName)
 	assert.Must(t, err)
+	// Return reader.
 	reader = bufio.NewReader(f)
 	return
 }
