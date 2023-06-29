@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"sort"
 	"strconv"
 	"strings"
 	"testing"
@@ -38,6 +39,11 @@ func ParseWindupReportIssues(t *testing.T, appId uint) (issues []api.Issue) {
 			issues = append(issues, issue)
 		})
 	}
+
+	// Sort issues to have stable order.
+	sort.SliceStable(issues, func(i, j int) bool {
+		return issues[i].Category+issues[i].Name < issues[j].Category+issues[j].Name
+	})
 	return
 }
 
