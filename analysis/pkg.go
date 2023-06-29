@@ -42,6 +42,7 @@ type TC struct {
 	TaskData      string
 	// After-analysis assertions.
 	ReportContent map[string][]string
+	Analysis      api.Analysis
 	AnalysisTags  []api.Tag
 }
 

@@ -38,14 +38,14 @@ $ make setup # start minikube&tackle using David's scripts - local env only
 ### Run test suite
 
 ```
-$ make test
+$ make test-all
 ```
 
 Run test manually example:
 
 ```
 $ export HUB_BASE_URL="http://`minikube ip`/hub"
-$ go test -v analysis/windup_basic_test.go
+$ go test -count=1 -v ./analysis/
 ```
 
 For parallel analysis test execution, set ```export PARALLEL=1```.
