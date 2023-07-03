@@ -95,6 +95,12 @@ func TestApplicationAnalysis(t *testing.T) {
 				if !assert.FlatEqual(gotAnalysis.Issues, tc.Analysis.Issues) {
 					t.Errorf("Analysis Issues don't match. Got:\n  %+v\nexpected:\n  %+v\n", gotAnalysis.Issues, tc.Analysis.Issues)
 				}
+				for i := range gotAnalysis.Issues {
+					if !assert.FlatEqual(gotAnalysis.Issues[i].Incidents, tc.Analysis.Issues[i].Incidents) {
+						t.Errorf("Analysis Incidents don't match. Got:\n  %+v\nexpected:\n  %+v\n", gotAnalysis.Issues[i], tc.Analysis.Issues[i])
+					}
+				}
+
 
 				// Check analysis-created Tags.
 				gotApp, _ := RichClient.Application.Get(tc.Application.ID)
