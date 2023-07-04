@@ -36,13 +36,15 @@ func matchIncident(re *regexp.Regexp, rawIncident string) (match string) {
 	return
 }
 
-func populateIncidents(t *testing.T, appId uint, appDetailPath string, issues *[]api.Issue) {
+func populateIncidents(t *testing.T, appId uint, appDetailPath string, issues *[]api.Issue) (incidentedIssues []api.Issue) {
 	doc, err := goquery.NewDocumentFromReader(downloadReport(t, appId, "/windup/report/reports/"+appDetailPath))
 	assert.Must(t, err)
 
+	incidentedIssues = *issues
+
 	// radek po radku podle jemna issue rozklikavat soubory a pridavat jednotlive issue
 	doc.Find("tr.projectFile > td.path > a").Each(func(i int, s *goquery.Selection) {
-		fileName := strings.TrimSpace(s.Text())
+		//fileName := strings.TrimSpace(s.Text())
 		filePath := strings.Split(s.AttrOr("href", ""), "?")
 		detailDoc, err := goquery.NewDocumentFromReader(downloadReport(t, appId, "/windup/report/reports/"+filePath[0]))
 		assert.Must(t, err)
@@ -53,9 +55,7 @@ func populateIncidents(t *testing.T, appId uint, appDetailPath string, issues *[
 				continue
 			}
 
-			fmt.Println("---- Parsing incident ----")
-
-			reDescription := regexp.MustCompile(`<div class='inline-comment-body'>(.*)</div>"`)
+			//reDescription := regexp.MustCompile(`<div class='inline-comment-body'>(.*)</div>"`)
 			reIssueName := regexp.MustCompile(`<div class='inline-comment-heading'><strong class='[a-z ]+'>(.*)</strong>`)
 			reLine := regexp.MustCompile(`'\#([0-9]+)\-inlines'`)
 			reRule := regexp.MustCompile(`'windup_ruleproviders.html#([a-z0-9-]+)'`)
@@ -64,22 +64,23 @@ func populateIncidents(t *testing.T, appId uint, appDetailPath string, issues *[
 			ruleName := matchIncident(reRule, incidentLine)
 
 			incident := api.Incident{}
-			incident.File = fileName
+			incident.File = filePath[0]
 			incident.Line, _ = strconv.Atoi(matchIncident(reLine, incidentLine))
-			incident.Message = matchIncident(reDescription, incidentLine)
-			fmt.Printf("INCIDENT: %+v\n", incident)
+			//incident.Message = matchIncident(reDescription, incidentLine)
+			fmt.Printf("FOUND INCIDENT: %+v\n", incident)
 
 			// Append Incident to the parent Issue.
-			for _, issue := range *issues {
+			for i, issue := range incidentedIssues {
 				if issue.Name == issueName {
-					issue.Incidents = append(issue.Incidents, incident)
+					incidentedIssues[i].Incidents = append(incidentedIssues[i].Incidents, incident)
 					if issue.Rule == "" {
-						issue.Rule = ruleName
+						incidentedIssues[i].Rule = ruleName
 					}
 				}
 			}
 		}
 	})
+	return
 }
 
 func ParseWindupReportIssues(t *testing.T, appId uint) (issues []api.Issue) {
@@ -99,7 +100,7 @@ func ParseWindupReportIssues(t *testing.T, appId uint) (issues []api.Issue) {
 
 	// Populate incidents from application detail page.
 	appDetailPath := strings.Replace(doc.Find("ul.nav > li:nth-child(2) > a").AttrOr("href", ""), "report_index_", "ApplicationDetails_", 1)
-	populateIncidents(t, appId, appDetailPath, &issues)
+	issues = populateIncidents(t, appId, appDetailPath, &issues)
 
 	// Sort issues to have stable order.
 	sort.SliceStable(issues, func(i, j int) bool {
