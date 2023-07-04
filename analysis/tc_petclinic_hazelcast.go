@@ -45,18 +45,35 @@ var PetclinicHazelcast = TC{
 				Description: "Complex change with documented solution",
 				Effort:      6,
 				Name:        "Embedded Hazelcast",
+				Rule:        "hazelcast-cloud-readiness-hz001",
+				Incidents: []api.Incident{
+					{
+						File: "SessionConfiguration_java.html",
+						Line: 78,
+					},
+					{
+						File: "SessionConfiguration_java.html",
+						Line: 77,
+					},
+					{
+						File: "pom_xml.html",
+						Line: 215,
+					},
+				},
 			},
 			{
 				Category:    "cloud-mandatory",
 				Description: "Trivial change or 1-1 library swap",
 				Effort:      1,
 				Name:        "Embedded Hazelcast dependencies",
+				Rule:        "hazelcast-cloud-readiness-hz002",
 			},
 			{
 				Category:    "cloud-mandatory",
 				Description: "Trivial change or 1-1 library swap",
 				Effort:      5,
 				Name:        "File system - Java IO",
+				Rule:        "local-storage-00001",
 			},
 			{
 				Category:    "information",

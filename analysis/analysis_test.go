@@ -108,20 +108,24 @@ func TestApplicationAnalysis(t *testing.T) {
 			// Cleanup Application.
 			assert.Must(t, RichClient.Application.Delete(tc.Application.ID))
 
-			//// Check the analysis result (effort, issues, etc).
-			//// Parse report for windup, get analysis from Hub API for lsp analyzer
-			//gotAnalysis := windupreport.Parse(t, tc.Application.ID)
-			//if gotAnalysis.Effort != tc.Analysis.Effort {
-			//	t.Errorf("Different effort error. Got %d, expected %d", gotAnalysis.Effort, tc.Analysis.Effort)
-			//}
-			//if !assert.FlatEqual(gotAnalysis.Issues, tc.Analysis.Issues) {
-			//	t.Errorf("Analysis Issues don't match. Got:\n  %+v\nexpected:\n  %+v\n", gotAnalysis.Issues, tc.Analysis.Issues)
-			//}
-			//for i := range gotAnalysis.Issues {
-			//	if !assert.FlatEqual(gotAnalysis.Issues[i].Incidents, tc.Analysis.Issues[i].Incidents) {
-			//		t.Errorf("Analysis Incidents don't match. Got:\n  %+v\nexpected:\n  %+v\n", gotAnalysis.Issues[i], tc.Analysis.Issues[i])
-			//	}
-			//}
+
+//				// Check the analysis result (effort, issues, etc).
+//				// Parse report for windup, get analysis from Hub API for lsp analyzer
+//				gotAnalysis := windupreport.Parse(t, tc.Application.ID)
+//				if gotAnalysis.Effort != tc.Analysis.Effort {
+//					t.Errorf("Different effort error. Got %d, expected %d", gotAnalysis.Effort, tc.Analysis.Effort)
+//				}
+//				//if !assert.FlatEqual(gotAnalysis.Issues, tc.Analysis.Issues) {
+//				//	t.Errorf("Analysis Issues don't match.") // Got:\n  %+v\nexpected:\n  %+v\n", gotAnalysis.Issues, tc.Analysis.Issues)
+//				//	pretty.Errorf("fmt", gotAnalysis.Issues, tc.Analysis.Issues)
+//				//}
+//				testify.Equal(t, gotAnalysis.Issues, tc.Analysis.Issues, "Analysis Issues should be equal")
+//
+//				//for i := range gotAnalysis.Issues {
+//				//	if !assert.FlatEqual(gotAnalysis.Issues[i].Incidents, tc.Analysis.Issues[i].Incidents) {
+//				//		t.Errorf("Analysis Incidents don't match. Got:\n  %+v\nexpected:\n  %+v\n", gotAnalysis.Issues[i], tc.Analysis.Issues[i])
+//				//	}
+//				//}
 
 			// Cleanup custom rules and their files.
 			for _, r := range tc.CustomRules {
