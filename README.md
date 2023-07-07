@@ -14,12 +14,11 @@ Tests require running Konveyor/MTA installation (e.g. Minikube works great for t
 
 ## Contribution guidelines
 
-Background for this test suite come from Hub API tests https://github.com/konveyor/tackle2-hub/pull/268.
+Background for this test suite come from Hub API tests [https://github.com/konveyor/tackle2-hub/pull/268](https://github.com/konveyor/tackle2-hub/tree/main/test).
 
-Application Analysis integration test example: https://github.com/konveyor/tackle2-hub/blob/main/test/integration/applications-inventory/analysis/windup_basic_test.go
+There is a ```binding``` package providing API client methods https://github.com/konveyor/tackle2-hub/tree/main/binding.
 
-Full hub provided test "framework": [https://github.com/konveyor/tackle2-hub/pull/268/files#diff-fcd2bf711a00447192da2d46171f15d0bb6302397b523e0ba92ac9f61bbb8ff7](https://github.com/konveyor/tackle2-hub/tree/main/test)
-
+Feel free to follow [application analysis integration test directory](https://github.com/konveyor/go-konveyor-tests/tree/main/analysis) as an example.
 
 ## Local test suite execution
 
