@@ -72,7 +72,7 @@ var TestCases = []TC{
 			Description: "Spring framework app",
 			Repository: &api.Repository{
 				Kind:   "git",
-				URL:    "https://github.com/savitharaghunathan/spring-framework-petclinic.git",
+				URL:    "https://github.com/konveyor/spring-framework-petclinic.git",
 				Branch: "main",
 			},
 		},
