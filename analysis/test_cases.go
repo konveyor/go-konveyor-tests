@@ -252,8 +252,8 @@ var TestCases = []TC{
 
 // Shared parameters.
 var Addons = []string{
-	"windup", // legacy windup analyzer
-	// "analyzer",	// LSP analyzer
+	//"windup", // legacy windup analyzer
+	"analyzer",	// LSP analyzer
 }
 
 var Analyze = api.Task{
