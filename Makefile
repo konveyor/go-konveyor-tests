@@ -12,6 +12,7 @@ setup:
 	curl https://raw.githubusercontent.com/konveyor/tackle2-operator/main/hack/install-tackle.sh -Lo ${VENDOR_DIR}/install-tackle.sh && chmod +x ${VENDOR_DIR}/install-tackle.sh
 	${VENDOR_DIR}/start-minikube.sh && \
 	${VENDOR_DIR}/install-tackle.sh
+	kubectl apply -f hack/windup-addon.yml || true	# Temporary add also windup addon
 
 # Clean local minikube with tackle
 clean:
