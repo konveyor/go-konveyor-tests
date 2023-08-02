@@ -34,9 +34,15 @@ type Mode struct {
 	Binary     bool   `json:"binary"`
 	Artifact   string `json:"artifact"`
 	WithDeps   bool   `json:"withDeps"`
-	Diva       bool   `json:"diva"`
-	CSV        bool   `json:"csv"`
 	Repository repository.SCM
+	//
+	//path struct {
+	//	appDir string
+	//	binary string
+	//	maven  struct {
+	//		settings string
+	//	}
+	//}
 }
 
 //
@@ -60,16 +66,15 @@ type Scope struct {
 //
 // Rules settings.
 type Rules struct {
-	Path       string          `json:"path" binding:"required"`
-	Labels     []string        `json:"labels"`
+	Path       string          `json:"path"`
 	RuleSets   []api.Ref       `json:"rulesets"`
 	Repository *api.Repository `json:"repository"`
 	Identity   *api.Ref        `json:"identity"`
-	Tags       struct {
+	Labels     struct {
 		Included []string `json:"included,omitempty"`
 		Excluded []string `json:"excluded,omitempty"`
-	} `json:"tags"`
-	foundTargets []string
+	} `json:"labels"`
+	//rules []string
 }
 
 //
