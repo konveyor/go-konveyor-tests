@@ -2,7 +2,6 @@ package analysis
 
 import (
 	"os"
-	"strings"
 	"testing"
 	"time"
 
@@ -10,6 +9,7 @@ import (
 	"github.com/konveyor/go-konveyor-tests/hack/uniq"
 	"github.com/konveyor/go-konveyor-tests/hack/windupreport"
 	"github.com/konveyor/tackle2-hub/api"
+	"github.com/konveyor/tackle2-hub/binding"
 	"github.com/konveyor/tackle2-hub/test/assert"
 )
 
@@ -73,14 +73,32 @@ func TestApplicationAnalysis(t *testing.T) {
 				t.Errorf("Analyze Task failed. Details: %+v", task)
 			}
 
-			// Check analysis results (report, issues, etc.)
+			var gotAnalysis api.Analysis
+			
 			if tc.Task.Addon == "windup" {
-				checkWindupReport(t, &tc)
+				// Old Windup check version parsing windup HTML report
+				CheckWindupReportContent(t, &tc)
+
+				// Parse report for windup, to api.Analysis structure
+				gotAnalysis = windupreport.Parse(t, tc.Application.ID)
 			} else {
-				// LSP
-				// var gotAnalysis api.Analysis
-				// assert.Should(t, Client.Get())
+				// Get LSP analysis directly form Hub API
+				analysisPath := binding.Path(api.AppAnalysisRoot).Inject(binding.Params{api.ID: tc.Application.ID})
+				assert.Should(t, Client.Get(analysisPath, &gotAnalysis))
 			}
+
+			// Check the analysis result (effort, issues, etc).
+			if gotAnalysis.Effort != tc.Analysis.Effort {
+				t.Errorf("Different effort error. Got %d, expected %d", gotAnalysis.Effort, tc.Analysis.Effort)
+			}
+			if !assert.FlatEqual(gotAnalysis.Issues, tc.Analysis.Issues) {
+				t.Errorf("Analysis Issues don't match. Got:\n  %+v\nexpected:\n  %+v\n", gotAnalysis.Issues, tc.Analysis.Issues)
+			}
+			//for i := range gotAnalysis.Issues {
+			//				//	if !assert.FlatEqual(gotAnalysis.Issues[i].Incidents, tc.Analysis.Issues[i].Incidents) {
+			//				//		t.Errorf("Analysis Incidents don't match. Got:\n  %+v\nexpected:\n  %+v\n", gotAnalysis.Issues[i], tc.Analysis.Issues[i])
+			//				//	}
+			//				//}
 
 			// Check analysis-created Tags.
 			gotApp, _ := RichClient.Application.Get(tc.Application.ID)
@@ -108,25 +126,6 @@ func TestApplicationAnalysis(t *testing.T) {
 			// Cleanup Application.
 			assert.Must(t, RichClient.Application.Delete(tc.Application.ID))
 
-
-//				// Check the analysis result (effort, issues, etc).
-//				// Parse report for windup, get analysis from Hub API for lsp analyzer
-//				gotAnalysis := windupreport.Parse(t, tc.Application.ID)
-//				if gotAnalysis.Effort != tc.Analysis.Effort {
-//					t.Errorf("Different effort error. Got %d, expected %d", gotAnalysis.Effort, tc.Analysis.Effort)
-//				}
-//				//if !assert.FlatEqual(gotAnalysis.Issues, tc.Analysis.Issues) {
-//				//	t.Errorf("Analysis Issues don't match.") // Got:\n  %+v\nexpected:\n  %+v\n", gotAnalysis.Issues, tc.Analysis.Issues)
-//				//	pretty.Errorf("fmt", gotAnalysis.Issues, tc.Analysis.Issues)
-//				//}
-//				testify.Equal(t, gotAnalysis.Issues, tc.Analysis.Issues, "Analysis Issues should be equal")
-//
-//				//for i := range gotAnalysis.Issues {
-//				//	if !assert.FlatEqual(gotAnalysis.Issues[i].Incidents, tc.Analysis.Issues[i].Incidents) {
-//				//		t.Errorf("Analysis Incidents don't match. Got:\n  %+v\nexpected:\n  %+v\n", gotAnalysis.Issues[i], tc.Analysis.Issues[i])
-//				//	}
-//				//}
-
 			// Cleanup custom rules and their files.
 			for _, r := range tc.CustomRules {
 				assert.Should(t, RichClient.RuleSet.Delete(r.ID))
@@ -136,27 +135,4 @@ func TestApplicationAnalysis(t *testing.T) {
 			}
 		})
 	}
-}
-
-func checkWindupReport(t *testing.T, tc *TC) {
-	// Check the report content.
-	for path, expectedElems := range tc.ReportContent {
-		content := getReportText(t, tc, path)
-		// Check its content.
-		for _, expectedContent := range expectedElems {
-			if !strings.Contains(content, expectedContent) {
-				t.Errorf("Error report contect check for %s. Cannot find %s in %s", path, expectedContent, content)
-			}
-		}
-	}
-
-	// Check the analysis result (effort, issues, etc).
-	// Parse report for windup, get analysis from Hub API for lsp analyzer
-	gotAnalysis := windupreport.Parse(t, tc.Application.ID)
-	if gotAnalysis.Effort != tc.Analysis.Effort {
-		t.Errorf("Different effort error. Got %d, expected %d", gotAnalysis.Effort, tc.Analysis.Effort)
-	}
-	//if !assert.FlatEqual(gotAnalysis.Issues, tc.Analysis.Issues) {
-	//	t.Errorf("Analysis Issues don't match. Got:\n  %+v\nexpected:\n  %+v\n", gotAnalysis.Issues, tc.Analysis.Issues)
-	//}
 }
