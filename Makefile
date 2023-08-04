@@ -19,7 +19,6 @@ clean:
 
 # Execute application analysis tests.
 test-analysis:
-	kubectl apply -f hack/windup-addon.yml || true	# Temporary add also windup addon
 	HUB_BASE_URL="http://${MINIKUBE_IP}/hub" go test -count=1 -timeout 7200s -v ./analysis/...
 
 # Execute all tests.
