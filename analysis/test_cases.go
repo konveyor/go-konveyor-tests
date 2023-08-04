@@ -5,12 +5,12 @@ package analysis
 // List of applications with expected analysis outputs.
 var TestCases = []TC{
 	PathfinderSample,
-	//PetclinicMain,
-	////PetclinicHazelcast,
-	//Tomcat,
-	//Daytrader,
-	//ApacheWicket,
-	//SeamBooking,
+	PetclinicMain,
+	//PetclinicHazelcast,
+	Tomcat,
+	Daytrader,
+	ApacheWicket,
+	SeamBooking,
 }
 
 //

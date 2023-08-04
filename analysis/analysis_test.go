@@ -1,6 +1,7 @@
 package analysis
 
 import (
+	"fmt"
 	"os"
 	"testing"
 	"time"
@@ -51,7 +52,7 @@ func TestApplicationAnalysis(t *testing.T) {
 			// Prepare and submit the analyze task.
 			// tc.Task.Addon = analyzerAddon
 			tc.Task.Application = &api.Ref{ID: tc.Application.ID}
-			taskData := tc.Task.Data.(addon.Data)
+			taskData := tc.Task.Data.(addon.Data) // addon / addonwindup
 			for _, r := range tc.CustomRules {
 				taskData.Rules.RuleSets = append(taskData.Rules.RuleSets, api.Ref{ID: r.ID, Name: r.Name})
 			}
@@ -74,7 +75,7 @@ func TestApplicationAnalysis(t *testing.T) {
 			}
 
 			var gotAnalysis api.Analysis
-			
+
 			if tc.Task.Addon == "windup" {
 				// Old Windup check version parsing windup HTML report
 				CheckWindupReportContent(t, &tc)
@@ -87,18 +88,16 @@ func TestApplicationAnalysis(t *testing.T) {
 				assert.Should(t, Client.Get(analysisPath, &gotAnalysis))
 			}
 
+			fmt.Printf("====== analysis: %+v\n", gotAnalysis)
+
 			// Check the analysis result (effort, issues, etc).
 			if gotAnalysis.Effort != tc.Analysis.Effort {
 				t.Errorf("Different effort error. Got %d, expected %d", gotAnalysis.Effort, tc.Analysis.Effort)
 			}
-			if !assert.FlatEqual(gotAnalysis.Issues, tc.Analysis.Issues) {
-				t.Errorf("Analysis Issues don't match. Got:\n  %+v\nexpected:\n  %+v\n", gotAnalysis.Issues, tc.Analysis.Issues)
+			flattenGotIssues := flattenIssues(gotAnalysis.Issues)
+			if !assert.FlatEqual(flattenGotIssues, tc.Analysis.Issues) {
+				t.Errorf("Analysis Issues don't match. Got:\n  %+v\nexpected:\n  %+v\n", flattenGotIssues, tc.Analysis.Issues)
 			}
-			//for i := range gotAnalysis.Issues {
-			//				//	if !assert.FlatEqual(gotAnalysis.Issues[i].Incidents, tc.Analysis.Issues[i].Incidents) {
-			//				//		t.Errorf("Analysis Incidents don't match. Got:\n  %+v\nexpected:\n  %+v\n", gotAnalysis.Issues[i], tc.Analysis.Issues[i])
-			//				//	}
-			//				//}
 
 			// Check analysis-created Tags.
 			gotApp, _ := RichClient.Application.Get(tc.Application.ID)
@@ -135,4 +134,15 @@ func TestApplicationAnalysis(t *testing.T) {
 			}
 		})
 	}
+}
+
+// Pick Issue fields relevant for test and return it as a string
+func flattenIssues(issues []api.Issue) (serializedIssues string) {
+	for _, issue := range issues {
+		fmt.Printf("%s{Category: \"%s\", Description: \"%s\", Effort: %d, Name: \"%s\",},\n", serializedIssues, issue.Category, issue.Description, issue.Effort, issue.Name)
+		//	if !assert.FlatEqual(gotAnalysis.Issues[i].Incidents, tc.Analysis.Issues[i].Incidents) {
+		//		t.Errorf("Analysis Incidents don't match. Got:\n  %+v\nexpected:\n  %+v\n", gotAnalysis.Issues[i], tc.Analysis.Issues[i])
+		//	}
+	}
+	return
 }

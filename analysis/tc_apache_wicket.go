@@ -20,7 +20,12 @@ var ApacheWicket = TC{
 	},
 	Analysis: api.Analysis{
 		Effort: 5,
-		Issues: []api.Issue{},
+		Issues: []api.Issue{
+			{Category: "cloud-mandatory", Description: "Trivial change or 1-1 library swap", Effort: 2, Name: "File system - Java IO"},
+			{Category: "cloud-mandatory", Description: "Trivial change or 1-1 library swap", Effort: 3, Name: "Hard-coded IP address"},
+			{Category: "information", Description: "Info", Effort: 0, Name: "Java Servlet"},
+			{Category: "information", Description: "Info", Effort: 0, Name: "Threads"},
+		},
 	},
 	AnalysisTags: []api.Tag{
 		{Name: "Servlet"},

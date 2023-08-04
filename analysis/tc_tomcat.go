@@ -24,7 +24,15 @@ var Tomcat = TC{
 	},
 	Analysis: api.Analysis{
 		Effort: 1,
-		Issues: []api.Issue{},
+		Issues: []api.Issue{
+			{Category: "cloud-mandatory", Description: "Trivial change or 1-1 library swap", Effort: 1, Name: "Hard-coded IP address"},
+			{Category: "information", Description: "Info", Effort: 0, Name: "Embedded Spring Data JPA"},
+			{Category: "information", Description: "Info", Effort: 0, Name: "Embedded framework - Spring MVC"},
+			{Category: "information", Description: "Info", Effort: 0, Name: "Embedded framework - Spring Web"},
+			{Category: "information", Description: "Info", Effort: 0, Name: "Embedded library - Spring Boot Actuator"},
+			{Category: "information", Description: "Info", Effort: 0, Name: "Java Servlet"},
+			{Category: "information", Description: "Info", Effort: 0, Name: "Maven POM (pom.xml)"},
+		},
 	},
 	AnalysisTags: []api.Tag{
 		{Name: "JPA entities"},

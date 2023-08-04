@@ -22,7 +22,11 @@ var SeamBooking = TC{
 	},
 	Analysis: api.Analysis{
 		Effort: 0,
-		Issues: []api.Issue{},
+		Issues: []api.Issue{
+			{Category: "information", Description: "Info", Effort: 0, Name: "EJB XML"},
+			{Category: "information", Description: "Info", Effort: 0, Name: "Maven POM (pom.xml)"},
+			{Category: "information", Description: "Info", Effort: 0, Name: "Web XML"},
+		},
 	},
 	AnalysisTags: []api.Tag{
 		{Name: "EJB XML"},
