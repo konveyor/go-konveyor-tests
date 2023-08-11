@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/PuerkitoBio/goquery v1.8.1
 	github.com/konveyor/tackle2-addon v0.2.0
-	github.com/konveyor/tackle2-hub v0.2.1-0.20230627223342-1747a2022128
+	github.com/konveyor/tackle2-hub v0.2.2-0.20230810163209-f18f21c71b23
 )
 
 require (
