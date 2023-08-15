@@ -67,14 +67,16 @@ type Scope struct {
 // Rules settings.
 type Rules struct {
 	Path       string          `json:"path"`
-	RuleSets   []api.Ref       `json:"rulesets"`
 	Repository *api.Repository `json:"repository"`
 	Identity   *api.Ref        `json:"identity"`
-	Labels     struct {
-		Included []string `json:"included,omitempty"`
-		Excluded []string `json:"excluded,omitempty"`
-	} `json:"labels"`
-	//rules []string
+	Labels     Labels          `json:"labels"`
+}
+
+//
+// Labels collection.
+type Labels struct {
+	Included []string `json:"included,omitempty"`
+	Excluded []string `json:"excluded,omitempty"`
 }
 
 //

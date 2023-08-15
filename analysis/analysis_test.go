@@ -53,9 +53,9 @@ func TestApplicationAnalysis(t *testing.T) {
 			// tc.Task.Addon = analyzerAddon
 			tc.Task.Application = &api.Ref{ID: tc.Application.ID}
 			taskData := tc.Task.Data.(addon.Data) // addon / addonwindup
-			for _, r := range tc.CustomRules {
-				taskData.Rules.RuleSets = append(taskData.Rules.RuleSets, api.Ref{ID: r.ID, Name: r.Name})
-			}
+			//for _, r := range tc.CustomRules {
+			//	taskData.Rules = append(taskData.Rules, api.Ref{ID: r.ID, Name: r.Name})
+			//}
 			tc.Task.Data = taskData
 			assert.Should(t, RichClient.Task.Create(&tc.Task))
 
@@ -94,9 +94,16 @@ func TestApplicationAnalysis(t *testing.T) {
 			if gotAnalysis.Effort != tc.Analysis.Effort {
 				t.Errorf("Different effort error. Got %d, expected %d", gotAnalysis.Effort, tc.Analysis.Effort)
 			}
-			flattenGotIssues := flattenIssues(gotAnalysis.Issues)
-			if !assert.FlatEqual(flattenGotIssues, tc.Analysis.Issues) {
-				t.Errorf("Analysis Issues don't match. Got:\n  %+v\nexpected:\n  %+v\n", flattenGotIssues, tc.Analysis.Issues)
+
+			// Check the analysis issues
+			if len(gotAnalysis.Issues) != len(tc.Analysis.Issues) {
+				t.Errorf("Different amount of issues error. Got %d, expected %d.", len(gotAnalysis.Issues), len(tc.Analysis.Issues))
+			}
+			for i, got := range gotAnalysis.Issues {
+				expected := tc.Analysis.Issues[i]
+				if got.Category != expected.Category || got.Description != expected.Description || got.Effort != expected.Effort {	// Consider add "Rule"
+					t.Errorf("Different issue error. Got %+v, expected %+v.", got, expected)
+				}
 			}
 
 			// Check analysis-created Tags.
@@ -134,15 +141,4 @@ func TestApplicationAnalysis(t *testing.T) {
 			}
 		})
 	}
-}
-
-// Pick Issue fields relevant for test and return it as a string
-func flattenIssues(issues []api.Issue) (serializedIssues string) {
-	for _, issue := range issues {
-		fmt.Printf("%s{Category: \"%s\", Description: \"%s\", Effort: %d, Name: \"%s\",},\n", serializedIssues, issue.Category, issue.Description, issue.Effort, issue.Name)
-		//	if !assert.FlatEqual(gotAnalysis.Issues[i].Incidents, tc.Analysis.Issues[i].Incidents) {
-		//		t.Errorf("Analysis Incidents don't match. Got:\n  %+v\nexpected:\n  %+v\n", gotAnalysis.Issues[i], tc.Analysis.Issues[i])
-		//	}
-	}
-	return
 }

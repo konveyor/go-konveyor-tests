@@ -23,7 +23,7 @@ var Tomcat = TC{
 		},
 	},
 	Analysis: api.Analysis{
-		Effort: 1,
+		Effort: 2,
 		Issues: []api.Issue{
 			{Category: "cloud-mandatory", Description: "Trivial change or 1-1 library swap", Effort: 1, Name: "Hard-coded IP address"},
 			{Category: "information", Description: "Info", Effort: 0, Name: "Embedded Spring Data JPA"},

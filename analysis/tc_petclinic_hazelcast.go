@@ -16,10 +16,6 @@ var PetclinicHazelcast = TC{
 	CustomRules: []api.RuleSet{
 		{
 			Name:   "Hazelcast Java distributed session store ruleset.",
-			Custom: true,
-			Image: api.Ref{
-				ID: 1,
-			},
 			Rules: []api.Rule{
 				{
 					File: &api.Ref{
