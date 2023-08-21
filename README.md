@@ -47,7 +47,15 @@ $ export HUB_BASE_URL="http://`minikube ip`/hub"
 $ go test -count=1 -v ./analysis/
 ```
 
-For parallel analysis test execution, set ```export PARALLEL=1```.
+### Test execution options
+
+#### PARALLEL
+
+For parallel test execution, set ```export PARALLEL=1```.
+
+#### KEEP
+
+For keep data created by test e.g. for debugging purposes, set ```export KEEP=1```.
 
 ## Konveyor CI status
 
