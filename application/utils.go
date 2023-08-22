@@ -19,3 +19,9 @@ func CreateMultipleApplications(numberOfApplications int) []api.Application {
 	}
 	return appSlice
 }
+
+func DeleteBySlice(apps []api.Application) {
+	for i := 0; i < len(apps); i++ {
+		Application.Delete(apps[i].ID)
+	}
+}
