@@ -1,11 +1,10 @@
-package customMetrics
+package metrics
 
 import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
-	. "github.com/konveyor/go-konveyor-tests/ginkgo/utils"
-	. "github.com/konveyor/go-konveyor-tests/ginkgo/utils/migration/applicationInventory"
+	. "github.com/konveyor/go-konveyor-tests/application"
 )
 
 var (
@@ -19,9 +18,14 @@ var _ = Describe("Application Metrics", func() {
 		metricValue = GetMetricValue(metricName)
 	})
 
+	AfterEach(func() {
+		// Cleanup resources
+	})
+
 	Context("when creating application", func() {
 		It("should increase the applications gauge", func() {
-			apps := CreateMultipleApplications(3)
+			numOfApps := 3
+			apps := CreateMultipleApplications(numOfApps)
 			expectedValue := metricValue + len(apps)
 			Expect(GetMetricValue(metricName)).To(Equal(expectedValue))
 		})
