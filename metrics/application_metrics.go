@@ -4,7 +4,7 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
-	"github.com/konveyor/go-konveyor-tests/application"
+	"github.com/konveyor/go-konveyor-tests/utils"
 	"github.com/konveyor/tackle2-hub/api"
 )
 
@@ -12,7 +12,7 @@ var (
 	metricValue int
 	metricName  string = "konveyor_applications_inventoried"
 	apps        []api.Application
-	Application = application.Application
+	Application = utils.Application
 )
 
 var _ = Describe("Application Metrics", Ordered, func() {
@@ -23,13 +23,13 @@ var _ = Describe("Application Metrics", Ordered, func() {
 
 	AfterAll(func() {
 		// Resources cleanup
-		application.DeleteBySlice(apps)
+		utils.DeleteApplicationsBySlice(apps)
 	})
 
 	Context("Create applications", func() {
 		It("Should increase the applications gauge", func() {
 			numOfApps := 3
-			apps = application.CreateMultipleApplications(numOfApps)
+			apps = utils.CreateMultipleApplications(numOfApps)
 			metricValue += len(apps)
 			Expect(GetMetricValue(metricName)).To(Equal(metricValue))
 		})

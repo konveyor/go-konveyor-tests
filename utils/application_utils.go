@@ -1,8 +1,9 @@
-package application
+package utils
 
 import (
-	"fmt"
+	"math/rand"
 
+	"github.com/konveyor/go-konveyor-tests/data"
 	"github.com/konveyor/go-konveyor-tests/hack/uniq"
 	"github.com/konveyor/tackle2-hub/api"
 )
@@ -10,17 +11,20 @@ import (
 func CreateMultipleApplications(numberOfApplications int) []api.Application {
 	var appSlice []api.Application
 	for i := 0; i < numberOfApplications; i++ {
-		// Create new application
-		application := api.Application{Name: fmt.Sprintf("test-app-%s", uniq.RandString(10))}
+		randomIndex := rand.Intn(len(data.ApplicationSamples))
 
-		// TODO: dealing with create returns error
+		// Create random application
+		//// Create a local copy
+		application := data.ApplicationSamples[randomIndex]
+		uniq.ApplicationName(&application)
+		//// TODO: dealing with create returns error
 		Application.Create(&application)
 		appSlice = append(appSlice, application)
 	}
 	return appSlice
 }
 
-func DeleteBySlice(apps []api.Application) {
+func DeleteApplicationsBySlice(apps []api.Application) {
 	for i := 0; i < len(apps); i++ {
 		Application.Delete(apps[i].ID)
 	}

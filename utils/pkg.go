@@ -1,4 +1,4 @@
-package application
+package utils
 
 import (
 	"github.com/konveyor/tackle2-hub/binding"

@@ -7,6 +7,8 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/konveyor/go-konveyor-tests/utils"
 )
 
 var (
@@ -36,13 +38,9 @@ func GetMetricValue(metricName string) int {
 	cmd := fmt.Sprintf("oc exec -n %s %s -- curl http://localhost:2112/metrics | grep %s", operator_namespace, hub_pod_name, metricName)
 	var outStr []string = strings.Split(runCmd(cmd), "\n")
 	metricValue := outStr[len(outStr)-1]
-	metricValue = lastString(strings.Split(metricValue, " "))
+	metricValue = utils.LastString(strings.Split(metricValue, " "))
 	outInt, _ := strconv.Atoi(metricValue)
 	return outInt
-}
-
-func lastString(str []string) string {
-	return str[len(str)-1]
 }
 
 func runCmd(cmd string) string {
