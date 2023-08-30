@@ -20,7 +20,7 @@ var defaultAnalyzerData = addon.Data{
 		//Diva:     true,
 	},
 	Sources: []string{},
-	Targets: []string{"cloud-readiness"},
+	Targets: []string{}, // Emty by default, TODO(maufrat): Add as option to test cases.
 	Scope: addon.Scope{
 		WithKnown: false,
 		//Packages: {

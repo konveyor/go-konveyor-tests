@@ -15,32 +15,41 @@ var Tomcat = TC{
 		},
 	},
 	Task: Analyze,
-	ReportContent: map[string][]string{
-		"/windup/report/index.html": {
-			"1\nstory points",
-			"1\nCloud Mandatory",
-			"6\nInformation",
-		},
-	},
+	//ReportContent: map[string][]string{ // From Windup
+	//	"/windup/report/index.html": {
+	//		"1\nstory points",
+	//		"1\nCloud Mandatory",
+	//		"6\nInformation",
+	//	},
+	//},
 	Analysis: api.Analysis{
 		Effort: 2,
 		Issues: []api.Issue{
-			{Category: "cloud-mandatory", Description: "Trivial change or 1-1 library swap", Effort: 1, Name: "Hard-coded IP address"},
-			{Category: "information", Description: "Info", Effort: 0, Name: "Embedded Spring Data JPA"},
-			{Category: "information", Description: "Info", Effort: 0, Name: "Embedded framework - Spring MVC"},
-			{Category: "information", Description: "Info", Effort: 0, Name: "Embedded framework - Spring Web"},
-			{Category: "information", Description: "Info", Effort: 0, Name: "Embedded library - Spring Boot Actuator"},
-			{Category: "information", Description: "Info", Effort: 0, Name: "Java Servlet"},
-			{Category: "information", Description: "Info", Effort: 0, Name: "Maven POM (pom.xml)"},
+			{
+				Category: "mandatory",
+				Description: "Hardcoded IP Address\nWhen migrating environments, hard-coded IP addresses may need to be modified or eliminated.",
+				Effort: 1,
+				RuleSet: "discovery-rules",
+				Rule: "hardcoded-ip-address",
+				Incidents: []api.Incident{
+					{
+						File: "/addon/source/example-applications/example-1/target/classes/persistence.properties",
+						Line: 0,
+						Message: "When migrating environments, hard-coded IP addresses may need to be modified or eliminated.",
+					},
+					{
+						File: "/addon/source/example-applications/example-1/src/main/resources/persistence.properties",
+						Line: 0,
+						Message: "When migrating environments, hard-coded IP addresses may need to be modified or eliminated.",
+					},
+				},
+			},
 		},
 	},
 	AnalysisTags: []api.Tag{
-		{Name: "JPA entities"},
+		{Name: "EJB XML"},
+		{Name: "Java EE Batch"},
 		{Name: "Properties"},
 		{Name: "Servlet"},
-		{Name: "Spring Boot Actuator"},
-		{Name: "Spring Data JPA"},
-		{Name: "Spring MVC"},
-		{Name: "Spring Web"},
 	},
 }

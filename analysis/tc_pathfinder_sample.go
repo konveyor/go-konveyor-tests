@@ -14,48 +14,29 @@ var PathfinderSample = TC{
 		},
 	},
 	Task: Analyze,
-	ReportContent: map[string][]string{
-		"/windup/report/index.html": {
-			"5\nstory points",
-			"5\nCloud Mandatory",
-			"9\nInformation",
-		},
-	},
+	//ReportContent: map[string][]string{  // From Windup
+	//	"/windup/report/index.html": {
+	//		"5\nstory points",
+	//		"5\nCloud Mandatory",
+	//		"9\nInformation",
+	//	},
+	//},
 	Analysis: api.Analysis{
-		Effort: 5,
+		Effort: 271,
 		Issues: []api.Issue{
 			{
-				Category:    "cloud-mandatory",
-				Description: "Trivial change or 1-1 library swap",
-				Effort:      5,
-				Name:        "File system - Java IO",
-			},
-			{
-				Category:    "information",
-				Description: "Info",
-				Effort:      0,
-				Name:        "Application properties file detected",
-			},
-			{
-				Category:    "information",
-				Description: "Info",
-				Effort:      0,
-				Name:        "Bean Validation",
-			},
-			{
-				Category:    "information",
-				Description: "Info",
-				Effort:      0,
-				Name:        "Maven POM (pom.xml)",
+				Category: "mandatory",
+				Description: "File system - Java IO\nAn application running inside a container could lose access to a file in local storage..",
+				Effort: 1,
+				RuleSet: "openshift",
+				Rule: "local-storage-00001",
+				Incidents: []api.Incident{},	// Got 271 incidents for this issue.
 			},
 		},
 	},
 	AnalysisTags: []api.Tag{
 		{Name: "CDI"},
-		{Name: "HTML"},
 		{Name: "Properties"},
-		{Name: "JPA entities"},
-		{Name: "JAX-RS"},
 		{Name: "Bean Validation"},
 		{Name: "Application Properties File"},
 	},

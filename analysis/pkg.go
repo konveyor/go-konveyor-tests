@@ -35,6 +35,7 @@ type TC struct {
 	// Analysis parameters.
 	Task          api.Task
 	TaskData      string
+	// TODO(maufart): Add fields for customizable Sources/Targets.
 	// After-analysis assertions.
 	ReportContent map[string][]string
 	Analysis      api.Analysis
