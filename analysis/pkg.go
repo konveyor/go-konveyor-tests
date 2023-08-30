@@ -1,16 +1,11 @@
 package analysis
 
 import (
-	"os"
-	"path/filepath"
-	"regexp"
-	"testing"
 	"time"
 
 	"github.com/konveyor/tackle2-hub/api"
 	"github.com/konveyor/tackle2-hub/binding"
 	"github.com/konveyor/tackle2-hub/test/api/client"
-	"github.com/konveyor/tackle2-hub/test/assert"
 )
 
 var (
@@ -40,26 +35,9 @@ type TC struct {
 	// Analysis parameters.
 	Task          api.Task
 	TaskData      string
+	// TODO(maufart): Add fields for customizable Sources/Targets.
 	// After-analysis assertions.
 	ReportContent map[string][]string
 	Analysis      api.Analysis
 	AnalysisTags  []api.Tag
-}
-
-func getReportText(t *testing.T, tc *TC, path string) (text string) {
-	// Get report file.
-	dirName, err := os.MkdirTemp("/tmp", tc.Name)
-	assert.Must(t, err)
-	fileName := filepath.Join(dirName, filepath.Base(path))
-	err = RichClient.Application.Bucket(tc.Application.ID).Get(path, dirName)
-	assert.Must(t, err)
-	content, err := os.ReadFile(fileName)
-	assert.Must(t, err)
-
-	// Prepare content - strip tags etc.
-	tags := regexp.MustCompile(`<.*?>`)
-	spaces := regexp.MustCompile(`(\t|  +|\n\t+\n)`)
-	text = tags.ReplaceAllString(string(content), "")
-	text = spaces.ReplaceAllString(text, "")
-	return
 }

@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/PuerkitoBio/goquery v1.8.1
 	github.com/konveyor/tackle2-addon v0.2.0
-	github.com/konveyor/tackle2-hub v0.2.2-0.20230810163209-f18f21c71b23
+	github.com/konveyor/tackle2-hub v0.3.0-alpha.2.0.20230829145245-ebd8ab8ac2f2
 )
 
 require (
@@ -63,6 +63,7 @@ require (
 	github.com/prometheus/procfs v0.9.0 // indirect
 	github.com/segmentio/ksuid v1.0.4 // indirect
 	github.com/sirupsen/logrus v1.9.0 // indirect
+	github.com/stretchr/testify v1.8.4 // indirect
 	github.com/trivago/tgo v1.0.7 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.2.9 // indirect
