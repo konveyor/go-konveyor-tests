@@ -28,7 +28,7 @@ jobs:
       - uses: actions/setup-go@v3
         with:
           go-version: '1.19'
-      - run: STAGE=1 make test-analysis
+      - run: STAGE1=1 make test-analysis
   test-analysis-stage2:
     runs-on: ubuntu-latest
     steps:
@@ -40,4 +40,4 @@ jobs:
       - uses: actions/setup-go@v3
         with:
           go-version: '1.19'
-      - run: STAGE=2 make test-analysis
+      - run: STAGE2=1 make test-analysis
