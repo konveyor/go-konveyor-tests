@@ -5,7 +5,7 @@ package analysis
 // List of applications with expected analysis outputs.
 var Stage0TestCases = []TC{
 	Tomcat,
-	//PathfinderSample,
+	PathfinderSample,
 }
 
 //
