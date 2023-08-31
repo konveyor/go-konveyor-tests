@@ -19,8 +19,7 @@ jobs:
       - name: start-minikube
         uses: konveyor/tackle2-operator/.github/actions/start-minikube@main
         with:
-          driver: kvm2
-          memory: 10000M
+          memory: 12000M
           cpus: 4
       - name: install-tackle
         uses: konveyor/tackle2-operator/.github/actions/install-tackle@main
