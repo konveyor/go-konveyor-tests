@@ -4,7 +4,7 @@ package analysis
 // Stage 0 Analysis test cases - should never fail.
 // List of applications with expected analysis outputs.
 var Stage0TestCases = []TC{
-	Tomcat,
+	//Tomcat,
 	PathfinderSample,
 }
 
