@@ -5,13 +5,9 @@ go 1.18
 require (
 	github.com/PuerkitoBio/goquery v1.8.1
 	github.com/konveyor/tackle2-addon v0.2.0
-<<<<<<< HEAD
 	github.com/konveyor/tackle2-hub v0.3.0-alpha.2.0.20230829145245-ebd8ab8ac2f2
-=======
-	github.com/konveyor/tackle2-hub v0.2.2-0.20230810163209-f18f21c71b23
 	github.com/onsi/ginkgo/v2 v2.11.0
 	github.com/onsi/gomega v1.27.10
->>>>>>> ac62a64 ([WIP] Initial Ginkgo test: Application Metrics)
 )
 
 require (
