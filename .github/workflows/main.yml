@@ -12,14 +12,16 @@ on:
 
 jobs:
   tests:
-    runs-on: ubuntu-latest
-    #runs-on: self-hosted
+    #runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
       - name: start-minikube
         uses: konveyor/tackle2-operator/.github/actions/start-minikube@main
         with:
-          memory: 6500M
+          driver: podman
+          cpus: 4
+          memory: 10000M
       - name: install-tackle
         uses: konveyor/tackle2-operator/.github/actions/install-tackle@main
       - uses: actions/setup-go@v3
