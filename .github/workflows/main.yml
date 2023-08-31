@@ -19,6 +19,7 @@ jobs:
       - name: start-minikube
         uses: konveyor/tackle2-operator/.github/actions/start-minikube@main
         with:
+          container-runtime: containerd
           driver: podman
           cpus: 4
           memory: 10000M
