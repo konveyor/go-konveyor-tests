@@ -19,7 +19,7 @@ jobs:
       - name: start-minikube
         uses: konveyor/tackle2-operator/.github/actions/start-minikube@main
         with:
-          memory: 12000M
+          memory: 6500M
       - name: install-tackle
         uses: konveyor/tackle2-operator/.github/actions/install-tackle@main
       - uses: actions/setup-go@v3
