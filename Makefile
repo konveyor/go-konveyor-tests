@@ -27,16 +27,16 @@ update-hub:
 
 # Stage0 - a core functionality, should never fail, Konveyor would be fully broken.
 test-stage0:
-	test-analysis
+	$(MAKE) test-analysis
 
 # Stage1 - all normal features expected to work.
 test-stage1:
-	STAGE1=1 test-analysis
-	test-metrics
+	STAGE1=1 $(MAKE) test-analysis
+	$(MAKE) test-metrics
 
-# Stage2 - 
+# Stage2 - advanced features and nice-to-haves.
 test-stage2:
-	STAGE2=1 test-analysis
+	STAGE2=1 $(MAKE) test-analysis
 
 #
 # Feature tests.
