@@ -19,7 +19,7 @@ jobs:
         with:
           go-version: '1.19'
       - run: make test-analysis
-  test-analysis-stage1:
+  test-stage0:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -32,8 +32,8 @@ jobs:
       - uses: actions/setup-go@v3
         with:
           go-version: '1.19'
-      - run: STAGE1=1 make test-analysis
-  test-analysis-stage2:
+      - run: make test-stage0
+  test-stage1:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -46,4 +46,18 @@ jobs:
       - uses: actions/setup-go@v3
         with:
           go-version: '1.19'
-      - run: STAGE2=1 make test-analysis
+      - run: make test-stage1
+  test-stage2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: start-minikube
+        uses: konveyor/tackle2-operator/.github/actions/start-minikube@main
+        with:
+          memory: 6500M
+      - name: install-tackle
+        uses: konveyor/tackle2-operator/.github/actions/install-tackle@main
+      - uses: actions/setup-go@v3
+        with:
+          go-version: '1.19'
+      - run: make test-stage2
