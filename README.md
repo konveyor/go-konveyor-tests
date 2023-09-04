@@ -47,32 +47,32 @@ $ export HUB_BASE_URL="http://`minikube ip`/hub"
 $ go test -count=1 -v ./analysis/
 ```
 
-## Test stages
+## Test tiers
 
-To provide maximum information about the project functionality, tests were separated into three stages. From core functionality to nice to haves.
+To provide maximum information about the project functionality, tests were separated into three tiers. From core functionality to nice to haves.
 
-### Stage 0
+### Tier 0
 
 Very basic and core functionality. A bug here would lead to mostly useless project. This stage should never fail. Examples: Hub API or a basic application analysis flow.
 
 ```
-$ make test-stage0
+$ make test-tier0
 ```
 
-### Stage 1
+### Tier 1
 
 Features of the project expected to work to satifly most of end-users expectations. Examples: real-world use cases of application analysis, Jira integrations or metrics.
 
 ```
-$ make test-stage1
+$ make test-tier1
 ```
 
-### Stage 2
+### Tier 2
 
 More advanced features like complex application analysis or some edge cases. This stage should be kept green, but a failure should not affect most of users.
 
 ```
-$ make test-stage2
+$ make test-tier2
 ```
 
 ## Test execution options

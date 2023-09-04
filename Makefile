@@ -25,18 +25,18 @@ update-hub:
 # Test stages.
 #
 
-# Stage0 - a core functionality, should never fail, Konveyor would be fully broken.
-test-stage0:
+# TIER0 - a core functionality, should never fail, Konveyor would be fully broken.
+test-tier0:
 	$(MAKE) test-analysis
 
-# Stage1 - all normal features expected to work.
-test-stage1:
-	STAGE1=1 $(MAKE) test-analysis
+# TIER1 - all normal features expected to work.
+test-tier1:
+	TIER1=1 $(MAKE) test-analysis
 	$(MAKE) test-metrics
 
-# Stage2 - advanced features and nice-to-haves.
-test-stage2:
-	STAGE2=1 $(MAKE) test-analysis
+# TIER2 - advanced features and nice-to-haves.
+test-tier2:
+	TIER2=1 $(MAKE) test-analysis
 
 #
 # Feature tests.

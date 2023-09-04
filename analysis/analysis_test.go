@@ -18,12 +18,12 @@ import (
 func TestApplicationAnalysis(t *testing.T) {
 	// Find right test cases for given stage (include Stage0 always).
 	testCases := Stage0TestCases
-	_, stage1 := os.LookupEnv("STAGE1")
-	if stage1 {
+	_, tier1 := os.LookupEnv("TIER1")
+	if tier1 {
 		testCases = append(testCases, Stage1TestCases...)
 	}
-	_, stage2 := os.LookupEnv("STAGE2")
-	if stage2 {
+	_, tier2 := os.LookupEnv("TIER2")
+	if tier2 {
 		testCases = append(testCases, Stage2TestCases...)
 	}
 	// Run test cases.

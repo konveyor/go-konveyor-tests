@@ -11,7 +11,7 @@ on:
       - '**.md'
 
 jobs:
-  test-stage0:
+  test-tier0:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -24,8 +24,8 @@ jobs:
       - uses: actions/setup-go@v3
         with:
           go-version: '1.19'
-      - run: make test-stage0
-  test-stage1:
+      - run: make test-tier0
+  test-tier1:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -38,8 +38,8 @@ jobs:
       - uses: actions/setup-go@v3
         with:
           go-version: '1.19'
-      - run: make test-stage1
-  test-stage2:
+      - run: make test-tier1
+  test-tier2:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -52,4 +52,4 @@ jobs:
       - uses: actions/setup-go@v3
         with:
           go-version: '1.19'
-      - run: make test-stage2
+      - run: make test-tier2
