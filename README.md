@@ -53,7 +53,7 @@ To provide maximum information about the project functionality, tests were separ
 
 ### Tier 0
 
-Very basic and core functionality. A bug here would lead to mostly useless project. This stage should never fail. Examples: Hub API or a basic application analysis flow.
+Very basic and core functionality. A bug here would lead to mostly useless project. This tier should never fail. Examples: Hub API or a basic application analysis flow.
 
 ```
 $ make test-tier0
@@ -69,7 +69,7 @@ $ make test-tier1
 
 ### Tier 2
 
-More advanced features like complex application analysis or some edge cases. This stage should be kept green, but a failure should not affect most of users.
+More advanced features like complex application analysis or some edge cases. This tier should be kept green, but a failure should not affect most of users.
 
 ```
 $ make test-tier2
