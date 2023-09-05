@@ -22,7 +22,7 @@ update-hub:
 	go get -u github.com/konveyor/tackle2-hub@main
 
 #
-# Test stages.
+# Test tiers.
 #
 
 # TIER0 - a core functionality, should never fail, Konveyor would be fully broken.
@@ -31,12 +31,12 @@ test-tier0:
 
 # TIER1 - all normal features expected to work.
 test-tier1:
-	TIER1=1 $(MAKE) test-analysis
+	STAGE1=1 $(MAKE) test-analysis
 	$(MAKE) test-metrics
 
 # TIER2 - advanced features and nice-to-haves.
 test-tier2:
-	TIER2=1 $(MAKE) test-analysis
+	STAGE2=1 $(MAKE) test-analysis
 
 #
 # Feature tests.
@@ -50,7 +50,7 @@ test-analysis:
 test-metrics:
 	HUB_BASE_URL="http://${MINIKUBE_IP}/hub" go test -count=1 -v ./metrics/...
 
-# Add next features tests here and call the target from appropriate stage.
+# Add next features tests here and call the target from appropriate tier.
 
 # Execute all tests.
-test-all: test-stage0 test-stage1 test-stage2
+test-all: test-tier0 test-tier1 test-tier2
