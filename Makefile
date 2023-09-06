@@ -31,8 +31,8 @@ test-tier0:
 
 # TIER1 - all normal features expected to work.
 test-tier1:
-	TIER1=1 $(MAKE) test-analysis
 	$(MAKE) test-metrics
+	TIER1=1 $(MAKE) test-analysis
 
 # TIER2 - advanced features and nice-to-haves.
 test-tier2:
@@ -48,7 +48,7 @@ test-analysis:
 
 # Metrics.
 test-metrics:
-	HUB_BASE_URL="http://${MINIKUBE_IP}/hub" go test -count=1 -v ./metrics/...
+	HUB_BASE_URL="http://${MINIKUBE_IP}/hub" ginkgo -v ./e2e/metrics/...
 
 # Add next features tests here and call the target from appropriate tier.
 
