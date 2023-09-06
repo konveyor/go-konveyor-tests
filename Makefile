@@ -31,12 +31,12 @@ test-tier0:
 
 # TIER1 - all normal features expected to work.
 test-tier1:
-	STAGE1=1 $(MAKE) test-analysis
+	TIER1=1 $(MAKE) test-analysis
 	$(MAKE) test-metrics
 
 # TIER2 - advanced features and nice-to-haves.
 test-tier2:
-	STAGE2=1 $(MAKE) test-analysis
+	TIER2=1 $(MAKE) test-analysis
 
 #
 # Feature tests.
