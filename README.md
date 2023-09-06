@@ -1,10 +1,14 @@
 # Golang API test suite for Konveyor
 
-[![API tests on Quay](https://quay.io/repository/konveyor/go-konveyor-tests/status "API tests Repository on Quay")](https://quay.io/repository/konveyor/go-konveyor-tests)
-[![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/konveyor/go-konveyor-tests/pulls)
+[![License](https://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/konveyor/go-konveyor-tests/pulls)
 
-[![API CI Test Suite](https://github.com/konveyor/go-konveyor-tests/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/konveyor/go-konveyor-tests/actions/workflows/main.yml)
-[![End-To-End Test Suite](https://github.com/konveyor/go-konveyor-tests/actions/workflows/test-nightly.yml/badge.svg?branch=main)](https://github.com/konveyor/go-konveyor-tests/actions/workflows/test-nightly.yml)
+[![Test TIER0](https://github.com/konveyor/go-konveyor-tests/actions/workflows/main-tier0.yml/badge.svg)](https://github.com/konveyor/go-konveyor-tests/actions/workflows/main-tier0.yml)
+[![Test TIER1](https://github.com/konveyor/go-konveyor-tests/actions/workflows/main-tier1.yml/badge.svg)](https://github.com/konveyor/go-konveyor-tests/actions/workflows/main-tier1.yml)
+[![Test TIER2](https://github.com/konveyor/go-konveyor-tests/actions/workflows/main-tier2.yml/badge.svg)](https://github.com/konveyor/go-konveyor-tests/actions/workflows/main-tier2.yml)
+
+[![Test nightly TIER0](https://github.com/konveyor/go-konveyor-tests/actions/workflows/nightly-tier0.yml/badge.svg)](https://github.com/konveyor/go-konveyor-tests/actions/workflows/nightly-tier0.yml)
+[![Test nightly TIER1](https://github.com/konveyor/go-konveyor-tests/actions/workflows/nightly-tier1.yml/badge.svg)](https://github.com/konveyor/go-konveyor-tests/actions/workflows/nightly-tier1.yml)
+[![Test nightly TIER2](https://github.com/konveyor/go-konveyor-tests/actions/workflows/nightly-tier2.yml/badge.svg)](https://github.com/konveyor/go-konveyor-tests/actions/workflows/nightly-tier2.yml)
 
 This repository contains application-level tests for Konveyor. That means test focusing on integration of multiple components and real-world Koveyor use-cases. Basic components tests should be placed and executed in their own repositories.
 
@@ -47,7 +51,35 @@ $ export HUB_BASE_URL="http://`minikube ip`/hub"
 $ go test -count=1 -v ./analysis/
 ```
 
-### Test execution options
+## Test tiers
+
+To provide maximum information about the project functionality, tests were separated into three tiers. From core functionality to nice to haves.
+
+### Tier 0
+
+Very basic and core functionality. A bug here would lead to mostly useless project. This tier should never fail. Examples: Hub API or a basic application analysis flow.
+
+```
+$ make test-tier0
+```
+
+### Tier 1
+
+Features of the project expected to work to satifly most of end-users expectations. Examples: real-world use cases of application analysis, Jira integrations or metrics.
+
+```
+$ make test-tier1
+```
+
+### Tier 2
+
+More advanced features like complex application analysis or some edge cases. This tier should be kept green, but a failure should not affect most of users.
+
+```
+$ make test-tier2
+```
+
+## Test execution options
 
 #### PARALLEL
 

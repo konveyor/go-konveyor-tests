@@ -16,15 +16,15 @@ import (
 
 // Test application analysis
 func TestApplicationAnalysis(t *testing.T) {
-	// Find right test cases for given stage (include Stage0 always).
-	testCases := Stage0TestCases
-	_, stage1 := os.LookupEnv("STAGE1")
-	if stage1 {
-		testCases = append(testCases, Stage1TestCases...)
+	// Find right test cases for given Tier (include Tier0 always).
+	testCases := Tier0TestCases
+	_, tier1 := os.LookupEnv("TIER1")
+	if tier1 {
+		testCases = append(testCases, Tier1TestCases...)
 	}
-	_, stage2 := os.LookupEnv("STAGE2")
-	if stage2 {
-		testCases = append(testCases, Stage2TestCases...)
+	_, tier2 := os.LookupEnv("TIER2")
+	if tier2 {
+		testCases = append(testCases, Tier2TestCases...)
 	}
 	// Run test cases.
 	for _, testcase := range testCases {
@@ -110,7 +110,7 @@ func TestApplicationAnalysis(t *testing.T) {
 			}
 			for i, got := range gotAnalysis.Issues {
 				expected := tc.Analysis.Issues[i]
-				if got.Category != expected.Category || got.RuleSet != expected.RuleSet || got.Rule != expected.Rule || got.Effort != expected.Effort || !strings.HasPrefix(got.Description, expected.Description) {	
+				if got.Category != expected.Category || got.RuleSet != expected.RuleSet || got.Rule != expected.Rule || got.Effort != expected.Effort || !strings.HasPrefix(got.Description, expected.Description) {
 					t.Errorf("\nDifferent issue error. Got %+v, expected %+v.\n\n", got, expected)
 				}
 
@@ -124,7 +124,7 @@ func TestApplicationAnalysis(t *testing.T) {
 				}
 				for j, gotInc := range got.Incidents {
 					expectedInc := expected.Incidents[j]
-					if gotInc.File != expectedInc.File || gotInc.Line != expectedInc.Line || !strings.HasPrefix(gotInc.Message, expectedInc.Message) {	
+					if gotInc.File != expectedInc.File || gotInc.Line != expectedInc.Line || !strings.HasPrefix(gotInc.Message, expectedInc.Message) {
 						t.Errorf("\nDifferent incident error. Got %+v, expected %+v.\n\n", gotInc, expectedInc)
 					}
 				}

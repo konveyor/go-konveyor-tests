@@ -1,28 +1,28 @@
 package analysis
 
 //
-// Stage 0 Analysis test cases - should never fail.
+// Tier 0 Analysis test cases - should never fail.
 // List of applications with expected analysis outputs.
-var Stage0TestCases = []TC{
+var Tier0TestCases = []TC{
 	Tomcat,
 	PathfinderSample,
 }
 
 //
-// Stage 1 Analysis test cases - should work.
+// Tier 1 Analysis test cases - should work.
 // List of applications with expected analysis outputs.
-var Stage1TestCases = []TC{
+var Tier1TestCases = []TC{
 	PetclinicMain,
 	PetclinicHazelcast,
-	Daytrader,
 	ApacheWicket,
 	SeamBooking,
 }
 
 //
-// Stage 2 Analysis test cases - great if works.
+// Tier 2 Analysis test cases - great if works.
 // List of applications with expected analysis outputs.
-var Stage2TestCases = []TC{
+var Tier2TestCases = []TC{
+	Daytrader,
 }
 
 //

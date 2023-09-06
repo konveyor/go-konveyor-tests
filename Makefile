@@ -17,13 +17,40 @@ setup:
 clean:
 	minikube delete || true
 
-# Execute application analysis tests.
-test-analysis:
-	HUB_BASE_URL="http://${MINIKUBE_IP}/hub" go test -count=1 -timeout 7200s -v ./analysis/...
-
-# Execute all tests.
-test-all: test-analysis
-
 # Update Hub dependency with latest binding and api.
 update-hub:
 	go get -u github.com/konveyor/tackle2-hub@main
+
+#
+# Test tiers.
+#
+
+# TIER0 - a core functionality, should never fail, Konveyor would be fully broken.
+test-tier0:
+	$(MAKE) test-analysis
+
+# TIER1 - all normal features expected to work.
+test-tier1:
+	$(MAKE) test-metrics
+	TIER1=1 $(MAKE) test-analysis
+
+# TIER2 - advanced features and nice-to-haves.
+test-tier2:
+	TIER2=1 $(MAKE) test-analysis
+
+#
+# Feature tests.
+#
+
+# Application analysis tests.
+test-analysis:
+	HUB_BASE_URL="http://${MINIKUBE_IP}/hub" go test -count=1 -timeout 7200s -v ./analysis/...
+
+# Metrics.
+test-metrics:
+	HUB_BASE_URL="http://${MINIKUBE_IP}/hub" ginkgo -v ./e2e/metrics/...
+
+# Add next features tests here and call the target from appropriate tier.
+
+# Execute all tests.
+test-all: test-tier0 test-tier1 test-tier2

@@ -1,0 +1,27 @@
+name: Test TIER1
+
+on:
+  pull_request:
+    branches: [ "main" ]
+    paths-ignore:
+      - '**.md'
+  push:
+    branches: [ "main" ]
+    paths-ignore:
+      - '**.md'
+
+jobs:
+  test-tier1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: start-minikube
+        uses: konveyor/tackle2-operator/.github/actions/start-minikube@main
+        with:
+          memory: 6500M
+      - name: install-tackle
+        uses: konveyor/tackle2-operator/.github/actions/install-tackle@main
+      - uses: actions/setup-go@v3
+        with:
+          go-version: '1.19'
+      - run: make test-tier1
