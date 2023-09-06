@@ -18,6 +18,9 @@ var Daytrader = TC{
 			"6\nInformation",
 		},
 	},
+	Targets: []string{
+		"cloud-readiness",
+	},
 	Analysis: api.Analysis{
 		Effort: 0,
 		Issues: []api.Issue{

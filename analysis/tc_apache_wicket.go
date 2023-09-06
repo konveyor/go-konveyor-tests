@@ -18,6 +18,9 @@ var ApacheWicket = TC{
 			"5\nstory points",
 		},
 	},
+	Targets: []string{
+		"cloud-readiness",
+	},
 	Analysis: api.Analysis{
 		Effort: 5,
 		Issues: []api.Issue{

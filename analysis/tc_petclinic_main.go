@@ -21,6 +21,9 @@ var PetclinicMain = TC{
 			"4\nInformation",
 		},
 	},
+	Targets: []string{
+		"cloud-readiness",
+	},
 	Analysis: api.Analysis{
 		Effort: 5,
 		Issues: []api.Issue{

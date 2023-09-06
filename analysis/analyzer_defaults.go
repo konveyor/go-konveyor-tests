@@ -20,7 +20,7 @@ var defaultAnalyzerData = addon.Data{
 		//Diva:     true,
 	},
 	Sources: []string{},
-	Targets: []string{}, // Emty by default, TODO(maufrat): Add as option to test cases.
+	Targets: []string{},
 	Scope: addon.Scope{
 		WithKnown: false,
 		//Packages: {
