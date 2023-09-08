@@ -20,6 +20,9 @@ var SeamBooking = TC{
 			"3\nInformation",
 		},
 	},
+	Targets: []string{
+		"cloud-readiness",
+	},
 	Analysis: api.Analysis{
 		Effort: 0,
 		Issues: []api.Issue{

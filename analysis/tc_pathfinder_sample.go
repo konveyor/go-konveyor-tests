@@ -21,6 +21,9 @@ var PathfinderSample = TC{
 	//		"9\nInformation",
 	//	},
 	//},
+	Targets: []string{
+		"cloud-readiness",
+	},
 	Analysis: api.Analysis{
 		Effort: 271,
 		Issues: []api.Issue{

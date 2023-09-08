@@ -20,11 +20,11 @@ func TestApplicationAnalysis(t *testing.T) {
 	testCases := Tier0TestCases
 	_, tier1 := os.LookupEnv("TIER1")
 	if tier1 {
-		testCases = append(testCases, Tier1TestCases...)
+		testCases = Tier1TestCases
 	}
 	_, tier2 := os.LookupEnv("TIER2")
 	if tier2 {
-		testCases = append(testCases, Tier2TestCases...)
+		testCases = Tier2TestCases
 	}
 	// Run test cases.
 	for _, testcase := range testCases {
@@ -67,6 +67,15 @@ func TestApplicationAnalysis(t *testing.T) {
 			//for _, r := range tc.CustomRules {
 			//	taskData.Rules = append(taskData.Rules, api.Ref{ID: r.ID, Name: r.Name})
 			//}
+			if len(tc.Sources) > 0 {
+				taskData.Sources = tc.Sources
+			}
+			if len(tc.Targets) > 0 {
+				taskData.Targets = tc.Targets
+			}
+			if tc.Rules.Path != "" {	// TODO: better rules handling
+				taskData.Rules = tc.Rules
+			}
 			tc.Task.Data = taskData
 			assert.Should(t, RichClient.Task.Create(&tc.Task))
 

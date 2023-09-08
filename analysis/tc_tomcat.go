@@ -22,6 +22,9 @@ var Tomcat = TC{
 	//		"6\nInformation",
 	//	},
 	//},
+	Targets: []string{
+		"cloud-readiness",
+	},
 	Analysis: api.Analysis{
 		Effort: 2,
 		Issues: []api.Issue{

@@ -33,6 +33,9 @@ var PetclinicHazelcast = TC{
 			"13\nInformation",
 		},
 	},
+	Targets: []string{
+		"cloud-readiness",
+	},
 	Analysis: api.Analysis{
 		Effort: 12,
 		Issues: []api.Issue{

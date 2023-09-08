@@ -27,7 +27,7 @@ var defaultWindupData = addonwindup.Data{
 		Diva:     true,
 	},
 	Sources: []string{},
-	Targets: []string{"cloud-readiness"},
+	Targets: []string{},
 	Scope: addonwindup.Scope{
 		WithKnown: false,
 		//Packages: {

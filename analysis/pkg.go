@@ -3,6 +3,7 @@ package analysis
 import (
 	"time"
 
+	"github.com/konveyor/go-konveyor-tests/hack/addon"
 	"github.com/konveyor/tackle2-hub/api"
 	"github.com/konveyor/tackle2-hub/binding"
 	"github.com/konveyor/tackle2-hub/test/api/client"
@@ -35,7 +36,9 @@ type TC struct {
 	// Analysis parameters.
 	Task          api.Task
 	TaskData      string
-	// TODO(maufart): Add fields for customizable Sources/Targets.
+	Sources       []string
+	Targets       []string
+	Rules         addon.Rules
 	// After-analysis assertions.
 	ReportContent map[string][]string
 	Analysis      api.Analysis
