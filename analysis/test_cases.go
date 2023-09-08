@@ -24,9 +24,3 @@ var Tier1TestCases = []TC{
 var Tier2TestCases = []TC{
 	Daytrader,
 }
-
-//
-// Switch analyzers:
-// - AnalyzeLsp
-// - AnalyzeWindup
-var Analyze = AnalyzeLsp

@@ -5,7 +5,7 @@ import (
 	"github.com/konveyor/tackle2-hub/api"
 )
 
-var AnalyzeLsp = api.Task{
+var Analyze = api.Task{
 	State: "Ready", // Created / Ready
 	Data:  defaultAnalyzerData,
 	Addon: "analyzer",

@@ -1,6 +1,7 @@
 VENDOR_DIR ?= /tmp/konveyor-vendor
 ARCH ?= amd64
 MINIKUBE_IP ?= `minikube ip`
+# HUB_BASE_URL="http://${MINIKUBE_IP}/hub"
 
 # Setup local minikube with tackle - work in progress (TODO: enable auth)
 # This is for local setup, CI uses shared github actions
@@ -44,11 +45,11 @@ test-tier2:
 
 # Application analysis tests.
 test-analysis:
-	HUB_BASE_URL="http://${MINIKUBE_IP}/hub" go test -count=1 -timeout 7200s -v ./analysis/...
+	go test -count=1 -timeout 7200s -v ./analysis/...
 
 # Metrics.
 test-metrics:
-	HUB_BASE_URL="http://${MINIKUBE_IP}/hub" ginkgo -v ./e2e/metrics/...
+	ginkgo -v ./e2e/metrics/...
 
 # Add next features tests here and call the target from appropriate tier.
 

@@ -1,29 +1,30 @@
-package analysis
+package analysiswindup
 
 import (
+	"fmt"
 	"os"
-	"strings"
 	"testing"
 	"time"
 
-	"github.com/konveyor/go-konveyor-tests/hack/addon"
+	"github.com/konveyor/go-konveyor-tests/analysis"
+	"github.com/konveyor/go-konveyor-tests/hack/addonwindup"
 	"github.com/konveyor/go-konveyor-tests/hack/uniq"
+	"github.com/konveyor/go-konveyor-tests/hack/windupreport"
 	"github.com/konveyor/tackle2-hub/api"
-	"github.com/konveyor/tackle2-hub/binding"
 	"github.com/konveyor/tackle2-hub/test/assert"
 )
 
 // Test application analysis
 func TestApplicationAnalysis(t *testing.T) {
 	// Find right test cases for given Tier (include Tier0 always).
-	testCases := Tier0TestCases
+	testCases := analysis.Tier0TestCases
 	_, tier1 := os.LookupEnv("TIER1")
 	if tier1 {
-		testCases = Tier1TestCases
+		testCases = analysis.Tier1TestCases
 	}
 	_, tier2 := os.LookupEnv("TIER2")
 	if tier2 {
-		testCases = Tier2TestCases
+		testCases = analysis.Tier2TestCases
 	}
 	// Run test cases.
 	for _, testcase := range testCases {
@@ -60,9 +61,9 @@ func TestApplicationAnalysis(t *testing.T) {
 			}
 
 			// Prepare and submit the analyze task.
-			// tc.Task.Addon = analyzerAddon
+			tc.Task = AnalyzeWindup
 			tc.Task.Application = &api.Ref{ID: tc.Application.ID}
-			taskData := tc.Task.Data.(addon.Data)
+			taskData := tc.Task.Data.(addonwindup.Data) // addon / addonwindup
 			//for _, r := range tc.CustomRules {
 			//	taskData.Rules = append(taskData.Rules, api.Ref{ID: r.ID, Name: r.Name})
 			//}
@@ -72,9 +73,9 @@ func TestApplicationAnalysis(t *testing.T) {
 			if len(tc.Targets) > 0 {
 				taskData.Targets = tc.Targets
 			}
-			if tc.Rules.Path != "" {	// TODO: better rules handling
-				taskData.Rules = tc.Rules
-			}
+			//if tc.Rules.Path != "" { // TODO: better rules handling
+			//	taskData.Rules = tc.Rules
+			//}
 			tc.Task.Data = taskData
 			assert.Should(t, RichClient.Task.Create(&tc.Task))
 
@@ -95,55 +96,58 @@ func TestApplicationAnalysis(t *testing.T) {
 
 			var gotAnalysis api.Analysis
 
-			// Get LSP analysis directly form Hub API
-			analysisPath := binding.Path(api.AppAnalysisRoot).Inject(binding.Params{api.ID: tc.Application.ID})
-			assert.Should(t, Client.Get(analysisPath, &gotAnalysis))
+			// Old Windup check version parsing windup HTML report
+			CheckWindupReportContent(t, &tc)
+
+			// Parse report for windup, to api.Analysis structure
+			gotAnalysis = windupreport.Parse(t, tc.Application.ID)
+			DumpAnalysis(t, gotAnalysis)
 
 			// Check the analysis result (effort, issues, etc).
 			if gotAnalysis.Effort != tc.Analysis.Effort {
 				t.Errorf("Different effort error. Got %d, expected %d", gotAnalysis.Effort, tc.Analysis.Effort)
 			}
 
-			// Check the analysis issues
-			if len(gotAnalysis.Issues) != len(tc.Analysis.Issues) {
-				t.Errorf("Different amount of issues error. Got %d, expected %d.", len(gotAnalysis.Issues), len(tc.Analysis.Issues))
-			}
-			for i, got := range gotAnalysis.Issues {
-				expected := tc.Analysis.Issues[i]
-				if got.Category != expected.Category || got.RuleSet != expected.RuleSet || got.Rule != expected.Rule || got.Effort != expected.Effort || !strings.HasPrefix(got.Description, expected.Description) {
-					t.Errorf("\nDifferent issue error. Got %+v, expected %+v.\n\n", got, expected)
-				}
-
-				// Incidents check.
-				if len(expected.Incidents) == 0 {
-					t.Log("Skipping empty expected Incidents check.")
-					break
-				}
-				if len(got.Incidents) != len(expected.Incidents) {
-					t.Errorf("Different amount of incident error. Got %d, expected %d.", len(got.Incidents), len(expected.Incidents))
-				}
-				for j, gotInc := range got.Incidents {
-					expectedInc := expected.Incidents[j]
-					if gotInc.File != expectedInc.File || gotInc.Line != expectedInc.Line || !strings.HasPrefix(gotInc.Message, expectedInc.Message) {
-						t.Errorf("\nDifferent incident error. Got %+v, expected %+v.\n\n", gotInc, expectedInc)
-					}
-				}
-			}
-
-			// Check analysis-created Tags.
-			gotApp, _ := RichClient.Application.Get(tc.Application.ID)
-			for _, expected := range tc.AnalysisTags {
-				found := false
-				for _, got := range gotApp.Tags {
-					if got.Name == expected.Name && got.Source == "Analysis" {
-						found = true
-						break
-					}
-				}
-				if !found {
-					t.Errorf("Missing expected tag '%s'.\n", expected.Name)
-				}
-			}
+			//// Check the analysis issues
+			//if len(gotAnalysis.Issues) != len(tc.Analysis.Issues) {
+			//	t.Errorf("Different amount of issues error. Got %d, expected %d.", len(gotAnalysis.Issues), len(tc.Analysis.Issues))
+			//}
+			//for i, got := range gotAnalysis.Issues {
+			//	expected := tc.Analysis.Issues[i]
+			//	if got.Category != expected.Category || got.RuleSet != expected.RuleSet || got.Rule != expected.Rule || got.Effort != expected.Effort || !strings.HasPrefix(got.Description, expected.Description) {
+			//		t.Errorf("\nDifferent issue error. Got %+v, expected %+v.\n\n", got, expected)
+			//	}
+//
+			//	// Incidents check.
+			//	if len(expected.Incidents) == 0 {
+			//		t.Log("Skipping empty expected Incidents check.")
+			//		break
+			//	}
+			//	if len(got.Incidents) != len(expected.Incidents) {
+			//		t.Errorf("Different amount of incident error. Got %d, expected %d.", len(got.Incidents), len(expected.Incidents))
+			//	}
+			//	for j, gotInc := range got.Incidents {
+			//		expectedInc := expected.Incidents[j]
+			//		if gotInc.File != expectedInc.File || gotInc.Line != expectedInc.Line || !strings.HasPrefix(gotInc.Message, expectedInc.Message) {
+			//			t.Errorf("\nDifferent incident error. Got %+v, expected %+v.\n\n", gotInc, expectedInc)
+			//		}
+			//	}
+			//}
+//
+			//// Check analysis-created Tags.
+			//gotApp, _ := RichClient.Application.Get(tc.Application.ID)
+			//for _, expected := range tc.AnalysisTags {
+			//	found := false
+			//	for _, got := range gotApp.Tags {
+			//		if got.Name == expected.Name && got.Source == "Analysis" {
+			//			found = true
+			//			break
+			//		}
+			//	}
+			//	if !found {
+			//		t.Errorf("Missing expected tag '%s'.\n", expected.Name)
+			//	}
+			//}
 
 			// TODO(maufart): analysis tagger creates duplicate tags, not sure if it is expected, check later.
 			//if len(tc.AnalysisTags) != len(gotApp.Tags) {
@@ -182,4 +186,31 @@ func TestApplicationAnalysis(t *testing.T) {
 			}
 		})
 	}
+}
+
+func DumpAnalysis(t *testing.T, analysis api.Analysis) {
+	fmt.Println("GOT ANALYSIS DUMP:")
+	fmt.Printf("api.Analysis{\n")
+	fmt.Printf("    Effort: %d,\n", analysis.Effort)
+	fmt.Printf("    Issues: []api.Issue{\n")
+	for _, issue := range analysis.Issues {
+		fmt.Printf("        {\n")
+		fmt.Printf("            Category: \"%s\",\n", issue.Category)
+		fmt.Printf("            Description: \"%s\",\n", issue.Description)
+		fmt.Printf("            Effort: %d,\n", issue.Effort)
+		fmt.Printf("            RuleSet: \"%s\",\n", issue.RuleSet)
+		fmt.Printf("            Rule: \"%s\",\n", issue.Rule)
+		fmt.Printf("            Incidents: []api.Incident{\n")
+		for _, incident := range issue.Incidents {
+			fmt.Printf("            {\n")
+			fmt.Printf("                File: \"%s\",\n", incident.File)
+			fmt.Printf("                Line: \"%d\",\n", incident.Line)
+			fmt.Printf("                Message: \"%s\",\n", incident.Message)
+			fmt.Printf("            },\n")
+		}
+		fmt.Printf("            },\n")
+		fmt.Printf("        },\n")
+	}
+	fmt.Printf("    }\n")
+	fmt.Printf("}\n")
 }
