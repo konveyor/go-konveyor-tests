@@ -2,10 +2,10 @@ package analysis
 
 import "github.com/konveyor/tackle2-hub/api"
 
-var PathfinderSample = TC{
-	Name: "Pathfinder cloud-readiness with tagger",
+var PathfinderExample1 = TC{
+	Name: "Pathfinder example1 cloud-readiness with tagger",
 	Application: api.Application{
-		Name:        "Pathfinder",
+		Name:        "Pathfinder example-1",
 		Description: "Tackle Pathfinder application.",
 		Repository: &api.Repository{
 			Kind:   "git",

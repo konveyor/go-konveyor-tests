@@ -101,7 +101,7 @@ func TestApplicationAnalysis(t *testing.T) {
 
 			// Parse report for windup, to api.Analysis structure
 			gotAnalysis = windupreport.Parse(t, tc.Application.ID)
-			DumpAnalysis(t, gotAnalysis)
+			DumpAnalysis(t, tc, gotAnalysis)
 
 			// Check the analysis result (effort, issues, etc).
 			if gotAnalysis.Effort != tc.Analysis.Effort {
@@ -188,8 +188,8 @@ func TestApplicationAnalysis(t *testing.T) {
 	}
 }
 
-func DumpAnalysis(t *testing.T, analysis api.Analysis) {
-	fmt.Println("GOT ANALYSIS DUMP:")
+func DumpAnalysis(t *testing.T, tc analysis.TC, analysis api.Analysis) {
+	fmt.Printf("WINDUP ANALYSIS OUTPUT FOR \"%s\":", tc.Name)
 	fmt.Printf("api.Analysis{\n")
 	fmt.Printf("    Effort: %d,\n", analysis.Effort)
 	fmt.Printf("    Issues: []api.Issue{\n")
