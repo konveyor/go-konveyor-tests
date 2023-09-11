@@ -9,6 +9,8 @@ var (
 	Client      *binding.Client
 	RichClient  *binding.RichClient
 	Application binding.Application
+	Tracker     binding.Tracker
+	Identity    binding.Identity
 )
 
 func init() {
@@ -20,4 +22,9 @@ func init() {
 
 	// Shortcut for Application-related RichClient methods.
 	Application = RichClient.Application
+
+	// Shortcut for Tracker-related RichClient methods.
+	Tracker = RichClient.Tracker
+
+	Identity = RichClient.Identity
 }
