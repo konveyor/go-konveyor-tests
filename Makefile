@@ -1,6 +1,7 @@
 VENDOR_DIR ?= /tmp/konveyor-vendor
 ARCH ?= amd64
 MINIKUBE_IP ?= `minikube ip`
+BRANCH ?= main
 
 # Setup local minikube with tackle - work in progress (TODO: enable auth)
 # This is for local setup, CI uses shared github actions
@@ -50,7 +51,17 @@ test-analysis:
 test-metrics:
 	HUB_BASE_URL="http://${MINIKUBE_IP}/hub" ginkgo -v ./e2e/metrics/...
 
-# Add next features tests here and call the target from appropriate tier.
+# Hub API remote tests.
+test-hub-api:
+	if [ -d /tmp/tackle2-hub-test ]; then \
+		cd /tmp/tackle2-hub-test; \
+		git pull origin ${BRANCH}; \
+	else
+		git clone --branch ${BRANCH} https://github.com/konveyor/tackle2-hub.git /tmp/tackle2-hub-test && cd $_
+	fi
+	HUB_BASE_URL="http://${MINIKUBE_IP}/hub" make test-api
+
+# Add next features tests here and call the target from appropriate stage.
 
 # Execute all tests.
 test-all: test-tier0 test-tier1 test-tier2
