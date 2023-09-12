@@ -29,22 +29,22 @@ var Tomcat = TC{
 		Effort: 2,
 		Issues: []api.Issue{
 			{
-				Category:    "mandatory",
+				Category: "mandatory",
 				Description: "Hardcoded IP Address\nWhen migrating environments, hard-coded IP addresses may need to be modified or eliminated.",
-				Effort:      1,
-				RuleSet:     "discovery-rules",
-				Rule:        "hardcoded-ip-address",
+				Effort: 1,
+				RuleSet: "discovery-rules",
+				Rule: "hardcoded-ip-address",
 				Incidents: []api.Incident{
-					{
-						File:    "/addon/source/example-applications/example-1/src/main/resources/persistence.properties",
-						Line:    0,
-						Message: "When migrating environments, hard-coded IP addresses may need to be modified or eliminated.",
-					},
-					{
-						File:    "/addon/source/example-applications/example-1/target/classes/persistence.properties",
-						Line:    0,
-						Message: "When migrating environments, hard-coded IP addresses may need to be modified or eliminated.",
-					},
+				{
+					File: "/addon/source/example-applications/example-1/target/classes/persistence.properties",
+					Line: 0,
+					Message: "When migrating environments, hard-coded IP addresses may need to be modified or eliminated.",
+				},
+				{
+					File: "/addon/source/example-applications/example-1/src/main/resources/persistence.properties",
+					Line: 0,
+					Message: "When migrating environments, hard-coded IP addresses may need to be modified or eliminated.",
+				},
 				},
 			},
 		},

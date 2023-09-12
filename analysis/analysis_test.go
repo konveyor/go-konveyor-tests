@@ -1,6 +1,7 @@
 package analysis
 
 import (
+	"fmt"
 	"os"
 	"strings"
 	"testing"
@@ -72,7 +73,7 @@ func TestApplicationAnalysis(t *testing.T) {
 			if len(tc.Targets) > 0 {
 				taskData.Targets = tc.Targets
 			}
-			if tc.Rules.Path != "" {	// TODO: better rules handling
+			if tc.Rules.Path != "" { // TODO: better rules handling
 				taskData.Rules = tc.Rules
 			}
 			tc.Task.Data = taskData
@@ -98,6 +99,11 @@ func TestApplicationAnalysis(t *testing.T) {
 			// Get LSP analysis directly form Hub API
 			analysisPath := binding.Path(api.AppAnalysisRoot).Inject(binding.Params{api.ID: tc.Application.ID})
 			assert.Should(t, Client.Get(analysisPath, &gotAnalysis))
+
+			_, debug := os.LookupEnv("DEBUG")
+			if debug {
+				DumpAnalysis(t, tc, gotAnalysis)
+			}
 
 			// Check the analysis result (effort, issues, etc).
 			if gotAnalysis.Effort != tc.Analysis.Effort {
@@ -182,4 +188,31 @@ func TestApplicationAnalysis(t *testing.T) {
 			}
 		})
 	}
+}
+
+func DumpAnalysis(t *testing.T, tc TC, analysis api.Analysis) {
+	fmt.Printf("WINDUP ANALYSIS OUTPUT FOR \"%s\":", tc.Name)
+	fmt.Printf("\napi.Analysis{\n")
+	fmt.Printf("    Effort: %d,\n", analysis.Effort)
+	fmt.Printf("    Issues: []api.Issue{\n")
+	for _, issue := range analysis.Issues {
+		fmt.Printf("        {\n")
+		fmt.Printf("            Category: \"%s\",\n", issue.Category)
+		fmt.Printf("            Description: \"%s\",\n", issue.Description)
+		fmt.Printf("            Effort: %d,\n", issue.Effort)
+		fmt.Printf("            RuleSet: \"%s\",\n", issue.RuleSet)
+		fmt.Printf("            Rule: \"%s\",\n", issue.Rule)
+		fmt.Printf("            Incidents: []api.Incident{\n")
+		for _, incident := range issue.Incidents {
+			fmt.Printf("            {\n")
+			fmt.Printf("                File: \"%s\",\n", incident.File)
+			fmt.Printf("                Line: %d,\n", incident.Line)
+			fmt.Printf("                Message: \"%s\",\n", incident.Message)
+			fmt.Printf("            },\n")
+		}
+		fmt.Printf("            },\n")
+		fmt.Printf("        },\n")
+	}
+	fmt.Printf("    },\n")
+	fmt.Printf("}\n")
 }
