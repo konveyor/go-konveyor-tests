@@ -32,10 +32,10 @@ func RuleSetName(r *api.RuleSet) {
 
 // IdentityName returns random Identity Name
 func IdentityName(r *api.Identity) {
-	r.Name = fmt.Sprint(r.Kind, '-', RandString(5))
+	r.Name = fmt.Sprint(r.Kind, "-", RandString(5))
 }
 
 // TrackerName returns random Tracker Name
 func TrackerName(r *api.Tracker) {
-	r.Name = fmt.Sprint(r.Kind, '-', RandString(5))
+	r.Name = fmt.Sprint(r.Kind, "-", RandString(5))
 }
