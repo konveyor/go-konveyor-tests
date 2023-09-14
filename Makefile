@@ -31,6 +31,7 @@ test-tier0:
 
 # TIER1 - all normal features expected to work.
 test-tier1:
+	$(MAKE) test-jira
 	$(MAKE) test-metrics
 	TIER1=1 $(MAKE) test-analysis
 
@@ -49,6 +50,14 @@ test-analysis:
 # Metrics.
 test-metrics:
 	HUB_BASE_URL="http://${MINIKUBE_IP}/hub" ginkgo -v ./e2e/metrics/...
+
+# Jira Integration.
+test-jira:
+	@if [ -z "${JIRA_USERNAME}" ]; then echo "Error: JIRA_USERNAME is not defined. Please set JIRA_USERNAME environment variable."; exit 1; fi
+	@if [ -z "${JIRA_PASSWORD}" ]; then echo "Error: JIRA_PASSWORD is not defined. Please set JIRA_PASSWORD environment variable."; exit 1; fi
+	@if [ -z "${JIRA_URL}" ]; then echo "Error: JIRA_URL is not defined. Please set JIRA_URL environment variable."; exit 1; fi 
+	HUB_BASE_URL="http://${MINIKUBE_IP}/hub" ginkgo -v -focus "Jira Connection"
+
 
 # Add next features tests here and call the target from appropriate tier.
 
