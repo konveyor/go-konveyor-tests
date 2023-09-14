@@ -1,3 +1,4 @@
 {
-	"RETRY_NUM": "10"
+	"RETRY_NUM": "10",
+	"KEEP": "0"
 }
