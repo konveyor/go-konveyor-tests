@@ -10,8 +10,6 @@ Due to fragile nature of some analysis parameters for more complex applications,
 
 Very basic Application->Task->Analyze->Result flow. Should never fail.
 
-TestCases from this stage are automaticaly included in analysis test executions.
-
 ### Stage 1
 
 Common example application analysis. Should work.
