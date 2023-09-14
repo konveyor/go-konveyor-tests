@@ -47,4 +47,3 @@ var defaultAnalyzerData = addon.Data{
 		Enabled: true,
 	},
 }
-

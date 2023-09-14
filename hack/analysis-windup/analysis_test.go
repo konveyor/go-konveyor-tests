@@ -1,7 +1,6 @@
 package analysiswindup
 
 import (
-	"fmt"
 	"os"
 	"testing"
 	"time"
@@ -28,7 +27,7 @@ func TestApplicationAnalysis(t *testing.T) {
 	}
 	// Run test cases.
 	for _, testcase := range testCases {
-		t.Run(testcase.Name, func(t *testing.T) {
+		t.Run("Windup"+testcase.Name, func(t *testing.T) {
 			// Prepare parallel execution if env variable PARALLEL is set.
 			tc := testcase
 			_, parallel := os.LookupEnv("PARALLEL")
@@ -99,75 +98,11 @@ func TestApplicationAnalysis(t *testing.T) {
 			// Old Windup check version parsing windup HTML report
 			CheckWindupReportContent(t, &tc)
 
-			// Parse report for windup, to api.Analysis structure
+			// Parse report for windup, to api.Analysis structure and print
 			gotAnalysis = windupreport.Parse(t, tc.Application.ID)
-			DumpAnalysis(t, tc, gotAnalysis)
-
-			// Check the analysis result (effort, issues, etc).
-			if gotAnalysis.Effort != tc.Analysis.Effort {
-				t.Errorf("Different effort error. Got %d, expected %d", gotAnalysis.Effort, tc.Analysis.Effort)
-			}
-
-			//// Check the analysis issues
-			//if len(gotAnalysis.Issues) != len(tc.Analysis.Issues) {
-			//	t.Errorf("Different amount of issues error. Got %d, expected %d.", len(gotAnalysis.Issues), len(tc.Analysis.Issues))
-			//}
-			//for i, got := range gotAnalysis.Issues {
-			//	expected := tc.Analysis.Issues[i]
-			//	if got.Category != expected.Category || got.RuleSet != expected.RuleSet || got.Rule != expected.Rule || got.Effort != expected.Effort || !strings.HasPrefix(got.Description, expected.Description) {
-			//		t.Errorf("\nDifferent issue error. Got %+v, expected %+v.\n\n", got, expected)
-			//	}
-//
-			//	// Incidents check.
-			//	if len(expected.Incidents) == 0 {
-			//		t.Log("Skipping empty expected Incidents check.")
-			//		break
-			//	}
-			//	if len(got.Incidents) != len(expected.Incidents) {
-			//		t.Errorf("Different amount of incident error. Got %d, expected %d.", len(got.Incidents), len(expected.Incidents))
-			//	}
-			//	for j, gotInc := range got.Incidents {
-			//		expectedInc := expected.Incidents[j]
-			//		if gotInc.File != expectedInc.File || gotInc.Line != expectedInc.Line || !strings.HasPrefix(gotInc.Message, expectedInc.Message) {
-			//			t.Errorf("\nDifferent incident error. Got %+v, expected %+v.\n\n", gotInc, expectedInc)
-			//		}
-			//	}
-			//}
-//
-			//// Check analysis-created Tags.
-			//gotApp, _ := RichClient.Application.Get(tc.Application.ID)
-			//for _, expected := range tc.AnalysisTags {
-			//	found := false
-			//	for _, got := range gotApp.Tags {
-			//		if got.Name == expected.Name && got.Source == "Analysis" {
-			//			found = true
-			//			break
-			//		}
-			//	}
-			//	if !found {
-			//		t.Errorf("Missing expected tag '%s'.\n", expected.Name)
-			//	}
-			//}
-
-			// TODO(maufart): analysis tagger creates duplicate tags, not sure if it is expected, check later.
-			//if len(tc.AnalysisTags) != len(gotApp.Tags) {
-			//	t.Errorf("Different Tags amount error. Got: %d, expected: %d.\n", len(gotApp.Tags), len(tc.AnalysisTags))
-			//}
-			//found, gotAnalysisTags := 0, 0
-			//for _, t := range gotApp.Tags {
-			//	if t.Source == "Analysis" {
-			//		gotAnalysisTags = gotAnalysisTags + 1
-			//		for _, expectedTag := range tc.AnalysisTags {
-			//			if expectedTag.Name == t.Name {
-			//				found = found + 1
-			//				break
-			//			}
-			//		}
-			//	}
-			//}
-			//if found != len(tc.AnalysisTags) || found < gotAnalysisTags {
-			//	t.Errorf("Analysis Tags don't match. Got:\n  %v\nexpected:\n  %v\n", gotApp.Tags, tc.AnalysisTags)
-			//}
+			gotApp, _ := RichClient.Application.Get(tc.Application.ID)
+			analysis.DumpAnalysis(t, tc, gotAnalysis)
+			analysis.DumpTags(t, tc, *gotApp)
 
 			// Allow skip cleanup to keep applications and analysis results for debugging etc.
 			_, keep := os.LookupEnv("KEEP")
@@ -186,31 +121,4 @@ func TestApplicationAnalysis(t *testing.T) {
 			}
 		})
 	}
-}
-
-func DumpAnalysis(t *testing.T, tc analysis.TC, analysis api.Analysis) {
-	fmt.Printf("WINDUP ANALYSIS OUTPUT FOR \"%s\":", tc.Name)
-	fmt.Printf("api.Analysis{\n")
-	fmt.Printf("    Effort: %d,\n", analysis.Effort)
-	fmt.Printf("    Issues: []api.Issue{\n")
-	for _, issue := range analysis.Issues {
-		fmt.Printf("        {\n")
-		fmt.Printf("            Category: \"%s\",\n", issue.Category)
-		fmt.Printf("            Description: \"%s\",\n", issue.Description)
-		fmt.Printf("            Effort: %d,\n", issue.Effort)
-		fmt.Printf("            RuleSet: \"%s\",\n", issue.RuleSet)
-		fmt.Printf("            Rule: \"%s\",\n", issue.Rule)
-		fmt.Printf("            Incidents: []api.Incident{\n")
-		for _, incident := range issue.Incidents {
-			fmt.Printf("            {\n")
-			fmt.Printf("                File: \"%s\",\n", incident.File)
-			fmt.Printf("                Line: \"%d\",\n", incident.Line)
-			fmt.Printf("                Message: \"%s\",\n", incident.Message)
-			fmt.Printf("            },\n")
-		}
-		fmt.Printf("            },\n")
-		fmt.Printf("        },\n")
-	}
-	fmt.Printf("    }\n")
-	fmt.Printf("}\n")
 }
