@@ -34,8 +34,9 @@ func getHubFullName() string {
 }
 
 func GetMetricValue(metricName string) int {
+	utils.Log.Info("Waiting for 30 seconds...")
 	time.Sleep(30 * time.Second)
-	cmd := fmt.Sprintf("oc exec -n %s %s -- curl http://localhost:2112/metrics | grep %s", operator_namespace, hub_pod_name, metricName)
+	cmd := fmt.Sprintf("oc exec -n %s %s -- curl -s http://localhost:2112/metrics | grep %s", operator_namespace, hub_pod_name, metricName)
 	var outStr []string = strings.Split(runCmd(cmd), "\n")
 	metricValue := outStr[len(outStr)-1]
 	metricValue = utils.LastString(strings.Split(metricValue, " "))
