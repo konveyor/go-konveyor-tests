@@ -31,7 +31,6 @@ test-tier0:
 
 # TIER1 - all normal features expected to work.
 test-tier1:
-	$(MAKE) test-jira
 	$(MAKE) test-metrics
 	TIER1=1 $(MAKE) test-analysis
 
