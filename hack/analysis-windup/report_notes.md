@@ -5,48 +5,49 @@ Executed on MTA 6.2.
 # TIER0 applications analysis
 
 ```
-$ go test -v -count=1 ./hack/analysis-windup/
-time=2023-09-14T10:34:13+02:00 level=info msg=[binding] Hub RichClient created.
-time=2023-09-14T10:34:13+02:00 level=info msg=[addon] Addon (adapter) created.
-time=2023-09-14T10:34:13+02:00 level=info msg=[binding] Hub RichClient created.
-time=2023-09-14T10:34:13+02:00 level=info msg=[binding] |201|  POST /hub/auth/login
-time=2023-09-14T10:34:13+02:00 level=info msg=[binding] Hub RichClient created.
-time=2023-09-14T10:34:13+02:00 level=info msg=[binding] |201|  POST /hub/auth/login
-time=2023-09-14T10:34:13+02:00 level=info msg=[binding] Hub RichClient created.
-time=2023-09-14T10:34:13+02:00 level=info msg=[binding] |201|  POST /hub/auth/login
+$ KEEP=1 go test -v -count=1 ./hack/analysis-windup/
+time=2023-09-14T10:56:23+02:00 level=info msg=[binding] Hub RichClient created.
+time=2023-09-14T10:56:23+02:00 level=info msg=[addon] Addon (adapter) created.
+time=2023-09-14T10:56:23+02:00 level=info msg=[binding] Hub RichClient created.
+time=2023-09-14T10:56:23+02:00 level=info msg=[binding] |201|  POST /hub/auth/login
+time=2023-09-14T10:56:23+02:00 level=info msg=[binding] Hub RichClient created.
+time=2023-09-14T10:56:23+02:00 level=info msg=[binding] |201|  POST /hub/auth/login
+time=2023-09-14T10:56:23+02:00 level=info msg=[binding] Hub RichClient created.
+time=2023-09-14T10:56:23+02:00 level=info msg=[binding] |201|  POST /hub/auth/login
 === RUN   TestApplicationAnalysis
 === RUN   TestApplicationAnalysis/WindupCustomer_Tomcat_Legacy_-_shoud_never_fail
-time=2023-09-14T10:34:13+02:00 level=info msg=[binding] |201|  POST /hub/applications
-time=2023-09-14T10:34:13+02:00 level=info msg=[binding] |201|  POST /hub/tasks
-time=2023-09-14T10:34:13+02:00 level=info msg=[binding] |200|  GET /hub/tasks/4
-time=2023-09-14T10:34:18+02:00 level=info msg=[binding] |200|  GET /hub/tasks/4
-time=2023-09-14T10:34:23+02:00 level=info msg=[binding] |200|  GET /hub/tasks/4
-time=2023-09-14T10:34:28+02:00 level=info msg=[binding] |200|  GET /hub/tasks/4
-time=2023-09-14T10:34:33+02:00 level=info msg=[binding] |200|  GET /hub/tasks/4
-time=2023-09-14T10:34:38+02:00 level=info msg=[binding] |200|  GET /hub/tasks/4
-time=2023-09-14T10:34:43+02:00 level=info msg=[binding] |200|  GET /hub/tasks/4
-time=2023-09-14T10:34:48+02:00 level=info msg=[binding] |200|  GET /hub/tasks/4
-time=2023-09-14T10:34:53+02:00 level=info msg=[binding] |200|  GET /hub/tasks/4
-time=2023-09-14T10:34:58+02:00 level=info msg=[binding] |200|  GET /hub/tasks/4
-time=2023-09-14T10:35:03+02:00 level=info msg=[binding] |200|  GET /hub/tasks/4
-time=2023-09-14T10:35:08+02:00 level=info msg=[binding] |200|  GET /hub/tasks/4
-time=2023-09-14T10:35:13+02:00 level=info msg=[binding] |200|  GET /hub/tasks/4
-time=2023-09-14T10:35:18+02:00 level=info msg=[binding] |200|  GET /hub/tasks/4
-time=2023-09-14T10:35:18+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/index.html
-time=2023-09-14T10:35:18+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/migration_issues.html
-time=2023-09-14T10:35:18+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/ApplicationDetails_Order_Management.html
-time=2023-09-14T10:35:18+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/pom_xml.html
-time=2023-09-14T10:35:18+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/windup_ruleproviders.html
-time=2023-09-14T10:35:18+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/windup_ruleproviders.html
-time=2023-09-14T10:35:18+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/windup_ruleproviders.html
-time=2023-09-14T10:35:18+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/windup_ruleproviders.html
-time=2023-09-14T10:35:18+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/windup_ruleproviders.html
-time=2023-09-14T10:35:18+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/persistence_properties.html
-time=2023-09-14T10:35:18+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/windup_ruleproviders.html
-time=2023-09-14T10:35:18+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/OrderManagementAppInitializer_java.html
-time=2023-09-14T10:35:18+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/windup_ruleproviders.html
-time=2023-09-14T10:35:18+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/Customer_java.html
-time=2023-09-14T10:35:18+02:00 level=info msg=[binding] |200|  GET /hub/applications/4
+time=2023-09-14T10:56:23+02:00 level=info msg=[binding] |201|  POST /hub/applications
+time=2023-09-14T10:56:23+02:00 level=info msg=[binding] |201|  POST /hub/tasks
+time=2023-09-14T10:56:23+02:00 level=info msg=[binding] |200|  GET /hub/tasks/1
+time=2023-09-14T10:56:28+02:00 level=info msg=[binding] |200|  GET /hub/tasks/1
+time=2023-09-14T10:56:33+02:00 level=info msg=[binding] |200|  GET /hub/tasks/1
+time=2023-09-14T10:56:38+02:00 level=info msg=[binding] |200|  GET /hub/tasks/1
+time=2023-09-14T10:56:43+02:00 level=info msg=[binding] |200|  GET /hub/tasks/1
+time=2023-09-14T10:56:48+02:00 level=info msg=[binding] |200|  GET /hub/tasks/1
+time=2023-09-14T10:56:53+02:00 level=info msg=[binding] |200|  GET /hub/tasks/1
+time=2023-09-14T10:56:58+02:00 level=info msg=[binding] |200|  GET /hub/tasks/1
+time=2023-09-14T10:57:03+02:00 level=info msg=[binding] |200|  GET /hub/tasks/1
+time=2023-09-14T10:57:08+02:00 level=info msg=[binding] |200|  GET /hub/tasks/1
+time=2023-09-14T10:57:13+02:00 level=info msg=[binding] |200|  GET /hub/tasks/1
+time=2023-09-14T10:57:18+02:00 level=info msg=[binding] |200|  GET /hub/tasks/1
+time=2023-09-14T10:57:23+02:00 level=info msg=[binding] |200|  GET /hub/tasks/1
+time=2023-09-14T10:57:28+02:00 level=info msg=[binding] |200|  GET /hub/tasks/1
+time=2023-09-14T10:57:33+02:00 level=info msg=[binding] |200|  GET /hub/tasks/1
+time=2023-09-14T10:57:33+02:00 level=info msg=[binding] |200|  GET /hub/applications/1/bucket/windup/report/index.html
+time=2023-09-14T10:57:33+02:00 level=info msg=[binding] |200|  GET /hub/applications/1/bucket/windup/report/reports/migration_issues.html
+time=2023-09-14T10:57:33+02:00 level=info msg=[binding] |200|  GET /hub/applications/1/bucket/windup/report/reports/ApplicationDetails_Order_Management.html
+time=2023-09-14T10:57:33+02:00 level=info msg=[binding] |200|  GET /hub/applications/1/bucket/windup/report/reports/pom_xml.html
+time=2023-09-14T10:57:33+02:00 level=info msg=[binding] |200|  GET /hub/applications/1/bucket/windup/report/reports/windup_ruleproviders.html
+time=2023-09-14T10:57:33+02:00 level=info msg=[binding] |200|  GET /hub/applications/1/bucket/windup/report/reports/windup_ruleproviders.html
+time=2023-09-14T10:57:33+02:00 level=info msg=[binding] |200|  GET /hub/applications/1/bucket/windup/report/reports/windup_ruleproviders.html
+time=2023-09-14T10:57:33+02:00 level=info msg=[binding] |200|  GET /hub/applications/1/bucket/windup/report/reports/windup_ruleproviders.html
+time=2023-09-14T10:57:33+02:00 level=info msg=[binding] |200|  GET /hub/applications/1/bucket/windup/report/reports/windup_ruleproviders.html
+time=2023-09-14T10:57:33+02:00 level=info msg=[binding] |200|  GET /hub/applications/1/bucket/windup/report/reports/persistence_properties.html
+time=2023-09-14T10:57:33+02:00 level=info msg=[binding] |200|  GET /hub/applications/1/bucket/windup/report/reports/windup_ruleproviders.html
+time=2023-09-14T10:57:33+02:00 level=info msg=[binding] |200|  GET /hub/applications/1/bucket/windup/report/reports/OrderManagementAppInitializer_java.html
+time=2023-09-14T10:57:33+02:00 level=info msg=[binding] |200|  GET /hub/applications/1/bucket/windup/report/reports/windup_ruleproviders.html
+time=2023-09-14T10:57:33+02:00 level=info msg=[binding] |200|  GET /hub/applications/1/bucket/windup/report/reports/Customer_java.html
+time=2023-09-14T10:57:33+02:00 level=info msg=[binding] |200|  GET /hub/applications/1
 ## GOT ANALYSIS OUTPUT FOR "Customer Tomcat Legacy - shoud never fail":
 api.Analysis{
     Effort: 1,
@@ -152,7 +153,7 @@ api.Analysis{
     },
 }
 ## GOT TAGS FOR "Customer Tomcat Legacy - shoud never fail":
-api.Tag{
+[]api.Tag{
     {Name: "Servlet"},
     {Name: "Spring MVC"},
     {Name: "Spring Boot Actuator"},
@@ -161,69 +162,68 @@ api.Tag{
     {Name: "Spring Data JPA"},
     {Name: "Spring Web"},
 }
-time=2023-09-14T10:35:18+02:00 level=info msg=[binding] |204|  DELETE /hub/applications/4
 === RUN   TestApplicationAnalysis/WindupPathfinder_example1_cloud-readiness_with_tagger
-time=2023-09-14T10:35:18+02:00 level=info msg=[binding] |201|  POST /hub/applications
-time=2023-09-14T10:35:18+02:00 level=info msg=[binding] |201|  POST /hub/tasks
-time=2023-09-14T10:35:18+02:00 level=info msg=[binding] |200|  GET /hub/tasks/4
-time=2023-09-14T10:35:23+02:00 level=info msg=[binding] |200|  GET /hub/tasks/4
-time=2023-09-14T10:35:28+02:00 level=info msg=[binding] |200|  GET /hub/tasks/4
-time=2023-09-14T10:35:33+02:00 level=info msg=[binding] |200|  GET /hub/tasks/4
-time=2023-09-14T10:35:38+02:00 level=info msg=[binding] |200|  GET /hub/tasks/4
-time=2023-09-14T10:35:43+02:00 level=info msg=[binding] |200|  GET /hub/tasks/4
-time=2023-09-14T10:35:48+02:00 level=info msg=[binding] |200|  GET /hub/tasks/4
-time=2023-09-14T10:35:53+02:00 level=info msg=[binding] |200|  GET /hub/tasks/4
-time=2023-09-14T10:35:58+02:00 level=info msg=[binding] |200|  GET /hub/tasks/4
-time=2023-09-14T10:36:03+02:00 level=info msg=[binding] |200|  GET /hub/tasks/4
-time=2023-09-14T10:36:08+02:00 level=info msg=[binding] |200|  GET /hub/tasks/4
-time=2023-09-14T10:36:13+02:00 level=info msg=[binding] |200|  GET /hub/tasks/4
-time=2023-09-14T10:36:18+02:00 level=info msg=[binding] |200|  GET /hub/tasks/4
-time=2023-09-14T10:36:24+02:00 level=info msg=[binding] |200|  GET /hub/tasks/4
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/tasks/4
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/index.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/migration_issues.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/ApplicationDetails_tackle_pathfinder.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/pom_xml.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/windup_ruleproviders.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/MavenWrapperDownloader_java.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/windup_ruleproviders.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/windup_ruleproviders.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/windup_ruleproviders.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/windup_ruleproviders.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/windup_ruleproviders.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/maven_wrapper_properties.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/application_properties.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/windup_ruleproviders.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/microprofile_config_properties.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/AssessmentsResource_java.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/windup_ruleproviders.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/QuestionnairesResource_java.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/TranslatorResource_java.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/windup_ruleproviders.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/ApplicationDto_java.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/windup_ruleproviders.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/AssessmentCreateCommand_java.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/windup_ruleproviders.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/AssessmentSvc_java.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/windup_ruleproviders.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/BulkCreateSvc_java.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/windup_ruleproviders.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/TranslatorSvc_java.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/windup_ruleproviders.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/AssessmentCategory_java.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/AssessmentQuestion_java.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/AssessmentQuestionnaire_java.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/AssessmentSingleOption_java.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/AssessmentStakeholder_java.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/AssessmentStakeholdergroup_java.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/AssessmentBulk_java.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/AssessmentBulkApplication_java.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/TranslatedText_java.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/Category_java.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/Question_java.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/Questionnaire_java.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4/bucket/windup/report/reports/SingleOption_java.html
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |200|  GET /hub/applications/4
+time=2023-09-14T10:57:33+02:00 level=info msg=[binding] |201|  POST /hub/applications
+time=2023-09-14T10:57:33+02:00 level=info msg=[binding] |201|  POST /hub/tasks
+time=2023-09-14T10:57:33+02:00 level=info msg=[binding] |200|  GET /hub/tasks/2
+time=2023-09-14T10:57:38+02:00 level=info msg=[binding] |200|  GET /hub/tasks/2
+time=2023-09-14T10:57:43+02:00 level=info msg=[binding] |200|  GET /hub/tasks/2
+time=2023-09-14T10:57:48+02:00 level=info msg=[binding] |200|  GET /hub/tasks/2
+time=2023-09-14T10:57:53+02:00 level=info msg=[binding] |200|  GET /hub/tasks/2
+time=2023-09-14T10:57:58+02:00 level=info msg=[binding] |200|  GET /hub/tasks/2
+time=2023-09-14T10:58:03+02:00 level=info msg=[binding] |200|  GET /hub/tasks/2
+time=2023-09-14T10:58:08+02:00 level=info msg=[binding] |200|  GET /hub/tasks/2
+time=2023-09-14T10:58:13+02:00 level=info msg=[binding] |200|  GET /hub/tasks/2
+time=2023-09-14T10:58:18+02:00 level=info msg=[binding] |200|  GET /hub/tasks/2
+time=2023-09-14T10:58:23+02:00 level=info msg=[binding] |200|  GET /hub/tasks/2
+time=2023-09-14T10:58:28+02:00 level=info msg=[binding] |200|  GET /hub/tasks/2
+time=2023-09-14T10:58:33+02:00 level=info msg=[binding] |200|  GET /hub/tasks/2
+time=2023-09-14T10:58:38+02:00 level=info msg=[binding] |200|  GET /hub/tasks/2
+time=2023-09-14T10:58:43+02:00 level=info msg=[binding] |200|  GET /hub/tasks/2
+time=2023-09-14T10:58:43+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/index.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/migration_issues.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/ApplicationDetails_tackle_pathfinder.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/pom_xml.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/windup_ruleproviders.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/MavenWrapperDownloader_java.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/windup_ruleproviders.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/windup_ruleproviders.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/windup_ruleproviders.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/windup_ruleproviders.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/windup_ruleproviders.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/maven_wrapper_properties.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/application_properties.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/windup_ruleproviders.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/microprofile_config_properties.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/AssessmentsResource_java.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/windup_ruleproviders.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/QuestionnairesResource_java.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/TranslatorResource_java.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/windup_ruleproviders.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/ApplicationDto_java.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/windup_ruleproviders.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/AssessmentCreateCommand_java.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/windup_ruleproviders.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/AssessmentSvc_java.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/windup_ruleproviders.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/BulkCreateSvc_java.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/windup_ruleproviders.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/TranslatorSvc_java.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/windup_ruleproviders.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/AssessmentCategory_java.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/AssessmentQuestion_java.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/AssessmentQuestionnaire_java.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/AssessmentSingleOption_java.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/AssessmentStakeholder_java.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/AssessmentStakeholdergroup_java.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/AssessmentBulk_java.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/AssessmentBulkApplication_java.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/TranslatedText_java.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/Category_java.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/Question_java.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/Questionnaire_java.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2/bucket/windup/report/reports/SingleOption_java.html
+time=2023-09-14T10:58:44+02:00 level=info msg=[binding] |200|  GET /hub/applications/2
 ## GOT ANALYSIS OUTPUT FOR "Pathfinder example1 cloud-readiness with tagger":
 api.Analysis{
     Effort: 5,
@@ -237,28 +237,28 @@ api.Analysis{
             Incidents: []api.Incident{
                 {
                     File: "MavenWrapperDownloader.java",
-                    Line: 55,
-                    Message: "An application running inside a container could lose access to a file in local storage.RecommendationsThe following recommendations depend on the function of the file in local storage:\n\n  Logging: Log to standard output and use a centralized log collector to analyze the logs.\n  Caching: Use a cache backing service.\n  Configuration: Store configuration settings in environment variables so that they can be updated without code changes.\n  Data storage: Use a database backing service for relational data or use a persistent data storage system.\n  Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.\nTwelve-Factor App: Backing servicesOpenShift Container Platform: Input secrets and ConfigMapsTwelve-Factor App: LogsOpenShift Container Platform: Understanding cluster loggingOpenShift Container Platform: Understanding persistent storageTwelve-Factor App: Config",
-                },
-                {
-                    File: "MavenWrapperDownloader.java",
-                    Line: 60,
-                    Message: "An application running inside a container could lose access to a file in local storage.RecommendationsThe following recommendations depend on the function of the file in local storage:\n\n  Logging: Log to standard output and use a centralized log collector to analyze the logs.\n  Caching: Use a cache backing service.\n  Configuration: Store configuration settings in environment variables so that they can be updated without code changes.\n  Data storage: Use a database backing service for relational data or use a persistent data storage system.\n  Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.\nOpenShift Container Platform: Input secrets and ConfigMapsTwelve-Factor App: LogsTwelve-Factor App: Backing servicesOpenShift Container Platform: Understanding persistent storageOpenShift Container Platform: Understanding cluster loggingTwelve-Factor App: Config",
-                },
-                {
-                    File: "MavenWrapperDownloader.java",
                     Line: 111,
-                    Message: "An application running inside a container could lose access to a file in local storage.RecommendationsThe following recommendations depend on the function of the file in local storage:\n\n  Logging: Log to standard output and use a centralized log collector to analyze the logs.\n  Caching: Use a cache backing service.\n  Configuration: Store configuration settings in environment variables so that they can be updated without code changes.\n  Data storage: Use a database backing service for relational data or use a persistent data storage system.\n  Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.\nTwelve-Factor App: ConfigTwelve-Factor App: Backing servicesTwelve-Factor App: LogsOpenShift Container Platform: Understanding cluster loggingOpenShift Container Platform: Input secrets and ConfigMapsOpenShift Container Platform: Understanding persistent storage",
-                },
-                {
-                    File: "MavenWrapperDownloader.java",
-                    Line: 78,
-                    Message: "An application running inside a container could lose access to a file in local storage.RecommendationsThe following recommendations depend on the function of the file in local storage:\n\n  Logging: Log to standard output and use a centralized log collector to analyze the logs.\n  Caching: Use a cache backing service.\n  Configuration: Store configuration settings in environment variables so that they can be updated without code changes.\n  Data storage: Use a database backing service for relational data or use a persistent data storage system.\n  Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.\nOpenShift Container Platform: Understanding cluster loggingTwelve-Factor App: Backing servicesOpenShift Container Platform: Understanding persistent storageOpenShift Container Platform: Input secrets and ConfigMapsTwelve-Factor App: LogsTwelve-Factor App: Config",
+                    Message: "An application running inside a container could lose access to a file in local storage.RecommendationsThe following recommendations depend on the function of the file in local storage:\n\n  Logging: Log to standard output and use a centralized log collector to analyze the logs.\n  Caching: Use a cache backing service.\n  Configuration: Store configuration settings in environment variables so that they can be updated without code changes.\n  Data storage: Use a database backing service for relational data or use a persistent data storage system.\n  Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.\nTwelve-Factor App: Backing servicesTwelve-Factor App: ConfigOpenShift Container Platform: Input secrets and ConfigMapsOpenShift Container Platform: Understanding cluster loggingTwelve-Factor App: LogsOpenShift Container Platform: Understanding persistent storage",
                 },
                 {
                     File: "MavenWrapperDownloader.java",
                     Line: 50,
-                    Message: "An application running inside a container could lose access to a file in local storage.RecommendationsThe following recommendations depend on the function of the file in local storage:\n\n  Logging: Log to standard output and use a centralized log collector to analyze the logs.\n  Caching: Use a cache backing service.\n  Configuration: Store configuration settings in environment variables so that they can be updated without code changes.\n  Data storage: Use a database backing service for relational data or use a persistent data storage system.\n  Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.\nTwelve-Factor App: Backing servicesTwelve-Factor App: ConfigOpenShift Container Platform: Understanding persistent storageOpenShift Container Platform: Input secrets and ConfigMapsOpenShift Container Platform: Understanding cluster loggingTwelve-Factor App: Logs",
+                    Message: "An application running inside a container could lose access to a file in local storage.RecommendationsThe following recommendations depend on the function of the file in local storage:\n\n  Logging: Log to standard output and use a centralized log collector to analyze the logs.\n  Caching: Use a cache backing service.\n  Configuration: Store configuration settings in environment variables so that they can be updated without code changes.\n  Data storage: Use a database backing service for relational data or use a persistent data storage system.\n  Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.\nTwelve-Factor App: Backing servicesOpenShift Container Platform: Input secrets and ConfigMapsTwelve-Factor App: LogsOpenShift Container Platform: Understanding cluster loggingTwelve-Factor App: ConfigOpenShift Container Platform: Understanding persistent storage",
+                },
+                {
+                    File: "MavenWrapperDownloader.java",
+                    Line: 78,
+                    Message: "An application running inside a container could lose access to a file in local storage.RecommendationsThe following recommendations depend on the function of the file in local storage:\n\n  Logging: Log to standard output and use a centralized log collector to analyze the logs.\n  Caching: Use a cache backing service.\n  Configuration: Store configuration settings in environment variables so that they can be updated without code changes.\n  Data storage: Use a database backing service for relational data or use a persistent data storage system.\n  Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.\nOpenShift Container Platform: Input secrets and ConfigMapsTwelve-Factor App: ConfigOpenShift Container Platform: Understanding persistent storageTwelve-Factor App: LogsOpenShift Container Platform: Understanding cluster loggingTwelve-Factor App: Backing services",
+                },
+                {
+                    File: "MavenWrapperDownloader.java",
+                    Line: 60,
+                    Message: "An application running inside a container could lose access to a file in local storage.RecommendationsThe following recommendations depend on the function of the file in local storage:\n\n  Logging: Log to standard output and use a centralized log collector to analyze the logs.\n  Caching: Use a cache backing service.\n  Configuration: Store configuration settings in environment variables so that they can be updated without code changes.\n  Data storage: Use a database backing service for relational data or use a persistent data storage system.\n  Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.\nTwelve-Factor App: Backing servicesTwelve-Factor App: LogsTwelve-Factor App: ConfigOpenShift Container Platform: Input secrets and ConfigMapsOpenShift Container Platform: Understanding cluster loggingOpenShift Container Platform: Understanding persistent storage",
+                },
+                {
+                    File: "MavenWrapperDownloader.java",
+                    Line: 55,
+                    Message: "An application running inside a container could lose access to a file in local storage.RecommendationsThe following recommendations depend on the function of the file in local storage:\n\n  Logging: Log to standard output and use a centralized log collector to analyze the logs.\n  Caching: Use a cache backing service.\n  Configuration: Store configuration settings in environment variables so that they can be updated without code changes.\n  Data storage: Use a database backing service for relational data or use a persistent data storage system.\n  Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.\nOpenShift Container Platform: Understanding persistent storageOpenShift Container Platform: Understanding cluster loggingTwelve-Factor App: LogsTwelve-Factor App: Backing servicesTwelve-Factor App: ConfigOpenShift Container Platform: Input secrets and ConfigMaps",
                 },
             },
         },
@@ -337,7 +337,7 @@ api.Analysis{
     },
 }
 ## GOT TAGS FOR "Pathfinder example1 cloud-readiness with tagger":
-api.Tag{
+[]api.Tag{
     {Name: "CDI"},
     {Name: "HTML"},
     {Name: "Properties"},
@@ -346,12 +346,10 @@ api.Tag{
     {Name: "Bean Validation"},
     {Name: "Application Properties File"},
 }
-time=2023-09-14T10:36:29+02:00 level=info msg=[binding] |204|  DELETE /hub/applications/4
---- PASS: TestApplicationAnalysis (136.26s)
-    --- PASS: TestApplicationAnalysis/WindupCustomer_Tomcat_Legacy_-_shoud_never_fail (65.51s)
-    --- PASS: TestApplicationAnalysis/WindupPathfinder_example1_cloud-readiness_with_tagger (70.76s)
+--- PASS: TestApplicationAnalysis (141.25s)
+    --- PASS: TestApplicationAnalysis/WindupCustomer_Tomcat_Legacy_-_shoud_never_fail (70.51s)
+    --- PASS: TestApplicationAnalysis/WindupPathfinder_example1_cloud-readiness_with_tagger (70.73s)
 PASS
-ok  	github.com/konveyor/go-konveyor-tests/hack/analysis-windup	136.307s
-
+ok  	github.com/konveyor/go-konveyor-tests/hack/analysis-windup	141.310s
 ```
 

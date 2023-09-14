@@ -76,7 +76,7 @@ func DumpAnalysis(t *testing.T, tc TC, analysis api.Analysis) {
 
 func DumpTags(t *testing.T, tc TC, app api.Application) {
 	fmt.Printf("## GOT TAGS FOR \"%s\":", tc.Name)
-	fmt.Printf("\napi.Tag{\n")
+	fmt.Printf("\n[]api.Tag{\n")
 	for _, tag := range app.Tags {
 		if tag.Source == "Analysis" {
 			fmt.Printf("    {Name: \"%s\"},\n", tag.Name)
