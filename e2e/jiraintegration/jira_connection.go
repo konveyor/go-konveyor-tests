@@ -25,11 +25,13 @@ const (
 
 var _ = Describe("Jira Connection", Ordered, func() {
 	AfterAll(func() {
+		// Resources cleanup
 		// Delete tracker instance and the associated identity after
-
-		//TODO - error handling
-		Tracker.Delete(jiraInstance.ID)
-		Identity.Delete(jiraBasicAuth.ID)
+		if keep, _ := strconv.ParseBool(Config.KEEP); keep {
+			return
+		}
+		Expect(Tracker.Delete(jiraInstance.ID)).To(Succeed())
+		Expect(Identity.Delete(jiraBasicAuth.ID)).To(Succeed())
 	})
 
 	Context("Create new Jira instance", func() {

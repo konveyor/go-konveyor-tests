@@ -6,6 +6,7 @@ import (
 	"github.com/konveyor/go-konveyor-tests/data"
 	"github.com/konveyor/go-konveyor-tests/hack/uniq"
 	"github.com/konveyor/tackle2-hub/api"
+	. "github.com/onsi/gomega"
 )
 
 func CreateMultipleApplications(numberOfApplications int) []api.Application {
@@ -17,8 +18,7 @@ func CreateMultipleApplications(numberOfApplications int) []api.Application {
 		//// Create a local copy
 		application := data.ApplicationSamples[randomIndex]
 		uniq.ApplicationName(&application)
-		//// TODO: dealing with create returns error
-		Application.Create(&application)
+		Expect(Application.Create(&application)).To(Succeed())
 		appSlice = append(appSlice, application)
 	}
 	return appSlice
@@ -26,6 +26,6 @@ func CreateMultipleApplications(numberOfApplications int) []api.Application {
 
 func DeleteApplicationsBySlice(apps []api.Application) {
 	for i := 0; i < len(apps); i++ {
-		Application.Delete(apps[i].ID)
+		Expect(Application.Delete(apps[i].ID)).To(Succeed())
 	}
 }
