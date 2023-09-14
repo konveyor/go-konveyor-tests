@@ -16,7 +16,7 @@ import (
 
 // Test application analysis
 func TestApplicationAnalysis(t *testing.T) {
-	// Find right test cases for given Tier (include Tier0 always).
+	// Find right test cases for given Tier.
 	testCases := Tier0TestCases
 	_, tier1 := os.LookupEnv("TIER1")
 	if tier1 {
@@ -73,9 +73,12 @@ func TestApplicationAnalysis(t *testing.T) {
 			if len(tc.Targets) > 0 {
 				taskData.Targets = tc.Targets
 			}
+<<<<<<< HEAD
 			if len(tc.Labels.Included) > 0 || len(tc.Labels.Excluded) > 0 {
 				taskData.Rules.Labels = tc.Labels
 			}
+=======
+>>>>>>> acba82e (update)
 			if tc.Rules.Path != "" { // TODO: better rules handling
 				taskData.Rules = tc.Rules
 			}
