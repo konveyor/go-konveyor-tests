@@ -5,6 +5,7 @@ package analysis
 // List of applications with expected analysis outputs.
 var Tier0TestCases = []TC{
 	TackleTestappPublic,
+	TackleTestappPublicDeps,
 }
 
 //

@@ -154,6 +154,22 @@ func TestApplicationAnalysis(t *testing.T) {
 				}
 			}
 
+			// Check the dependencies.
+			if len(gotAnalysis.Dependencies) != len(tc.Analysis.Dependencies) {
+				t.Errorf("Different amount of dependencies error. Got %d, expected %d.", len(gotAnalysis.Dependencies), len(tc.Analysis.Dependencies))
+			}
+
+			// Ensure stable order of Issues.
+			sort.SliceStable(gotAnalysis.Dependencies, func(a, b int) bool { return gotAnalysis.Dependencies[a].Name < gotAnalysis.Dependencies[b].Name })
+			sort.SliceStable(tc.Analysis.Dependencies, func(a, b int) bool { return tc.Analysis.Dependencies[a].Name < tc.Analysis.Dependencies[b].Name })
+
+			for i, got := range gotAnalysis.Dependencies {
+				expected := tc.Analysis.Dependencies[i]
+				if got.Name != expected.Name || got.Version != expected.Version || got.Provider != expected.Provider {
+					t.Errorf("\nDifferent dependency error. Got %+v, expected %+v.\n\n", got, expected)
+				}
+			}
+
 			// Check analysis-created Tags.
 			gotApp, _ := RichClient.Application.Get(tc.Application.ID)
 			for _, expected := range tc.AnalysisTags {
