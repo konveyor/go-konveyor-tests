@@ -23,10 +23,6 @@ var defaultAnalyzerData = addon.Data{
 	Targets: []string{},
 	Scope: addon.Scope{
 		WithKnown: false,
-		//Packages: {
-		//	Included: []string{},
-		//	Excluded: []string{},
-		//},
 	},
 	Rules: addon.Rules{
 		Path: "",
@@ -36,9 +32,6 @@ var defaultAnalyzerData = addon.Data{
 				"cloud-readiness",
 			},
 		},
-		//Tags: {
-		//	Excluded: []string{},
-		//},
 	},
 	Tagger: addon.Tagger{
 		Enabled: true,

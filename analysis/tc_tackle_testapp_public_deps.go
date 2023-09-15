@@ -5,18 +5,11 @@ import (
 	"github.com/konveyor/tackle2-hub/api"
 )
 
-var TackleTestApp = api.Application{
-	Name: "Tackle Testapp public",
-	Repository: &api.Repository{
-		Kind: "git",
-		URL:  "https://github.com/konveyor/tackle-testapp-public",
-	},
-}
-
-var TackleTestappPublic = TC{
-	Name: "Tackle Testapp public",
+var TackleTestappPublicDeps = TC{
+	Name: "Tackle Testapp public with deps",
 	Application: TackleTestApp,
 	Task: Analyze,
+	WithDeps: true,
 	Labels: addon.Labels{
 		Included: []string{
 			"konveyor.io/target=linux",

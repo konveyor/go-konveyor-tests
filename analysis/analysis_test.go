@@ -79,6 +79,9 @@ func TestApplicationAnalysis(t *testing.T) {
 			if tc.Rules.Path != "" { // TODO: better rules handling
 				taskData.Rules = tc.Rules
 			}
+			if tc.WithDeps == true {
+				taskData.Mode.WithDeps = true
+			}
 			tc.Task.Data = taskData
 			assert.Should(t, RichClient.Task.Create(&tc.Task))
 

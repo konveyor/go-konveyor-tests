@@ -42,6 +42,7 @@ type TC struct {
 	Targets  []string
 	Labels   addon.Labels
 	Rules    addon.Rules
+	WithDeps bool
 	// After-analysis assertions.
 	ReportContent map[string][]string
 	Analysis      api.Analysis
