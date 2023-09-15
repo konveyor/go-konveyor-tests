@@ -2,13 +2,13 @@ package analysis
 
 import (
 	"os"
+	"sort"
 	"strings"
 	"testing"
 	"time"
 
 	"github.com/konveyor/go-konveyor-tests/hack/addon"
 	"github.com/konveyor/go-konveyor-tests/hack/uniq"
-	"github.com/konveyor/go-konveyor-tests/hack/windupreport"
 	"github.com/konveyor/tackle2-hub/api"
 	"github.com/konveyor/tackle2-hub/binding"
 	"github.com/konveyor/tackle2-hub/test/assert"
@@ -63,7 +63,7 @@ func TestApplicationAnalysis(t *testing.T) {
 			// Prepare and submit the analyze task.
 			// tc.Task.Addon = analyzerAddon
 			tc.Task.Application = &api.Ref{ID: tc.Application.ID}
-			taskData := tc.Task.Data.(addon.Data) // addon / addonwindup
+			taskData := tc.Task.Data.(addon.Data)
 			//for _, r := range tc.CustomRules {
 			//	taskData.Rules = append(taskData.Rules, api.Ref{ID: r.ID, Name: r.Name})
 			//}
@@ -73,7 +73,10 @@ func TestApplicationAnalysis(t *testing.T) {
 			if len(tc.Targets) > 0 {
 				taskData.Targets = tc.Targets
 			}
-			if tc.Rules.Path != "" {	// TODO: better rules handling
+			if len(tc.Labels.Included) > 0 || len(tc.Labels.Excluded) > 0 {
+				taskData.Rules.Labels = tc.Labels
+			}
+			if tc.Rules.Path != "" { // TODO: better rules handling
 				taskData.Rules = tc.Rules
 			}
 			tc.Task.Data = taskData
@@ -94,18 +97,18 @@ func TestApplicationAnalysis(t *testing.T) {
 				t.Errorf("Analyze Task failed. Details: %+v", task)
 			}
 
+			var gotAppAnalyses []api.Analysis
 			var gotAnalysis api.Analysis
 
-			if tc.Task.Addon == "windup" {
-				// Old Windup check version parsing windup HTML report
-				CheckWindupReportContent(t, &tc)
+			// Get LSP analysis directly form Hub API
+			analysisPath := binding.Path(api.AppAnalysesRoot).Inject(binding.Params{api.ID: tc.Application.ID})
+			assert.Should(t, Client.Get(analysisPath, &gotAppAnalyses))
+			analysisDetailPath := binding.Path(api.AnalysisRoot).Inject(binding.Params{api.ID: gotAppAnalyses[len(gotAppAnalyses)-1].ID})
+			assert.Should(t, Client.Get(analysisDetailPath, &gotAnalysis))
 
-				// Parse report for windup, to api.Analysis structure
-				gotAnalysis = windupreport.Parse(t, tc.Application.ID)
-			} else {
-				// Get LSP analysis directly form Hub API
-				analysisPath := binding.Path(api.AppAnalysisRoot).Inject(binding.Params{api.ID: tc.Application.ID})
-				assert.Should(t, Client.Get(analysisPath, &gotAnalysis))
+			_, debug := os.LookupEnv("DEBUG")
+			if debug {
+				DumpAnalysis(t, tc, gotAnalysis)
 			}
 
 			// Check the analysis result (effort, issues, etc).
@@ -117,6 +120,11 @@ func TestApplicationAnalysis(t *testing.T) {
 			if len(gotAnalysis.Issues) != len(tc.Analysis.Issues) {
 				t.Errorf("Different amount of issues error. Got %d, expected %d.", len(gotAnalysis.Issues), len(tc.Analysis.Issues))
 			}
+
+			// Ensure stable order of Issues.
+			sort.SliceStable(gotAnalysis.Issues, func(a, b int) bool { return gotAnalysis.Issues[a].Rule < gotAnalysis.Issues[b].Rule })
+			sort.SliceStable(tc.Analysis.Issues, func(a, b int) bool { return tc.Analysis.Issues[a].Rule < tc.Analysis.Issues[b].Rule })
+
 			for i, got := range gotAnalysis.Issues {
 				expected := tc.Analysis.Issues[i]
 				if got.Category != expected.Category || got.RuleSet != expected.RuleSet || got.Rule != expected.Rule || got.Effort != expected.Effort || !strings.HasPrefix(got.Description, expected.Description) {
@@ -130,11 +138,15 @@ func TestApplicationAnalysis(t *testing.T) {
 				}
 				if len(got.Incidents) != len(expected.Incidents) {
 					t.Errorf("Different amount of incident error. Got %d, expected %d.", len(got.Incidents), len(expected.Incidents))
-				}
-				for j, gotInc := range got.Incidents {
-					expectedInc := expected.Incidents[j]
-					if gotInc.File != expectedInc.File || gotInc.Line != expectedInc.Line || !strings.HasPrefix(gotInc.Message, expectedInc.Message) {
-						t.Errorf("\nDifferent incident error. Got %+v, expected %+v.\n\n", gotInc, expectedInc)
+				} else {
+					// Ensure stable order of Incidents.
+					sort.SliceStable(got.Incidents, func(a, b int) bool { return got.Incidents[a].File < got.Incidents[b].File })
+					sort.SliceStable(expected.Incidents, func(a, b int) bool { return expected.Incidents[a].File < expected.Incidents[b].File })
+					for j, gotInc := range got.Incidents {
+						expectedInc := expected.Incidents[j]
+						if gotInc.File != expectedInc.File || gotInc.Line != expectedInc.Line || !strings.HasPrefix(gotInc.Message, expectedInc.Message) {
+							t.Errorf("\nDifferent incident error. Got %+v, expected %+v.\n\n", gotInc, expectedInc)
+						}
 					}
 				}
 			}
@@ -153,6 +165,11 @@ func TestApplicationAnalysis(t *testing.T) {
 					t.Errorf("Missing expected tag '%s'.\n", expected.Name)
 				}
 			}
+
+			if debug {
+				DumpTags(t, tc, *gotApp)
+			}
+
 
 			// TODO(maufart): analysis tagger creates duplicate tags, not sure if it is expected, check later.
 			//if len(tc.AnalysisTags) != len(gotApp.Tags) {

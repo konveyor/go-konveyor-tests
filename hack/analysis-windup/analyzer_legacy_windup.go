@@ -1,4 +1,4 @@
-package analysis
+package analysiswindup
 
 import (
 	"os"
@@ -7,6 +7,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/konveyor/go-konveyor-tests/analysis"
 	"github.com/konveyor/go-konveyor-tests/hack/addonwindup"
 	"github.com/konveyor/tackle2-hub/api"
 	"github.com/konveyor/tackle2-hub/test/assert"
@@ -39,6 +40,7 @@ var defaultWindupData = addonwindup.Data{
 		Path: "",
 		Labels: []string{
 			"cloud-readiness",
+			"linux",
 		},
 		//Tags: {
 		//	Excluded: []string{},
@@ -49,7 +51,7 @@ var defaultWindupData = addonwindup.Data{
 	},
 }
 
-func GetReportText(t *testing.T, tc *TC, path string) (text string) {
+func GetReportText(t *testing.T, tc *analysis.TC, path string) (text string) {
 	// Get report file.
 	dirName, err := os.MkdirTemp("/tmp", tc.Name)
 	assert.Must(t, err)
@@ -67,7 +69,7 @@ func GetReportText(t *testing.T, tc *TC, path string) (text string) {
 	return
 }
 
-func CheckWindupReportContent(t *testing.T, tc *TC) {
+func CheckWindupReportContent(t *testing.T, tc *analysis.TC) {
 	// Check the report content.
 	for path, expectedElems := range tc.ReportContent {
 		content := GetReportText(t, tc, path)

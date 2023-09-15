@@ -5,7 +5,7 @@ import (
 	"github.com/konveyor/tackle2-hub/api"
 )
 
-var AnalyzeLsp = api.Task{
+var Analyze = api.Task{
 	State: "Ready", // Created / Ready
 	Data:  defaultAnalyzerData,
 	Addon: "analyzer",
@@ -17,7 +17,7 @@ var defaultAnalyzerData = addon.Data{
 		Artifact: "",
 		Binary:   false,
 		WithDeps: false,
-		//Diva:     true,
+		// Diva:     true,
 	},
 	Sources: []string{},
 	Targets: []string{},
@@ -30,13 +30,10 @@ var defaultAnalyzerData = addon.Data{
 	},
 	Rules: addon.Rules{
 		Path: "",
-		Labels: struct {
-			Included []string `json:"included,omitempty"`
-			Excluded []string `json:"excluded,omitempty"`
-		}{
+		Labels: addon.Labels{
 			Excluded: []string{},
 			Included: []string{
-			"cloud-readiness",
+				"cloud-readiness",
 			},
 		},
 		//Tags: {
@@ -47,4 +44,3 @@ var defaultAnalyzerData = addon.Data{
 		Enabled: true,
 	},
 }
-
