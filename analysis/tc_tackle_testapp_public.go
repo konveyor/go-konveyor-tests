@@ -104,6 +104,5 @@ var TackleTestappPublic = TC{
 		},
 	},
 	// Tags are empty right now.
-	AnalysisTags: []api.Tag{
-	},
+	AnalysisTags: []api.Tag{},
 }

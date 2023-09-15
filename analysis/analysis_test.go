@@ -2,6 +2,7 @@ package analysis
 
 import (
 	"os"
+	"sort"
 	"strings"
 	"testing"
 	"time"
@@ -119,6 +120,11 @@ func TestApplicationAnalysis(t *testing.T) {
 			if len(gotAnalysis.Issues) != len(tc.Analysis.Issues) {
 				t.Errorf("Different amount of issues error. Got %d, expected %d.", len(gotAnalysis.Issues), len(tc.Analysis.Issues))
 			}
+
+			// Ensure stable order of Issues.
+			sort.SliceStable(gotAnalysis.Issues, func(a, b int) bool { return gotAnalysis.Issues[a].Rule < gotAnalysis.Issues[b].Rule })
+			sort.SliceStable(tc.Analysis.Issues, func(a, b int) bool { return tc.Analysis.Issues[a].Rule < tc.Analysis.Issues[b].Rule })
+
 			for i, got := range gotAnalysis.Issues {
 				expected := tc.Analysis.Issues[i]
 				if got.Category != expected.Category || got.RuleSet != expected.RuleSet || got.Rule != expected.Rule || got.Effort != expected.Effort || !strings.HasPrefix(got.Description, expected.Description) {
@@ -133,6 +139,9 @@ func TestApplicationAnalysis(t *testing.T) {
 				if len(got.Incidents) != len(expected.Incidents) {
 					t.Errorf("Different amount of incident error. Got %d, expected %d.", len(got.Incidents), len(expected.Incidents))
 				} else {
+					// Ensure stable order of Incidents.
+					sort.SliceStable(got.Incidents, func(a, b int) bool { return got.Incidents[a].File < got.Incidents[b].File })
+					sort.SliceStable(expected.Incidents, func(a, b int) bool { return expected.Incidents[a].File < expected.Incidents[b].File })
 					for j, gotInc := range got.Incidents {
 						expectedInc := expected.Incidents[j]
 						if gotInc.File != expectedInc.File || gotInc.Line != expectedInc.Line || !strings.HasPrefix(gotInc.Message, expectedInc.Message) {
