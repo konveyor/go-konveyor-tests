@@ -72,6 +72,9 @@ func TestApplicationAnalysis(t *testing.T) {
 			if len(tc.Targets) > 0 {
 				taskData.Targets = tc.Targets
 			}
+			if len(tc.Labels.Included) > 0 || len(tc.Labels.Excluded) > 0 {
+				taskData.Rules.Labels = tc.Labels
+			}
 			if tc.Rules.Path != "" { // TODO: better rules handling
 				taskData.Rules = tc.Rules
 			}
@@ -93,11 +96,14 @@ func TestApplicationAnalysis(t *testing.T) {
 				t.Errorf("Analyze Task failed. Details: %+v", task)
 			}
 
+			var gotAppAnalyses []api.Analysis
 			var gotAnalysis api.Analysis
 
 			// Get LSP analysis directly form Hub API
-			analysisPath := binding.Path(api.AppAnalysisRoot).Inject(binding.Params{api.ID: tc.Application.ID})
-			assert.Should(t, Client.Get(analysisPath, &gotAnalysis))
+			analysisPath := binding.Path(api.AppAnalysesRoot).Inject(binding.Params{api.ID: tc.Application.ID})
+			assert.Should(t, Client.Get(analysisPath, &gotAppAnalyses))
+			analysisDetailPath := binding.Path(api.AnalysisRoot).Inject(binding.Params{api.ID: gotAppAnalyses[len(gotAppAnalyses)-1].ID})
+			assert.Should(t, Client.Get(analysisDetailPath, &gotAnalysis))
 
 			_, debug := os.LookupEnv("DEBUG")
 			if debug {
@@ -126,11 +132,12 @@ func TestApplicationAnalysis(t *testing.T) {
 				}
 				if len(got.Incidents) != len(expected.Incidents) {
 					t.Errorf("Different amount of incident error. Got %d, expected %d.", len(got.Incidents), len(expected.Incidents))
-				}
-				for j, gotInc := range got.Incidents {
-					expectedInc := expected.Incidents[j]
-					if gotInc.File != expectedInc.File || gotInc.Line != expectedInc.Line || !strings.HasPrefix(gotInc.Message, expectedInc.Message) {
-						t.Errorf("\nDifferent incident error. Got %+v, expected %+v.\n\n", gotInc, expectedInc)
+				} else {
+					for j, gotInc := range got.Incidents {
+						expectedInc := expected.Incidents[j]
+						if gotInc.File != expectedInc.File || gotInc.Line != expectedInc.Line || !strings.HasPrefix(gotInc.Message, expectedInc.Message) {
+							t.Errorf("\nDifferent incident error. Got %+v, expected %+v.\n\n", gotInc, expectedInc)
+						}
 					}
 				}
 			}
@@ -149,6 +156,11 @@ func TestApplicationAnalysis(t *testing.T) {
 					t.Errorf("Missing expected tag '%s'.\n", expected.Name)
 				}
 			}
+
+			if debug {
+				DumpTags(t, tc, *gotApp)
+			}
+
 
 			// TODO(maufart): analysis tagger creates duplicate tags, not sure if it is expected, check later.
 			//if len(tc.AnalysisTags) != len(gotApp.Tags) {

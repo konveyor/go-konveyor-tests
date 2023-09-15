@@ -17,6 +17,7 @@ var Tomcat = TC{
 	Task: Analyze,
 	Targets: []string{
 		"cloud-readiness",
+		"linux",
 	},
 	Analysis: api.Analysis{
 		Effort: 1,

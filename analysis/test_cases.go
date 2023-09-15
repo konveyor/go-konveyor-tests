@@ -4,8 +4,7 @@ package analysis
 // Tier 0 Analysis test cases - should never fail.
 // List of applications with expected analysis outputs.
 var Tier0TestCases = []TC{
-	Tomcat,
-	PathfinderSample,
+	TackleTestappPublic,
 }
 
 //

@@ -40,6 +40,7 @@ var defaultWindupData = addonwindup.Data{
 		Path: "",
 		Labels: []string{
 			"cloud-readiness",
+			"linux",
 		},
 		//Tags: {
 		//	Excluded: []string{},

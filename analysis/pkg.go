@@ -40,6 +40,7 @@ type TC struct {
 	TaskData string
 	Sources  []string
 	Targets  []string
+	Labels   addon.Labels
 	Rules    addon.Rules
 	// After-analysis assertions.
 	ReportContent map[string][]string
