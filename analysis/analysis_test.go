@@ -16,7 +16,7 @@ import (
 
 // Test application analysis
 func TestApplicationAnalysis(t *testing.T) {
-	// Find right test cases for given Tier (include Tier0 always).
+	// Find right test cases for given Tier.
 	testCases := Tier0TestCases
 	_, tier1 := os.LookupEnv("TIER1")
 	if tier1 {
@@ -169,7 +169,6 @@ func TestApplicationAnalysis(t *testing.T) {
 			if debug {
 				DumpTags(t, tc, *gotApp)
 			}
-
 
 			// TODO(maufart): analysis tagger creates duplicate tags, not sure if it is expected, check later.
 			//if len(tc.AnalysisTags) != len(gotApp.Tags) {
