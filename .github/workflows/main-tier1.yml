@@ -27,6 +27,4 @@ jobs:
       - name: Install dependencies
         run: |
           go install github.com/onsi/ginkgo/v2/ginkgo
-      - run: |
-          export HUB_BASE_URL="http://$(minikube ip)/hub"
-          make test-tier1
+      - run: HUB_BASE_URL="http://$(minikube ip)/hub" make test-tier1
