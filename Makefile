@@ -1,6 +1,5 @@
 VENDOR_DIR ?= /tmp/konveyor-vendor
 ARCH ?= amd64
-MINIKUBE_IP ?= `minikube ip`
 
 # Setup local minikube with tackle - work in progress (TODO: enable auth)
 # This is for local setup, CI uses shared github actions
@@ -24,6 +23,8 @@ update-hub:
 #
 # Test tiers.
 #
+# Set HUB_BASE_URL to point to Konveyor installation, e.g. export HUB_BASE_URL="http://192.168.39.16/hub"
+#
 
 # TIER0 - a core functionality, should never fail, Konveyor would be fully broken.
 test-tier0:
@@ -33,6 +34,7 @@ test-tier0:
 test-tier1:
 	$(MAKE) test-metrics
 	TIER1=1 $(MAKE) test-analysis
+	$(MAKE) test-jira
 
 # TIER2 - advanced features and nice-to-haves.
 test-tier2:
@@ -44,18 +46,18 @@ test-tier2:
 
 # Application analysis tests.
 test-analysis:
-	HUB_BASE_URL="http://${MINIKUBE_IP}/hub" go test -count=1 -timeout 7200s -v ./analysis/...
+	go test -count=1 -timeout 7200s -v ./analysis/...
 
 # Metrics.
 test-metrics:
-	HUB_BASE_URL="http://${MINIKUBE_IP}/hub" ginkgo -v ./e2e/metrics/...
+	ginkgo -v ./e2e/metrics/...
 
 # Jira Integration.
 test-jira:
 	@if [ -z "${JIRA_USERNAME}" ]; then echo "Error: JIRA_USERNAME is not defined. Please set JIRA_USERNAME environment variable."; exit 1; fi
 	@if [ -z "${JIRA_PASSWORD}" ]; then echo "Error: JIRA_PASSWORD is not defined. Please set JIRA_PASSWORD environment variable."; exit 1; fi
 	@if [ -z "${JIRA_URL}" ]; then echo "Error: JIRA_URL is not defined. Please set JIRA_URL environment variable."; exit 1; fi 
-	HUB_BASE_URL="http://${MINIKUBE_IP}/hub" ginkgo -v -focus "Jira Connection"
+	ginkgo -v -focus "Jira Connection"
 
 
 # Add next features tests here and call the target from appropriate tier.
