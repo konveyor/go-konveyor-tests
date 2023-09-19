@@ -100,9 +100,12 @@ func TestApplicationAnalysis(t *testing.T) {
 			var gotAppAnalyses []api.Analysis
 			var gotAnalysis api.Analysis
 
-			// Get LSP analysis directly form Hub API
+			// Get LSP analysis directly from Hub API
 			analysisPath := binding.Path(api.AppAnalysesRoot).Inject(binding.Params{api.ID: tc.Application.ID})
 			assert.Should(t, Client.Get(analysisPath, &gotAppAnalyses))
+			if len(gotAppAnalyses) < 1 {
+				t.Fatalf("Analysis result not present in Hub.")
+			}
 			analysisDetailPath := binding.Path(api.AnalysisRoot).Inject(binding.Params{api.ID: gotAppAnalyses[len(gotAppAnalyses)-1].ID})
 			assert.Should(t, Client.Get(analysisDetailPath, &gotAnalysis))
 
@@ -116,36 +119,36 @@ func TestApplicationAnalysis(t *testing.T) {
 				t.Errorf("Different effort error. Got %d, expected %d", gotAnalysis.Effort, tc.Analysis.Effort)
 			}
 
-			// Check the analysis issues
-			if len(gotAnalysis.Issues) != len(tc.Analysis.Issues) {
-				t.Errorf("Different amount of issues error. Got %d, expected %d.", len(gotAnalysis.Issues), len(tc.Analysis.Issues))
-			}
-
 			// Ensure stable order of Issues.
 			sort.SliceStable(gotAnalysis.Issues, func(a, b int) bool { return gotAnalysis.Issues[a].Rule < gotAnalysis.Issues[b].Rule })
 			sort.SliceStable(tc.Analysis.Issues, func(a, b int) bool { return tc.Analysis.Issues[a].Rule < tc.Analysis.Issues[b].Rule })
 
-			for i, got := range gotAnalysis.Issues {
-				expected := tc.Analysis.Issues[i]
-				if got.Category != expected.Category || got.RuleSet != expected.RuleSet || got.Rule != expected.Rule || got.Effort != expected.Effort || !strings.HasPrefix(got.Description, expected.Description) {
-					t.Errorf("\nDifferent issue error. Got %+v, expected %+v.\n\n", got, expected)
-				}
+			// Check the analysis issues
+			if len(gotAnalysis.Issues) != len(tc.Analysis.Issues) {
+				t.Errorf("Different amount of issues error. Got %d, expected %d.", len(gotAnalysis.Issues), len(tc.Analysis.Issues))
+			} else {
+				for i, got := range gotAnalysis.Issues {
+					expected := tc.Analysis.Issues[i]
+					if got.Category != expected.Category || got.RuleSet != expected.RuleSet || got.Rule != expected.Rule || got.Effort != expected.Effort || !strings.HasPrefix(got.Description, expected.Description) {
+						t.Errorf("\nDifferent issue error. Got %+v, expected %+v.\n\n", got, expected)
+					}
 
-				// Incidents check.
-				if len(expected.Incidents) == 0 {
-					t.Log("Skipping empty expected Incidents check.")
-					break
-				}
-				if len(got.Incidents) != len(expected.Incidents) {
-					t.Errorf("Different amount of incident error. Got %d, expected %d.", len(got.Incidents), len(expected.Incidents))
-				} else {
-					// Ensure stable order of Incidents.
-					sort.SliceStable(got.Incidents, func(a, b int) bool { return got.Incidents[a].File < got.Incidents[b].File })
-					sort.SliceStable(expected.Incidents, func(a, b int) bool { return expected.Incidents[a].File < expected.Incidents[b].File })
-					for j, gotInc := range got.Incidents {
-						expectedInc := expected.Incidents[j]
-						if gotInc.File != expectedInc.File || gotInc.Line != expectedInc.Line || !strings.HasPrefix(gotInc.Message, expectedInc.Message) {
-							t.Errorf("\nDifferent incident error. Got %+v, expected %+v.\n\n", gotInc, expectedInc)
+					// Incidents check.
+					if len(expected.Incidents) == 0 {
+						t.Log("Skipping empty expected Incidents check.")
+						break
+					}
+					if len(got.Incidents) != len(expected.Incidents) {
+						t.Errorf("Different amount of incidents error. Got %d, expected %d.", len(got.Incidents), len(expected.Incidents))
+					} else {
+						// Ensure stable order of Incidents.
+						sort.SliceStable(got.Incidents, func(a, b int) bool { return got.Incidents[a].File < got.Incidents[b].File })
+						sort.SliceStable(expected.Incidents, func(a, b int) bool { return expected.Incidents[a].File < expected.Incidents[b].File })
+						for j, gotInc := range got.Incidents {
+							expectedInc := expected.Incidents[j]
+							if gotInc.File != expectedInc.File || gotInc.Line != expectedInc.Line || !strings.HasPrefix(gotInc.Message, expectedInc.Message) {
+								t.Errorf("\nDifferent incident error. Got %+v, expected %+v.\n\n", gotInc, expectedInc)
+							}
 						}
 					}
 				}
