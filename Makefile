@@ -34,7 +34,6 @@ test-tier0:
 test-tier1:
 	$(MAKE) test-metrics
 	TIER1=1 $(MAKE) test-analysis
-	$(MAKE) test-jira
 
 # TIER2 - advanced features and nice-to-haves.
 test-tier2:

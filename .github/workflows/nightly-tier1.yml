@@ -22,9 +22,12 @@ jobs:
         run: |
           go install github.com/onsi/ginkgo/v2/ginkgo
       - run: |
+          export HUB_BASE_URL="http://$(minikube ip)/hub"
           make test-tier1
+      - run: |
+          export HUB_BASE_URL="http://$(minikube ip)/hub"
+          make test-jira
         env:
-          HUB_BASE_URL: http://$(minikube ip)/hub
           JIRA_USERNAME: ${{ secrets.JIRA_USERNAME }}
           JIRA_PASSWORD: ${{ secrets.JIRA_PASSWORD }}
           JIRA_URL: ${{ secrets.JIRA_URL }}
