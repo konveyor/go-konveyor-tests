@@ -21,8 +21,8 @@ jobs:
       - name: Install dependencies
         run: |
           go install github.com/onsi/ginkgo/v2/ginkgo
-      - run: make test-tier1
-      - run: make test-jira
+      - run: HUB_BASE_URL="http://$(minikube ip)/hub" make test-tier1
+      - run: HUB_BASE_URL="http://$(minikube ip)/hub" make test-jira
         env:
           JIRA_USERNAME: ${{ secrets.JIRA_USERNAME }}
           JIRA_PASSWORD: ${{ secrets.JIRA_PASSWORD }}
