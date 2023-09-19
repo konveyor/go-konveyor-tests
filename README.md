@@ -40,8 +40,10 @@ $ make setup # start minikube&tackle using David's scripts - local env only
 
 ### Run test suite
 
+Set ```$HUB_BASE_URL``` environment variable to point to Konveyor installation before running tests. More options could be found in [Hub API test README](https://github.com/konveyor/tackle2-hub/tree/main/test#rest-api).
+
 ```
-$ make test-all
+$ HUB_BASE_URL="http://<KONVEYOR_HOST>/hub" make test-tier0
 ```
 
 Run test manually example:
