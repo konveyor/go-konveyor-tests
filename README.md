@@ -38,6 +38,16 @@ git clone https://github.com/aufi/go-konveyor-tests && cd go-konveyor-tests
 $ make setup # start minikube&tackle using David's scripts - local env only
 ```
 
+### OpenShift cluster
+
+These tests can be executed against OpenShift cluster with Konveyor installed by setting `KUBECONFIG` variable:
+
+```
+KUBECONFIG=<kubeconfig file>
+```
+
+> **_NOTE:_** You might be required to download and import the certificate chain. Please see [Hub API test README](https://github.com/konveyor/tackle2-hub/tree/main/test#https) for more information.
+
 ### Run test suite
 
 Set ```$HUB_BASE_URL``` environment variable to point to Konveyor installation before running tests. More options could be found in [Hub API test README](https://github.com/konveyor/tackle2-hub/tree/main/test#rest-api).
