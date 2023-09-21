@@ -24,7 +24,7 @@ var TackleTestappPublic = TC{
 		},
 	},
 	Analysis: api.Analysis{
-		Effort: 10,
+		Effort: 9,
 		Issues: []api.Issue{
 			{
 				Category: "mandatory",
@@ -86,20 +86,6 @@ var TackleTestappPublic = TC{
 						File: "/addon/source/tackle-testapp-public/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
 						Line: 68,
 						Message: "An application running inside a container could lose access to a file in local storage.. Recommendations. The following recommendations depend on the function of the file in local storage:. * Logging: Log to standard output and use a centralized log collector to analyze the logs.. * Caching: Use a cache backing service.. * Configuration: Store configuration settings in environment variables so that they can be updated without code changes.. * Data storage: Use a database backing service for relational data or use a persistent data storage system.. * Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.",
-					},
-				},
-			},
-			{
-				Category:    "mandatory",
-				Description: "Windows file system path\nThis file system path is Microsoft Windows platform dependent. It needs to be replaced with a Linux-style path.",
-				Effort:      1,
-				RuleSet:     "os/windows",
-				Rule:        "os-specific-00001",
-				Incidents: []api.Incident{
-					{
-						File:    "/addon/source/tackle-testapp-public/.git/hooks/fsmonitor-watchman.sample",
-						Line:    0,	// Fix.
-						Message: "This file system path is Microsoft Windows platform dependent. It needs to be replaced with a Linux-style path.",
 					},
 				},
 			},
