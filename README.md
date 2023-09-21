@@ -83,13 +83,17 @@ $ make test-tier2
 
 ## Test execution options
 
-#### PARALLEL
+### DEBUG
 
-For parallel test execution, set ```export PARALLEL=1```.
+For debug output like printing full analysis results, set ```export DEBUG=1```.
 
-#### KEEP
+### KEEP
 
 For keep data created by test e.g. for debugging purposes, set ```export KEEP=1```.
+
+### PARALLEL
+
+For parallel test execution, set ```export PARALLEL=1```.
 
 ## Konveyor CI status
 
