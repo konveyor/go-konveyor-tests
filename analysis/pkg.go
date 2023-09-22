@@ -42,6 +42,7 @@ type TC struct {
 	Targets  []string
 	Labels   addon.Labels
 	Rules    addon.Rules
+	WithDeps bool
 	// After-analysis assertions.
 	ReportContent map[string][]string
 	Analysis      api.Analysis
@@ -69,6 +70,14 @@ func DumpAnalysis(t *testing.T, tc TC, analysis api.Analysis) {
 			fmt.Printf("                },\n")
 		}
 		fmt.Printf("            },\n")
+		fmt.Printf("        },\n")
+	}
+	fmt.Printf("    Dependencies: []api.TechDependency{\n")
+	for _, dep := range analysis.Dependencies {
+		fmt.Printf("        {\n")
+		fmt.Printf("            Name: \"%s\",\n", dep.Name)
+		fmt.Printf("            Version: \"%s\",\n", dep.Version)
+		fmt.Printf("            Provider: \"%s\",\n", dep.Provider)
 		fmt.Printf("        },\n")
 	}
 	fmt.Printf("    },\n")

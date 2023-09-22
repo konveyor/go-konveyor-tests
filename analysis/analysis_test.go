@@ -79,6 +79,9 @@ func TestApplicationAnalysis(t *testing.T) {
 			if tc.Rules.Path != "" { // TODO: better rules handling
 				taskData.Rules = tc.Rules
 			}
+			if tc.WithDeps == true {
+				taskData.Mode.WithDeps = true
+			}
 			tc.Task.Data = taskData
 			assert.Should(t, RichClient.Task.Create(&tc.Task))
 
@@ -150,6 +153,22 @@ func TestApplicationAnalysis(t *testing.T) {
 								t.Errorf("\nDifferent incident error. Got %+v, expected %+v.\n\n", gotInc, expectedInc)
 							}
 						}
+					}
+				}
+			}
+
+			// Ensure stable order of Dependencies.
+			sort.SliceStable(gotAnalysis.Dependencies, func(a, b int) bool { return gotAnalysis.Dependencies[a].Name < gotAnalysis.Dependencies[b].Name })
+			sort.SliceStable(tc.Analysis.Dependencies, func(a, b int) bool { return tc.Analysis.Dependencies[a].Name < tc.Analysis.Dependencies[b].Name })
+
+			// Check the dependencies.
+			if len(gotAnalysis.Dependencies) != len(tc.Analysis.Dependencies) {
+				t.Errorf("Different amount of dependencies error. Got %d, expected %d.", len(gotAnalysis.Dependencies), len(tc.Analysis.Dependencies))
+			} else {
+				for i, got := range gotAnalysis.Dependencies {
+					expected := tc.Analysis.Dependencies[i]
+					if got.Name != expected.Name || got.Version != expected.Version || got.Provider != expected.Provider {
+						t.Errorf("\nDifferent dependency error. Got %+v, expected %+v.\n\n", got, expected)
 					}
 				}
 			}
