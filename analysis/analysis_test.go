@@ -192,6 +192,10 @@ func TestApplicationAnalysis(t *testing.T) {
 				}
 			}
 
+			// Ensure stable order of Tags.
+			sort.SliceStable(gotTags, func(a, b int) bool { return gotTags[a].Name + gotTags[a].Category.Name < gotTags[b].Name + gotTags[b].Category.Name })
+			sort.SliceStable(tc.AnalysisTags, func(a, b int) bool { return tc.AnalysisTags[a].Name + tc.AnalysisTags[a].Category.Name < tc.AnalysisTags[b].Name + tc.AnalysisTags[b].Category.Name })
+
 			// Check Tags.
 			if len(tc.AnalysisTags) != len(gotApp.Tags) {
 				t.Errorf("Different Tags amount error. Got: %d, expected: %d.\n", len(gotApp.Tags), len(tc.AnalysisTags))
