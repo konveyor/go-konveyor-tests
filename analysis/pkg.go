@@ -72,6 +72,7 @@ func DumpAnalysis(t *testing.T, tc TC, analysis api.Analysis) {
 		fmt.Printf("            },\n")
 		fmt.Printf("        },\n")
 	}
+	fmt.Printf("    },\n")
 	fmt.Printf("    Dependencies: []api.TechDependency{\n")
 	for _, dep := range analysis.Dependencies {
 		fmt.Printf("        {\n")
@@ -85,12 +86,18 @@ func DumpAnalysis(t *testing.T, tc TC, analysis api.Analysis) {
 }
 
 func DumpTags(t *testing.T, tc TC, app api.Application) {
+	// Preload tags.
+	tags := []api.Tag{}
+	for _, tagRef := range app.Tags {
+		if tagRef.Source == "Analysis" {
+			tag, _ := RichClient.Tag.Get(tagRef.ID)
+			tags = append(tags, *tag)
+		}
+	}
 	fmt.Printf("## GOT TAGS FOR \"%s\":", tc.Name)
 	fmt.Printf("\n[]api.Tag{\n")
-	for _, tag := range app.Tags {
-		if tag.Source == "Analysis" {
-			fmt.Printf("    {Name: \"%s\"},\n", tag.Name)
-		}
+	for _, tag := range tags {
+			fmt.Printf("    {Name: \"%s\", Category: api.Ref{Name: \"%s\")},\n", tag.Name, tag.Category.Name)
 	}
 	fmt.Printf("}\n")
 }

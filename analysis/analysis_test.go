@@ -129,11 +129,12 @@ func TestApplicationAnalysis(t *testing.T) {
 			// Check the analysis issues
 			if len(gotAnalysis.Issues) != len(tc.Analysis.Issues) {
 				t.Errorf("Different amount of issues error. Got %d, expected %d.", len(gotAnalysis.Issues), len(tc.Analysis.Issues))
+				t.Errorf("Got: %+v\nExpected: %+v.\n", gotAnalysis.Issues, tc.Analysis.Issues)
 			} else {
 				for i, got := range gotAnalysis.Issues {
 					expected := tc.Analysis.Issues[i]
 					if got.Category != expected.Category || got.RuleSet != expected.RuleSet || got.Rule != expected.Rule || got.Effort != expected.Effort || !strings.HasPrefix(got.Description, expected.Description) {
-						t.Errorf("\nDifferent issue error. Got %+v, expected %+v.\n\n", got, expected)
+						t.Errorf("\nDifferent issue error. Got %+v\nExpected %+v.\n\n", got, expected)
 					}
 
 					// Incidents check.
@@ -143,6 +144,7 @@ func TestApplicationAnalysis(t *testing.T) {
 					}
 					if len(got.Incidents) != len(expected.Incidents) {
 						t.Errorf("Different amount of incidents error. Got %d, expected %d.", len(got.Incidents), len(expected.Incidents))
+						t.Errorf("Got: %+v\nExpected: %+v.\n", got.Incidents, expected.Incidents)
 					} else {
 						// Ensure stable order of Incidents.
 						sort.SliceStable(got.Incidents, func(a, b int) bool { return got.Incidents[a].File < got.Incidents[b].File })
@@ -150,7 +152,7 @@ func TestApplicationAnalysis(t *testing.T) {
 						for j, gotInc := range got.Incidents {
 							expectedInc := expected.Incidents[j]
 							if gotInc.File != expectedInc.File || gotInc.Line != expectedInc.Line || !strings.HasPrefix(gotInc.Message, expectedInc.Message) {
-								t.Errorf("\nDifferent incident error. Got %+v, expected %+v.\n\n", gotInc, expectedInc)
+								t.Errorf("\nDifferent incident error. Got %+v\nExpected %+v.\n\n", gotInc, expectedInc)
 							}
 						}
 					}
@@ -164,53 +166,48 @@ func TestApplicationAnalysis(t *testing.T) {
 			// Check the dependencies.
 			if len(gotAnalysis.Dependencies) != len(tc.Analysis.Dependencies) {
 				t.Errorf("Different amount of dependencies error. Got %d, expected %d.", len(gotAnalysis.Dependencies), len(tc.Analysis.Dependencies))
+				t.Errorf("Got: %+v\nExpected: %+v.\n", gotAnalysis.Dependencies, tc.Analysis.Dependencies)
 			} else {
 				for i, got := range gotAnalysis.Dependencies {
 					expected := tc.Analysis.Dependencies[i]
 					if got.Name != expected.Name || got.Version != expected.Version || got.Provider != expected.Provider {
-						t.Errorf("\nDifferent dependency error. Got %+v, expected %+v.\n\n", got, expected)
+						t.Errorf("\nDifferent dependency error. Got %+v\nExpected %+v.\n\n", got, expected)
 					}
 				}
 			}
 
 			// Check analysis-created Tags.
 			gotApp, _ := RichClient.Application.Get(tc.Application.ID)
-			for _, expected := range tc.AnalysisTags {
-				found := false
-				for _, got := range gotApp.Tags {
-					if got.Name == expected.Name && got.Source == "Analysis" {
-						found = true
-						break
-					}
-				}
-				if !found {
-					t.Errorf("Missing expected tag '%s'.\n", expected.Name)
-				}
-			}
 
 			if debug {
 				DumpTags(t, tc, *gotApp)
 			}
 
-			// TODO(maufart): analysis tagger creates duplicate tags, not sure if it is expected, check later.
-			//if len(tc.AnalysisTags) != len(gotApp.Tags) {
-			//	t.Errorf("Different Tags amount error. Got: %d, expected: %d.\n", len(gotApp.Tags), len(tc.AnalysisTags))
-			//}
-			//found, gotAnalysisTags := 0, 0
-			//for _, t := range gotApp.Tags {
-			//	if t.Source == "Analysis" {
-			//		gotAnalysisTags = gotAnalysisTags + 1
-			//		for _, expectedTag := range tc.AnalysisTags {
-			//			if expectedTag.Name == t.Name {
-			//				found = found + 1
-			//				break
-			//			}
-			//		}
-			//	}
-			//}
-			//if found != len(tc.AnalysisTags) || found < gotAnalysisTags {
-			//	t.Errorf("Analysis Tags don't match. Got:\n  %v\nexpected:\n  %v\n", gotApp.Tags, tc.AnalysisTags)
-			//}
+			// Resolve TagRefs to Tags.
+			gotTags := []api.Tag{}
+			for _, tagRef := range gotApp.Tags {
+				if tagRef.Source == "Analysis" {
+					tag, _ := RichClient.Tag.Get(tagRef.ID)
+					gotTags = append(gotTags, *tag)
+				}
+			}
+
+			// Ensure stable order of Tags.
+			sort.SliceStable(gotTags, func(a, b int) bool { return gotTags[a].Name + gotTags[a].Category.Name < gotTags[b].Name + gotTags[b].Category.Name })
+			sort.SliceStable(tc.AnalysisTags, func(a, b int) bool { return tc.AnalysisTags[a].Name + tc.AnalysisTags[a].Category.Name < tc.AnalysisTags[b].Name + tc.AnalysisTags[b].Category.Name })
+
+			// Check Tags.
+			if len(tc.AnalysisTags) != len(gotApp.Tags) {
+				t.Errorf("Different Tags amount error. Got: %d, expected: %d.\n", len(gotApp.Tags), len(tc.AnalysisTags))
+				t.Errorf("Got: %+v\nExpected: %+v.\n", gotApp.Tags, tc.AnalysisTags)
+			} else {
+				for i, got := range gotTags {
+					expected := tc.AnalysisTags[i]
+					if got.Name != expected.Name || got.Category.Name != expected.Category.Name {
+						t.Errorf("\nDifferent tag error. Got %+v\nExpected %+v.\n\n", got, expected)
+					}
+				}
+			}
 
 			// Allow skip cleanup to keep applications and analysis results for debugging etc.
 			_, keep := os.LookupEnv("KEEP")
