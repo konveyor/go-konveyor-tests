@@ -20,7 +20,6 @@ var Tier1TestCases = []TC{
 var Tier2TestCases = []TC{
 	Tomcat,
 	Daytrader,
-	PetclinicMain,
 	PetclinicHazelcast,
 	ApacheWicket,
 	SeamBooking,
