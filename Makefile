@@ -53,10 +53,10 @@ test-metrics:
 
 # Jira Integration.
 test-jira:
-	@if [ -z "${JIRA_USERNAME}" ]; then echo "Error: JIRA_USERNAME is not defined. Please set JIRA_USERNAME environment variable."; exit 1; fi
-	@if [ -z "${JIRA_PASSWORD}" ]; then echo "Error: JIRA_PASSWORD is not defined. Please set JIRA_PASSWORD environment variable."; exit 1; fi
-	@if [ -z "${JIRA_URL}" ]; then echo "Error: JIRA_URL is not defined. Please set JIRA_URL environment variable."; exit 1; fi 
-	ginkgo -v -focus "Jira Connection"
+	@if [ -z "${JIRA_CLOUD_USERNAME}" ]; then echo "Error: JIRA_CLOUD_USERNAME environment variable is not defined."; exit 1; fi
+	@if [ -z "${JIRA_CLOUD_PASSWORD}" ]; then echo "Error: JIRA_CLOUD_PASSWORD environment variable is not defined."; exit 1; fi
+	@if [ -z "${JIRA_CLOUD_URL}" ]; then echo "Error: JIRA_CLOUD_URL environment variable is not defined."; exit 1; fi
+	ginkgo -v -focus "Jira cloud"
 
 
 # Add next features tests here and call the target from appropriate tier.

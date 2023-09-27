@@ -1,58 +1,49 @@
 package jiraintegration
 
 import (
-	. "github.com/onsi/ginkgo/v2"
-	. "github.com/onsi/gomega"
-
 	"strconv"
 	"time"
 
+	. "github.com/onsi/ginkgo/v2"
+	. "github.com/onsi/gomega"
+
 	. "github.com/konveyor/go-konveyor-tests/config"
-	"github.com/konveyor/go-konveyor-tests/hack/uniq"
 	. "github.com/konveyor/go-konveyor-tests/utils"
+
+	"github.com/konveyor/go-konveyor-tests/data"
+	"github.com/konveyor/go-konveyor-tests/hack/uniq"
 	"github.com/konveyor/tackle2-hub/api"
 )
 
-var (
-	jiraBasicAuth api.Identity
-	jiraInstance  api.Tracker
-)
+var _ = Describe("Jira connection", Ordered, func() {
+	var jiraIdentity api.Identity
+	var jiraInstance api.Tracker
 
-const (
-	jiraBasic string = "basic-auth"
-	jiraCloud string = "jira-cloud"
-)
-
-var _ = Describe("Jira Connection", Ordered, func() {
-	AfterAll(func() {
+	AfterEach(func() {
 		// Resources cleanup
 		// Delete tracker instance and the associated identity after
 		if keep, _ := strconv.ParseBool(Config.KEEP); keep {
 			return
 		}
 		Expect(Tracker.Delete(jiraInstance.ID)).To(Succeed())
-		Expect(Identity.Delete(jiraBasicAuth.ID)).To(Succeed())
+		Expect(Identity.Delete(jiraIdentity.ID)).To(Succeed())
 	})
 
-	Context("Create new Jira instance", func() {
-		It("Verify connection", func() {
+	DescribeTable("",
+		func(testCase data.JiraInstanceTC) {
 			By("Create credential")
-			jiraBasicAuth = api.Identity{
-				Kind:     jiraBasic,
-				User:     Config.JIRA_USERNAME,
-				Password: Config.JIRA_PASSWORD,
-			}
-			uniq.IdentityName(&jiraBasicAuth)
-			err := Identity.Create(&jiraBasicAuth)
+			jiraIdentity = testCase.Identity
+			uniq.IdentityName(&jiraIdentity)
+			err := Identity.Create(&jiraIdentity)
 			Expect(err).NotTo(HaveOccurred())
 
-			By("Create Jira cloud instance and associate credential")
+			By("Create Jira instance and associate credential")
 			jiraInstance = api.Tracker{
-				URL:  Config.JIRA_URL,
-				Kind: jiraCloud,
+				URL:  testCase.JiraUrl,
+				Kind: testCase.JiraKind,
 				Identity: api.Ref{
-					ID:   jiraBasicAuth.ID,
-					Name: jiraBasicAuth.Name,
+					ID:   jiraIdentity.ID,
+					Name: jiraIdentity.Name,
 				},
 			}
 			uniq.TrackerName(&jiraInstance)
@@ -70,7 +61,9 @@ var _ = Describe("Jira Connection", Ordered, func() {
 				time.Sleep(5 * time.Second)
 			}
 			Expect(jira.Connected).To(BeTrue())
-		})
-	})
 
+		},
+		Entry("Jira cloud", data.JiraCloud),
+		Entry("Jira server with basic auth", data.JiraServer),
+		Entry("Jira server with bearer token", data.JiraServerBearerToken))
 })
