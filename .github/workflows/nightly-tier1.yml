@@ -24,6 +24,6 @@ jobs:
       - run: HUB_BASE_URL="http://$(minikube ip)/hub" DEBUG=1 make test-tier1
       - run: HUB_BASE_URL="http://$(minikube ip)/hub" make test-jira
         env:
-          JIRA_USERNAME: ${{ secrets.JIRA_CLOUD_USERNAME }}
-          JIRA_PASSWORD: ${{ secrets.JIRA_CLOUD_PASSWORD }}
-          JIRA_URL: ${{ secrets.JIRA_CLOUD_URL }}
+          JIRA_CLOUD_USERNAME: ${{ secrets.JIRA_CLOUD_USERNAME }}
+          JIRA_CLOUD_PASSWORD: ${{ secrets.JIRA_CLOUD_PASSWORD }}
+          JIRA_CLOUD_URL: ${{ secrets.JIRA_CLOUD_URL }}
