@@ -26,8 +26,6 @@ jobs:
         env:
           JIRA_CLOUD_USERNAME: ${{ secrets.JIRA_CLOUD_USERNAME }}
           JIRA_CLOUD_PASSWORD: ${{ secrets.JIRA_CLOUD_PASSWORD }}
-          JIRA_CLOUD_URL: ${{ secrets.JIRA_CLOUD_URL }}
-          JIRA_SERVER_URL: ${{ secrets.JIRA_SERVER_URL }}
           JIRA_SERVER_USERNAME: ${{ secrets.JIRA_SERVER_USERNAME }}
           JIRA_SERVER_PASSWORD: ${{ secrets.JIRA_SERVER_PASSWORD }}
           JIRA_SERVER_TOKEN: ${{ secrets.JIRA_SERVER_TOKEN }}
