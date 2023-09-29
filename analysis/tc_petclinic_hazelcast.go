@@ -1,6 +1,9 @@
 package analysis
 
-import "github.com/konveyor/tackle2-hub/api"
+import (
+	"github.com/konveyor/go-konveyor-tests/hack/addon"
+	"github.com/konveyor/tackle2-hub/api"
+)
 
 var PetclinicHazelcast = TC{
 	Name: "Petclinic legacy cloud-readiness with tagger and hazelcast custom rules",
@@ -26,15 +29,11 @@ var PetclinicHazelcast = TC{
 		},
 	},
 	Task: Analyze,
-	ReportContent: map[string][]string{
-		"/windup/report/index.html": {
-			"12\nstory points",
-			"8\nCloud Mandatory",
-			"13\nInformation",
+	Labels: addon.Labels{
+		Included: []string{
+			"konveyor.io/target=linux",
+			"konveyor.io/target=cloud-readiness",
 		},
-	},
-	Targets: []string{
-		"cloud-readiness",
 	},
 	Analysis: api.Analysis{
 		Effort: 12,

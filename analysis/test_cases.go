@@ -11,7 +11,7 @@ var Tier0TestCases = []TC{
 // Tier 1 Analysis test cases - should work.
 // List of applications with expected analysis outputs.
 var Tier1TestCases = []TC{
-	// Setting empty until have working applications.
+	PetclinicHazelcast,
 }
 
 //
@@ -20,7 +20,6 @@ var Tier1TestCases = []TC{
 var Tier2TestCases = []TC{
 	Tomcat,
 	Daytrader,
-	PetclinicHazelcast,
 	ApacheWicket,
 	SeamBooking,
 }
