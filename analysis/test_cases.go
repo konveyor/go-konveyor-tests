@@ -19,6 +19,7 @@ var Tier1TestCases = []TC{
 // List of applications with expected analysis outputs.
 var Tier2TestCases = []TC{
 	TackleTestappPublicWithDeps,
+	TackleTestappPublicCorpFrameworkConfig,	// Move to tier0 or tier1 once confirmed with Ramon&Pranav
 	Tomcat,
 	Daytrader,
 	PetclinicHazelcast,
