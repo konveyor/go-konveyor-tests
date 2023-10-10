@@ -163,17 +163,21 @@ func TestApplicationAnalysis(t *testing.T) {
 			sort.SliceStable(gotAnalysis.Dependencies, func(a, b int) bool { return gotAnalysis.Dependencies[a].Name < gotAnalysis.Dependencies[b].Name })
 			sort.SliceStable(tc.Analysis.Dependencies, func(a, b int) bool { return tc.Analysis.Dependencies[a].Name < tc.Analysis.Dependencies[b].Name })
 
-			// Check the dependencies.
-			if len(gotAnalysis.Dependencies) != len(tc.Analysis.Dependencies) {
-				t.Errorf("Different amount of dependencies error. Got %d, expected %d.", len(gotAnalysis.Dependencies), len(tc.Analysis.Dependencies))
-				t.Errorf("Got: %+v\nExpected: %+v.\n", gotAnalysis.Dependencies, tc.Analysis.Dependencies)
-			} else {
-				for i, got := range gotAnalysis.Dependencies {
-					expected := tc.Analysis.Dependencies[i]
-					if got.Name != expected.Name || got.Version != expected.Version || got.Provider != expected.Provider {
-						t.Errorf("\nDifferent dependency error. Got %+v\nExpected %+v.\n\n", got, expected)
+			// Check the dependencies (if specified by TestCase).
+			if len(tc.Analysis.Dependencies) > 0 {
+				if len(gotAnalysis.Dependencies) != len(tc.Analysis.Dependencies) {
+					t.Errorf("Different amount of dependencies error. Got %d, expected %d.", len(gotAnalysis.Dependencies), len(tc.Analysis.Dependencies))
+					t.Errorf("Got: %+v\nExpected: %+v.\n", gotAnalysis.Dependencies, tc.Analysis.Dependencies)
+				} else {
+					for i, got := range gotAnalysis.Dependencies {
+						expected := tc.Analysis.Dependencies[i]
+						if got.Name != expected.Name || got.Version != expected.Version || got.Provider != expected.Provider {
+							t.Errorf("\nDifferent dependency error. Got %+v\nExpected %+v.\n\n", got, expected)
+						}
 					}
 				}
+			} else {
+				t.Log("Skipping Dependencies check, nothing is expected.")
 			}
 
 			// Check analysis-created Tags.
@@ -193,20 +197,28 @@ func TestApplicationAnalysis(t *testing.T) {
 			}
 
 			// Ensure stable order of Tags.
-			sort.SliceStable(gotTags, func(a, b int) bool { return gotTags[a].Name + gotTags[a].Category.Name < gotTags[b].Name + gotTags[b].Category.Name })
-			sort.SliceStable(tc.AnalysisTags, func(a, b int) bool { return tc.AnalysisTags[a].Name + tc.AnalysisTags[a].Category.Name < tc.AnalysisTags[b].Name + tc.AnalysisTags[b].Category.Name })
+			sort.SliceStable(gotTags, func(a, b int) bool {
+				return gotTags[a].Name+gotTags[a].Category.Name < gotTags[b].Name+gotTags[b].Category.Name
+			})
+			sort.SliceStable(tc.AnalysisTags, func(a, b int) bool {
+				return tc.AnalysisTags[a].Name+tc.AnalysisTags[a].Category.Name < tc.AnalysisTags[b].Name+tc.AnalysisTags[b].Category.Name
+			})
 
-			// Check Tags.
-			if len(tc.AnalysisTags) != len(gotApp.Tags) {
-				t.Errorf("Different Tags amount error. Got: %d, expected: %d.\n", len(gotApp.Tags), len(tc.AnalysisTags))
-				t.Errorf("Got: %+v\nExpected: %+v.\n", gotApp.Tags, tc.AnalysisTags)
-			} else {
-				for i, got := range gotTags {
-					expected := tc.AnalysisTags[i]
-					if got.Name != expected.Name || got.Category.Name != expected.Category.Name {
-						t.Errorf("\nDifferent tag error. Got %+v\nExpected %+v.\n\n", got, expected)
+			// Check Tags (if specified by TestCase).
+			if len(tc.AnalysisTags) > 0 {
+				if len(tc.AnalysisTags) != len(gotApp.Tags) {
+					t.Errorf("Different Tags amount error. Got: %d, expected: %d.\n", len(gotApp.Tags), len(tc.AnalysisTags))
+					t.Errorf("Got: %+v\nExpected: %+v.\n", gotApp.Tags, tc.AnalysisTags)
+				} else {
+					for i, got := range gotTags {
+						expected := tc.AnalysisTags[i]
+						if got.Name != expected.Name || got.Category.Name != expected.Category.Name {
+							t.Errorf("\nDifferent tag error. Got %+v\nExpected %+v.\n\n", got, expected)
+						}
 					}
 				}
+			} else {
+				t.Log("Skipping Tags check, nothing is expected.")
 			}
 
 			// Allow skip cleanup to keep applications and analysis results for debugging etc.
