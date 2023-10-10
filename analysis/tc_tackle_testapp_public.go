@@ -17,6 +17,7 @@ var TackleTestappPublic = TC{
 	Name:        "Tackle Testapp public",
 	Application: TackleTestApp,
 	Task:        Analyze,
+	WithDeps:    false,
 	Labels: addon.Labels{
 		Included: []string{
 			"konveyor.io/target=linux",
