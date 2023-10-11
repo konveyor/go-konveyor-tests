@@ -32,6 +32,7 @@ test-tier0:
 
 # TIER1 - all normal features expected to work.
 test-tier1:
+	${MAKE} test-hub-api
 	$(MAKE) test-metrics
 	TIER1=1 $(MAKE) test-analysis
 
@@ -53,13 +54,7 @@ test-metrics:
 
 # Hub API remote tests.
 test-hub-api:
-	if [ -d /tmp/tackle2-hub-test ]; then \
-		cd /tmp/tackle2-hub-test; \
-		git pull origin ${BRANCH}; \
-	else
-		git clone --branch ${BRANCH} https://github.com/konveyor/tackle2-hub.git /tmp/tackle2-hub-test && cd $_
-	fi
-	HUB_BASE_URL="http://${MINIKUBE_IP}/hub" make test-api
+	./hub-api/run-tests.sh ${BRANCH}
 
 # Add next features tests here and call the target from appropriate stage.
 
