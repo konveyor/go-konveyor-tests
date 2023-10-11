@@ -18,4 +18,12 @@ jobs:
       - uses: actions/setup-go@v3
         with:
           go-version: '1.19'
-      - run: make test-tier1
+      - name: Install dependencies
+        run: |
+          go install github.com/onsi/ginkgo/v2/ginkgo
+      - run: HUB_BASE_URL="http://$(minikube ip)/hub" DEBUG=1 make test-tier1
+      - run: HUB_BASE_URL="http://$(minikube ip)/hub" make test-jira
+        env:
+          JIRA_CLOUD_USERNAME: ${{ secrets.JIRA_CLOUD_USERNAME }}
+          JIRA_CLOUD_PASSWORD: ${{ secrets.JIRA_CLOUD_PASSWORD }}
+          JIRA_CLOUD_URL: ${{ secrets.JIRA_CLOUD_URL }}

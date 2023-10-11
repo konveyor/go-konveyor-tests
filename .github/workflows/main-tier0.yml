@@ -24,4 +24,7 @@ jobs:
       - uses: actions/setup-go@v3
         with:
           go-version: '1.19'
-      - run: make test-tier0
+      - name: Install dependencies
+        run: |
+          go install github.com/onsi/ginkgo/v2/ginkgo
+      - run: HUB_BASE_URL="http://$(minikube ip)/hub" DEBUG=1 make test-tier0

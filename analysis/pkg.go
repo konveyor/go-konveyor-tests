@@ -1,6 +1,8 @@
 package analysis
 
 import (
+	"fmt"
+	"testing"
 	"time"
 
 	"github.com/konveyor/go-konveyor-tests/hack/addon"
@@ -29,18 +31,73 @@ func init() {
 
 // Test cases for Application Analysis.
 type TC struct {
-	Name          string
+	Name string
 	// Application and other test data declaration.
-	Application   api.Application	// Required.
-	CustomRules   []api.RuleSet
+	Application api.Application // Required.
+	CustomRules []api.RuleSet
 	// Analysis parameters.
-	Task          api.Task
-	TaskData      string
-	Sources       []string
-	Targets       []string
-	Rules         addon.Rules
+	Task     api.Task
+	TaskData string
+	Sources  []string
+	Targets  []string
+	Labels   addon.Labels
+	Rules    addon.Rules
+	WithDeps bool
 	// After-analysis assertions.
 	ReportContent map[string][]string
 	Analysis      api.Analysis
 	AnalysisTags  []api.Tag
+}
+
+func DumpAnalysis(t *testing.T, tc TC, analysis api.Analysis) {
+	fmt.Printf("## GOT ANALYSIS OUTPUT FOR \"%s\":", tc.Name)
+	fmt.Printf("\napi.Analysis{\n")
+	fmt.Printf("    Effort: %d,\n", analysis.Effort)
+	fmt.Printf("    Issues: []api.Issue{\n")
+	for _, issue := range analysis.Issues {
+		fmt.Printf("        {\n")
+		fmt.Printf("            Category: \"%s\",\n", issue.Category)
+		fmt.Printf("            Description: \"%s\",\n", issue.Description)
+		fmt.Printf("            Effort: %d,\n", issue.Effort)
+		fmt.Printf("            RuleSet: \"%s\",\n", issue.RuleSet)
+		fmt.Printf("            Rule: \"%s\",\n", issue.Rule)
+		fmt.Printf("            Incidents: []api.Incident{\n")
+		for _, incident := range issue.Incidents {
+			fmt.Printf("                {\n")
+			fmt.Printf("                    File: \"%s\",\n", incident.File)
+			fmt.Printf("                    Line: %d,\n", incident.Line)
+			fmt.Printf("                    Message: \"%s\",\n", incident.Message)
+			fmt.Printf("                },\n")
+		}
+		fmt.Printf("            },\n")
+		fmt.Printf("        },\n")
+	}
+	fmt.Printf("    },\n")
+	fmt.Printf("    Dependencies: []api.TechDependency{\n")
+	for _, dep := range analysis.Dependencies {
+		fmt.Printf("        {\n")
+		fmt.Printf("            Name: \"%s\",\n", dep.Name)
+		fmt.Printf("            Version: \"%s\",\n", dep.Version)
+		fmt.Printf("            Provider: \"%s\",\n", dep.Provider)
+		fmt.Printf("        },\n")
+	}
+	fmt.Printf("    },\n")
+	fmt.Printf("}\n")
+}
+
+func DumpTags(t *testing.T, tc TC, app api.Application) {
+	// Preload tags.
+	tags := []api.Tag{}
+	for _, tagRef := range app.Tags {
+		if tagRef.Source == "Analysis" {
+			tag, _ := RichClient.Tag.Get(tagRef.ID)
+			tags = append(tags, *tag)
+		}
+	}
+	fmt.Printf("## GOT TAGS FOR \"%s\":", tc.Name)
+	fmt.Printf("\n[]api.Tag{\n")
+	for _, tag := range tags {
+			fmt.Printf("    {Name: \"%s\", Category: api.Ref{Name: \"%s\")},\n", tag.Name, tag.Category.Name)
+	}
+	fmt.Printf("}\n")
 }

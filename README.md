@@ -38,10 +38,22 @@ git clone https://github.com/aufi/go-konveyor-tests && cd go-konveyor-tests
 $ make setup # start minikube&tackle using David's scripts - local env only
 ```
 
-### Run test suite
+### OpenShift cluster
+
+These tests can be executed against OpenShift cluster with Konveyor installed by setting `KUBECONFIG` variable:
 
 ```
-$ make test-all
+KUBECONFIG=<kubeconfig file>
+```
+
+> **_NOTE:_** You might be required to download and import the certificate chain. Please see [Hub API test README](https://github.com/konveyor/tackle2-hub/tree/main/test#https) for more information.
+
+### Run test suite
+
+Set ```$HUB_BASE_URL``` environment variable to point to Konveyor installation before running tests. More options could be found in [Hub API test README](https://github.com/konveyor/tackle2-hub/tree/main/test#rest-api).
+
+```
+$ HUB_BASE_URL="http://<KONVEYOR_HOST>/hub" make test-tier0
 ```
 
 Run test manually example:
@@ -81,13 +93,17 @@ $ make test-tier2
 
 ## Test execution options
 
-#### PARALLEL
+### DEBUG
 
-For parallel test execution, set ```export PARALLEL=1```.
+For debug output like printing full analysis results, set ```export DEBUG=1```.
 
-#### KEEP
+### KEEP
 
 For keep data created by test e.g. for debugging purposes, set ```export KEEP=1```.
+
+### PARALLEL
+
+For parallel test execution, set ```export PARALLEL=1```.
 
 ## Konveyor CI status
 

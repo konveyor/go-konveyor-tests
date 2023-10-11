@@ -8,6 +8,7 @@ require (
 	github.com/konveyor/tackle2-hub v0.3.0-alpha.2.0.20230904115841-a848da310e48
 	github.com/onsi/ginkgo/v2 v2.11.0
 	github.com/onsi/gomega v1.27.10
+	github.com/tkanos/gonfig v0.0.0-20210106201359-53e13348de2f
 )
 
 require (
@@ -23,6 +24,7 @@ require (
 	github.com/emicklei/go-restful/v3 v3.9.0 // indirect
 	github.com/evanphx/json-patch/v5 v5.6.0 // indirect
 	github.com/fatih/structs v1.1.0 // indirect
+	github.com/ghodss/yaml v1.0.0 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/gin-gonic/gin v1.9.0 // indirect
 	github.com/go-logr/logr v1.2.4 // indirect

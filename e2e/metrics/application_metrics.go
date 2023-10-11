@@ -1,9 +1,12 @@
 package metrics
 
 import (
+	"strconv"
+
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
+	. "github.com/konveyor/go-konveyor-tests/config"
 	"github.com/konveyor/go-konveyor-tests/utils"
 	"github.com/konveyor/tackle2-hub/api"
 )
@@ -23,6 +26,9 @@ var _ = Describe("Application Metrics", Ordered, func() {
 
 	AfterAll(func() {
 		// Resources cleanup
+		if keep, _ := strconv.ParseBool(Config.KEEP); keep {
+			return
+		}
 		utils.DeleteApplicationsBySlice(apps)
 	})
 
@@ -39,7 +45,7 @@ var _ = Describe("Application Metrics", Ordered, func() {
 		It("Should decrease the applications gauge", func() {
 			// Delete the last application item
 			lastApplicationItem := apps[len(apps)-1]
-			Application.Delete(lastApplicationItem.ID)
+			utils.DeleteApplicationsBySlice([]api.Application{lastApplicationItem})
 			metricValue--
 			Expect(GetMetricValue(metricName)).To(Equal(metricValue))
 		})

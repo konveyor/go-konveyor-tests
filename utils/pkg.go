@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"github.com/jortel/go-utils/logr"
 	"github.com/konveyor/tackle2-hub/binding"
 	"github.com/konveyor/tackle2-hub/test/api/client"
 )
@@ -9,6 +10,9 @@ var (
 	Client      *binding.Client
 	RichClient  *binding.RichClient
 	Application binding.Application
+	Tracker     binding.Tracker
+	Identity    binding.Identity
+	Log         = logr.WithName("test")
 )
 
 func init() {
@@ -20,4 +24,9 @@ func init() {
 
 	// Shortcut for Application-related RichClient methods.
 	Application = RichClient.Application
+
+	// Shortcut for Tracker-related RichClient methods.
+	Tracker = RichClient.Tracker
+
+	Identity = RichClient.Identity
 }

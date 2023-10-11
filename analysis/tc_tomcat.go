@@ -15,44 +15,120 @@ var Tomcat = TC{
 		},
 	},
 	Task: Analyze,
-	//ReportContent: map[string][]string{ // From Windup
-	//	"/windup/report/index.html": {
-	//		"1\nstory points",
-	//		"1\nCloud Mandatory",
-	//		"6\nInformation",
-	//	},
-	//},
 	Targets: []string{
 		"cloud-readiness",
+		"linux",
 	},
 	Analysis: api.Analysis{
-		Effort: 2,
+		Effort: 1,
 		Issues: []api.Issue{
 			{
-				Category:    "mandatory",
-				Description: "Hardcoded IP Address\nWhen migrating environments, hard-coded IP addresses may need to be modified or eliminated.",
+				Category:    "cloud-mandatory",
+				Description: "Trivial change or 1-1 library swap",
 				Effort:      1,
-				RuleSet:     "discovery-rules",
-				Rule:        "hardcoded-ip-address",
+				RuleSet:     "DiscoverHardcodedIPAddressRuleProvider",
+				Rule:        "DiscoverHardcodedIPAddressRuleProvider",
 				Incidents: []api.Incident{
 					{
-						File:    "/addon/source/example-applications/example-1/src/main/resources/persistence.properties",
-						Line:    0,
-						Message: "When migrating environments, hard-coded IP addresses may need to be modified or eliminated.",
+						File:    "persistence.properties",
+						Line:    2,
+						Message: "Hard-coded IP: 169.60.225.216When migrating environments, hard-coded IP addresses may need to be modified or eliminated.",
 					},
+				},
+			},
+			{
+				Category:    "information",
+				Description: "Info",
+				Effort:      0,
+				RuleSet:     "database",
+				Rule:        "database-03200",
+				Incidents: []api.Incident{
 					{
-						File:    "/addon/source/example-applications/example-1/target/classes/persistence.properties",
+						File:    "pom.xml",
 						Line:    0,
-						Message: "When migrating environments, hard-coded IP addresses may need to be modified or eliminated.",
+						Message: "The application embeds Spring Data JPA",
+					},
+				},
+			},
+			{
+				Category:    "information",
+				Description: "Info",
+				Effort:      0,
+				RuleSet:     "mvc",
+				Rule:        "mvc-01220",
+				Incidents: []api.Incident{
+					{
+						File:    "pom.xml",
+						Line:    0,
+						Message: "The application embeds a Spring MVC library.",
+					},
+				},
+			},
+			{
+				Category:    "information",
+				Description: "Info",
+				Effort:      0,
+				RuleSet:     "embedded-framework",
+				Rule:        "embedded-framework-08400",
+				Incidents: []api.Incident{
+					{
+						File:    "pom.xml",
+						Line:    0,
+						Message: "The application embeds the Spring Web framework.",
+					},
+				},
+			},
+			{
+				Category:    "information",
+				Description: "Info",
+				Effort:      0,
+				RuleSet:     "observability",
+				Rule:        "observability-0100",
+				Incidents: []api.Incident{
+					{
+						File:    "pom.xml",
+						Line:    0,
+						Message: "The application embeds Spring Boot Actuator.",
+					},
+				},
+			},
+			{
+				Category:    "information",
+				Description: "Info",
+				Effort:      0,
+				RuleSet:     "technology-usage-javaee",
+				Rule:        "javaee-technology-usage-00120",
+				Incidents: []api.Incident{
+					{
+						File:    "OrderManagementAppInitializer.java",
+						Line:    0,
+						Message: "The application uses Java Servlets",
+					},
+				},
+			},
+			{
+				Category:    "information",
+				Description: "Info",
+				Effort:      0,
+				RuleSet:     "DiscoverMavenProjectsRuleProvider",
+				Rule:        "DiscoverMavenProjectsRuleProvider_1",
+				Incidents: []api.Incident{
+					{
+						File:    "pom.xml",
+						Line:    0,
+						Message: "Maven Project Object Model (POM) File",
 					},
 				},
 			},
 		},
 	},
 	AnalysisTags: []api.Tag{
-		{Name: "EJB XML"},
-		{Name: "Java EE Batch"},
-		{Name: "Properties"},
 		{Name: "Servlet"},
+		{Name: "Spring MVC"},
+		{Name: "Spring Boot Actuator"},
+		{Name: "Properties"},
+		{Name: "JPA entities"},
+		{Name: "Spring Data JPA"},
+		{Name: "Spring Web"},
 	},
 }
