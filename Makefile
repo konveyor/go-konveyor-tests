@@ -1,5 +1,7 @@
 VENDOR_DIR ?= /tmp/konveyor-vendor
 ARCH ?= amd64
+BRANCH ?= main
+
 
 # Setup local minikube with tackle - work in progress (TODO: enable auth)
 # This is for local setup, CI uses shared github actions
@@ -32,6 +34,7 @@ test-tier0:
 
 # TIER1 - all normal features expected to work.
 test-tier1:
+	${MAKE} test-hub-api
 	$(MAKE) test-metrics
 	TIER1=1 $(MAKE) test-analysis
 
@@ -59,7 +62,11 @@ test-jira:
 	ginkgo -v -focus "Jira cloud"
 
 
-# Add next features tests here and call the target from appropriate tier.
+# Hub API remote tests.
+test-hub-api:
+	./hub-api/run-tests.sh ${BRANCH}
+
+# Add next features tests here and call the target from appropriate stage.
 
 # Execute all tests.
 test-all: test-tier0 test-tier1 test-tier2
