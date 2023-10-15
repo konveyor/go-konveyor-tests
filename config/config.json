@@ -1,7 +1,5 @@
 {
 	"KUBECONFIG": "",
 	"RETRY_NUM": "10",
-	"KEEP": "0",
-	"JIRA_CLOUD_URL": "https://mta-qe-testing.atlassian.net",
-	"JIRA_SERVER_URL": "https://issues.stage.redhat.com"
+	"KEEP": "0"
 }

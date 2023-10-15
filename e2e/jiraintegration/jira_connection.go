@@ -15,7 +15,7 @@ import (
 	"github.com/konveyor/tackle2-hub/api"
 )
 
-var _ = Describe("Jira connection", Ordered, func() {
+var _ = Describe("Jira connection", func() {
 	var jiraIdentity api.Identity
 	var jiraInstance api.Tracker
 
