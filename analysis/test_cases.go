@@ -12,6 +12,7 @@ var Tier0TestCases = []TC{
 // List of applications with expected analysis outputs.
 var Tier1TestCases = []TC{
 	// Setting empty until have working applications.
+	TackleTestappPublicCorpFrameworkConfig,
 }
 
 //
