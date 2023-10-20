@@ -10,6 +10,12 @@
 export BRANCH=$1
 export HUB_TMP_DIR="/tmp/tackle2-hub-test"
 
+# Upstream CI hack to use golang test ref input as branch for tests for releases.
+if [ ! -z $GOLANG_TESTS_REF ] && [[ $GOLANG_TESTS_REF == release-* ]]; then
+    echo "Using branch '${GOLANG_TESTS_REF}' for Hub API tests."
+    export BRANCH=$GOLANG_TESTS_REF
+fi
+
 if [ -z $BRANCH ]; then
     echo "Assuming 'main' branch to be used for Hub."
     export BRANCH="main"
