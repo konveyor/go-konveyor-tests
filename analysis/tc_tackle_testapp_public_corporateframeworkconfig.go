@@ -9,12 +9,24 @@ var TackleTestappPublicCorpFrameworkConfig = TC{
 	Name:        "Tackle Testapp public corporate-framework-config",
 	Application: TackleTestApp,
 	Task:        Analyze,
-	WithDeps:    true,
+	WithDeps:    false,
 	Labels: addon.Labels{
 		Included: []string{
 			"konveyor.io/target=linux",
 			"konveyor.io/target=cloud-readiness",
 			"konveyor.io/source=java",
+		},
+	},
+	CustomRules: []api.RuleSet{
+		{
+			Name:   "This ruleset provides rules related to the corporate configuration frameworks.",
+			Rules: []api.Rule{
+				{
+					File: &api.Ref{
+						Name: "./data/corporate-framework-config.windup.xml",
+					},
+				},
+			},
 		},
 	},
 	Analysis: api.Analysis{
@@ -63,97 +75,8 @@ var TackleTestappPublicCorpFrameworkConfig = TC{
 					},
 				},
 			},
-		},
-		Dependencies: []api.TechDependency{
 			{
-				Name: "com.fasterxml.jackson.jackson-bom",
-				Version: "${jackson.version}",
-				Provider: "",
-			},
-			{
-				Name: "org.springframework.data.spring-data-bom",
-				Version: "${spring-data.version}",
-				Provider: "",
-			},
-			{
-				Name: "org.apache.tomcat.tomcat-servlet-api",
-				Version: "${tomcat.version}",
-				Provider: "",
-			},
-			{
-				Name: "com.fasterxml.jackson.core.jackson-core",
-				Version: "",
-				Provider: "",
-			},
-			{
-				Name: "com.fasterxml.jackson.core.jackson-databind",
-				Version: "",
-				Provider: "",
-			},
-			{
-				Name: "org.springframework.data.spring-data-jpa",
-				Version: "",
-				Provider: "",
-			},
-			{
-				Name: "org.springframework.spring-jdbc",
-				Version: "${spring-framework.version}",
-				Provider: "",
-			},
-			{
-				Name: "org.springframework.spring-webmvc",
-				Version: "${spring-framework.version}",
-				Provider: "",
-			},
-			{
-				Name: "org.springframework.spring-web",
-				Version: "${spring-framework.version}",
-				Provider: "",
-			},
-			{
-				Name: "org.springframework.boot.spring-boot-starter-actuator",
-				Version: "2.5.0",
-				Provider: "",
-			},
-			{
-				Name: "org.apache.tomcat.tomcat-jdbc",
-				Version: "${tomcat.version}",
-				Provider: "",
-			},
-			{
-				Name: "org.hibernate.hibernate-entitymanager",
-				Version: "${hibernate.version}",
-				Provider: "",
-			},
-			{
-				Name: "org.hibernate.validator.hibernate-validator",
-				Version: "${hibernate-validator.version}",
-				Provider: "",
-			},
-			{
-				Name: "ch.qos.logback.logback-classic",
-				Version: "1.1.7",
-				Provider: "",
-			},
-			{
-				Name: "com.oracle.database.jdbc.ojdbc11",
-				Version: "21.1.0.0",
-				Provider: "",
-			},
-			{
-				Name: "org.postgresql.postgresql",
-				Version: "42.2.23",
-				Provider: "",
-			},
-			{
-				Name: "com.h2database.h2",
-				Version: "2.1.214",
-				Provider: "",
-			},
-			{
-				Name: "io.konveyor.demo.configuration-utils",
-				Version: "1.0.0",
-				Provider: "",
+				//TBD custom rule's issues
 			},
 		},
 	},
