@@ -25,6 +25,10 @@ var TackleTestappPublicCorpFrameworkConfig = TC{
 					File: &api.Ref{
 						Name: "./data/corporate-framework-config.windup.xml",
 					},
+					Labels: []string{
+						"konveyor.io/source=java",
+						"konveyor.io/target=cloud-readiness",
+					},
 				},
 			},
 		},

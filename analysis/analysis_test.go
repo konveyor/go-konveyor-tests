@@ -53,6 +53,7 @@ func TestApplicationAnalysis(t *testing.T) {
 						File: &api.Ref{
 							ID: ruleFile.ID,
 						},
+						Labels: rule.Labels,
 					})
 					// ruleFiles = append(ruleFiles, *ruleFile)
 				}
