@@ -24,6 +24,12 @@ There is a ```binding``` package providing API client methods https://github.com
 
 Feel free to follow [application analysis integration test directory](https://github.com/konveyor/go-konveyor-tests/tree/main/analysis) as an example.
 
+## Konveyor CI status
+
+[![Run Konveyor main nightly tests](https://github.com/konveyor/ci/actions/workflows/nightly-main.yaml/badge.svg?branch=main)](https://github.com/konveyor/ci/actions/workflows/nightly-main.yaml)
+
+More details at https://github.com/konveyor/ci
+
 ## Local test suite execution
 
 ### Clone this repo
@@ -104,10 +110,6 @@ For keep data created by test e.g. for debugging purposes, set ```export KEEP=1`
 ### PARALLEL
 
 For parallel test execution, set ```export PARALLEL=1```.
-
-## Konveyor CI status
-
-See https://github.com/konveyor/ci
 
 ## Code of Conduct
 Refer to Konveyor's Code of Conduct [here](https://github.com/konveyor/community/blob/main/CODE_OF_CONDUCT.md).
