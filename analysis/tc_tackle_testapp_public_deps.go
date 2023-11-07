@@ -85,48 +85,23 @@ var TackleTestappPublicWithDeps = TC{
 		},
 		Dependencies: []api.TechDependency{
 			{
-				Name:     "com.fasterxml.jackson.jackson-bom",
-				Version:  "${jackson.version}",
-				Provider: "",
-			},
-			{
-				Name:     "org.springframework.data.spring-data-bom",
-				Version:  "${spring-data.version}",
-				Provider: "",
-			},
-			{
 				Name:     "org.apache.tomcat.tomcat-servlet-api",
-				Version:  "${tomcat.version}",
-				Provider: "",
-			},
-			{
-				Name:     "com.fasterxml.jackson.core.jackson-core",
-				Version:  "",
-				Provider: "",
-			},
-			{
-				Name:     "com.fasterxml.jackson.core.jackson-databind",
-				Version:  "",
-				Provider: "",
-			},
-			{
-				Name:     "org.springframework.data.spring-data-jpa",
-				Version:  "",
+				Version:  "9.0.46",
 				Provider: "",
 			},
 			{
 				Name:     "org.springframework.spring-jdbc",
-				Version:  "${spring-framework.version}",
+				Version:  "5.3.7",
 				Provider: "",
 			},
 			{
 				Name:     "org.springframework.spring-webmvc",
-				Version:  "${spring-framework.version}",
+				Version:  "5.3.7",
 				Provider: "",
 			},
 			{
 				Name:     "org.springframework.spring-web",
-				Version:  "${spring-framework.version}",
+				Version:  "5.3.7",
 				Provider: "",
 			},
 			{
@@ -136,17 +111,17 @@ var TackleTestappPublicWithDeps = TC{
 			},
 			{
 				Name:     "org.apache.tomcat.tomcat-jdbc",
-				Version:  "${tomcat.version}",
+				Version:  "9.0.46",
 				Provider: "",
 			},
 			{
 				Name:     "org.hibernate.hibernate-entitymanager",
-				Version:  "${hibernate.version}",
+				Version:  "5.4.32.Final",
 				Provider: "",
 			},
 			{
 				Name:     "org.hibernate.validator.hibernate-validator",
-				Version:  "${hibernate-validator.version}",
+				Version:  "6.2.0.Final",
 				Provider: "",
 			},
 			{
@@ -174,6 +149,16 @@ var TackleTestappPublicWithDeps = TC{
 				Version:  "1.0.0",
 				Provider: "",
 			},
+			{
+				Name:     "com.fasterxml.jackson.jackson-bom",
+				Version:  "2.12.3",
+				Provider: "",
+			},
+			{
+				Name:     "org.springframework.data.spring-data-bom",
+				Version:  "2021.0.1",
+				Provider: "",
+			},
 		},
 	},
 	AnalysisTags: []api.Tag{
@@ -181,13 +166,16 @@ var TackleTestappPublicWithDeps = TC{
 		{Name: "Servlet", Category: api.Ref{Name: "HTTP"}},
 		{Name: "Properties", Category: api.Ref{Name: "Other"}},
 		{Name: "Java EE Batch", Category: api.Ref{Name: "Processing"}},
-		{Name: "Java EE Batch", Category: api.Ref{Name: "Java EE"}},
+		{Name: "Spring Web", Category: api.Ref{Name: "Web"}},
+		{Name: "EJB XML", Category: api.Ref{Name: "Connect"}},
 		{Name: "Servlet", Category: api.Ref{Name: "Java EE"}},
 		{Name: "EJB XML", Category: api.Ref{Name: "Java EE"}},
 		{Name: "Properties", Category: api.Ref{Name: "Sustain"}},
 		{Name: "Properties", Category: api.Ref{Name: "Embedded"}},
 		{Name: "Java EE Batch", Category: api.Ref{Name: "Execute"}},
-		{Name: "EJB XML", Category: api.Ref{Name: "Connect"}},
+		{Name: "Java EE Batch", Category: api.Ref{Name: "Java EE"}},
 		{Name: "Servlet", Category: api.Ref{Name: "Connect"}},
+		{Name: "Spring Web", Category: api.Ref{Name: "View"}},
+		{Name: "Spring Web", Category: api.Ref{Name: "Embedded"}},
 	},
 }
