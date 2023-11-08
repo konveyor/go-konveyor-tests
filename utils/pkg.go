@@ -7,12 +7,14 @@ import (
 )
 
 var (
-	Client      *binding.Client
-	RichClient  *binding.RichClient
-	Application binding.Application
-	Tracker     binding.Tracker
-	Identity    binding.Identity
-	Log         = logr.WithName("test")
+	Log           = logr.WithName("test")
+	Client        *binding.Client
+	RichClient    *binding.RichClient
+	Application   binding.Application
+	Tracker       binding.Tracker
+	Identity      binding.Identity
+	MigrationWave binding.MigrationWave
+	Ticket        binding.Ticket
 )
 
 func init() {
@@ -29,4 +31,6 @@ func init() {
 	Tracker = RichClient.Tracker
 
 	Identity = RichClient.Identity
+	MigrationWave = RichClient.MigrationWave
+	Ticket = RichClient.Ticket
 }

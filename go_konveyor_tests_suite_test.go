@@ -5,6 +5,7 @@ import (
 
 	_ "github.com/konveyor/go-konveyor-tests/e2e/jiraintegration"
 	_ "github.com/konveyor/go-konveyor-tests/e2e/metrics"
+	_ "github.com/konveyor/go-konveyor-tests/e2e/migrationwave"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )
