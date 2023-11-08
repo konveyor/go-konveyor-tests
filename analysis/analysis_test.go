@@ -36,6 +36,16 @@ func TestApplicationAnalysis(t *testing.T) {
 				t.Parallel()
 			}
 
+			// Prepare Identities, e.g. for Maven repo
+			for _, identity := range tc.Identities {
+				if identity.Kind == "maven" {
+					strings.Replace(identity.Settings, "GITHUB_USER", os.Getenv("GITHUB_USER"), 1)
+					strings.Replace(identity.Settings, "GITHUB_TOKEN", os.Getenv("GITHUB_USER"), 1)
+				}
+				assert.Should(t, RichClient.Identity.Create(&identity))
+				tc.Application.Identities = append(tc.Application.Identities, api.Ref{ID: identity.ID})
+			}
+
 			// Create the application.
 			uniq.ApplicationName(&tc.Application)
 			assert.Should(t, RichClient.Application.Create(&tc.Application))
@@ -226,6 +236,12 @@ func TestApplicationAnalysis(t *testing.T) {
 			if keep {
 				return
 			}
+
+			// Cleanup Identities.
+			for _, r := range tc.Application.Identities {
+				assert.Should(t, RichClient.Identity.Delete(r.ID))
+			}
+
 			// Cleanup Application.
 			assert.Must(t, RichClient.Application.Delete(tc.Application.ID))
 

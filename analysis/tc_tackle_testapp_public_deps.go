@@ -3,7 +3,10 @@ package analysis
 import (
 	"github.com/konveyor/go-konveyor-tests/hack/addon"
 	"github.com/konveyor/tackle2-hub/api"
+	"github.com/konveyor/tackle2-hub/test/api/identity"
 )
+
+var MavenPublic = identity.Mvn
 
 var TackleTestappPublicWithDeps = TC{
 	Name:        "Tackle Testapp public with deps",
@@ -15,6 +18,9 @@ var TackleTestappPublicWithDeps = TC{
 			"konveyor.io/target=linux",
 			"konveyor.io/target=cloud-readiness",
 		},
+	},
+	Identities: []api.Identity{
+		MavenPublic,	// Tackle Testapp public Maven registry expects GITHUB_USER and GITHUB_TOKEN env variables.
 	},
 	Analysis: api.Analysis{
 		Effort: 9,
