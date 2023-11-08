@@ -2,6 +2,7 @@ package analysis
 
 import (
 	"fmt"
+	"strings"
 	"testing"
 	"time"
 
@@ -64,6 +65,7 @@ func DumpAnalysis(t *testing.T, tc TC, analysis api.Analysis) {
 		fmt.Printf("            Incidents: []api.Incident{\n")
 		for _, incident := range issue.Incidents {
 			fmt.Printf("                {\n")
+			fmt.Printf("                    CodeSnip: \"%s\",\n", codeSnipLine(incident.CodeSnip, incident.Line))
 			fmt.Printf("                    File: \"%s\",\n", incident.File)
 			fmt.Printf("                    Line: %d,\n", incident.Line)
 			fmt.Printf("                    Message: \"%s\",\n", incident.Message)
@@ -100,4 +102,13 @@ func DumpTags(t *testing.T, tc TC, app api.Application) {
 			fmt.Printf("    {Name: \"%s\", Category: api.Ref{Name: \"%s\")},\n", tag.Name, tag.Category.Name)
 	}
 	fmt.Printf("}\n")
+}
+
+func codeSnipLine(code string, lineNumber int) (incidentLine string) {
+	for _, line := range strings.Split(code, "\n") {
+		if strings.HasPrefix(line, fmt.Sprint(lineNumber)) {
+			incidentLine = line
+		}
+	}
+	return
 }

@@ -151,7 +151,7 @@ func TestApplicationAnalysis(t *testing.T) {
 						sort.SliceStable(expected.Incidents, func(a, b int) bool { return expected.Incidents[a].File < expected.Incidents[b].File })
 						for j, gotInc := range got.Incidents {
 							expectedInc := expected.Incidents[j]
-							if gotInc.File != expectedInc.File || gotInc.Line != expectedInc.Line || !strings.HasPrefix(gotInc.Message, expectedInc.Message) {
+							if gotInc.File != expectedInc.File || gotInc.Line != expectedInc.Line || !strings.HasPrefix(gotInc.Message, expectedInc.Message) || !strings.Contains(gotInc.CodeSnip, expectedInc.CodeSnip) {
 								t.Errorf("\nDifferent incident error. Got %+v\nExpected %+v.\n\n", gotInc, expectedInc)
 							}
 						}
