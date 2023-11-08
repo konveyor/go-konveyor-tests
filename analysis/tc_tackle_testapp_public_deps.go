@@ -20,7 +20,7 @@ var TackleTestappPublicWithDeps = TC{
 		},
 	},
 	Identities: []api.Identity{
-		MavenPublic,	// Tackle Testapp public Maven registry expects GITHUB_USER and GITHUB_TOKEN env variables.
+		MavenPublic,	// Tackle Testapp public Maven registry expects MAVEN_TESTAPP_USER and MAVEN_TESTAPP_TOKEN env variables.
 	},
 	Analysis: api.Analysis{
 		Effort: 9,
