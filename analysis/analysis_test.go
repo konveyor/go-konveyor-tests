@@ -37,10 +37,11 @@ func TestApplicationAnalysis(t *testing.T) {
 			}
 
 			// Prepare Identities, e.g. for Maven repo
-			for _, identity := range tc.Identities {
+			for idx := range tc.Identities {
+				identity := tc.Identities[idx]
 				if identity.Kind == "maven" {
-					strings.Replace(identity.Settings, "GITHUB_USER", os.Getenv("MAVEN_TESTAPP_USER"), 1)
-					strings.Replace(identity.Settings, "GITHUB_TOKEN", os.Getenv("MAVEN_TESTAPP_TOKEN"), 1)
+					identity.Settings = strings.Replace(identity.Settings, "GITHUB_USER", os.Getenv("MAVEN_TESTAPP_USER"), 1)
+					identity.Settings = strings.Replace(identity.Settings, "GITHUB_TOKEN", os.Getenv("MAVEN_TESTAPP_TOKEN"), 1)
 				}
 				assert.Should(t, RichClient.Identity.Create(&identity))
 				tc.Application.Identities = append(tc.Application.Identities, api.Ref{ID: identity.ID})
@@ -161,8 +162,14 @@ func TestApplicationAnalysis(t *testing.T) {
 						sort.SliceStable(expected.Incidents, func(a, b int) bool { return expected.Incidents[a].File < expected.Incidents[b].File })
 						for j, gotInc := range got.Incidents {
 							expectedInc := expected.Incidents[j]
-							if gotInc.File != expectedInc.File || gotInc.Line != expectedInc.Line || !strings.HasPrefix(gotInc.Message, expectedInc.Message) {
-								t.Errorf("\nDifferent incident error. Got %+v\nExpected %+v.\n\n", gotInc, expectedInc)
+							if gotInc.File != expectedInc.File {
+								t.Errorf("\nDifferent incident.File error. Got %+v\nExpected %+v.\n\n", gotInc.File, expectedInc.File)
+							}
+							if gotInc.Line != expectedInc.Line {
+								t.Errorf("\nDifferent incident.Line error. Got %+v\nExpected %+v.\n\n", gotInc.Line, expectedInc.Line)
+							}
+							if !strings.HasPrefix(gotInc.Message, expectedInc.Message) {
+								t.Errorf("\nDifferent incident.Message error. Got %+v\nExpected %+v.\n\n", gotInc.Message, expectedInc.Message)
 							}
 						}
 					}

@@ -35,7 +35,7 @@ type TC struct {
 	// Application and other test data declaration.
 	Application api.Application // Required.
 	CustomRules []api.RuleSet
-	Identities []api.Identity
+	Identities  []api.Identity
 	// Analysis parameters.
 	Task     api.Task
 	TaskData string
@@ -98,7 +98,7 @@ func DumpTags(t *testing.T, tc TC, app api.Application) {
 	fmt.Printf("## GOT TAGS FOR \"%s\":", tc.Name)
 	fmt.Printf("\n[]api.Tag{\n")
 	for _, tag := range tags {
-			fmt.Printf("    {Name: \"%s\", Category: api.Ref{Name: \"%s\")},\n", tag.Name, tag.Category.Name)
+		fmt.Printf("    {Name: \"%s\", Category: api.Ref{Name: \"%s\")},\n", tag.Name, tag.Category.Name)
 	}
 	fmt.Printf("}\n")
 }
