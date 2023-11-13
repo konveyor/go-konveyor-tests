@@ -24,9 +24,7 @@ var TackleTestappPublic = TC{
 			"konveyor.io/target=linux",
 		},
 	},
-	Identities: []api.Identity{
-		MavenPublic,
-	},
+	Identities: []api.Identity{},
 	Analysis: api.Analysis{
 		Effort: 8,
 		Issues: []api.Issue{

@@ -38,12 +38,13 @@ func TestApplicationAnalysis(t *testing.T) {
 
 			// Prepare Identities, e.g. for Maven repo
 			for idx := range tc.Identities {
-				identity := tc.Identities[idx]
+				identity := &tc.Identities[idx]
+				uniq.IdentityName(identity)
 				if identity.Kind == "maven" {
 					identity.Settings = strings.Replace(identity.Settings, "GITHUB_USER", os.Getenv("MAVEN_TESTAPP_USER"), 1)
 					identity.Settings = strings.Replace(identity.Settings, "GITHUB_TOKEN", os.Getenv("MAVEN_TESTAPP_TOKEN"), 1)
 				}
-				assert.Should(t, RichClient.Identity.Create(&identity))
+				assert.Should(t, RichClient.Identity.Create(identity))
 				tc.Application.Identities = append(tc.Application.Identities, api.Ref{ID: identity.ID})
 			}
 
