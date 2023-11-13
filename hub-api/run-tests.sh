@@ -28,4 +28,5 @@ else
     git clone --branch ${BRANCH} https://github.com/konveyor/tackle2-hub.git $HUB_TMP_DIR && cd $_
 fi
 
-make test-api
+echo "Running Hub API tests (printing FAILs only).."
+make test-api | grep -B 20  FAIL
