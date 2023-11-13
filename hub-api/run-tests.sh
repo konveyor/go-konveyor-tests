@@ -29,4 +29,5 @@ else
 fi
 
 echo "Running Hub API tests (printing FAILs only).."
+set -o pipefail
 make test-api | grep -B 20  FAIL
