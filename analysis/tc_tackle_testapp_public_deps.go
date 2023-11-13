@@ -3,10 +3,7 @@ package analysis
 import (
 	"github.com/konveyor/go-konveyor-tests/hack/addon"
 	"github.com/konveyor/tackle2-hub/api"
-	"github.com/konveyor/tackle2-hub/test/api/identity"
 )
-
-var MavenPublic = identity.Mvn
 
 var TackleTestappPublicWithDeps = TC{
 	Name:        "Tackle Testapp public with deps",
@@ -18,9 +15,6 @@ var TackleTestappPublicWithDeps = TC{
 			"konveyor.io/target=linux",
 			"konveyor.io/target=cloud-readiness",
 		},
-	},
-	Identities: []api.Identity{
-		MavenPublic,	// Tackle Testapp public Maven registry expects MAVEN_TESTAPP_USER and MAVEN_TESTAPP_TOKEN env variables.
 	},
 	Analysis: api.Analysis{
 		Effort: 9,
@@ -91,23 +85,48 @@ var TackleTestappPublicWithDeps = TC{
 		},
 		Dependencies: []api.TechDependency{
 			{
+				Name:     "com.fasterxml.jackson.jackson-bom",
+				Version:  "${jackson.version}",
+				Provider: "",
+			},
+			{
+				Name:     "org.springframework.data.spring-data-bom",
+				Version:  "${spring-data.version}",
+				Provider: "",
+			},
+			{
 				Name:     "org.apache.tomcat.tomcat-servlet-api",
-				Version:  "9.0.46",
+				Version:  "${tomcat.version}",
+				Provider: "",
+			},
+			{
+				Name:     "com.fasterxml.jackson.core.jackson-core",
+				Version:  "",
+				Provider: "",
+			},
+			{
+				Name:     "com.fasterxml.jackson.core.jackson-databind",
+				Version:  "",
+				Provider: "",
+			},
+			{
+				Name:     "org.springframework.data.spring-data-jpa",
+				Version:  "",
 				Provider: "",
 			},
 			{
 				Name:     "org.springframework.spring-jdbc",
-				Version:  "5.3.7",
+				Version:  "${spring-framework.version}",
 				Provider: "",
 			},
 			{
 				Name:     "org.springframework.spring-webmvc",
-				Version:  "5.3.7",
+				Version:  "${spring-framework.version}",
 				Provider: "",
 			},
 			{
 				Name:     "org.springframework.spring-web",
-				Version:  "5.3.7",
+				Version:  "${spring-framework.version}",
 				Provider: "",
 			},
 			{
@@ -117,17 +136,17 @@ var TackleTestappPublicWithDeps = TC{
 			},
 			{
 				Name:     "org.apache.tomcat.tomcat-jdbc",
-				Version:  "9.0.46",
+				Version:  "${tomcat.version}",
 				Provider: "",
 			},
 			{
 				Name:     "org.hibernate.hibernate-entitymanager",
-				Version:  "5.4.32.Final",
+				Version:  "${hibernate.version}",
 				Provider: "",
 			},
 			{
 				Name:     "org.hibernate.validator.hibernate-validator",
-				Version:  "6.2.0.Final",
+				Version:  "${hibernate-validator.version}",
 				Provider: "",
 			},
 			{
@@ -155,16 +174,6 @@ var TackleTestappPublicWithDeps = TC{
 				Version:  "1.0.0",
 				Provider: "",
 			},
-			{
-				Name:     "com.fasterxml.jackson.jackson-bom",
-				Version:  "2.12.3",
-				Provider: "",
-			},
-			{
-				Name:     "org.springframework.data.spring-data-bom",
-				Version:  "2021.0.1",
-				Provider: "",
-			},
 		},
 	},
 	AnalysisTags: []api.Tag{
@@ -172,16 +181,13 @@ var TackleTestappPublicWithDeps = TC{
 		{Name: "Servlet", Category: api.Ref{Name: "HTTP"}},
 		{Name: "Properties", Category: api.Ref{Name: "Other"}},
 		{Name: "Java EE Batch", Category: api.Ref{Name: "Processing"}},
-		{Name: "Spring Web", Category: api.Ref{Name: "Web"}},
-		{Name: "EJB XML", Category: api.Ref{Name: "Connect"}},
+		{Name: "Java EE Batch", Category: api.Ref{Name: "Java EE"}},
 		{Name: "Servlet", Category: api.Ref{Name: "Java EE"}},
 		{Name: "EJB XML", Category: api.Ref{Name: "Java EE"}},
 		{Name: "Properties", Category: api.Ref{Name: "Sustain"}},
 		{Name: "Properties", Category: api.Ref{Name: "Embedded"}},
 		{Name: "Java EE Batch", Category: api.Ref{Name: "Execute"}},
-		{Name: "Java EE Batch", Category: api.Ref{Name: "Java EE"}},
+		{Name: "EJB XML", Category: api.Ref{Name: "Connect"}},
 		{Name: "Servlet", Category: api.Ref{Name: "Connect"}},
-		{Name: "Spring Web", Category: api.Ref{Name: "View"}},
-		{Name: "Spring Web", Category: api.Ref{Name: "Embedded"}},
 	},
 }

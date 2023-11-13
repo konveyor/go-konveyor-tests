@@ -35,7 +35,6 @@ type TC struct {
 	// Application and other test data declaration.
 	Application api.Application // Required.
 	CustomRules []api.RuleSet
-	Identities []api.Identity
 	// Analysis parameters.
 	Task     api.Task
 	TaskData string
