@@ -48,7 +48,7 @@ test-tier2:
 
 # Application analysis tests.
 test-analysis:
-	go test -count=1 -timeout 7200s -v ./analysis/...
+	go test -count=1 -p=1 -timeout 7200s -v ./analysis/...
 
 # Metrics.
 test-metrics:
