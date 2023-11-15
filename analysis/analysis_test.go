@@ -181,7 +181,9 @@ func TestApplicationAnalysis(t *testing.T) {
 				} else {
 					for i, got := range gotAnalysis.Dependencies {
 						expected := tc.Analysis.Dependencies[i]
-						if got.Name != expected.Name || got.Version != expected.Version || got.Provider != expected.Provider {
+						sort.Strings(expected.Labels)
+						sort.Strings(got.Labels)
+						if got.Name != expected.Name || got.Version != expected.Version || got.Provider != expected.Provider || !assert.FlatEqual(got.Labels, expected.Labels) {
 							t.Errorf("\nDifferent dependency error. Got %+v\nExpected %+v.\n\n", got, expected)
 						}
 					}
