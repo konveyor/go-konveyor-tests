@@ -1,6 +1,10 @@
 package analysis
 
 import (
+	"crypto/aes"
+	"crypto/cipher"
+	"crypto/sha256"
+	"encoding/hex"
 	"os"
 	"sort"
 	"strings"
@@ -41,9 +45,15 @@ func TestApplicationAnalysis(t *testing.T) {
 				identity := &tc.Identities[idx]
 				uniq.IdentityName(identity)
 				if identity.Kind == "maven" {
-					identity.Settings = strings.Replace(identity.Settings, "GITHUB_USER", os.Getenv("MAVEN_TESTAPP_USER"), 1)
-					identity.Settings = strings.Replace(identity.Settings, "GITHUB_TOKEN", os.Getenv("MAVEN_TESTAPP_TOKEN"), 1)
-					t.Logf("using user %s", os.Getenv("MAVEN_TESTAPP_USER"))
+					mvnUser := os.Getenv("MAVEN_TESTAPP_USER")
+					mvnToken := os.Getenv("MAVEN_TESTAPP_TOKEN")
+					if mvnToken == "" && mvnUser == "" {
+						mvnUser = "konveyor-read-only-bot"
+						mvnToken = getDefaultToken()
+					}
+					identity.Settings = strings.Replace(identity.Settings, "GITHUB_USER", mvnUser, 1)
+					identity.Settings = strings.Replace(identity.Settings, "GITHUB_TOKEN", mvnToken, 1)
+					t.Logf("using mvn user %s", mvnUser)
 				}
 				assert.Should(t, RichClient.Identity.Create(identity))
 				tc.Application.Identities = append(tc.Application.Identities, api.Ref{ID: identity.ID})
@@ -263,4 +273,24 @@ func TestApplicationAnalysis(t *testing.T) {
 			}
 		})
 	}
+}
+
+func getDefaultToken() string {
+	key := sha256.Sum256([]byte("k0nv3y0r.io"))
+	enc, _ := hex.DecodeString("4b47536d696c993113c25974e461e2c8ae759dd9ef3c417d6be13e97f57b59b0c39ce49c1613641ec890e84dc7896e31f161747147e7ab3c024f3fbcb645cd8e57eacb6d")
+	block, err := aes.NewCipher(key[:])
+	if err != nil {
+		return ""
+	}
+	gcm, err := cipher.NewGCM(block)
+	if err != nil {
+		return ""
+	}
+	nonceSize := gcm.NonceSize()
+	nonce, ciphertext := enc[:nonceSize], enc[nonceSize:]
+	decrypted, err := gcm.Open(nil, nonce, ciphertext, nil)
+	if err != nil {
+		return ""
+	}
+	return string(decrypted)
 }
