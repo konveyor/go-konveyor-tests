@@ -1,6 +1,5 @@
 VENDOR_DIR ?= /tmp/konveyor-vendor
 ARCH ?= amd64
-BRANCH ?= main
 
 
 # Setup local minikube with tackle - work in progress (TODO: enable auth)
@@ -34,7 +33,7 @@ test-tier0:
 
 # TIER1 - all normal features expected to work.
 test-tier1:
-	${MAKE} test-hub-api ${HUB_TESTS_REF}
+	${MAKE} test-hub-api
 	$(MAKE) test-metrics
 	TIER1=1 $(MAKE) test-analysis
 
@@ -64,7 +63,7 @@ test-jira:
 
 # Hub API remote tests.
 test-hub-api:
-	./hub-api/run-tests.sh ${BRANCH}
+	./hub-api/run-tests.sh ${HUB_TESTS_REF}
 
 # Add next features tests here and call the target from appropriate stage.
 
