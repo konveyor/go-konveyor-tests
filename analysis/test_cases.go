@@ -3,7 +3,6 @@ package analysis
 // Tier 0 Analysis test cases - should never fail.
 // List of applications with expected analysis outputs.
 var Tier0TestCases = []TC{
-	TackleTestappPublic,
 	TackleTestappPublicWithDeps,
 }
 
@@ -17,6 +16,7 @@ var Tier1TestCases = []TC{
 // List of applications with expected analysis outputs.
 var Tier2TestCases = []TC{
 	Tomcat,
+	TackleTestappPublic,
 	Daytrader,
 	PetclinicHazelcast,
 	ApacheWicket,
