@@ -11,7 +11,8 @@ var Daytrader = TC{
 			URL:  "https://github.com/WASdev/sample.daytrader7.git",
 		},
 	},
-	Task: Analyze,
+	WithDeps: true,
+	Task:     Analyze,
 	ReportContent: map[string][]string{
 		"/windup/report/index.html": {
 			"0\nstory points",
@@ -20,6 +21,7 @@ var Daytrader = TC{
 	},
 	Targets: []string{
 		"cloud-readiness",
+		"quarkus",
 	},
 	Analysis: api.Analysis{
 		Effort: 0,
