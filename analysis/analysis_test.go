@@ -167,7 +167,7 @@ func TestApplicationAnalysis(t *testing.T) {
 					}
 					if len(got.Incidents) != len(expected.Incidents) {
 						t.Errorf("Different amount of incidents error. Got %d, expected %d.", len(got.Incidents), len(expected.Incidents))
-						// t.Errorf("Got: %+v\nExpected: %+v.\n", got.Incidents, expected.Incidents)
+						t.Errorf("Got: %+v\nExpected: %+v.\n", got.Incidents, expected.Incidents)
 					} else {
 						// Ensure stable order of Incidents.
 						sort.SliceStable(got.Incidents, func(a, b int) bool { return got.Incidents[a].File < got.Incidents[b].File })
