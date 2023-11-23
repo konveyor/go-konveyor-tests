@@ -6,7 +6,6 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/konveyor/go-konveyor-tests/config"
 	"github.com/konveyor/go-konveyor-tests/data"
 	"github.com/konveyor/go-konveyor-tests/hack/uniq"
 	"github.com/konveyor/tackle2-hub/api"
@@ -35,7 +34,7 @@ func CreateJiraInstance(data data.JiraInstanceTC) (api.Identity, Jira) {
 
 	// Wait for connection succeeded
 	var jira *api.Tracker
-	var retry, _ = strconv.Atoi(config.Config.RETRY_NUM)
+	var retry, _ = strconv.Atoi(conf.RETRY_NUM)
 	for i := 0; i < retry; i++ {
 		jira, err = Tracker.Get(jiraInstance.ID)
 		if err != nil || jira.Connected {
@@ -50,7 +49,7 @@ func CreateJiraInstance(data data.JiraInstanceTC) (api.Identity, Jira) {
 
 func (r *Jira) DeleteJiraIssues(issues []string) {
 	for i := 0; i < len(issues); i++ {
-		url := config.Config.JIRA_CLOUD_URL + "/rest/api/3/issue/" + issues[i]
+		url := conf.JIRA_CLOUD_URL + "/rest/api/3/issue/" + issues[i]
 		r.sendJiraRequest(url, "DELETE")
 	}
 }
@@ -58,13 +57,13 @@ func (r *Jira) DeleteJiraIssues(issues []string) {
 func (r *Jira) sendJiraRequest(url string, method string) {
 	// Create a basic authentication string
 	basicAuth := "Basic " +
-		base64.StdEncoding.EncodeToString([]byte(config.Config.JIRA_CLOUD_USERNAME+":"+config.Config.JIRA_CLOUD_PASSWORD))
+		base64.StdEncoding.EncodeToString([]byte(conf.JIRA_CLOUD_USERNAME+":"+conf.JIRA_CLOUD_PASSWORD))
 
 	// Create a bearer authentication string
-	bearerAuth := "Bearer " + config.Config.JIRA_CLOUD_PASSWORD
+	bearerAuth := "Bearer " + conf.JIRA_CLOUD_PASSWORD
 
 	// Create a request
-	request, err := http.NewRequest(method, url, nil)
+	request, _ := http.NewRequest(method, url, nil)
 
 	// Set the authorization header
 	request.Header.Set("Authorization", basicAuth)
