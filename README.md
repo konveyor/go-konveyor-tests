@@ -20,7 +20,7 @@ Tests require running Konveyor/MTA installation (e.g. Minikube works great for t
 
 Background for this test suite come from Hub API tests [https://github.com/konveyor/tackle2-hub/pull/268](https://github.com/konveyor/tackle2-hub/tree/main/test).
 
-There is a ```binding``` package providing API client methods https://github.com/konveyor/tackle2-hub/tree/main/binding.
+There is a `binding` package providing API client methods https://github.com/konveyor/tackle2-hub/tree/main/binding.
 
 Feel free to follow [application analysis integration test directory](https://github.com/konveyor/go-konveyor-tests/tree/main/analysis) as an example.
 
@@ -56,7 +56,7 @@ KUBECONFIG=<kubeconfig file>
 
 ### Run test suite
 
-Set ```$HUB_BASE_URL``` environment variable to point to Konveyor installation before running tests. More options could be found in [Hub API test README](https://github.com/konveyor/tackle2-hub/tree/main/test#rest-api).
+Set `$HUB_BASE_URL` environment variable to point to Konveyor installation before running tests. More options could be found in [Hub API test README](https://github.com/konveyor/tackle2-hub/tree/main/test#rest-api).
 
 ```
 $ HUB_BASE_URL="http://<KONVEYOR_HOST>/hub" make test-tier0
@@ -101,15 +101,28 @@ $ make test-tier2
 
 ### DEBUG
 
-For debug output like printing full analysis results, set ```export DEBUG=1```.
+For debug output like printing full analysis results, set `export DEBUG=1`.
 
 ### KEEP
 
-For keep data created by test e.g. for debugging purposes, set ```export KEEP=1```.
+For keep data created by test e.g. for debugging purposes, set `export KEEP=1`.
 
 ### PARALLEL
 
-For parallel test execution, set ```export PARALLEL=1```.
+For parallel test execution, set `export PARALLEL=1`.
+
+## Configuration
+
+**Note:** Some tests utilize environment variables for configuration. Refer to the `Configuration` struct in `config/configuration.go` file for details on supported variables.
+
+Ensure that the required variables are set as environment variables or added to `config/config.json` file.
+
+### Test-Specific Configuration
+
+Refer to the `README.md` files in each folder for test-specific configuration details.
+
+- [e2e/jiraintegration](https://github.com/konveyor/go-konveyor-tests/blob/main/e2e/jiraintegration.README.md)
 
 ## Code of Conduct
+
 Refer to Konveyor's Code of Conduct [here](https://github.com/konveyor/community/blob/main/CODE_OF_CONDUCT.md).
