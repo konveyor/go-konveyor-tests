@@ -1,6 +1,5 @@
 VENDOR_DIR ?= /tmp/konveyor-vendor
 ARCH ?= amd64
-BRANCH ?= main
 
 
 # Setup local minikube with tackle - work in progress (TODO: enable auth)
@@ -64,7 +63,7 @@ test-jira:
 
 # Hub API remote tests.
 test-hub-api:
-	./hub-api/run-tests.sh ${BRANCH}
+	./hub-api/run-tests.sh ${HUB_TESTS_REF}
 
 # Add next features tests here and call the target from appropriate stage.
 
