@@ -21,11 +21,11 @@ if [ -z $BRANCH ]; then
     export BRANCH="main"
 fi
 
-if [ -d $HUB_TMP_DIR ]; then
-    cd $HUB_TMP_DIR
-    git pull origin ${BRANCH}
-else
-    git clone --branch ${BRANCH} https://github.com/konveyor/tackle2-hub.git $HUB_TMP_DIR && cd $_
+if [ ! -d $HUB_TMP_DIR ]; then
+    git clone https://github.com/konveyor/tackle2-hub.git $HUB_TMP_DIR
 fi
+
+cd $HUB_TMP_DIR
+git pull origin ${BRANCH}
 
 make test-api
