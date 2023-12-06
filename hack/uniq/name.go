@@ -39,3 +39,8 @@ func IdentityName(r *api.Identity) {
 func TrackerName(r *api.Tracker) {
 	r.Name = fmt.Sprint(r.Kind, "-", RandString(5))
 }
+
+// MigrationWaveName returns random MigrationWave Name
+func MigrationWaveName(r *api.MigrationWave) {
+	r.Name = fmt.Sprint( "migrationwave-", RandString(5))
+}

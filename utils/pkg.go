@@ -2,20 +2,26 @@ package utils
 
 import (
 	"github.com/jortel/go-utils/logr"
+	"github.com/konveyor/go-konveyor-tests/config"
 	"github.com/konveyor/tackle2-hub/binding"
 	"github.com/konveyor/tackle2-hub/test/api/client"
 )
 
 var (
-	Client      *binding.Client
-	RichClient  *binding.RichClient
-	Application binding.Application
-	Tracker     binding.Tracker
-	Identity    binding.Identity
-	Log         = logr.WithName("test")
+	conf          config.Configuration
+	Log           = logr.WithName("test")
+	Client        *binding.Client
+	RichClient    *binding.RichClient
+	Application   binding.Application
+	Tracker       binding.Tracker
+	Identity      binding.Identity
+	MigrationWave binding.MigrationWave
+	Ticket        binding.Ticket
 )
 
 func init() {
+	conf = config.Config
+
 	// Prepare RichClient and login to Hub API (configured from env variables).
 	RichClient = client.PrepareRichClient()
 
@@ -29,4 +35,6 @@ func init() {
 	Tracker = RichClient.Tracker
 
 	Identity = RichClient.Identity
+	MigrationWave = RichClient.MigrationWave
+	Ticket = RichClient.Ticket
 }
