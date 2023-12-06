@@ -41,6 +41,11 @@ test-tier1:
 test-tier2:
 	TIER2=1 $(MAKE) test-analysis
 
+
+# TIER3
+test-tier3:
+	$(MAKE) test-jira
+
 #
 # Feature tests.
 #
