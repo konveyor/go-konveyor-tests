@@ -97,6 +97,14 @@ More advanced features like complex application analysis or some edge cases. Thi
 $ make test-tier2
 ```
 
+### Tier 3
+
+Tests involving credentials or private resources which are supplied as part of the test configuration. It should be excluded from PR runs and will be run through Jenkins.
+
+```
+$ make test-tier3
+```
+
 ## Test execution options
 
 ### DEBUG
@@ -113,15 +121,15 @@ For parallel test execution, set `export PARALLEL=1`.
 
 ## Configuration
 
-**Note:** Some tests utilize environment variables for configuration. Refer to the `Configuration` struct in `config/configuration.go` file for details on supported variables.
+**Note:** When running tests, ensure that your configuration is set appropriately. Refer to the `Configuration` struct in `config/configuration.go` file for details on supported configuration variables.
 
-Ensure that the required variables are set as environment variables or added to `config/config.json` file.
+Ensure that the required configuration variables are set as environment variables or added to `config/config.json` file.
 
 ### Test-Specific Configuration
 
 Refer to the `README.md` files in each folder for test-specific configuration details.
 
-- [e2e/jiraintegration](https://github.com/konveyor/go-konveyor-tests/blob/main/e2e/jiraintegration.README.md)
+- [e2e/jiraintegration](https://github.com/konveyor/go-konveyor-tests/blob/main/e2e/jiraintegration/README.md)
 
 ## Code of Conduct
 

@@ -2,7 +2,7 @@
 
 ### Jira connection
 
-To run this test, make sure you set the following environment variables:
+To run this test, the following data is needed:
 
 - `KUBECONFIG`: Path to the Kubernetes configuration file.
 - `JIRA_CLOUD_URL`: URL of Jira Cloud.
