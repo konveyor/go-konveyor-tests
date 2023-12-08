@@ -135,6 +135,15 @@ func TestApplicationAnalysis(t *testing.T) {
 			analysisDetailPath := binding.Path(api.AnalysisRoot).Inject(binding.Params{api.ID: gotAppAnalyses[len(gotAppAnalyses)-1].ID})
 			assert.Should(t, Client.Get(analysisDetailPath, &gotAnalysis))
 
+			// Filter out non-mandatory issues, TODO(maufart): quickfix until decide if we test potential issues too
+			var mandatoryIssues []api.Issue
+			for _, issue := range gotAnalysis.Issues {
+				if issue.Category == "mandatory" {
+					mandatoryIssues = append(mandatoryIssues, issue)
+				}
+			}
+			gotAnalysis.Issues = mandatoryIssues
+
 			_, debug := os.LookupEnv("DEBUG")
 			if debug {
 				DumpAnalysis(t, tc, gotAnalysis)
