@@ -11,6 +11,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/k0kubun/pp"
 	"github.com/konveyor/go-konveyor-tests/hack/addon"
 	"github.com/konveyor/go-konveyor-tests/hack/uniq"
 	"github.com/konveyor/tackle2-hub/api"
@@ -120,7 +121,8 @@ func TestApplicationAnalysis(t *testing.T) {
 			}
 
 			if task.State != "Succeeded" {
-				t.Errorf("Analyze Task failed. Details: %+v", task)
+				t.Error("Analyze Task failed. Details:\n")
+				pp.Print(task)
 			}
 
 			var gotAppAnalyses []api.Analysis
