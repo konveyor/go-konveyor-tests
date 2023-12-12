@@ -121,8 +121,8 @@ func TestApplicationAnalysis(t *testing.T) {
 			}
 
 			if task.State != "Succeeded" {
-				t.Error("Analyze Task failed. Details:\n")
-				pp.Print(task)
+				t.Error("Analyze Task failed. Details:")
+				pp.Println(task)
 			}
 
 			var gotAppAnalyses []api.Analysis
@@ -163,7 +163,10 @@ func TestApplicationAnalysis(t *testing.T) {
 			// Check the analysis issues
 			if len(gotAnalysis.Issues) != len(tc.Analysis.Issues) {
 				t.Errorf("Different amount of issues error. Got %d, expected %d.", len(gotAnalysis.Issues), len(tc.Analysis.Issues))
-				t.Errorf("Got: %+v\nExpected: %+v.\n", gotAnalysis.Issues, tc.Analysis.Issues)
+				t.Error("Got:")
+				pp.Println(gotAnalysis.Issues)
+				t.Error("Expected:")
+				pp.Println(tc.Analysis.Issues)
 			} else {
 				for i, got := range gotAnalysis.Issues {
 					expected := tc.Analysis.Issues[i]
@@ -178,7 +181,11 @@ func TestApplicationAnalysis(t *testing.T) {
 					}
 					if len(got.Incidents) != len(expected.Incidents) {
 						t.Errorf("Different amount of incidents error. Got %d, expected %d.", len(got.Incidents), len(expected.Incidents))
-						t.Errorf("Got: %+v\nExpected: %+v.\n", got.Incidents, expected.Incidents)
+						t.Error("Got:")
+						pp.Println(got.Incidents)
+						t.Error("Expected:")
+						pp.Println(expected.Incidents)
+
 					} else {
 						// Ensure stable order of Incidents.
 						sort.SliceStable(got.Incidents, func(a, b int) bool { return got.Incidents[a].File < got.Incidents[b].File })
@@ -207,7 +214,10 @@ func TestApplicationAnalysis(t *testing.T) {
 			if len(tc.Analysis.Dependencies) > 0 {
 				if len(gotAnalysis.Dependencies) != len(tc.Analysis.Dependencies) {
 					t.Errorf("Different amount of dependencies error. Got %d, expected %d.", len(gotAnalysis.Dependencies), len(tc.Analysis.Dependencies))
-					t.Errorf("Got: %+v\nExpected: %+v.\n", gotAnalysis.Dependencies, tc.Analysis.Dependencies)
+					t.Error("Got:")
+					pp.Println(gotAnalysis.Dependencies)
+					t.Error("Expected:")
+					pp.Println(tc.Analysis.Dependencies)
 				} else {
 					for i, got := range gotAnalysis.Dependencies {
 						expected := tc.Analysis.Dependencies[i]
@@ -248,7 +258,10 @@ func TestApplicationAnalysis(t *testing.T) {
 			if len(tc.AnalysisTags) > 0 {
 				if len(tc.AnalysisTags) != len(gotApp.Tags) {
 					t.Errorf("Different Tags amount error. Got: %d, expected: %d.\n", len(gotApp.Tags), len(tc.AnalysisTags))
-					t.Errorf("Got: %+v\nExpected: %+v.\n", gotApp.Tags, tc.AnalysisTags)
+					t.Error("Got:")
+					pp.Println(gotApp.Tags)
+					t.Error("Expected:")
+					pp.Println(tc.AnalysisTags)
 				} else {
 					for i, got := range gotTags {
 						expected := tc.AnalysisTags[i]
