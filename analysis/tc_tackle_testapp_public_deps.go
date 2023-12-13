@@ -28,7 +28,7 @@ var TackleTestappPublicWithDeps = TC{
 		Issues: []api.Issue{
 			{
 				Category:    "mandatory",
-				Description: "Hardcoded IP Address\nWhen migrating environments, hard-coded IP addresses may need to be modified or eliminated.",
+				Description: "Hardcoded IP Address",
 				Effort:      1,
 				RuleSet:     "discovery-rules",
 				Rule:        "hardcoded-ip-address",
