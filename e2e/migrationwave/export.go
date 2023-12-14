@@ -5,7 +5,8 @@ import (
 	"time"
 
 	"github.com/konveyor/go-konveyor-tests/config"
-	"github.com/konveyor/go-konveyor-tests/data"
+	"github.com/konveyor/go-konveyor-tests/data/jira"
+	"github.com/konveyor/go-konveyor-tests/data/migrationwave"
 	"github.com/konveyor/go-konveyor-tests/hack/uniq"
 	"github.com/konveyor/go-konveyor-tests/utils"
 	"github.com/konveyor/tackle2-hub/api"
@@ -22,6 +23,14 @@ var (
 )
 
 var _ = Describe("Export applications", func() {
+	BeforeEach(func() {
+		jiraInstance = utils.Jira{}
+		jiraIdentity = api.Identity{}
+		migrationWave = api.MigrationWave{}
+		issueIds = []string{}
+		appsToExport = []api.Application{}
+
+	})
 	AfterEach(func() {
 		// Resources cleanup
 		if keep, _ := strconv.ParseBool(config.Config.KEEP); keep {
@@ -35,7 +44,7 @@ var _ = Describe("Export applications", func() {
 	})
 
 	DescribeTable("",
-		func(testCase data.ExportApplicationsCase) {
+		func(testCase migrationwave.ExportApplicationsCase) {
 			appsToExport = utils.CreateMultipleApplications(testCase.NumOfApps)
 			By("Create migration wave")
 			uniq.MigrationWaveName(&migrationWave)
@@ -73,9 +82,19 @@ var _ = Describe("Export applications", func() {
 			}
 
 		},
-		Entry("Export applications as a task", data.ExportApplicationsCase{
-			JiraInstance: data.JiraCloud,
+		Entry("Export as task to jira cloud", migrationwave.ExportApplicationsCase{
+			JiraInstance: jira.JiraCloud,
 			NumOfApps:    3,
 			TicketKind:   "10007", /* Task issuetypeId */
-			TicketParent: "10001" /* mta_integration projectId */}))
+			TicketParent: "10001" /* mta_integration projectId */}),
+		Entry("Export as task to jira server", migrationwave.ExportApplicationsCase{
+			JiraInstance: jira.JiraServer,
+			NumOfApps:    3,
+			TicketKind:   "3", /* Task issuetypeId */
+			TicketParent: "12340621" /* mta-qe-test projectId */}),
+		Entry("Export as task to jira server using token", migrationwave.ExportApplicationsCase{
+			JiraInstance: jira.JiraServerBearerToken, /* Using token for Jira connection */
+			NumOfApps:    3,
+			TicketKind:   "3", /* Task issuetypeId */
+			TicketParent: "12340621" /* mta-qe-test projectId */}))
 })

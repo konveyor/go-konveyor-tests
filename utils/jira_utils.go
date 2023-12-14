@@ -2,11 +2,12 @@ package utils
 
 import (
 	"encoding/base64"
+	"fmt"
 	"net/http"
 	"strconv"
 	"time"
 
-	"github.com/konveyor/go-konveyor-tests/data"
+	"github.com/konveyor/go-konveyor-tests/data/jira"
 	"github.com/konveyor/go-konveyor-tests/hack/uniq"
 	"github.com/konveyor/tackle2-hub/api"
 	"github.com/onsi/gomega"
@@ -14,7 +15,7 @@ import (
 
 type Jira api.Tracker
 
-func CreateJiraInstance(data data.JiraInstanceTC) (api.Identity, Jira) {
+func CreateJiraInstance(data jira.JiraInstanceTC) (api.Identity, Jira) {
 	jiraIdentity := data.Identity
 	uniq.IdentityName(&jiraIdentity)
 	err := Identity.Create(&jiraIdentity)
@@ -48,9 +49,19 @@ func CreateJiraInstance(data data.JiraInstanceTC) (api.Identity, Jira) {
 }
 
 func (r *Jira) DeleteJiraIssues(issues []string) {
-	for i := 0; i < len(issues); i++ {
-		url := conf.JIRA_CLOUD_URL + "/rest/api/3/issue/" + issues[i]
-		r.sendJiraRequest(url, "DELETE")
+	if r.Kind == jira.JIRA_KIND_CLOUD {
+		for i := 0; i < len(issues); i++ {
+			url := r.URL + "/rest/api/3/issue/" + issues[i]
+			r.sendJiraRequest(url, "DELETE")
+		}
+		return
+	}
+	if r.Kind == jira.JIRA_KIND_ONPREM {
+		for i := 0; i < len(issues); i++ {
+			url := fmt.Sprintf("%s/rest/api/2/issue/%s/archive", r.URL, issues[i])
+			r.sendJiraRequest(url, "PUT")
+		}
+		return
 	}
 }
 
@@ -60,14 +71,14 @@ func (r *Jira) sendJiraRequest(url string, method string) {
 		base64.StdEncoding.EncodeToString([]byte(conf.JIRA_CLOUD_USERNAME+":"+conf.JIRA_CLOUD_PASSWORD))
 
 	// Create a bearer authentication string
-	bearerAuth := "Bearer " + conf.JIRA_CLOUD_PASSWORD
+	bearerAuth := "Bearer " + conf.JIRA_SERVER_TOKEN
 
 	// Create a request
 	request, _ := http.NewRequest(method, url, nil)
 
 	// Set the authorization header
 	request.Header.Set("Authorization", basicAuth)
-	if r.Kind == "on-permise" {
+	if r.Kind == jira.JIRA_KIND_ONPREM {
 		request.Header.Set("Authorization", bearerAuth)
 	}
 
