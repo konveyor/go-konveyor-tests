@@ -5,11 +5,9 @@ pipeline{
     }
     options{
         ansiColor('xterm')
-    } 
+    }
     environment{
-        HUB_USERNAME="admin"
-        PATH="$PATH:/usr/local/go/bin"
-        HUB_PASSWORD="Passw0rd!"
+        PATH="$PATH:/usr/local/go/bin" 
         JIRA_CLOUD_PASSWORD=credentials('mta_jira_cloud_token')
         JIRA_SERVER_TOKEN=credentials('mta_jira_stage_token')
     }
