@@ -60,7 +60,7 @@ pipeline{
                             """
 
                             echo "Applying tackle CR"
-                            tackle.applyTackleCR() //Tackle CR will be applied with using default password `Passw0rd!`.
+                            tackle.applyTackleCR()
                 }
             }
         }
