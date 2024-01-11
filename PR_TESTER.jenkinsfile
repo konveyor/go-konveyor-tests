@@ -6,7 +6,7 @@ pipeline{
     options{
         ansiColor('xterm')
     }
-    environment{ 
+    environment{
         PATH="$PATH:/usr/local/go/bin" 
         JIRA_CLOUD_PASSWORD=credentials('mta_jira_cloud_token')
         JIRA_SERVER_TOKEN=credentials('mta_jira_stage_token')
@@ -20,8 +20,8 @@ pipeline{
             }
             steps{
                 script{
-                    checkout scm 
-                    env.RUN_TESTS = "true"  
+                    checkout scm
+                    env.RUN_TESTS = "true" 
                     tackle.setGoTestsEnvVars() //Sets env sensitive env vars
                 }
             }
