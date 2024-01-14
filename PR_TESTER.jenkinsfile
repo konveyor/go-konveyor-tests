@@ -1,0 +1,96 @@
+@Library('migrationqe-automation-lib') _
+pipeline{
+    agent {
+        label 'minikube-node' 
+    }
+    options{
+        ansiColor('xterm')
+    }
+    environment{
+        PATH="$PATH:/usr/local/go/bin" 
+        JIRA_CLOUD_PASSWORD=credentials('mta_jira_cloud_token')
+        JIRA_SERVER_TOKEN=credentials('mta_jira_stage_token')
+    }
+    
+    stages{
+        stage("Check if their are changed tests"){
+            when{
+                branch pattern: '^PR-.*$',
+                comparator: 'REGEXP';
+            }
+            steps{
+                script{
+                    checkout scm
+                    env.RUN_TESTS = "true" 
+                    tackle.setGoTestsEnvVars() //Sets env sensitive env vars
+                }
+            }
+        }
+        stage('Install & run minikube'){
+            when {  
+                expression{
+                    env.RUN_TESTS == "true"
+                }
+            }   
+            steps{
+                script{
+                    
+                    sh """ curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+                            chmod +x minikube
+                            minikube_homedir=/usr/local/bin/
+
+                            sudo install minikube /usr/local/bin
+
+                            minikube delete
+                            sleep 20s
+                            minikube start --driver=podman --memory=4g
+                            minikube addons enable dashboard
+                            minikube addons enable ingress
+                            minikube addons enable olm
+                            kubectl apply -f https://raw.githubusercontent.com/operator-framework/operator-lifecycle-manager/master/deploy/upstream/quickstart/crds.yaml
+                            kubectl apply -f https://raw.githubusercontent.com/operator-framework/operator-lifecycle-manager/master/deploy/upstream/quickstart/olm.yaml
+
+                            kubectl apply -f https://raw.githubusercontent.com/konveyor/tackle2-operator/main/tackle-k8s.yaml
+
+                            while [ \$(kubectl get crd|grep tackle|wc -l) != 2 ]
+                            do echo "Waiting for Tackle CRDs..."
+                            sleep 5s
+                            done
+
+                            """
+
+                            echo "Applying tackle CR"
+                            tackle.applyTackleCR()
+                }
+            }
+        }
+        stage('Run tackle go api tests'){
+           when { 
+                expression{
+                    env.RUN_TESTS == "true"
+                }
+            }   
+            steps{
+                script{
+                    env.MINIKUBE_IP = sh(
+                        script : 'minikube ip',
+                        returnStdout: true
+                    ).trim()
+                    env.HUB_BASE_URL="http://"+env.MINIKUBE_IP+"/hub" 
+                    ocp.pollRouteUntilReady("http://"+env.MINIKUBE_IP,15,30)
+                    sh "sleep 40s" //Grace period after the application is serving correctly.
+                    sh (script:"make test-tier3",
+                        label: "Running tier3 tests"
+                        )
+                }
+            }
+        }
+    }
+    post{
+        always{
+            script{
+                cleanWs()
+            }
+        }
+    }
+}

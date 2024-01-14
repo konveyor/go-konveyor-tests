@@ -106,6 +106,9 @@ func TestApplicationAnalysis(t *testing.T) {
 			if tc.WithDeps == true {
 				taskData.Mode.WithDeps = true
 			}
+			if tc.Scope != nil {
+				taskData.Scope = *tc.Scope
+			}
 			tc.Task.Data = taskData
 			assert.Should(t, RichClient.Task.Create(&tc.Task))
 

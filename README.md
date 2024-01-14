@@ -130,6 +130,7 @@ Ensure that the required configuration variables are set as environment variable
 Refer to the `README.md` files in each folder for test-specific configuration details.
 
 - [e2e/jiraintegration](https://github.com/konveyor/go-konveyor-tests/blob/main/e2e/jiraintegration/README.md)
+- [e2e/migrationwave](https://github.com/konveyor/go-konveyor-tests/blob/main/e2e/migrationwave/README.md)
 
 ## Code of Conduct
 

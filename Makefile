@@ -45,6 +45,7 @@ test-tier2:
 # TIER3
 test-tier3:
 	$(MAKE) test-jira
+	$(MAKE) test-migrationwave
 
 #
 # Feature tests.
@@ -65,6 +66,9 @@ test-jira:
 	@if [ -z "${JIRA_CLOUD_URL}" ]; then echo "Error: JIRA_CLOUD_URL environment variable is not defined."; exit 1; fi
 	ginkgo -v -focus "Jira cloud"
 
+# Migration wave
+test-migrationwave:
+	ginkgo -v -focus "Export applications"
 
 # Hub API remote tests.
 test-hub-api:

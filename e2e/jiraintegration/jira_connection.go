@@ -4,7 +4,7 @@ import (
 	"strconv"
 
 	"github.com/konveyor/go-konveyor-tests/config"
-	"github.com/konveyor/go-konveyor-tests/data"
+	"github.com/konveyor/go-konveyor-tests/data/jira"
 	"github.com/konveyor/go-konveyor-tests/utils"
 	"github.com/konveyor/tackle2-hub/api"
 	. "github.com/onsi/ginkgo/v2"
@@ -26,11 +26,11 @@ var _ = Describe("Jira connection", func() {
 	})
 
 	DescribeTable("",
-		func(testCase data.JiraInstanceTC) {
+		func(testCase jira.JiraInstanceTC) {
 			// Create Jira instance
 			jiraIdentity, jiraInstance = utils.CreateJiraInstance(testCase)
 		},
-		Entry("Jira cloud", data.JiraCloud),
-		Entry("Jira server with basic auth", data.JiraServer),
-		Entry("Jira server with bearer token", data.JiraServerBearerToken))
+		Entry("Jira cloud", jira.JiraCloud),
+		Entry("Jira server with basic auth", jira.JiraServer),
+		Entry("Jira server with bearer token", jira.JiraServerBearerToken))
 })
