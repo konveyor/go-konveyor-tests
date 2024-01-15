@@ -92,5 +92,15 @@ pipeline{
                 cleanWs()
             }
         }
+        success{
+            script{
+                tackle.writeBuildStatus()
+            }
+        }
+        failure{
+            script{
+                tackle.writeBuildStatus(passed=false) 
+            }
+        } 
     }
 }
