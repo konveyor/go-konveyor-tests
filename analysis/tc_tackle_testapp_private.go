@@ -14,9 +14,6 @@ var TackleTestappPrivateBinary = TC{
 	},
 	Task: Analyze,
 	Binary: true,
-	Targets: []string{
-		"cloud-readiness",
-	},
 	Analysis: api.Analysis{
 		Effort: 16,
 		Issues: []api.Issue{
