@@ -1,5 +1,4 @@
 {
 	"KUBECONFIG": "",
-	"RETRY_NUM": "10",
-	"KEEP": "0"
+	"RETRY_NUM": "10"
 }

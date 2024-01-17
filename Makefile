@@ -44,6 +44,7 @@ test-tier2:
 
 # TIER3
 test-tier3:
+	TIER3=1 $(MAKE) test-analysis
 	$(MAKE) test-jira
 	$(MAKE) test-migrationwave
 
