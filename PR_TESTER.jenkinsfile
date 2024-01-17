@@ -10,6 +10,9 @@ pipeline{
         PATH="$PATH:/usr/local/go/bin" 
         JIRA_CLOUD_PASSWORD=credentials('mta_jira_cloud_token')
         JIRA_SERVER_TOKEN=credentials('mta_jira_stage_token')
+        CRED=credentials('tackle_git_pass')
+        GITHUB_USER="$CRED_USR"
+        GITHUB_TOKEN="$CRED_PSW"
     }
     
     stages{
