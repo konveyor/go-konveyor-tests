@@ -44,7 +44,7 @@ test-tier2:
 
 # TIER3
 test-tier3:
-	TIER3=1 $(MAKE) test-analysis
+	TIER3=1 MAVEN_TESTAPP_USER=$(GITHUB_USER) MAVEN_TESTAPP_TOKEN=$(GITHUB_TOKEN) $(MAKE) test-analysis
 	$(MAKE) test-jira
 	$(MAKE) test-migrationwave
 
