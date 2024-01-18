@@ -97,12 +97,16 @@ pipeline{
         }
         success{
             script{
-                tackle.writeBuildStatus()
+                if(env.BRANCH_NAME=="main"){
+                    tackle.writeBuildStatus()
+                }
             }
         }
         failure{
             script{
-                tackle.writeBuildStatus(passed=false) 
+                if(env.BRANCH_NAME=="main"){
+                    tackle.writeBuildStatus(passed=false) 
+                }
             }
         } 
     }
