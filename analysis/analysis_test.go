@@ -31,6 +31,10 @@ func TestApplicationAnalysis(t *testing.T) {
 	if tier2 {
 		testCases = Tier2TestCases
 	}
+	_, tier3 := os.LookupEnv("TIER3")
+	if tier3 {
+		testCases = Tier3TestCases
+	}
 	// Run test cases.
 	for _, testcase := range testCases {
 		t.Run(testcase.Name, func(t *testing.T) {
@@ -105,6 +109,9 @@ func TestApplicationAnalysis(t *testing.T) {
 			}
 			if tc.WithDeps == true {
 				taskData.Mode.WithDeps = true
+			}
+			if tc.Binary {
+				taskData.Mode.Binary = true
 			}
 			if tc.Scope != nil {
 				taskData.Scope = *tc.Scope

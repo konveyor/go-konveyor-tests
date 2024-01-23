@@ -10,6 +10,8 @@ type Configuration struct {
 	JIRA_SERVER_USERNAME string `env:"JIRA_SERVER_USERNAME"`
 	JIRA_SERVER_PASSWORD string `env:"JIRA_SERVER_PASSWORD"`
 	JIRA_SERVER_TOKEN    string `env:"JIRA_SERVER_TOKEN"`
+	GITHUB_USER          string `env:"GITHUB_USER"`
+	GITHUB_TOKEN         string `env:"GITHUB_TOKEN"`
 
 	RETRY_NUM string `env:"RETRY_NUM"`
 	KEEP      string `env:"KEEP"`

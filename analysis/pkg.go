@@ -45,6 +45,7 @@ type TC struct {
 	Rules    addon.Rules
 	Scope    *addon.Scope
 	WithDeps bool
+	Binary bool
 	// After-analysis assertions.
 	ReportContent map[string][]string
 	Analysis      api.Analysis
