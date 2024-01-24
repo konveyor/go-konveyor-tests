@@ -87,14 +87,46 @@ var _ = Describe("Export applications", func() {
 			NumOfApps:    3,
 			TicketKind:   "10007", /* Task issuetypeId */
 			TicketParent: "10001" /* mta_integration projectId */}),
+		Entry("Export as story to jira cloud", migrationwave.ExportApplicationsCase{
+			JiraInstance: jira.JiraCloud,
+			NumOfApps:    2,
+			TicketKind:   "10011", /* Story */
+			TicketParent: "10001"}),
+		Entry("Export as bug to jira cloud", migrationwave.ExportApplicationsCase{
+			JiraInstance: jira.JiraCloud,
+			NumOfApps:    2,
+			TicketKind:   "10012", /* Bug */
+			TicketParent: "10001"}),
+
 		Entry("Export as task to jira server", migrationwave.ExportApplicationsCase{
 			JiraInstance: jira.JiraServer,
 			NumOfApps:    3,
 			TicketKind:   "3", /* Task issuetypeId */
 			TicketParent: "12340621" /* mta-qe-test projectId */}),
+		Entry("Export as story to jira server", migrationwave.ExportApplicationsCase{
+			JiraInstance: jira.JiraServer,
+			NumOfApps:    2,
+			TicketKind:   "17", /* Story */
+			TicketParent: "12340621"}),
+		Entry("Export as bug to jira server", migrationwave.ExportApplicationsCase{
+			JiraInstance: jira.JiraServer,
+			NumOfApps:    2,
+			TicketKind:   "1", /* Bug */
+			TicketParent: "12340621"}),
+
 		Entry("Export as task to jira server using token", migrationwave.ExportApplicationsCase{
 			JiraInstance: jira.JiraServerBearerToken, /* Using token for Jira connection */
 			NumOfApps:    3,
 			TicketKind:   "3", /* Task issuetypeId */
-			TicketParent: "12340621" /* mta-qe-test projectId */}))
+			TicketParent: "12340621" /* mta-qe-test projectId */}),
+		Entry("Export as story to jira server using token", migrationwave.ExportApplicationsCase{
+			JiraInstance: jira.JiraServerBearerToken,
+			NumOfApps:    2,
+			TicketKind:   "17", /* Story */
+			TicketParent: "12340621"}),
+		Entry("Export as bug to jira server using token", migrationwave.ExportApplicationsCase{
+			JiraInstance: jira.JiraServerBearerToken, /* Using token for Jira connection */
+			NumOfApps:    2,
+			TicketKind:   "1", /* Bug */
+			TicketParent: "12340621"}))
 })
