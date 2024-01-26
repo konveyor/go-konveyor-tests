@@ -6,7 +6,7 @@ require (
 	github.com/PuerkitoBio/goquery v1.8.1
 	github.com/jortel/go-utils v0.1.2
 	github.com/konveyor/tackle2-addon v0.2.0
-	github.com/konveyor/tackle2-hub v0.3.0-beta.1.1.0.20231019182229-77fa5af3ac80
+	github.com/konveyor/tackle2-hub v0.3.1-0.20240123170057-e18a6547d4af
 	github.com/onsi/ginkgo/v2 v2.11.0
 	github.com/onsi/gomega v1.27.10
 	github.com/tkanos/gonfig v0.0.0-20210106201359-53e13348de2f
@@ -54,7 +54,7 @@ require (
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/k0kubun/pp v2.4.0+incompatible // indirect
 	github.com/klauspost/cpuid/v2 v2.0.9 // indirect
-	github.com/leodido/go-urn v1.2.3 // indirect
+	github.com/leodido/go-urn v1.2.4 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.17 // indirect
