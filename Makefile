@@ -44,7 +44,6 @@ test-tier2:
 
 # TIER3
 test-tier3:
-	TIER3=1 MAVEN_TESTAPP_USER=$(GITHUB_USER) MAVEN_TESTAPP_TOKEN=$(GITHUB_TOKEN) $(MAKE) test-analysis
 	$(MAKE) test-jira
 	$(MAKE) test-migrationwave
 
@@ -58,18 +57,15 @@ test-analysis:
 
 # Metrics.
 test-metrics:
-	ginkgo -v ./e2e/metrics/...
+	ginkgo -v ./e2e/metrics --junit-report=metrics-report.xml --output-dir=/tmp/ginkgo-report
 
 # Jira Integration.
 test-jira:
-	@if [ -z "${JIRA_CLOUD_USERNAME}" ]; then echo "Error: JIRA_CLOUD_USERNAME environment variable is not defined."; exit 1; fi
-	@if [ -z "${JIRA_CLOUD_PASSWORD}" ]; then echo "Error: JIRA_CLOUD_PASSWORD environment variable is not defined."; exit 1; fi
-	@if [ -z "${JIRA_CLOUD_URL}" ]; then echo "Error: JIRA_CLOUD_URL environment variable is not defined."; exit 1; fi
-	ginkgo -v -focus "Jira cloud"
+	ginkgo -v ./e2e/jiraintegration --junit-report=jiraintegration-report.xml --output-dir=/tmp/ginkgo-report
 
 # Migration wave
 test-migrationwave:
-	ginkgo -v -focus "Export applications"
+	ginkgo -v ./e2e/migrationwave --junit-report=migrationwave-report.xml --output-dir=/tmp/ginkgo-report
 
 # Hub API remote tests.
 test-hub-api:
