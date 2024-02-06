@@ -122,9 +122,7 @@ For parallel test execution, set `export PARALLEL=1`.
 
 ## Configuration
 
-**Note:** When running tests, ensure that your configuration is set appropriately. Refer to the `Configuration` struct in `config/configuration.go` file for details on supported configuration variables.
-
-Ensure that the required configuration variables are set as environment variables or added to `config/config.json` file.
+**Note:** Before running tests, ensure that the required configuration variables are set as environment variables
 
 ### Test-Specific Configuration
 

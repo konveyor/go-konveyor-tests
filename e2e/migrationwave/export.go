@@ -1,10 +1,10 @@
 package migrationwave
 
 import (
+	"os"
 	"strconv"
 	"time"
 
-	"github.com/konveyor/go-konveyor-tests/config"
 	"github.com/konveyor/go-konveyor-tests/data/jira"
 	"github.com/konveyor/go-konveyor-tests/data/migrationwave"
 	"github.com/konveyor/go-konveyor-tests/hack/uniq"
@@ -22,6 +22,10 @@ var (
 	appsToExport  []api.Application
 )
 
+const (
+	RETRY_NUM = 10
+)
+
 var _ = Describe("Export applications", func() {
 	BeforeEach(func() {
 		jiraInstance = utils.Jira{}
@@ -33,7 +37,7 @@ var _ = Describe("Export applications", func() {
 	})
 	AfterEach(func() {
 		// Resources cleanup
-		if keep, _ := strconv.ParseBool(config.Config.KEEP); keep {
+		if keep, _ := strconv.ParseBool(os.Getenv("KEEP")); keep {
 			return
 		}
 		Expect(utils.Tracker.Delete(jiraInstance.ID)).To(Succeed())
@@ -69,8 +73,7 @@ var _ = Describe("Export applications", func() {
 
 				// Wait for reference field to be populated
 				var got *api.Ticket
-				var retry, _ = strconv.Atoi(config.Config.RETRY_NUM)
-				for i := 0; i < retry; i++ {
+				for i := 0; i < RETRY_NUM; i++ {
 					got, err = utils.Ticket.Get(ticket.ID)
 					if err != nil || got.Reference != "" {
 						break
