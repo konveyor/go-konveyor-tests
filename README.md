@@ -122,7 +122,7 @@ For parallel test execution, set `export PARALLEL=1`.
 
 ## Configuration
 
-**Note:** Before running tests, ensure that the required configuration variables are set as environment variables
+> **_NOTE:_** Before running tests, ensure that the required configuration variables are set as environment variables
 
 ### Test-Specific Configuration
 
