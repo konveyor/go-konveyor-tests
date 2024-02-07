@@ -1,12 +1,12 @@
 package metrics
 
 import (
+	"os"
 	"strconv"
 
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
-	. "github.com/konveyor/go-konveyor-tests/config"
 	"github.com/konveyor/go-konveyor-tests/utils"
 	"github.com/konveyor/tackle2-hub/api"
 )
@@ -26,7 +26,7 @@ var _ = Describe("Application Metrics", Ordered, func() {
 
 	AfterAll(func() {
 		// Resources cleanup
-		if keep, _ := strconv.ParseBool(Config.KEEP); keep {
+		if keep, _ := strconv.ParseBool(os.Getenv("KEEP")); keep {
 			return
 		}
 		utils.DeleteApplicationsBySlice(apps)

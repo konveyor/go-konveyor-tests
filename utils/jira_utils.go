@@ -4,7 +4,7 @@ import (
 	"encoding/base64"
 	"fmt"
 	"net/http"
-	"strconv"
+	"os"
 	"time"
 
 	"github.com/konveyor/go-konveyor-tests/data/jira"
@@ -14,6 +14,10 @@ import (
 )
 
 type Jira api.Tracker
+
+const (
+	RETRY_NUM = 10
+)
 
 func CreateJiraInstance(data jira.JiraInstanceTC) (api.Identity, Jira) {
 	jiraIdentity := data.Identity
@@ -35,8 +39,7 @@ func CreateJiraInstance(data jira.JiraInstanceTC) (api.Identity, Jira) {
 
 	// Wait for connection succeeded
 	var jira *api.Tracker
-	var retry, _ = strconv.Atoi(conf.RETRY_NUM)
-	for i := 0; i < retry; i++ {
+	for i := 0; i < RETRY_NUM; i++ {
 		jira, err = Tracker.Get(jiraInstance.ID)
 		if err != nil || jira.Connected {
 			break
@@ -68,10 +71,10 @@ func (r *Jira) DeleteJiraIssues(issues []string) {
 func (r *Jira) sendJiraRequest(url string, method string) {
 	// Create a basic authentication string
 	basicAuth := "Basic " +
-		base64.StdEncoding.EncodeToString([]byte(conf.JIRA_CLOUD_USERNAME+":"+conf.JIRA_CLOUD_PASSWORD))
+		base64.StdEncoding.EncodeToString([]byte(os.Getenv("JIRA_CLOUD_USERNAME")+":"+os.Getenv("JIRA_CLOUD_PASSWORD")))
 
 	// Create a bearer authentication string
-	bearerAuth := "Bearer " + conf.JIRA_SERVER_TOKEN
+	bearerAuth := "Bearer " + os.Getenv("JIRA_SERVER_TOKEN")
 
 	// Create a request
 	request, _ := http.NewRequest(method, url, nil)

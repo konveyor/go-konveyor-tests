@@ -9,7 +9,6 @@ import (
 	"strings"
 	"time"
 
-	. "github.com/konveyor/go-konveyor-tests/config"
 	. "github.com/onsi/gomega"
 
 	"github.com/konveyor/go-konveyor-tests/utils"
@@ -47,7 +46,7 @@ func GetMetricValue(metricName string) int {
 
 // runOpenshiftCmd runs an OpenShift command and returns its output as a string.
 func runOpenshiftCmd(cmd string) string {
-	os.Setenv("KUBECONFIG", Config.KUBECONFIG)
+	os.Setenv("KUBECONFIG", os.Getenv("KUBECONFIG"))
 
 	// Create a new command to execute in a Bash environment.
 	command := exec.Command("bash", "-c", cmd)
