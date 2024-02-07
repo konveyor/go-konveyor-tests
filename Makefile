@@ -1,5 +1,6 @@
 VENDOR_DIR ?= /tmp/konveyor-vendor
 ARCH ?= amd64
+GINKGO_REPORT_DIR = /tmp/ginkgo-report
 
 
 # Setup local minikube with tackle - work in progress (TODO: enable auth)
@@ -44,7 +45,6 @@ test-tier2:
 
 # TIER3
 test-tier3:
-	TIER3=1 MAVEN_TESTAPP_USER=$(GITHUB_USER) MAVEN_TESTAPP_TOKEN=$(GITHUB_TOKEN) $(MAKE) test-analysis
 	$(MAKE) test-jira
 	$(MAKE) test-migrationwave
 
@@ -58,18 +58,15 @@ test-analysis:
 
 # Metrics.
 test-metrics:
-	ginkgo -v ./e2e/metrics/...
+	cd e2e/metrics/ && ginkgo -v --junit-report=metrics-report.xml --output-dir=${GINKGO_REPORT_DIR}
 
 # Jira Integration.
 test-jira:
-	@if [ -z "${JIRA_CLOUD_USERNAME}" ]; then echo "Error: JIRA_CLOUD_USERNAME environment variable is not defined."; exit 1; fi
-	@if [ -z "${JIRA_CLOUD_PASSWORD}" ]; then echo "Error: JIRA_CLOUD_PASSWORD environment variable is not defined."; exit 1; fi
-	@if [ -z "${JIRA_CLOUD_URL}" ]; then echo "Error: JIRA_CLOUD_URL environment variable is not defined."; exit 1; fi
-	ginkgo -v -focus "Jira cloud"
+	cd e2e/jiraintegration/ && ginkgo -v --junit-report=jiraintegration-report.xml --output-dir=${GINKGO_REPORT_DIR}
 
 # Migration wave
 test-migrationwave:
-	ginkgo -v -focus "Export applications"
+	cd e2e/migrationwave/ && ginkgo -v --junit-report=migrationwave-report.xml --output-dir=${GINKGO_REPORT_DIR}
 
 # Hub API remote tests.
 test-hub-api:
