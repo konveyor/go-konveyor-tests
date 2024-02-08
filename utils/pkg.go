@@ -6,6 +6,10 @@ import (
 	"github.com/konveyor/tackle2-hub/test/api/client"
 )
 
+const (
+	RETRY_NUM = 10
+)
+
 var (
 	Log           = logr.WithName("test")
 	Client        *binding.Client

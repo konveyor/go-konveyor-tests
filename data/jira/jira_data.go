@@ -46,4 +46,6 @@ var (
 		JiraUrl:  os.Getenv("JIRA_SERVER_URL"),
 		JiraKind: JIRA_KIND_ONPREM,
 	}
+
+	JiraSamples = []JiraInstanceTC{JiraCloud, JiraServer, JiraServerBearerToken}
 )

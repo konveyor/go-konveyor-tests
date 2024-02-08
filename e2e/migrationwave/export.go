@@ -3,7 +3,6 @@ package migrationwave
 import (
 	"os"
 	"strconv"
-	"time"
 
 	"github.com/konveyor/go-konveyor-tests/data/jira"
 	"github.com/konveyor/go-konveyor-tests/data/migrationwave"
@@ -27,6 +26,14 @@ const (
 )
 
 var _ = Describe("Export applications", func() {
+	var (
+		jiraInstance  utils.Jira
+		jiraIdentity  api.Identity
+		migrationWave api.MigrationWave
+		issueIds      []string
+		appsToExport  []api.Application
+	)
+
 	BeforeEach(func() {
 		jiraInstance = utils.Jira{}
 		jiraIdentity = api.Identity{}
@@ -64,26 +71,17 @@ var _ = Describe("Export applications", func() {
 
 			By("Create Jira instance")
 			jiraIdentity, jiraInstance = utils.CreateJiraInstance(testCase.JiraInstance)
+			jiraInstance.CheckConnection()
 
-			By("Check ticket was created")
+			By("Create ticket, check ticket was created")
 			for i := 0; i < len(appsToExport); i++ {
 				ticket := api.Ticket{Kind: testCase.TicketKind, Parent: testCase.TicketParent, Application: api.Ref{ID: appsToExport[i].ID},
 					Tracker: api.Ref{ID: jiraInstance.ID}}
 				utils.Ticket.Create(&ticket)
 
-				// Wait for reference field to be populated
-				var got *api.Ticket
-				for i := 0; i < RETRY_NUM; i++ {
-					got, err = utils.Ticket.Get(ticket.ID)
-					if err != nil || got.Reference != "" {
-						break
-					}
-					time.Sleep(5 * time.Second)
-				}
-				Expect(got.Reference).NotTo(BeEmpty())
-				issueIds = append(issueIds, got.Reference)
+				ticketReference := utils.CheckReferenceNotEmpty(&ticket)
+				issueIds = append(issueIds, ticketReference)
 			}
-
 		},
 		Entry("Export as task to jira cloud", migrationwave.ExportApplicationsCase{
 			JiraInstance: jira.JiraCloud,
