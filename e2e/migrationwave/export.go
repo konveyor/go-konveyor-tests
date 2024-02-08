@@ -4,7 +4,6 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/konveyor/go-konveyor-tests/data/jira"
 	"github.com/konveyor/go-konveyor-tests/data/migrationwave"
 	"github.com/konveyor/go-konveyor-tests/hack/uniq"
 	"github.com/konveyor/go-konveyor-tests/utils"
@@ -55,8 +54,8 @@ var _ = Describe("Export applications", func() {
 	})
 
 	DescribeTable("",
-		func(testCase migrationwave.ExportApplicationsCase) {
-			appsToExport = utils.CreateMultipleApplications(testCase.NumOfApps)
+		func(testCase migrationwave.ExportApplicationsCase, numOfApps int) {
+			appsToExport = utils.CreateMultipleApplications(numOfApps)
 			By("Create migration wave")
 			uniq.MigrationWaveName(&migrationWave)
 			err := utils.MigrationWave.Create(&migrationWave)
@@ -83,51 +82,15 @@ var _ = Describe("Export applications", func() {
 				issueIds = append(issueIds, ticketReference)
 			}
 		},
-		Entry("Export as task to jira cloud", migrationwave.ExportApplicationsCase{
-			JiraInstance: jira.JiraCloud,
-			NumOfApps:    3,
-			TicketKind:   "10007", /* Task issuetypeId */
-			TicketParent: "10001" /* mta_integration projectId */}),
-		Entry("Export as story to jira cloud", migrationwave.ExportApplicationsCase{
-			JiraInstance: jira.JiraCloud,
-			NumOfApps:    2,
-			TicketKind:   "10011", /* Story */
-			TicketParent: "10001"}),
-		Entry("Export as bug to jira cloud", migrationwave.ExportApplicationsCase{
-			JiraInstance: jira.JiraCloud,
-			NumOfApps:    2,
-			TicketKind:   "10012", /* Bug */
-			TicketParent: "10001"}),
+		Entry("Export as task to jira cloud", migrationwave.ExportBugToJiraCloud, 3),
+		Entry("Export as story to jira cloud", migrationwave.ExportTaskToJiraCloud, 2),
+		Entry("Export as bug to jira cloud", migrationwave.ExportBugToJiraCloud, 2),
 
-		Entry("Export as task to jira server", migrationwave.ExportApplicationsCase{
-			JiraInstance: jira.JiraServer,
-			NumOfApps:    3,
-			TicketKind:   "3", /* Task issuetypeId */
-			TicketParent: "12340621" /* mta-qe-test projectId */}),
-		Entry("Export as story to jira server", migrationwave.ExportApplicationsCase{
-			JiraInstance: jira.JiraServer,
-			NumOfApps:    2,
-			TicketKind:   "17", /* Story */
-			TicketParent: "12340621"}),
-		Entry("Export as bug to jira server", migrationwave.ExportApplicationsCase{
-			JiraInstance: jira.JiraServer,
-			NumOfApps:    2,
-			TicketKind:   "1", /* Bug */
-			TicketParent: "12340621"}),
+		Entry("Export as task to jira server", migrationwave.ExportTaskToJiraServer, 3),
+		Entry("Export as story to jira server", migrationwave.ExportStoryToJiraServer, 2),
+		Entry("Export as bug to jira server", migrationwave.ExportBugToJiraServer, 2),
 
-		Entry("Export as task to jira server using token", migrationwave.ExportApplicationsCase{
-			JiraInstance: jira.JiraServerBearerToken, /* Using token for Jira connection */
-			NumOfApps:    3,
-			TicketKind:   "3", /* Task issuetypeId */
-			TicketParent: "12340621" /* mta-qe-test projectId */}),
-		Entry("Export as story to jira server using token", migrationwave.ExportApplicationsCase{
-			JiraInstance: jira.JiraServerBearerToken,
-			NumOfApps:    2,
-			TicketKind:   "17", /* Story */
-			TicketParent: "12340621"}),
-		Entry("Export as bug to jira server using token", migrationwave.ExportApplicationsCase{
-			JiraInstance: jira.JiraServerBearerToken, /* Using token for Jira connection */
-			NumOfApps:    2,
-			TicketKind:   "1", /* Bug */
-			TicketParent: "12340621"}))
+		Entry("Export as task to jira server using token", migrationwave.ExportTaskToJiraUsingToken, 3),
+		Entry("Export as story to jira server using token", migrationwave.ExportStoryToJiraUsingToken, 2),
+		Entry("Export as bug to jira server using token", migrationwave.ExportBugToJiraUsingToken, 2))
 })
