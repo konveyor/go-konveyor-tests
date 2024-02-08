@@ -47,8 +47,9 @@ func CreateJiraInstance(data jira.JiraInstanceTC) (api.Identity, Jira) {
 func (r *Jira) CheckConnection() {
 	// Wait for connection succeeded
 	var jira *api.Tracker
+	var err error
 	for i := 0; i < RETRY_NUM; i++ {
-		jira, err := Tracker.Get(r.ID)
+		jira, err = Tracker.Get(r.ID)
 		if err != nil || jira.Connected {
 			break
 		}
