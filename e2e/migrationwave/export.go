@@ -72,7 +72,7 @@ var _ = Describe("Export applications", func() {
 			jiraIdentity, jiraInstance = utils.CreateJiraInstance(testCase.JiraInstance)
 			jiraInstance.CheckConnection()
 
-			By("Create ticket, check ticket was created")
+			By("Create ticket - check ticket was created")
 			for i := 0; i < len(appsToExport); i++ {
 				ticket := api.Ticket{Kind: testCase.TicketKind, Parent: testCase.TicketParent, Application: api.Ref{ID: appsToExport[i].ID},
 					Tracker: api.Ref{ID: jiraInstance.ID}}

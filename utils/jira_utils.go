@@ -3,7 +3,6 @@ package utils
 import (
 	"encoding/base64"
 	"fmt"
-	"math/rand"
 	"net/http"
 	"os"
 	"time"
@@ -15,13 +14,6 @@ import (
 )
 
 type Jira api.Tracker
-
-func RandomJiraData() (jiraData jira.JiraInstanceTC) {
-	randomIndex := rand.Intn(len(jira.JiraSamples))
-	//// Create a local copy
-	jiraData = jira.JiraSamples[randomIndex]
-	return
-}
 
 func CreateJiraInstance(data jira.JiraInstanceTC) (api.Identity, Jira) {
 	jiraIdentity := data.Identity
