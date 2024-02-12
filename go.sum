@@ -147,6 +147,8 @@ github.com/konveyor/tackle2-addon v0.2.0 h1:YWyFY72ZU2oKsPFb0Pt1U/1sWtD186BcYxtw
 github.com/konveyor/tackle2-addon v0.2.0/go.mod h1:2poGMxU2vxmz7+FppLvSliMrk0mAtbDHp+LeZ/p2/Q8=
 github.com/konveyor/tackle2-hub v0.3.0-beta.1.1.0.20231019182229-77fa5af3ac80 h1:KJ/SNXe888UkQ06SlZXZsY54bCp9q+FYhaGM+G4tMGQ=
 github.com/konveyor/tackle2-hub v0.3.0-beta.1.1.0.20231019182229-77fa5af3ac80/go.mod h1:Olcw0BD/zmhVtdOR4pOR8HPDFRnafERO/eM5iHUG/8A=
+github.com/konveyor/tackle2-hub v0.3.1-0.20240212080122-ae2295a67936 h1:OSltvI88suLT9fSoC26IVBQzuVv9oD/ohvPm5uSo4U8=
+github.com/konveyor/tackle2-hub v0.3.1-0.20240212080122-ae2295a67936/go.mod h1:97Z3kWWmPERNl58XkpQkV/F+jnqNNDAVpL9m9XTZmdo=
 github.com/kr/pretty v0.2.0/go.mod h1:ipq/a2n7PKx3OHsz4KJII5eveXtPO4qwEXGdVfWzfnI=
 github.com/kr/pretty v0.2.1/go.mod h1:ipq/a2n7PKx3OHsz4KJII5eveXtPO4qwEXGdVfWzfnI=
 github.com/kr/pretty v0.3.1 h1:flRD4NNwYAUpkphVc1HcthR4KEIFJ65n8Mw5qdRn3LE=
@@ -156,6 +158,7 @@ github.com/kr/text v0.2.0 h1:5Nx0Ya0ZqY2ygV366QzturHI13Jq95ApcVaJBhpS+AY=
 github.com/kr/text v0.2.0/go.mod h1:eLer722TekiGuMkidMxC/pM04lWEeraHUUmBw8l2grE=
 github.com/leodido/go-urn v1.2.3 h1:6BE2vPT0lqoz3fmOesHZiaiFh7889ssCo2GMvLCfiuA=
 github.com/leodido/go-urn v1.2.3/go.mod h1:7ZrI8mTSeBSHl/UaRyKQW1qZeMgak41ANeCNaVckg+4=
+github.com/leodido/go-urn v1.2.4/go.mod h1:7ZrI8mTSeBSHl/UaRyKQW1qZeMgak41ANeCNaVckg+4=
 github.com/mailru/easyjson v0.7.7 h1:UGYAvKxe3sBsEDzO8ZeWOSlIQfWFlxbzLZe7hwFURr0=
 github.com/mailru/easyjson v0.7.7/go.mod h1:xzfreul335JAWq5oZzymOObrkdz5UnU4kGfJJLY9Nlc=
 github.com/mattn/go-colorable v0.1.13 h1:fFA4WZxdEF4tXPZVKMLwD8oUnCTTo08duU7wxecdEvA=
