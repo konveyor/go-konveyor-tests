@@ -12,18 +12,6 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var (
-	jiraInstance  utils.Jira
-	jiraIdentity  api.Identity
-	migrationWave api.MigrationWave
-	issueIds      []string
-	appsToExport  []api.Application
-)
-
-const (
-	RETRY_NUM = 10
-)
-
 var _ = Describe("Export applications", func() {
 	var (
 		jiraInstance  utils.Jira
