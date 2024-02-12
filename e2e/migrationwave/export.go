@@ -78,8 +78,10 @@ var _ = Describe("Export applications", func() {
 					Tracker: api.Ref{ID: jiraInstance.ID}}
 				utils.Ticket.Create(&ticket)
 
-				ticketReference := utils.CheckReferenceNotEmpty(&ticket)
+				ticketReference := utils.WaitForReference(&ticket)
 				issueIds = append(issueIds, ticketReference)
+				Expect(ticketReference).NotTo(BeEmpty())
+
 			}
 		},
 		Entry("Export as task to jira cloud", migrationwave.TaskJiraCloud, 3),

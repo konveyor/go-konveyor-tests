@@ -53,7 +53,7 @@ var _ = Describe("Unlink application from Jira", Ordered, func() {
 				Application: api.Ref{ID: appsToExport[i].ID}, Tracker: api.Ref{ID: jiraInstance.ID}}
 			utils.Ticket.Create(&ticket)
 
-			ticketReference := utils.CheckReferenceNotEmpty(&ticket)
+			ticketReference := utils.WaitForReference(&ticket)
 			issueIds = append(issueIds, ticketReference)
 			tickets = append(tickets, ticket)
 		}

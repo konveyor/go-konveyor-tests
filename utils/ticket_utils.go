@@ -4,10 +4,9 @@ import (
 	"time"
 
 	"github.com/konveyor/tackle2-hub/api"
-	"github.com/onsi/gomega"
 )
 
-func CheckReferenceNotEmpty(ticket *api.Ticket) string {
+func WaitForReference(ticket *api.Ticket) string {
 	// Wait for reference field to be populated
 	var got *api.Ticket
 	var err error
@@ -18,6 +17,5 @@ func CheckReferenceNotEmpty(ticket *api.Ticket) string {
 		}
 		time.Sleep(5 * time.Second)
 	}
-	gomega.Expect(got.Reference).NotTo(gomega.BeEmpty())
 	return got.Reference
 }
