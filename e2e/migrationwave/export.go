@@ -82,15 +82,15 @@ var _ = Describe("Export applications", func() {
 				issueIds = append(issueIds, ticketReference)
 			}
 		},
-		Entry("Export as task to jira cloud", migrationwave.ExportBugToJiraCloud, 3),
-		Entry("Export as story to jira cloud", migrationwave.ExportTaskToJiraCloud, 2),
-		Entry("Export as bug to jira cloud", migrationwave.ExportBugToJiraCloud, 2),
+		Entry("Export as task to jira cloud", migrationwave.TaskJiraCloud, 3),
+		Entry("Export as story to jira cloud", migrationwave.StoryJiraCloud, 2),
+		Entry("Export as bug to jira cloud", migrationwave.BugJiraCloud, 2),
 
-		Entry("Export as task to jira server", migrationwave.ExportTaskToJiraServer, 3),
-		Entry("Export as story to jira server", migrationwave.ExportStoryToJiraServer, 2),
-		Entry("Export as bug to jira server", migrationwave.ExportBugToJiraServer, 2),
+		Entry("Export as task to jira server", migrationwave.TaskJiraServer, 3),
+		Entry("Export as story to jira server", migrationwave.StoryJiraServer, 2),
+		Entry("Export as bug to jira server", migrationwave.BugJiraServer, 2),
 
-		Entry("Export as task to jira server using token", migrationwave.ExportTaskToJiraUsingToken, 3),
-		Entry("Export as story to jira server using token", migrationwave.ExportStoryToJiraUsingToken, 2),
-		Entry("Export as bug to jira server using token", migrationwave.ExportBugToJiraUsingToken, 2))
+		Entry("Export as task to jira server using token", migrationwave.TaskJiraUsingToken, 3),
+		Entry("Export as story to jira server using token", migrationwave.StoryJiraUsingToken, 2),
+		Entry("Export as bug to jira server using token", migrationwave.BugJiraUsingToken, 2))
 })

@@ -11,40 +11,52 @@ type ExportApplicationsCase struct {
 }
 
 var (
-	ExportTaskToJiraCloud = ExportApplicationsCase{
+	TaskJiraCloud = ExportApplicationsCase{
 		JiraInstance: jira.JiraCloud,
 		TicketKind:   "10007", /* Task issuetypeId */
 		TicketParent: "10001"} /* mta_integration projectId */
 
-	ExportBugToJiraCloud = ExportApplicationsCase{
+	StoryJiraCloud = ExportApplicationsCase{
+		JiraInstance: jira.JiraCloud,
+		TicketKind:   "10011", /* Story */
+		TicketParent: "10001"}
+
+	BugJiraCloud = ExportApplicationsCase{
 		JiraInstance: jira.JiraCloud,
 		TicketKind:   "10012", /* Bug */
 		TicketParent: "10001"}
 
-	ExportTaskToJiraServer = ExportApplicationsCase{
+	TaskJiraServer = ExportApplicationsCase{
 		JiraInstance: jira.JiraServer,
 		TicketKind:   "3",        /* Task issuetypeId */
 		TicketParent: "12340621"} /* mta-qe-test projectId */
 
-	ExportStoryToJiraServer = ExportApplicationsCase{
+	StoryJiraServer = ExportApplicationsCase{
 		JiraInstance: jira.JiraServer,
 		TicketKind:   "17", /* Story */
 		TicketParent: "12340621"}
-	ExportBugToJiraServer = ExportApplicationsCase{
+
+	BugJiraServer = ExportApplicationsCase{
 		JiraInstance: jira.JiraServer,
 		TicketKind:   "1", /* Bug */
 		TicketParent: "12340621"}
 
-	ExportTaskToJiraUsingToken = ExportApplicationsCase{
+	TaskJiraUsingToken = ExportApplicationsCase{
 		JiraInstance: jira.JiraServerBearerToken, /* Using token for Jira connection */
 		TicketKind:   "3",                        /* Task issuetypeId */
 		TicketParent: "12340621"}                 /* mta-qe-test projectId */
-	ExportStoryToJiraUsingToken = ExportApplicationsCase{
+
+	StoryJiraUsingToken = ExportApplicationsCase{
 		JiraInstance: jira.JiraServerBearerToken,
 		TicketKind:   "17", /* Story */
 		TicketParent: "12340621"}
-	ExportBugToJiraUsingToken = ExportApplicationsCase{
+
+	BugJiraUsingToken = ExportApplicationsCase{
 		JiraInstance: jira.JiraServerBearerToken,
 		TicketKind:   "1", /* Bug */
 		TicketParent: "12340621"}
+
+	Samples = []ExportApplicationsCase{TaskJiraCloud, TaskJiraServer, TaskJiraUsingToken,
+		StoryJiraCloud, StoryJiraServer, StoryJiraUsingToken,
+		BugJiraCloud, BugJiraServer, BugJiraUsingToken}
 )
