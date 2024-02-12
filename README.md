@@ -125,10 +125,6 @@ For parallel test execution, set `export PARALLEL=1`.
 > **_NOTE:_** Before running tests, ensure that the required configuration variables are set as environment variables
 <!-- TODO (mguetta1): add config file for example -->
 
-**Note:** When running tests, ensure that your configuration is set appropriately. Refer to the `Configuration` struct in `config/configuration.go` file for details on supported configuration variables.
-
-Ensure that the required configuration variables are set as environment variables or added to `config/config.json` file.
-
 ### Test-Specific Configuration
 
 Refer to the `README.md` files in each folder for test-specific configuration details.
