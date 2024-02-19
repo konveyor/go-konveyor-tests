@@ -15,10 +15,6 @@ import (
 
 type Jira api.Tracker
 
-const (
-	RETRY_NUM = 10
-)
-
 func CreateJiraInstance(data jira.JiraInstanceTC) (api.Identity, Jira) {
 	jiraIdentity := data.Identity
 	uniq.IdentityName(&jiraIdentity)
@@ -37,18 +33,21 @@ func CreateJiraInstance(data jira.JiraInstanceTC) (api.Identity, Jira) {
 	err = Tracker.Create((*api.Tracker)(&jiraInstance))
 	gomega.Expect(err).NotTo(gomega.HaveOccurred())
 
+	return jiraIdentity, jiraInstance
+}
+
+func (r *Jira) CheckConnection() {
 	// Wait for connection succeeded
 	var jira *api.Tracker
+	var err error
 	for i := 0; i < RETRY_NUM; i++ {
-		jira, err = Tracker.Get(jiraInstance.ID)
+		jira, err = Tracker.Get(r.ID)
 		if err != nil || jira.Connected {
 			break
 		}
 		time.Sleep(5 * time.Second)
 	}
 	gomega.Expect(jira.Connected).To(gomega.BeTrue())
-
-	return jiraIdentity, jiraInstance
 }
 
 func (r *Jira) DeleteJiraIssues(issues []string) {

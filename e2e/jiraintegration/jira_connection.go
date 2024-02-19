@@ -29,6 +29,7 @@ var _ = Describe("Jira connection", func() {
 		func(testCase jira.JiraInstanceTC) {
 			// Create Jira instance
 			jiraIdentity, jiraInstance = utils.CreateJiraInstance(testCase)
+			jiraInstance.CheckConnection()
 		},
 		Entry("Jira cloud", jira.JiraCloud),
 		Entry("Jira server with basic auth", jira.JiraServer),

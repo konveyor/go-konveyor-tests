@@ -123,6 +123,7 @@ For parallel test execution, set `export PARALLEL=1`.
 ## Configuration
 
 > **_NOTE:_** Before running tests, ensure that the required configuration variables are set as environment variables
+<!-- TODO (mguetta1): add config file for example -->
 
 ### Test-Specific Configuration
 
