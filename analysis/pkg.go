@@ -46,6 +46,7 @@ type TC struct {
 	Scope    *addon.Scope
 	WithDeps bool
 	Binary bool
+	Artifact string
 	// After-analysis assertions.
 	ReportContent map[string][]string
 	Analysis      api.Analysis
