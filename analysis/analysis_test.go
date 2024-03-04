@@ -124,21 +124,9 @@ func TestApplicationAnalysis(t *testing.T) {
 			assert.Should(t, RichClient.Task.Create(&tc.Task))
 
 			if tc.Artifact != "" {
-				fileName := strings.Replace(tc.Artifact, "/binary/", "", 1)
-				filePath := "/tmp/" + fileName
-				url := "https://github.com/konveyor/tackle-ui-tests/raw/main/cypress/fixtures/" + fileName
-				err := DownloadFile(filePath, url)
-				if err != nil {
-					t.Fatal("Error downloading file: ", err)
-				}
-
 				// Upload binary file into the bucket
 				bucketContent := RichClient.Bucket.Content(tc.Task.Bucket.ID)
-				err = bucketContent.Put(filePath, tc.Artifact)
-				if err != nil {
-					t.Fatal("Error uploading file: ", err)
-				}
-
+				bucketContent.Put("data"+tc.Artifact, tc.Artifact)
 			}
 
 			tc.Task.State = "Ready"

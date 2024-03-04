@@ -16,7 +16,7 @@ var AdministracionEfectivo = TC{
 		},
 	},
 	Binary:   true,
-	Artifact: "/binary/administracionEfectivo.ear",
+	Artifact: "/binary/administracion_efectivo.ear",
 	Analysis: api.Analysis{
 		Effort: 1591,
 		Issues: []api.Issue{
