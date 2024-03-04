@@ -1,6 +1,6 @@
 VENDOR_DIR ?= /tmp/konveyor-vendor
 ARCH ?= amd64
-GINKGO_REPORT_DIR = /tmp/ginkgo-report
+JUNIT_REPORT_DIR = /tmp/junit-report
 
 
 # Setup local minikube with tackle - work in progress (TODO: enable auth)
@@ -42,7 +42,6 @@ test-tier1:
 test-tier2:
 	TIER2=1 $(MAKE) test-analysis
 
-
 # TIER3
 test-tier3:
 	$(MAKE) test-jira
@@ -58,15 +57,15 @@ test-analysis:
 
 # Metrics.
 test-metrics:
-	cd e2e/metrics/ && ginkgo -v --junit-report=metrics-report.xml --output-dir=${GINKGO_REPORT_DIR}
+	cd e2e/metrics/ && ginkgo -v --junit-report=metrics-report.xml --output-dir=${JUNIT_REPORT_DIR}
 
 # Jira Integration.
 test-jira:
-	cd e2e/jiraintegration/ && ginkgo -v --junit-report=jiraintegration-report.xml --output-dir=${GINKGO_REPORT_DIR}
+	cd e2e/jiraintegration/ && ginkgo -v --junit-report=jiraintegration-report.xml --output-dir=${JUNIT_REPORT_DIR}
 
 # Migration wave
 test-migrationwave:
-	cd e2e/migrationwave/ && ginkgo -v --junit-report=migrationwave-report.xml --output-dir=${GINKGO_REPORT_DIR}
+	cd e2e/migrationwave/ && ginkgo -v --junit-report=migrationwave-report.xml --output-dir=${JUNIT_REPORT_DIR}
 
 # Hub API remote tests.
 test-hub-api:
@@ -76,3 +75,11 @@ test-hub-api:
 
 # Execute all tests.
 test-all: test-tier0 test-tier1 test-tier2
+
+# Merge Junit reports
+merge-report:
+	go install github.com/nezorflame/junit-merger@latest
+	cd ${JUNIT_REPORT_DIR} && rm -f merged.xml && junit-merger -o merged.xml *
+
+clean-report-dir:
+	rm -f ${JUNIT_REPORT_DIR}/*
