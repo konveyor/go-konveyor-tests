@@ -3,6 +3,7 @@ package migrationwave
 import (
 	"os"
 	"strconv"
+	"time"
 
 	"github.com/konveyor/go-konveyor-tests/data/migrationwave"
 	"github.com/konveyor/go-konveyor-tests/hack/uniq"
@@ -24,7 +25,10 @@ var _ = Describe("Export applications", func() {
 	BeforeEach(func() {
 		jiraInstance = utils.Jira{}
 		jiraIdentity = api.Identity{}
-		migrationWave = api.MigrationWave{}
+		migrationWave = api.MigrationWave{
+			StartDate: time.Date(time.Now().Year(), time.Now().Month(), time.Now().Day(), 0, 0, 0, 0, time.Local),
+			EndDate:   time.Date(time.Now().Year(), time.Now().Month(), time.Now().Day(), 0, 0, 0, 0, time.Local).Add(24 * time.Hour),
+		}
 		issueIds = []string{}
 		appsToExport = []api.Application{}
 
