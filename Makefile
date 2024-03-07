@@ -1,6 +1,6 @@
 VENDOR_DIR ?= /tmp/konveyor-vendor
 ARCH ?= amd64
-JUNIT_REPORT_DIR = /tmp/junit-report
+JUNIT_REPORT_DIR ?= /tmp/junit-report
 
 
 # Setup local minikube with tackle - work in progress (TODO: enable auth)
