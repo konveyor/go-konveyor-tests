@@ -1,11 +1,10 @@
 package migrationwave
 
 import (
+	"os"
 	"strconv"
 	"time"
 
-	"github.com/konveyor/go-konveyor-tests/config"
-	"github.com/konveyor/go-konveyor-tests/data/jira"
 	"github.com/konveyor/go-konveyor-tests/data/migrationwave"
 	"github.com/konveyor/go-konveyor-tests/hack/uniq"
 	"github.com/konveyor/go-konveyor-tests/utils"
@@ -14,26 +13,29 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var (
-	jiraInstance  utils.Jira
-	jiraIdentity  api.Identity
-	migrationWave api.MigrationWave
-	issueIds      []string
-	appsToExport  []api.Application
-)
-
 var _ = Describe("Export applications", func() {
+	var (
+		jiraInstance  utils.Jira
+		jiraIdentity  api.Identity
+		migrationWave api.MigrationWave
+		issueIds      []string
+		appsToExport  []api.Application
+	)
+
 	BeforeEach(func() {
 		jiraInstance = utils.Jira{}
 		jiraIdentity = api.Identity{}
-		migrationWave = api.MigrationWave{}
+		migrationWave = api.MigrationWave{
+			StartDate: time.Date(time.Now().Year(), time.Now().Month(), time.Now().Day(), 0, 0, 0, 0, time.Local),
+			EndDate:   time.Date(time.Now().Year(), time.Now().Month(), time.Now().Day(), 0, 0, 0, 0, time.Local).Add(24 * time.Hour),
+		}
 		issueIds = []string{}
 		appsToExport = []api.Application{}
 
 	})
 	AfterEach(func() {
 		// Resources cleanup
-		if keep, _ := strconv.ParseBool(config.Config.KEEP); keep {
+		if keep, _ := strconv.ParseBool(os.Getenv("KEEP")); keep {
 			return
 		}
 		Expect(utils.Tracker.Delete(jiraInstance.ID)).To(Succeed())
@@ -44,8 +46,8 @@ var _ = Describe("Export applications", func() {
 	})
 
 	DescribeTable("",
-		func(testCase migrationwave.ExportApplicationsCase) {
-			appsToExport = utils.CreateMultipleApplications(testCase.NumOfApps)
+		func(testCase migrationwave.ExportApplicationsCase, numOfApps int) {
+			appsToExport = utils.CreateMultipleApplications(numOfApps)
 			By("Create migration wave")
 			uniq.MigrationWaveName(&migrationWave)
 			err := utils.MigrationWave.Create(&migrationWave)
@@ -60,41 +62,29 @@ var _ = Describe("Export applications", func() {
 
 			By("Create Jira instance")
 			jiraIdentity, jiraInstance = utils.CreateJiraInstance(testCase.JiraInstance)
+			jiraInstance.CheckConnection()
 
-			By("Check ticket was created")
+			By("Create ticket - check ticket was created")
 			for i := 0; i < len(appsToExport); i++ {
 				ticket := api.Ticket{Kind: testCase.TicketKind, Parent: testCase.TicketParent, Application: api.Ref{ID: appsToExport[i].ID},
 					Tracker: api.Ref{ID: jiraInstance.ID}}
 				utils.Ticket.Create(&ticket)
 
-				// Wait for reference field to be populated
-				var got *api.Ticket
-				var retry, _ = strconv.Atoi(config.Config.RETRY_NUM)
-				for i := 0; i < retry; i++ {
-					got, err = utils.Ticket.Get(ticket.ID)
-					if err != nil || got.Reference != "" {
-						break
-					}
-					time.Sleep(5 * time.Second)
-				}
-				Expect(got.Reference).NotTo(BeEmpty())
-				issueIds = append(issueIds, got.Reference)
-			}
+				ticketReference := utils.WaitForReference(&ticket)
+				issueIds = append(issueIds, ticketReference)
+				Expect(ticketReference).NotTo(BeEmpty())
 
+			}
 		},
-		Entry("Export as task to jira cloud", migrationwave.ExportApplicationsCase{
-			JiraInstance: jira.JiraCloud,
-			NumOfApps:    3,
-			TicketKind:   "10007", /* Task issuetypeId */
-			TicketParent: "10001" /* mta_integration projectId */}),
-		Entry("Export as task to jira server", migrationwave.ExportApplicationsCase{
-			JiraInstance: jira.JiraServer,
-			NumOfApps:    3,
-			TicketKind:   "3", /* Task issuetypeId */
-			TicketParent: "12340621" /* mta-qe-test projectId */}),
-		Entry("Export as task to jira server using token", migrationwave.ExportApplicationsCase{
-			JiraInstance: jira.JiraServerBearerToken, /* Using token for Jira connection */
-			NumOfApps:    3,
-			TicketKind:   "3", /* Task issuetypeId */
-			TicketParent: "12340621" /* mta-qe-test projectId */}))
+		Entry("Export as task to jira cloud", migrationwave.TaskJiraCloud, 3),
+		Entry("Export as story to jira cloud", migrationwave.StoryJiraCloud, 2),
+		Entry("Export as bug to jira cloud", migrationwave.BugJiraCloud, 2),
+
+		Entry("Export as task to jira server", migrationwave.TaskJiraServer, 3),
+		Entry("Export as story to jira server", migrationwave.StoryJiraServer, 2),
+		Entry("Export as bug to jira server", migrationwave.BugJiraServer, 2),
+
+		Entry("Export as task to jira server using token", migrationwave.TaskJiraUsingToken, 3),
+		Entry("Export as story to jira server using token", migrationwave.StoryJiraUsingToken, 2),
+		Entry("Export as bug to jira server using token", migrationwave.BugJiraUsingToken, 2))
 })

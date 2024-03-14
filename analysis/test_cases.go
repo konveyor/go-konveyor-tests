@@ -23,3 +23,9 @@ var Tier2TestCases = []TC{
 	ApacheWicket,
 	SeamBooking,
 }
+
+// Tier 3 Analysis test cases - should work
+// List of applications with expected analysis outputs.
+var Tier3TestCases = []TC {
+	TackleTestappPrivateBinary,
+}

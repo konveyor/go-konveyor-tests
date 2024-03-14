@@ -2,13 +2,15 @@ package utils
 
 import (
 	"github.com/jortel/go-utils/logr"
-	"github.com/konveyor/go-konveyor-tests/config"
 	"github.com/konveyor/tackle2-hub/binding"
 	"github.com/konveyor/tackle2-hub/test/api/client"
 )
 
+const (
+	RETRY_NUM = 10
+)
+
 var (
-	conf          config.Configuration
 	Log           = logr.WithName("test")
 	Client        *binding.Client
 	RichClient    *binding.RichClient
@@ -20,7 +22,6 @@ var (
 )
 
 func init() {
-	conf = config.Config
 
 	// Prepare RichClient and login to Hub API (configured from env variables).
 	RichClient = client.PrepareRichClient()

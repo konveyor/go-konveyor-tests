@@ -1,5 +1,6 @@
 VENDOR_DIR ?= /tmp/konveyor-vendor
 ARCH ?= amd64
+JUNIT_REPORT_DIR ?= /tmp/junit-report
 
 
 # Setup local minikube with tackle - work in progress (TODO: enable auth)
@@ -41,7 +42,6 @@ test-tier1:
 test-tier2:
 	TIER2=1 $(MAKE) test-analysis
 
-
 # TIER3
 test-tier3:
 	$(MAKE) test-jira
@@ -57,18 +57,15 @@ test-analysis:
 
 # Metrics.
 test-metrics:
-	ginkgo -v ./e2e/metrics/...
+	cd e2e/metrics/ && ginkgo -v --junit-report=metrics-report.xml --output-dir=${JUNIT_REPORT_DIR}
 
 # Jira Integration.
 test-jira:
-	@if [ -z "${JIRA_CLOUD_USERNAME}" ]; then echo "Error: JIRA_CLOUD_USERNAME environment variable is not defined."; exit 1; fi
-	@if [ -z "${JIRA_CLOUD_PASSWORD}" ]; then echo "Error: JIRA_CLOUD_PASSWORD environment variable is not defined."; exit 1; fi
-	@if [ -z "${JIRA_CLOUD_URL}" ]; then echo "Error: JIRA_CLOUD_URL environment variable is not defined."; exit 1; fi
-	ginkgo -v -focus "Jira cloud"
+	cd e2e/jiraintegration/ && ginkgo -v --junit-report=jiraintegration-report.xml --output-dir=${JUNIT_REPORT_DIR}
 
 # Migration wave
 test-migrationwave:
-	ginkgo -v -focus "Export applications"
+	cd e2e/migrationwave/ && ginkgo -v --junit-report=migrationwave-report.xml --output-dir=${JUNIT_REPORT_DIR}
 
 # Hub API remote tests.
 test-hub-api:
@@ -78,3 +75,11 @@ test-hub-api:
 
 # Execute all tests.
 test-all: test-tier0 test-tier1 test-tier2
+
+# Merge Junit reports
+merge-report:
+	go install github.com/nezorflame/junit-merger@latest
+	cd ${JUNIT_REPORT_DIR} && rm -f merged.xml && junit-merger -o merged.xml *
+
+clean-report-dir:
+	rm -f ${JUNIT_REPORT_DIR}/*

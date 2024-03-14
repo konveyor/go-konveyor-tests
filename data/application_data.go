@@ -26,7 +26,7 @@ var (
 			URL:  "https://github.com/ibraginsky/book-server",
 		},
 	}
-	tackleTestapp = api.Application{
+	TackleTestapp = api.Application{
 		Name: "tackle-testapp",
 		Repository: &api.Repository{
 			Kind: "subversion",
@@ -34,5 +34,5 @@ var (
 		},
 		Binary: "io.konveyor.demo:customers-tomcat:0.0.1-SNAPSHOT:war",
 	}
-	ApplicationSamples = []api.Application{Minimal, PathfinderGit, BookServer, tackleTestapp}
+	ApplicationSamples = []api.Application{Minimal, PathfinderGit, BookServer, TackleTestapp}
 )

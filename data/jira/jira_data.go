@@ -1,7 +1,8 @@
 package jira
 
 import (
-	. "github.com/konveyor/go-konveyor-tests/config"
+	"os"
+
 	"github.com/konveyor/tackle2-hub/api"
 )
 
@@ -22,27 +23,29 @@ var (
 	JiraCloud = JiraInstanceTC{
 		Identity: api.Identity{
 			Kind:     "basic-auth",
-			User:     Config.JIRA_CLOUD_USERNAME,
-			Password: Config.JIRA_CLOUD_PASSWORD,
+			User:     os.Getenv("JIRA_CLOUD_USERNAME"),
+			Password: os.Getenv("JIRA_CLOUD_PASSWORD"),
 		},
-		JiraUrl:  Config.JIRA_CLOUD_URL,
+		JiraUrl:  os.Getenv("JIRA_CLOUD_URL"),
 		JiraKind: JIRA_KIND_CLOUD,
 	}
 	JiraServer = JiraInstanceTC{
 		Identity: api.Identity{
 			Kind:     "basic-auth",
-			User:     Config.JIRA_SERVER_USERNAME,
-			Password: Config.JIRA_SERVER_PASSWORD,
+			User:     os.Getenv("JIRA_SERVER_USERNAME"),
+			Password: os.Getenv("JIRA_SERVER_PASSWORD"),
 		},
-		JiraUrl:  Config.JIRA_SERVER_URL,
+		JiraUrl:  os.Getenv("JIRA_SERVER_URL"),
 		JiraKind: JIRA_KIND_ONPREM,
 	}
 	JiraServerBearerToken = JiraInstanceTC{
 		Identity: api.Identity{
 			Kind: "bearer",
-			Key:  Config.JIRA_SERVER_TOKEN,
+			Key:  os.Getenv("JIRA_SERVER_TOKEN"),
 		},
-		JiraUrl:  Config.JIRA_SERVER_URL,
+		JiraUrl:  os.Getenv("JIRA_SERVER_URL"),
 		JiraKind: JIRA_KIND_ONPREM,
 	}
+
+	JiraSamples = []JiraInstanceTC{JiraCloud, JiraServer, JiraServerBearerToken}
 )
