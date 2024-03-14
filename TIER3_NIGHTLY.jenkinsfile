@@ -14,41 +14,19 @@ pipeline{
         GITHUB_USER="$CRED_USR"
         GITHUB_TOKEN="$CRED_PSW"
     }
-    
     stages{
-        stage("Check if their are changed tests"){
-            when{
-                branch pattern: '^(PR-.*|main)$',
-                comparator: 'REGEXP';
-            }
+        stage('Install konveyor operator & run on minikube'){  
             steps{
                 script{
                     checkout scm
-                    env.RUN_TESTS = "true" 
                     tackle.setGoTestsEnvVars() //Sets env sensitive env vars
-                }
-            }
-        }
-        stage('Install & run minikube'){
-            when {  
-                expression{
-                    env.RUN_TESTS == "true"
-                }
-            }   
-            steps{
-                script{
                     tackle.deployKonveyorOnMinikube()
                     echo "Applying tackle CR"
                     tackle.applyTackleCR()
                 }
             }
         }
-        stage('Run tackle go api tests'){
-           when { 
-                expression{
-                    env.RUN_TESTS == "true"
-                }
-            }   
+        stage('Run konveyor go tier3 tests'){ 
             steps{
                 script{
                     env.MINIKUBE_IP = sh(
@@ -73,16 +51,12 @@ pipeline{
         }
         success{
             script{
-                if(env.BRANCH_NAME=="main"){
-                    tackle.writeBuildStatus(passed=true,pipeline="tier3-pr")
-                }
+                tackle.writeBuildStatus(passed=true,pipeline="tier3-nightly")
             }
         }
         failure{
             script{
-                if(env.BRANCH_NAME=="main"){
-                    tackle.writeBuildStatus(passed=false,pipeline="tier3-pr") 
-                }
+                tackle.writeBuildStatus(passed=false,pipeline="tier3-nightly") 
             }
         } 
     }
