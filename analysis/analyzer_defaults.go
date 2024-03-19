@@ -6,7 +6,7 @@ import (
 )
 
 var Analyze = api.Task{
-	State: "Ready", // Created / Ready
+	State: "Created", // Created / Ready
 	Data:  defaultAnalyzerData,
 	Addon: "analyzer",
 }
