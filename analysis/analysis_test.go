@@ -116,8 +116,19 @@ func TestApplicationAnalysis(t *testing.T) {
 			if tc.Scope != nil {
 				taskData.Scope = *tc.Scope
 			}
+
+			taskData.Mode.Artifact = tc.Artifact
 			tc.Task.Data = taskData
 			assert.Should(t, RichClient.Task.Create(&tc.Task))
+
+			if tc.Artifact != "" {
+				// Upload binary file into the bucket
+				bucketContent := RichClient.Bucket.Content(tc.Task.Bucket.ID)
+				bucketContent.Put("data"+tc.Artifact, tc.Artifact)
+			}
+
+			tc.Task.State = "Ready"
+			assert.Should(t, RichClient.Task.Update(&tc.Task))
 
 			// Wait until task finishes
 			var task *api.Task

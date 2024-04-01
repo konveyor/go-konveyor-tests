@@ -34,5 +34,8 @@ var (
 		},
 		Binary: "io.konveyor.demo:customers-tomcat:0.0.1-SNAPSHOT:war",
 	}
-	ApplicationSamples = []api.Application{Minimal, PathfinderGit, BookServer, TackleTestapp}
+	UploadBinary = api.Application {
+		Name: "upload-binary",
+	}
+	ApplicationSamples = []api.Application{Minimal, PathfinderGit, BookServer, TackleTestapp, UploadBinary}
 )
