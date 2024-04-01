@@ -49,7 +49,6 @@ var AdministracionEfectivo = TC{
 		{Name: "JNI", Category: api.Ref{Name: "Other"}},
 		{Name: "Mail", Category: api.Ref{Name: "Other"}},
 		{Name: "Spring Scheduled", Category: api.Ref{Name: "Processing"}},
-		{Name: "EJB Timer", Category: api.Ref{Name: "Processing"}},
 		{Name: "Mail", Category: api.Ref{Name: "Connect"}},
 		{Name: "Servlet", Category: api.Ref{Name: "Connect"}},
 		{Name: "EAR Deployment", Category: api.Ref{Name: "Connect"}},
@@ -57,10 +56,8 @@ var AdministracionEfectivo = TC{
 		{Name: "JNI", Category: api.Ref{Name: "Java EE"}},
 		{Name: "Servlet", Category: api.Ref{Name: "Java EE"}},
 		{Name: "EAR Deployment", Category: api.Ref{Name: "Java EE"}},
-		{Name: "EJB Timer", Category: api.Ref{Name: "Java EE"}},
 		{Name: "Mail", Category: api.Ref{Name: "Java EE"}},
 		{Name: "Spring Scheduled", Category: api.Ref{Name: "Embedded"}},
 		{Name: "Spring Scheduled", Category: api.Ref{Name: "Execute"}},
-		{Name: "EJB Timer", Category: api.Ref{Name: "Execute"}},
 	},
 }
