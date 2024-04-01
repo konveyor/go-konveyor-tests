@@ -142,6 +142,11 @@ func TestApplicationAnalysis(t *testing.T) {
 				time.Sleep(Wait)
 			}
 
+			if task.State == "Running" {
+				t.Error("Timed out running the test. Details:")
+				pp.Println(task)
+			}
+
 			if task.State != "Succeeded" {
 				t.Error("Analyze Task failed. Details:")
 				pp.Println(task)
