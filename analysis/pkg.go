@@ -17,7 +17,7 @@ var (
 	RichClient *binding.RichClient
 
 	// Analysis waiting loop 5 minutes (60 * 5s)
-	Retry = 100
+	Retry = 200
 	Wait  = 5 * time.Second
 )
 
@@ -45,7 +45,7 @@ type TC struct {
 	Rules    addon.Rules
 	Scope    *addon.Scope
 	WithDeps bool
-	Binary bool
+	Binary   bool
 	Artifact string
 	// After-analysis assertions.
 	ReportContent map[string][]string

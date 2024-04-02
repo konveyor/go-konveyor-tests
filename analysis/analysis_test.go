@@ -5,6 +5,7 @@ import (
 	"crypto/cipher"
 	"crypto/sha256"
 	"encoding/hex"
+	"fmt"
 	"os"
 	"sort"
 	"strings"
@@ -139,6 +140,11 @@ func TestApplicationAnalysis(t *testing.T) {
 					break
 				}
 				time.Sleep(Wait)
+			}
+
+			if task.State == "Running" {
+				t.Error("Timed out running the test. Details:")
+				pp.Println(task)
 			}
 
 			if task.State != "Succeeded" {
@@ -279,10 +285,13 @@ func TestApplicationAnalysis(t *testing.T) {
 			if len(tc.AnalysisTags) > 0 {
 				if len(tc.AnalysisTags) != len(gotApp.Tags) {
 					t.Errorf("Different Tags amount error. Got: %d, expected: %d.\n", len(gotApp.Tags), len(tc.AnalysisTags))
-					t.Error("Got:")
-					pp.Println(gotApp.Tags)
-					t.Error("Expected:")
-					pp.Println(tc.AnalysisTags)
+					notFoundTags, unexpectedTags := getTagsDiff(tc.AnalysisTags, gotTags)
+					for _, notFoundTag := range notFoundTags {
+						pp.Println("Expected tag not found", notFoundTag)
+					}
+					for _, unexpectedTag := range unexpectedTags {
+						pp.Println("Unexpected tag found\n", unexpectedTag)
+					}
 				} else {
 					for i, got := range gotTags {
 						expected := tc.AnalysisTags[i]
@@ -338,4 +347,27 @@ func getDefaultToken() string {
 		return ""
 	}
 	return string(decrypted)
+}
+
+func getTagsDiff(want, got []api.Tag) (notFound []api.Tag, extras []api.Tag) {
+	tagKey := func(t api.Tag) string { return fmt.Sprintf("%s-%s", t.Category.Name, t.Name) }
+	wantTags := map[string]api.Tag{}
+	gotTags := map[string]api.Tag{}
+	for _, gotTag := range got {
+		gotTags[tagKey(gotTag)] = gotTag
+	}
+	for _, wantTag := range want {
+		wantTags[tagKey(wantTag)] = wantTag
+		// find tags we expect, but not present in output
+		if _, found := gotTags[tagKey(wantTag)]; !found {
+			notFound = append(notFound, wantTag)
+		}
+	}
+	for _, gotTag := range got {
+		// find tags we got, but we didn't expect
+		if _, found := wantTags[tagKey(gotTag)]; !found {
+			extras = append(extras, gotTag)
+		}
+	}
+	return
 }
