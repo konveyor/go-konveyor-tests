@@ -29,32 +29,32 @@ var (
 	TaskJiraServer = ExportApplicationsCase{
 		JiraInstance: jira.JiraServer,
 		TicketKind:   "3",        /* Task issuetypeId */
-		TicketParent: "12340621"} /* mta-qe-test projectId */
+		TicketParent: "12335626"} /* Migration Toolkit for Applications projectId */
 
 	StoryJiraServer = ExportApplicationsCase{
 		JiraInstance: jira.JiraServer,
 		TicketKind:   "17", /* Story */
-		TicketParent: "12340621"}
+		TicketParent: "12335626"}
 
 	BugJiraServer = ExportApplicationsCase{
 		JiraInstance: jira.JiraServer,
 		TicketKind:   "1", /* Bug */
-		TicketParent: "12340621"}
+		TicketParent: "12335626"}
 
 	TaskJiraUsingToken = ExportApplicationsCase{
 		JiraInstance: jira.JiraServerBearerToken, /* Using token for Jira connection */
 		TicketKind:   "3",                        /* Task issuetypeId */
-		TicketParent: "12340621"}                 /* mta-qe-test projectId */
+		TicketParent: "12335626"}
 
 	StoryJiraUsingToken = ExportApplicationsCase{
 		JiraInstance: jira.JiraServerBearerToken,
 		TicketKind:   "17", /* Story */
-		TicketParent: "12340621"}
+		TicketParent: "12335626"}
 
 	BugJiraUsingToken = ExportApplicationsCase{
 		JiraInstance: jira.JiraServerBearerToken,
 		TicketKind:   "1", /* Bug */
-		TicketParent: "12340621"}
+		TicketParent: "12335626"}
 
 	Samples = []ExportApplicationsCase{TaskJiraCloud, TaskJiraServer, TaskJiraUsingToken,
 		StoryJiraCloud, StoryJiraServer, StoryJiraUsingToken,
