@@ -21,7 +21,7 @@ var TackleTestappPrivateBinary = TC{
 	},
 	Binary: true,
 	Analysis: api.Analysis{
-		Effort: 16,
+		Effort: 15,
 		Issues: []api.Issue{
 			{
 				Category:    "mandatory",
@@ -47,11 +47,6 @@ var TackleTestappPrivateBinary = TC{
 					{
 						File:    "/bin/maven/java-project/src/main/java/io/konveyor/demo/config/ApplicationConfiguration.java",
 						Line:    8,
-						Message: "\n An application running inside a container could lose access to a file in local storage.",
-					},
-					{
-						File:    "/bin/maven/java-project/src/main/java/io/konveyor/demo/config/ApplicationConfiguration.java",
-						Line:    37,
 						Message: "\n An application running inside a container could lose access to a file in local storage.",
 					},
 					{
