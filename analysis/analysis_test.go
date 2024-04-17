@@ -190,10 +190,13 @@ func TestApplicationAnalysis(t *testing.T) {
 			// Check the analysis issues
 			if len(gotAnalysis.Issues) != len(tc.Analysis.Issues) {
 				t.Errorf("Different amount of issues error. Got %d, expected %d.", len(gotAnalysis.Issues), len(tc.Analysis.Issues))
-				t.Error("Got:")
-				pp.Println(gotAnalysis.Issues)
-				t.Error("Expected:")
-				pp.Println(tc.Analysis.Issues)
+				missing, unexpected := getIssuesDiff(tc.Analysis.Issues, gotAnalysis.Issues)
+				for _, issue := range missing {
+					fmt.Printf("Expected issue not found for rule %s.\n", issue.Rule)
+				}
+				for _, issue := range unexpected {
+					fmt.Printf("Unexpected issue found for rule %s.\n", issue.Rule)
+				}
 			} else {
 				for i, got := range gotAnalysis.Issues {
 					expected := tc.Analysis.Issues[i]
@@ -208,10 +211,13 @@ func TestApplicationAnalysis(t *testing.T) {
 					}
 					if len(got.Incidents) != len(expected.Incidents) {
 						t.Errorf("Different amount of incidents error. Got %d, expected %d.", len(got.Incidents), len(expected.Incidents))
-						t.Error("Got:")
-						pp.Println(got.Incidents)
-						t.Error("Expected:")
-						pp.Println(expected.Incidents)
+						missing, unexpected := getIncidentsDiff(expected.Incidents, got.Incidents)
+					    for _, incident := range missing {
+							fmt.Printf("Expected incident not found: %s line %d.\n", incident.File, incident.Line)
+					    }
+					    for _, incident := range unexpected {
+							fmt.Printf("Unexpected incident found: %s line %d.\n", incident.File, incident.Line)
+					    }
 
 					} else {
 						// Ensure stable order of Incidents.
@@ -347,27 +353,4 @@ func getDefaultToken() string {
 		return ""
 	}
 	return string(decrypted)
-}
-
-func getTagsDiff(want, got []api.Tag) (notFound []api.Tag, extras []api.Tag) {
-	tagKey := func(t api.Tag) string { return fmt.Sprintf("%s-%s", t.Category.Name, t.Name) }
-	wantTags := map[string]api.Tag{}
-	gotTags := map[string]api.Tag{}
-	for _, gotTag := range got {
-		gotTags[tagKey(gotTag)] = gotTag
-	}
-	for _, wantTag := range want {
-		wantTags[tagKey(wantTag)] = wantTag
-		// find tags we expect, but not present in output
-		if _, found := gotTags[tagKey(wantTag)]; !found {
-			notFound = append(notFound, wantTag)
-		}
-	}
-	for _, gotTag := range got {
-		// find tags we got, but we didn't expect
-		if _, found := wantTags[tagKey(gotTag)]; !found {
-			extras = append(extras, gotTag)
-		}
-	}
-	return
 }
