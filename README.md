@@ -124,7 +124,11 @@ For parallel test execution, set `export PARALLEL=1`.
 ## Configuration
 
 > **_NOTE:_** Before running tests, ensure that the required configuration variables are set as environment variables
-<!-- TODO (mguetta1): add config file for example -->
+
+Yoc can edit the configuration file [go-konveyor-tests.config](go-konveyor-tests.config) and run:
+```
+source go-konveyor-tests.config
+```
 
 ### Test-Specific Configuration
 
@@ -132,6 +136,7 @@ Refer to the `README.md` files in each folder for test-specific configuration de
 
 - [e2e/jiraintegration](https://github.com/konveyor/go-konveyor-tests/blob/main/e2e/jiraintegration/README.md)
 - [e2e/migrationwave](https://github.com/konveyor/go-konveyor-tests/blob/main/e2e/migrationwave/README.md)
+- [analysis](https://github.com/konveyor/go-konveyor-tests/blob/main/analysis/README.md#tier-3)
 
 ## Code of Conduct
 
