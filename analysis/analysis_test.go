@@ -192,12 +192,10 @@ func TestApplicationAnalysis(t *testing.T) {
 				t.Errorf("Different amount of issues error. Got %d, expected %d.", len(gotAnalysis.Issues), len(tc.Analysis.Issues))
 				missing, unexpected := getIssuesDiff(tc.Analysis.Issues, gotAnalysis.Issues)
 				for _, issue := range missing {
-					fmt.Println("Expected issue not found:")
-					pp.Println(issue)
+					fmt.Printf("Expected issue not found for rule %s.\n", issue.Rule)
 				}
 				for _, issue := range unexpected {
-					fmt.Println("Unexpected issue found:")
-					pp.Println(issue)
+					fmt.Printf("Unexpected issue found for rule %s.\n", issue.Rule)
 				}
 			} else {
 				for i, got := range gotAnalysis.Issues {
@@ -215,12 +213,10 @@ func TestApplicationAnalysis(t *testing.T) {
 						t.Errorf("Different amount of incidents error. Got %d, expected %d.", len(got.Incidents), len(expected.Incidents))
 						missing, unexpected := getIncidentsDiff(expected.Incidents, got.Incidents)
 					    for _, incident := range missing {
-							fmt.Println("Expected incident not found:")
-							pp.Println(incident)
+							fmt.Printf("Expected incident not found: %s line %d.\n", incident.File, incident.Line)
 					    }
 					    for _, incident := range unexpected {
-							fmt.Println("Unexpected incident found:")
-							pp.Println(incident)
+							fmt.Printf("Unexpected incident found: %s line %d.\n", incident.File, incident.Line)
 					    }
 
 					} else {
