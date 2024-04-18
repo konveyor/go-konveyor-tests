@@ -51,7 +51,7 @@ var TackleTestappPublicWithDeps = TC{
 					{
 						File:    "/cache/m2/io/konveyor/demo/configuration-utils/1.0.0/io/konveyor/demo/config/ApplicationConfiguration.java",
 						Line:    14,
-						Message: "\n An application running inside a container could lose access to a file in local storage",
+						Message: "An application running inside a container could lose access to a file in local storage",
 					},
 				},
 			},
@@ -569,6 +569,7 @@ var TackleTestappPublicWithDeps = TC{
 		{Name: "Micrometer", Category: api.Ref{Name: "Integration"}},
 		{Name: "Spring DI", Category: api.Ref{Name: "Inversion of Control"}},
 		{Name: "Spring Data JPA", Category: api.Ref{Name: "Persistence"}},
+		{Name: "JPA named queries", Category: api.Ref{Name: "Persistence"}},
 		{Name: "Properties", Category: api.Ref{Name: "Other"}},
 		{Name: "Spring Web", Category: api.Ref{Name: "Web"}},
 		{Name: "Spring DI", Category: api.Ref{Name: "Execute"}},
@@ -577,6 +578,7 @@ var TackleTestappPublicWithDeps = TC{
 		{Name: "Servlet", Category: api.Ref{Name: "Connect"}},
 		{Name: "Servlet", Category: api.Ref{Name: "Java EE"}},
 		{Name: "EJB XML", Category: api.Ref{Name: "Java EE"}},
+		{Name: "JPA named queries", Category: api.Ref{Name: "Java EE"}},
 		{Name: "Properties", Category: api.Ref{Name: "Sustain"}},
 		{Name: "Properties", Category: api.Ref{Name: "Embedded"}},
 		{Name: "Spring Web", Category: api.Ref{Name: "Embedded"}},
@@ -585,5 +587,6 @@ var TackleTestappPublicWithDeps = TC{
 		{Name: "Micrometer", Category: api.Ref{Name: "Embedded"}},
 		{Name: "Spring Web", Category: api.Ref{Name: "View"}},
 		{Name: "Spring Data JPA", Category: api.Ref{Name: "Store"}},
+		{Name: "JPA named queries", Category: api.Ref{Name: "Store"}},
 	},
 }
