@@ -101,7 +101,7 @@ func DumpTags(t *testing.T, tc TC, app api.Application) {
 	fmt.Printf("## GOT TAGS FOR \"%s\":", tc.Name)
 	fmt.Printf("\n[]api.Tag{\n")
 	for _, tag := range tags {
-		fmt.Printf("    {Name: \"%s\", Category: api.Ref{Name: \"%s\")},\n", tag.Name, tag.Category.Name)
+		fmt.Printf("    {Name: \"%s\", Category: api.Ref{Name: \"%s\"}},\n", tag.Name, tag.Category.Name)
 	}
 	fmt.Printf("}\n")
 }
