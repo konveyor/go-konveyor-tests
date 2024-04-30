@@ -38,15 +38,6 @@ Application analysis with credentials, which are supplied as part of the test co
 
 Test cases: https://github.com/konveyor/go-konveyor-tests/blob/main/analysis/test_cases.go#L31
 
-#### Test Requirements
-You should provide `GITHUB_USER` and `GITHUB_TOKEN` with write access to [tackle-testapp](https://github.com/konveyor/tackle-testapp) repository:
-
-```
-export GITHUB_USER=""
-export GITHUB_TOKEN=""
-TIER3=1 MAVEN_TESTAPP_USER=$(GITHUB_USER) MAVEN_TESTAPP_TOKEN=$(GITHUB_TOKEN) make test-analysis
-```
-
 ## Options
 
 [HUB_BASE_URL](https://github.com/konveyor/tackle2-hub/tree/main/test#rest-api) is required in the same way as in API test.

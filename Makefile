@@ -2,6 +2,10 @@ VENDOR_DIR ?= /tmp/konveyor-vendor
 ARCH ?= amd64
 JUNIT_REPORT_DIR ?= /tmp/junit-report
 
+# Set MAVEN_TESTAPP_USER to the value of GITHUB_USER if GITHUB_USER is defined
+MAVEN_TESTAPP_USER ?= $(GITHUB_USER)
+MAVEN_TESTAPP_TOKEN ?= $(GITHUB_TOKEN)
+
 
 # Setup local minikube with tackle - work in progress (TODO: enable auth)
 # This is for local setup, CI uses shared github actions
@@ -44,7 +48,7 @@ test-tier2:
 
 # TIER3
 test-tier3:
-	TIER3=1 MAVEN_TESTAPP_USER=$(GITHUB_USER) MAVEN_TESTAPP_TOKEN=$(GITHUB_TOKEN) $(MAKE) test-analysis
+	TIER3=1 $(MAKE) test-analysis
 	$(MAKE) test-jira
 	$(MAKE) test-migrationwave
 
