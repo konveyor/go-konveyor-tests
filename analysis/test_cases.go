@@ -25,8 +25,8 @@ var Tier2TestCases = []TC{
 	SeamBooking,
 }
 
-// Tier 3 Analysis test cases - should work
+// Tier 3 Analysis with credentials test cases - should work
 // List of applications with expected analysis outputs.
 var Tier3TestCases = []TC{
-	TackleTestappPrivateBinary,
+	TackleTestappPrivateBinary, // Needs GITHUB_USER and GITHUB_TOKEN env variables with Read access to https://github.com/konveyor/tackle-testapp
 }
