@@ -26,11 +26,17 @@ TIER1=1 make test-analysis
 
 More advanced analysis parameters. Great if works.
 
-Test cases: https://github.com/konveyor/go-konveyor-tests/blob/main/analysis/test_cases.go#L20
+Test cases: https://github.com/konveyor/go-konveyor-tests/blob/main/analysis/test_cases.go#L19
 
 ```
 TIER2=1 make test-analysis
 ```
+
+### Tier 3
+
+Application analysis with credentials, which are supplied as part of the test configuration. Should work.
+
+Test cases: https://github.com/konveyor/go-konveyor-tests/blob/main/analysis/test_cases.go#L31
 
 ## Options
 
