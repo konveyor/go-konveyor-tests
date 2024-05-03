@@ -5,6 +5,7 @@ import (
 	"crypto/cipher"
 	"crypto/sha256"
 	"encoding/hex"
+	"fmt"
 	"os"
 	"sort"
 	"strings"
@@ -141,6 +142,11 @@ func TestApplicationAnalysis(t *testing.T) {
 				time.Sleep(Wait)
 			}
 
+			if task.State == "Running" {
+				t.Error("Timed out running the test. Details:")
+				pp.Println(task)
+			}
+
 			if task.State != "Succeeded" {
 				t.Error("Analyze Task failed. Details:")
 				pp.Println(task)
@@ -184,10 +190,13 @@ func TestApplicationAnalysis(t *testing.T) {
 			// Check the analysis issues
 			if len(gotAnalysis.Issues) != len(tc.Analysis.Issues) {
 				t.Errorf("Different amount of issues error. Got %d, expected %d.", len(gotAnalysis.Issues), len(tc.Analysis.Issues))
-				t.Error("Got:")
-				pp.Println(gotAnalysis.Issues)
-				t.Error("Expected:")
-				pp.Println(tc.Analysis.Issues)
+				missing, unexpected := getIssuesDiff(tc.Analysis.Issues, gotAnalysis.Issues)
+				for _, issue := range missing {
+					fmt.Printf("Expected issue not found for rule %s.\n", issue.Rule)
+				}
+				for _, issue := range unexpected {
+					fmt.Printf("Unexpected issue found for rule %s.\n", issue.Rule)
+				}
 			} else {
 				for i, got := range gotAnalysis.Issues {
 					expected := tc.Analysis.Issues[i]
@@ -202,10 +211,13 @@ func TestApplicationAnalysis(t *testing.T) {
 					}
 					if len(got.Incidents) != len(expected.Incidents) {
 						t.Errorf("Different amount of incidents error. Got %d, expected %d.", len(got.Incidents), len(expected.Incidents))
-						t.Error("Got:")
-						pp.Println(got.Incidents)
-						t.Error("Expected:")
-						pp.Println(expected.Incidents)
+						missing, unexpected := getIncidentsDiff(expected.Incidents, got.Incidents)
+					    for _, incident := range missing {
+							fmt.Printf("Expected incident not found: %s line %d.\n", incident.File, incident.Line)
+					    }
+					    for _, incident := range unexpected {
+							fmt.Printf("Unexpected incident found: %s line %d.\n", incident.File, incident.Line)
+					    }
 
 					} else {
 						// Ensure stable order of Incidents.
@@ -279,10 +291,13 @@ func TestApplicationAnalysis(t *testing.T) {
 			if len(tc.AnalysisTags) > 0 {
 				if len(tc.AnalysisTags) != len(gotApp.Tags) {
 					t.Errorf("Different Tags amount error. Got: %d, expected: %d.\n", len(gotApp.Tags), len(tc.AnalysisTags))
-					t.Error("Got:")
-					pp.Println(gotApp.Tags)
-					t.Error("Expected:")
-					pp.Println(tc.AnalysisTags)
+					notFoundTags, unexpectedTags := getTagsDiff(tc.AnalysisTags, gotTags)
+					for _, notFoundTag := range notFoundTags {
+						pp.Println("Expected tag not found", notFoundTag)
+					}
+					for _, unexpectedTag := range unexpectedTags {
+						pp.Println("Unexpected tag found\n", unexpectedTag)
+					}
 				} else {
 					for i, got := range gotTags {
 						expected := tc.AnalysisTags[i]
