@@ -56,7 +56,8 @@ pipeline{
         }
         failure{
             script{
-                tackle.writeBuildStatus(passed=false,pipeline="tier3-nightly") 
+                tackle.writeBuildStatus(passed=false,pipeline="tier3-nightly")
+                tackle.sendTier3NightlyFailureNotification()
             }
         } 
     }
