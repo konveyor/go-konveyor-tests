@@ -78,7 +78,7 @@ var AcmeairWebapp = TC{
 			},
 			{
 				Category:    "mandatory",
-				Description: "The package 'javax' has been replaced by 'jakarta.',
+				Description: "The package \'javax\' has been replaced by \'jakarta\'.",
 				Effort:      1,
 				RuleSet:     "eap8/eap7",
 				Rule:        "javax-to-jakarta-import-00001",
