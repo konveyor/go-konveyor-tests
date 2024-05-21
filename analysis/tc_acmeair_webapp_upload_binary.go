@@ -78,7 +78,7 @@ var AcmeairWebapp = TC{
 			},
 			{
 				Category:    "mandatory",
-				Description: "The package \'javax\' has been replaced by \'jakarta\'.",
+				Description: "The package 'javax' has been replaced by 'jakarta'.",
 				Effort:      1,
 				RuleSet:     "eap8/eap7",
 				Rule:        "javax-to-jakarta-import-00001",
@@ -202,7 +202,7 @@ var AcmeairWebapp = TC{
 		},
 		{
 			Name:     "commons-logging.commons-logging",
-			Version:  "1.1.1,"
+			Version:  "1.1.1",
 			SHA:      "5043bfebc3db072ed80fbd362e7caf00e885d8ae",
 			Provider: "java",
 			Labels:   []string{"konveyor.io/dep-source=open-source", "konveyor.io/language=java"},
