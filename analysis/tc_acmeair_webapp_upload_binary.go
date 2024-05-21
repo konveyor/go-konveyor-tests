@@ -207,4 +207,5 @@ var AcmeairWebapp = TC{
 			Provider: "java",
 			Labels:   []string{"konveyor.io/dep-source=open-source", "konveyor.io/language=java"},
 		},
+	},
 }
