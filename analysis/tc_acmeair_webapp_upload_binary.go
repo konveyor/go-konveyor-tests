@@ -157,6 +157,5 @@ var AcmeairWebapp = TC{
 		{Name: "RMI", Category: api.Ref{Name: "Java EE"}},
 		{Name: "Servlet", Category: api.Ref{Name: "Java EE"}},
 		{Name: "JPA named queries", Category: api.Ref{Name: "Store"}},
-		{Name: "Spring Web", Category: api.Ref{Name: "View"}},
 	},
 }
