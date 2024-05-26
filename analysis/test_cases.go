@@ -5,6 +5,7 @@ package analysis
 var Tier0TestCases = []TC{
 	TackleTestappPublicWithDeps,
 	TackleTestappPublicPackageFilter,
+	AcmeairWebapp,
 }
 
 // Tier 1 Analysis test cases - should work.
