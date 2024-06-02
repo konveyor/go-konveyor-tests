@@ -18,7 +18,7 @@ var AcmeairWebapp = TC{
 	Binary:   true,
 	Artifact: "/binary/acmeair-webapp-1.0-SNAPSHOT.war",
 	Analysis: api.Analysis{
-		Effort: 36,
+		Effort: 54,
 		Issues: []api.Issue{
 			{
 				Category:    "mandatory",
@@ -149,13 +149,7 @@ var AcmeairWebapp = TC{
 	},
 	AnalysisTags: []api.Tag{
 		{Name: "Servlet", Category: api.Ref{Name: "HTTP"}},
-		{Name: "RMI", Category: api.Ref{Name: "Other"}},
-		{Name: "JPA named queries", Category: api.Ref{Name: "Persistence"}},
-		{Name: "RMI", Category: api.Ref{Name: "Connect"}},
 		{Name: "Servlet", Category: api.Ref{Name: "Connect"}},
-		{Name: "JPA named queries", Category: api.Ref{Name: "Java EE"}},
-		{Name: "RMI", Category: api.Ref{Name: "Java EE"}},
 		{Name: "Servlet", Category: api.Ref{Name: "Java EE"}},
-		{Name: "JPA named queries", Category: api.Ref{Name: "Store"}},
 	},
 }
