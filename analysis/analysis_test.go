@@ -96,17 +96,16 @@ func TestApplicationAnalysis(t *testing.T) {
 			//	taskData.Rules = append(taskData.Rules, api.Ref{ID: r.ID, Name: r.Name})
 			//}
 			if tc.Labels != nil {
-				fmt.Println("pridavam rules LABELS")
 				taskData["rules"] = api.Map{"labels": tc.Labels}
 			}
 			//if tc.Rules["path"] != "" { // TODO: better rules handling
 			//	taskData["rules"] = tc.Rules
 			//}
 			if tc.WithDeps == true {
-				taskData["mode"].(api.Map)["WithDeps"] = true
+				taskData["mode"] = api.Map{"withDeps": true}
 			}
 			if tc.Binary {
-				taskData["mode"].(api.Map)["Binary"] = true
+				taskData["mode"].(api.Map)["binary"] = true
 			}
 			if tc.Scope != nil {
 				taskData["scope"] = *tc.Scope

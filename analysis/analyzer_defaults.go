@@ -19,7 +19,7 @@ var defaultAnalyzerData = api.Map{
 		// Diva:     true,
 	},
 	"scope": api.Map{
-		"WithKnown": false,
+		"withKnown": false,
 	},
 	"rules": api.Map{
 		"path": "",
