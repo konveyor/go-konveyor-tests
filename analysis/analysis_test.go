@@ -111,7 +111,8 @@ func TestApplicationAnalysis(t *testing.T) {
 				taskData["scope"] = *tc.Scope
 			}
 
-			taskData["mode"].(api.Map)["artifact"] = tc.Artifact
+			// Temporary disabling artifact / binary upload
+			//taskData["mode"].(api.Map)["artifact"] = tc.Artifact
 			tc.Task.Data = taskData
 			assert.Should(t, RichClient.Task.Create(&tc.Task))
 

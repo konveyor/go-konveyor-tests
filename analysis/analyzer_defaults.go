@@ -13,10 +13,9 @@ var Analyze = api.Task{
 var defaultAnalyzerData = api.Map{
 	"output": "/windup/report",
 	"mode": api.Map{
-		"Artifact": "",
-		"Binary":   false,
-		"WithDeps": false,
-		// Diva:     true,
+		"artifact": "",
+		"binary":   false,
+		"withDeps": false,
 	},
 	"scope": api.Map{
 		"withKnown": false,
