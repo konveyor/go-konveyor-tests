@@ -5,7 +5,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/konveyor/go-konveyor-tests/hack/addon"
 	"github.com/konveyor/tackle2-hub/api"
 	"github.com/konveyor/tackle2-hub/binding"
 	"github.com/konveyor/tackle2-hub/test/api/client"
@@ -38,12 +37,12 @@ type TC struct {
 	Identities  []api.Identity
 	// Analysis parameters.
 	Task     api.Task
-	TaskData string
-	Sources  []string
-	Targets  []string
-	Labels   addon.Labels
-	Rules    addon.Rules
-	Scope    *addon.Scope
+	TaskData api.Map
+	//Sources  []string
+	//Targets  []string
+	Labels   api.Map
+	Rules    api.Map
+	Scope    *api.Map
 	WithDeps bool
 	Binary   bool
 	Artifact string

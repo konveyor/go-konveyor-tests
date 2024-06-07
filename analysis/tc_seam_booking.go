@@ -20,8 +20,10 @@ var SeamBooking = TC{
 			"3\nInformation",
 		},
 	},
-	Targets: []string{
-		"cloud-readiness",
+	Labels: api.Map{
+		"included": []string{
+			"konveyor.io/target=cloud-readiness",
+		},
 	},
 	Analysis: api.Analysis{
 		Effort: 0,

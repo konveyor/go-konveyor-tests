@@ -13,7 +13,6 @@ import (
 	"time"
 
 	"github.com/k0kubun/pp"
-	"github.com/konveyor/go-konveyor-tests/hack/addon"
 	"github.com/konveyor/go-konveyor-tests/hack/uniq"
 	"github.com/konveyor/tackle2-hub/api"
 	"github.com/konveyor/tackle2-hub/binding"
@@ -92,33 +91,27 @@ func TestApplicationAnalysis(t *testing.T) {
 			// Prepare and submit the analyze task.
 			// tc.Task.Addon = analyzerAddon
 			tc.Task.Application = &api.Ref{ID: tc.Application.ID}
-			taskData := tc.Task.Data.(addon.Data)
+			taskData := tc.Task.Data
 			//for _, r := range tc.CustomRules {
 			//	taskData.Rules = append(taskData.Rules, api.Ref{ID: r.ID, Name: r.Name})
 			//}
-			if len(tc.Sources) > 0 {
-				taskData.Sources = tc.Sources
+			if tc.Labels != nil {
+				taskData["rules"] = api.Map{"labels": tc.Labels}
 			}
-			if len(tc.Targets) > 0 {
-				taskData.Targets = tc.Targets
-			}
-			if len(tc.Labels.Included) > 0 || len(tc.Labels.Excluded) > 0 {
-				taskData.Rules.Labels = tc.Labels
-			}
-			if tc.Rules.Path != "" { // TODO: better rules handling
-				taskData.Rules = tc.Rules
+			if tc.Rules["Path"] != "" { // TODO: better rules handling
+				taskData["Rules"] = tc.Rules
 			}
 			if tc.WithDeps == true {
-				taskData.Mode.WithDeps = true
+				taskData["Mode"].(api.Map)["WithDeps"] = true
 			}
 			if tc.Binary {
-				taskData.Mode.Binary = true
+				taskData["Mode"].(api.Map)["Binary"] = true
 			}
 			if tc.Scope != nil {
-				taskData.Scope = *tc.Scope
+				taskData["Scope"] = *tc.Scope
 			}
 
-			taskData.Mode.Artifact = tc.Artifact
+			taskData["Mode"].(api.Map)["Artifact"] = tc.Artifact
 			tc.Task.Data = taskData
 			assert.Should(t, RichClient.Task.Create(&tc.Task))
 

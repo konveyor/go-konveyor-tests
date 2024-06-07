@@ -19,9 +19,11 @@ var Daytrader = TC{
 			"6\nInformation",
 		},
 	},
-	Targets: []string{
-		"cloud-readiness",
-		"quarkus",
+	Labels: api.Map{
+		"included": []string{
+			"konveyor.io/target=cloud-readiness",
+			"konveyor.io/target=quarkus",
+		},
 	},
 	Analysis: api.Analysis{
 		Effort: 0,

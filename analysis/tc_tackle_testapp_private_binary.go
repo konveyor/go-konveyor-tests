@@ -3,7 +3,6 @@ package analysis
 import (
 	"github.com/konveyor/go-konveyor-tests/data"
 	"github.com/konveyor/go-konveyor-tests/data/identity"
-	"github.com/konveyor/go-konveyor-tests/hack/addon"
 	"github.com/konveyor/tackle2-hub/api"
 )
 
@@ -14,8 +13,8 @@ var TackleTestappPrivateBinary = TC{
 		identity.TackleTestappMaven,
 	},
 	Task: Analyze,
-	Labels: addon.Labels{
-		Included: []string{
+	Labels: api.Map{
+		"included": []string{
 			"konveyor.io/target=cloud-readiness",
 		},
 	},

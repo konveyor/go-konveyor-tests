@@ -15,9 +15,11 @@ var Tomcat = TC{
 		},
 	},
 	Task: Analyze,
-	Targets: []string{
-		"cloud-readiness",
-		"linux",
+	Labels: api.Map{
+		"included": []string{
+			"konveyor.io/target=cloud-readiness",
+			"konveyor.io/target=linux",
+		},
 	},
 	Analysis: api.Analysis{
 		Effort: 1,

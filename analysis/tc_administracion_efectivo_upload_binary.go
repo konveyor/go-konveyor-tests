@@ -2,7 +2,6 @@ package analysis
 
 import (
 	"github.com/konveyor/go-konveyor-tests/data"
-	"github.com/konveyor/go-konveyor-tests/hack/addon"
 	"github.com/konveyor/tackle2-hub/api"
 )
 
@@ -10,8 +9,8 @@ var AdministracionEfectivo = TC{
 	Name:        "administracion-efectivo",
 	Application: data.UploadBinary,
 	Task:        Analyze,
-	Labels: addon.Labels{
-		Included: []string{
+	Labels: api.Map{
+		"included": []string{
 			"konveyor.io/target=cloud-readiness",
 		},
 	},

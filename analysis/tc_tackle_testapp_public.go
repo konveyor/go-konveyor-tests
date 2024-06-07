@@ -1,7 +1,6 @@
 package analysis
 
 import (
-	"github.com/konveyor/go-konveyor-tests/hack/addon"
 	"github.com/konveyor/tackle2-hub/api"
 )
 
@@ -18,8 +17,8 @@ var TackleTestappPublic = TC{
 	Application: TackleTestApp,
 	Task:        Analyze,
 	WithDeps:    false,
-	Labels: addon.Labels{
-		Included: []string{
+	Labels: api.Map{
+		"included": []string{
 			"konveyor.io/target=cloud-readiness",
 			"konveyor.io/target=linux",
 		},

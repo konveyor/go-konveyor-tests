@@ -1,7 +1,6 @@
 package analysis
 
 import (
-	"github.com/konveyor/go-konveyor-tests/hack/addon"
 	"github.com/konveyor/tackle2-hub/api"
 )
 
@@ -11,29 +10,27 @@ var Analyze = api.Task{
 	Addon: "analyzer",
 }
 
-var defaultAnalyzerData = addon.Data{
-	Output: "/windup/report",
-	Mode: addon.Mode{
-		Artifact: "",
-		Binary:   false,
-		WithDeps: false,
+var defaultAnalyzerData = api.Map{
+	"Output": "/windup/report",
+	"Mode": api.Map{
+		"Artifact": "",
+		"Binary":   false,
+		"WithDeps": false,
 		// Diva:     true,
 	},
-	Sources: []string{},
-	Targets: []string{},
-	Scope: addon.Scope{
-		WithKnown: false,
+	"Scope": api.Map{
+		"WithKnown": false,
 	},
-	Rules: addon.Rules{
-		Path: "",
-		Labels: addon.Labels{
-			Excluded: []string{},
-			Included: []string{
+	"Rules": api.Map{
+		"Path": "",
+		"Labels": api.Map{
+			"Excluded": []string{},
+			"Included": []string{
 				"cloud-readiness",
 			},
 		},
 	},
-	Tagger: addon.Tagger{
-		Enabled: true,
+	"Tagger": api.Map{
+		"Enabled": true,
 	},
 }
