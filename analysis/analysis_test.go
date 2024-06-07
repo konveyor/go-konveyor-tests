@@ -96,22 +96,23 @@ func TestApplicationAnalysis(t *testing.T) {
 			//	taskData.Rules = append(taskData.Rules, api.Ref{ID: r.ID, Name: r.Name})
 			//}
 			if tc.Labels != nil {
+				fmt.Println("pridavam rules LABELS")
 				taskData["rules"] = api.Map{"labels": tc.Labels}
 			}
-			if tc.Rules["Path"] != "" { // TODO: better rules handling
-				taskData["Rules"] = tc.Rules
-			}
+			//if tc.Rules["path"] != "" { // TODO: better rules handling
+			//	taskData["rules"] = tc.Rules
+			//}
 			if tc.WithDeps == true {
-				taskData["Mode"].(api.Map)["WithDeps"] = true
+				taskData["mode"].(api.Map)["WithDeps"] = true
 			}
 			if tc.Binary {
-				taskData["Mode"].(api.Map)["Binary"] = true
+				taskData["mode"].(api.Map)["Binary"] = true
 			}
 			if tc.Scope != nil {
-				taskData["Scope"] = *tc.Scope
+				taskData["scope"] = *tc.Scope
 			}
 
-			taskData["Mode"].(api.Map)["Artifact"] = tc.Artifact
+			taskData["mode"].(api.Map)["artifact"] = tc.Artifact
 			tc.Task.Data = taskData
 			assert.Should(t, RichClient.Task.Create(&tc.Task))
 

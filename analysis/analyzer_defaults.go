@@ -11,26 +11,26 @@ var Analyze = api.Task{
 }
 
 var defaultAnalyzerData = api.Map{
-	"Output": "/windup/report",
-	"Mode": api.Map{
+	"output": "/windup/report",
+	"mode": api.Map{
 		"Artifact": "",
 		"Binary":   false,
 		"WithDeps": false,
 		// Diva:     true,
 	},
-	"Scope": api.Map{
+	"scope": api.Map{
 		"WithKnown": false,
 	},
-	"Rules": api.Map{
-		"Path": "",
-		"Labels": api.Map{
-			"Excluded": []string{},
-			"Included": []string{
+	"rules": api.Map{
+		"path": "",
+		"labels": api.Map{
+			"excluded": []string{},
+			"included": []string{
 				"cloud-readiness",
 			},
 		},
 	},
-	"Tagger": api.Map{
-		"Enabled": true,
+	"tagger": api.Map{
+		"enabled": true,
 	},
 }
