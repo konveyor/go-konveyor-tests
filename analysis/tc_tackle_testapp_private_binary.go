@@ -9,7 +9,7 @@ import (
 
 var TackleTestappPrivateBinary = TC{
 	Name:        "tackle-testapp-binary",
-	Application: data.TackleTestapp,
+	Application: data.TackleTestappBin,
 	Identities: []api.Identity{
 		identity.TackleTestappMaven,
 	},

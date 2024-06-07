@@ -26,7 +26,7 @@ var (
 			URL:  "https://github.com/ibraginsky/book-server",
 		},
 	}
-	TackleTestapp = api.Application{
+	TackleTestappBin = api.Application{
 		Name: "tackle-testapp",
 		Repository: &api.Repository{
 			Kind: "subversion",
@@ -37,5 +37,24 @@ var (
 	UploadBinary = api.Application {
 		Name: "upload-binary",
 	}
-	ApplicationSamples = []api.Application{Minimal, PathfinderGit, BookServer, TackleTestapp, UploadBinary}
+
+	// Analysis Application samples based on TackleTestAppPublic
+	TackleTestApp = api.Application{
+		Name: "Tackle Testapp public",
+		Repository: &api.Repository{
+			Kind: "git",
+			URL:  "https://github.com/konveyor/tackle-testapp-public",
+			Branch: "main",
+		},
+	}
+	TackleTestAppGradle = api.Application{
+		Name: "Tackle Testapp public gradle",
+		Repository: &api.Repository{
+			Kind: "git",
+			URL:  "https://github.com/konveyor/tackle-testapp-public",
+			Branch: "gradle",
+		},
+	}
+
+	ApplicationSamples = []api.Application{Minimal, PathfinderGit, BookServer, TackleTestappBin, UploadBinary, TackleTestApp, TackleTestAppGradle}
 )
