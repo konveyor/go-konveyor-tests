@@ -36,7 +36,7 @@ var TackleTestappPublic = TC{
 				Rule:        "hardcoded-ip-address",
 				Incidents: []api.Incident{
 					{
-						File:     "/addon/source/tackle-testapp-public/src/main/resources/persistence.properties",
+						File:     "/shared/source/tackle-testapp-public/src/main/resources/persistence.properties",
 						Line:     2,
 						Message:  "When migrating environments, hard-coded IP addresses may need to be modified or eliminated.",
 						CodeSnip: "jdbc.url=jdbc:oracle:thin:@10.19.2.93:15",
@@ -51,43 +51,43 @@ var TackleTestappPublic = TC{
 				Rule:        "local-storage-00001",
 				Incidents: []api.Incident{
 					{
-						File:     "/addon/source/tackle-testapp-public/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
+						File:     "/shared/source/tackle-testapp-public/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
 						Line:     45,
 						Message:  "An application running inside a container could lose access to a file in local storage.. Recommendations. The following recommendations depend on the function of the file in local storage:. * Logging: Log to standard output and use a centralized log collector to analyze the logs.. * Caching: Use a cache backing service.. * Configuration: Store configuration settings in environment variables so that they can be updated without code changes.. * Data storage: Use a database backing service for relational data or use a persistent data storage system.. * Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.",
 						CodeSnip: "dataSource.setDriverClassName(config.getProperty(\"jdbc.driverClassName\"));",
 					},
 					{
-						File:     "/addon/source/tackle-testapp-public/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
+						File:     "/shared/source/tackle-testapp-public/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
 						Line:     46,
 						Message:  "An application running inside a container could lose access to a file in local storage.. Recommendations. The following recommendations depend on the function of the file in local storage:. * Logging: Log to standard output and use a centralized log collector to analyze the logs.. * Caching: Use a cache backing service.. * Configuration: Store configuration settings in environment variables so that they can be updated without code changes.. * Data storage: Use a database backing service for relational data or use a persistent data storage system.. * Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.",
 						CodeSnip: "dataSource.setUrl(config.getProperty(\"jdbc.url\"));",
 					},
 					{
-						File:     "/addon/source/tackle-testapp-public/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
+						File:     "/shared/source/tackle-testapp-public/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
 						Line:     47,
 						Message:  "An application running inside a container could lose access to a file in local storage.. Recommendations. The following recommendations depend on the function of the file in local storage:. * Logging: Log to standard output and use a centralized log collector to analyze the logs.. * Caching: Use a cache backing service.. * Configuration: Store configuration settings in environment variables so that they can be updated without code changes.. * Data storage: Use a database backing service for relational data or use a persistent data storage system.. * Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.",
 						CodeSnip: "dataSource.setUsername(config.getProperty(\"jdbc.user\"));",
 					},
 					{
-						File:     "/addon/source/tackle-testapp-public/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
+						File:     "/shared/source/tackle-testapp-public/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
 						Line:     48,
 						Message:  "An application running inside a container could lose access to a file in local storage.. Recommendations. The following recommendations depend on the function of the file in local storage:. * Logging: Log to standard output and use a centralized log collector to analyze the logs.. * Caching: Use a cache backing service.. * Configuration: Store configuration settings in environment variables so that they can be updated without code changes.. * Data storage: Use a database backing service for relational data or use a persistent data storage system.. * Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.",
 						CodeSnip: "dataSource.setPassword(config.getProperty(\"jdbc.password\"));",
 					},
 					{
-						File:     "/addon/source/tackle-testapp-public/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
+						File:     "/shared/source/tackle-testapp-public/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
 						Line:     56,
 						Message:  "An application running inside a container could lose access to a file in local storage.. Recommendations. The following recommendations depend on the function of the file in local storage:. * Logging: Log to standard output and use a centralized log collector to analyze the logs.. * Caching: Use a cache backing service.. * Configuration: Store configuration settings in environment variables so that they can be updated without code changes.. * Data storage: Use a database backing service for relational data or use a persistent data storage system.. * Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.",
 						CodeSnip: "transactionManager.setEntityManagerFactory(",
 					},
 					{
-						File:     "/addon/source/tackle-testapp-public/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
+						File:     "/shared/source/tackle-testapp-public/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
 						Line:     68,
 						Message:  "An application running inside a container could lose access to a file in local storage.. Recommendations. The following recommendations depend on the function of the file in local storage:. * Logging: Log to standard output and use a centralized log collector to analyze the logs.. * Caching: Use a cache backing service.. * Configuration: Store configuration settings in environment variables so that they can be updated without code changes.. * Data storage: Use a database backing service for relational data or use a persistent data storage system.. * Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.",
 						CodeSnip: "hibernateProperties.setProperty(\"hibernate.hbm2ddl.auto\", config.getProperty(\"hibernate.hbm2ddl.auto\"));",
 					},
 					{
-						File:     "/addon/source/tackle-testapp-public/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
+						File:     "/shared/source/tackle-testapp-public/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
 						Line:     69,
 						Message:  "An application running inside a container could lose access to a file in local storage.. Recommendations. The following recommendations depend on the function of the file in local storage:. * Logging: Log to standard output and use a centralized log collector to analyze the logs.. * Caching: Use a cache backing service.. * Configuration: Store configuration settings in environment variables so that they can be updated without code changes.. * Data storage: Use a database backing service for relational data or use a persistent data storage system.. * Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.",
 						CodeSnip: "hibernateProperties.setProperty(\"hibernate.dialect\", config.getProperty(\"hibernate.dialect\"));",

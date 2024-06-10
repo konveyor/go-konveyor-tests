@@ -13,7 +13,6 @@ import (
 	"time"
 
 	"github.com/k0kubun/pp"
-	"github.com/konveyor/go-konveyor-tests/hack/addon"
 	"github.com/konveyor/go-konveyor-tests/hack/uniq"
 	"github.com/konveyor/tackle2-hub/api"
 	"github.com/konveyor/tackle2-hub/binding"
@@ -92,7 +91,7 @@ func TestApplicationAnalysis(t *testing.T) {
 			// Prepare and submit the analyze task.
 			// tc.Task.Addon = analyzerAddon
 			tc.Task.Application = &api.Ref{ID: tc.Application.ID}
-			taskData := tc.Task.Data.(addon.Data)
+			taskData := AnalyzeDataDefault
 			//for _, r := range tc.CustomRules {
 			//	taskData.Rules = append(taskData.Rules, api.Ref{ID: r.ID, Name: r.Name})
 			//}
