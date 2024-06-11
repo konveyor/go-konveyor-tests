@@ -7,11 +7,10 @@ import (
 
 var Analyze = api.Task{
 	State: "Created", // Created / Ready
-	Data:  defaultAnalyzerData,
 	Addon: "analyzer",
 }
 
-var defaultAnalyzerData = addon.Data{
+var AnalyzeDataDefault = addon.Data{
 	Output: "/windup/report",
 	Mode: addon.Mode{
 		Artifact: "",

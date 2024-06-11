@@ -34,7 +34,7 @@ var TackleTestappPublicWithDeps = TC{
 				Rule:        "hardcoded-ip-address",
 				Incidents: []api.Incident{
 					{
-						File:     "/addon/source/tackle-testapp-public/src/main/resources/persistence.properties",
+						File:     "/shared/source/tackle-testapp-public/src/main/resources/persistence.properties",
 						Line:     2,
 						Message:  "When migrating environments, hard-coded IP addresses may need to be modified or eliminated.",
 						CodeSnip: "jdbc.url=jdbc:oracle:thin:@10.19.2.93:15",
@@ -49,7 +49,7 @@ var TackleTestappPublicWithDeps = TC{
 				Rule:        "local-storage-00001",
 				Incidents: []api.Incident{
 					{
-						File:    "/cache/m2/io/konveyor/demo/configuration-utils/1.0.0/io/konveyor/demo/config/ApplicationConfiguration.java",
+						File:    "/root/.m2/repository/io/konveyor/demo/configuration-utils/1.0.0/io/konveyor/demo/config/ApplicationConfiguration.java",
 						Line:    14,
 						Message: "An application running inside a container could lose access to a file in local storage",
 					},
