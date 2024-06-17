@@ -26,6 +26,6 @@ if [ ! -d $HUB_TMP_DIR ]; then
 fi
 
 cd $HUB_TMP_DIR
-git pull origin ${BRANCH}
+git checkout -b api-tests-run origin/${BRANCH}
 
 make test-api
