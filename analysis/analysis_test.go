@@ -291,8 +291,8 @@ func TestApplicationAnalysis(t *testing.T) {
 
 			// Check Tags (if specified by TestCase).
 			if len(tc.AnalysisTags) > 0 {
-				if len(tc.AnalysisTags) != len(gotApp.Tags) {
-					t.Errorf("Different Tags amount error. Got: %d, expected: %d.\n", len(gotApp.Tags), len(tc.AnalysisTags))
+				if len(tc.AnalysisTags) != len(gotTags) {
+					t.Errorf("Different Tags amount error. Got: %d, expected: %d.\n", len(gotTags), len(tc.AnalysisTags))
 					notFoundTags, unexpectedTags := getTagsDiff(tc.AnalysisTags, gotTags)
 					for _, notFoundTag := range notFoundTags {
 						pp.Println("Expected tag not found", notFoundTag)
