@@ -11,7 +11,6 @@ var Analyze = api.Task{
 }
 
 var AnalyzeDataDefault = addon.Data{
-	Output: "/windup/report",
 	Mode: addon.Mode{
 		Artifact: "",
 		Binary:   false,
@@ -28,7 +27,7 @@ var AnalyzeDataDefault = addon.Data{
 		Labels: addon.Labels{
 			Excluded: []string{},
 			Included: []string{
-				"cloud-readiness",
+				"konveyor.io/target=cloud-readiness",
 			},
 		},
 	},
