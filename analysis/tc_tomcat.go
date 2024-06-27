@@ -27,7 +27,7 @@ var Tomcat = TC{
 				Rule:        "hardcoded-ip-address",
 				Incidents: []api.Incident{
 					{
-						File:     "/shared/source/example-applications/example-1/src/main/resources/persistence.properties",
+						File:     "/addon/source/example-applications/example-1/src/main/resources/persistence.properties",
 						Line:     2,
 						Message:  "When migrating environments, hard-coded IP addresses may need to be modified or eliminated.",
 						CodeSnip: "jdbc.url=jdbc:oracle:thin:@169.60.225.216:1521/XEPDB1",
