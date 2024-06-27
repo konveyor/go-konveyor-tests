@@ -353,3 +353,5 @@ func getDefaultToken() string {
 	}
 	return string(decrypted)
 }
+
+// DeleteMe
