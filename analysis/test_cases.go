@@ -5,6 +5,8 @@ package analysis
 var Tier0TestCases = []TC{
 	TackleTestappPublicWithDeps,
 	TackleTestappPublicPackageFilter,
+	AcmeairWebapp,
+	Tomcat,
 }
 
 // Tier 1 Analysis test cases - should work.
@@ -17,7 +19,6 @@ var Tier1TestCases = []TC{
 // List of applications with expected analysis outputs.
 var Tier2TestCases = []TC{
 	AdministracionEfectivo,
-	Tomcat,
 	TackleTestappPublic,
 	Daytrader,
 	PetclinicHazelcast,
