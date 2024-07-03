@@ -130,6 +130,7 @@ func TestApplicationAnalysis(t *testing.T) {
 			tc.Task.State = "Ready"
 			assert.Should(t, RichClient.Task.Update(&tc.Task))
 
+			_, debug := os.LookupEnv("DEBUG")
 			// Wait until task finishes
 			var task *api.Task
 			var err error
@@ -148,6 +149,9 @@ func TestApplicationAnalysis(t *testing.T) {
 
 			if task.State != "Succeeded" {
 				t.Error("Analyze Task failed. Details:")
+				pp.Println(task)
+			}
+			if debug {
 				pp.Println(task)
 			}
 
@@ -211,12 +215,12 @@ func TestApplicationAnalysis(t *testing.T) {
 					if len(got.Incidents) != len(expected.Incidents) {
 						t.Errorf("Different amount of incidents error. Got %d, expected %d.", len(got.Incidents), len(expected.Incidents))
 						missing, unexpected := getIncidentsDiff(expected.Incidents, got.Incidents)
-					    for _, incident := range missing {
+						for _, incident := range missing {
 							fmt.Printf("Expected incident not found: %s line %d.\n", incident.File, incident.Line)
-					    }
-					    for _, incident := range unexpected {
+						}
+						for _, incident := range unexpected {
 							fmt.Printf("Unexpected incident found: %s line %d.\n", incident.File, incident.Line)
-					    }
+						}
 
 					} else {
 						// Ensure stable order of Incidents.
