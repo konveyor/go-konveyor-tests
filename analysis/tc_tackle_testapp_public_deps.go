@@ -24,7 +24,7 @@ var TackleTestappPublicWithDeps = TC{
 
 	},
 	Analysis: api.Analysis{
-		Effort: 2,
+		Effort: 1,
 		Issues: []api.Issue{
 			{
 				Category:    "mandatory",
