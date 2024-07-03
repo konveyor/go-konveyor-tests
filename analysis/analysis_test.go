@@ -176,7 +176,6 @@ func TestApplicationAnalysis(t *testing.T) {
 			}
 			gotAnalysis.Issues = mandatoryIssues
 
-			_, debug := os.LookupEnv("DEBUG")
 			if debug {
 				DumpAnalysis(t, tc, gotAnalysis)
 			}
