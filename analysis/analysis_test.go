@@ -1,12 +1,14 @@
 package analysis
 
 import (
+	"context"
 	"crypto/aes"
 	"crypto/cipher"
 	"crypto/sha256"
 	"encoding/hex"
 	"fmt"
 	"os"
+	"path"
 	"sort"
 	"strings"
 	"testing"
@@ -16,7 +18,10 @@ import (
 	"github.com/konveyor/go-konveyor-tests/hack/uniq"
 	"github.com/konveyor/tackle2-hub/api"
 	"github.com/konveyor/tackle2-hub/binding"
+	"github.com/konveyor/tackle2-hub/k8s"
 	"github.com/konveyor/tackle2-hub/test/assert"
+	v1 "k8s.io/api/core/v1"
+	k8sclient "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
 // Test application analysis
@@ -139,6 +144,22 @@ func TestApplicationAnalysis(t *testing.T) {
 					break
 				}
 				time.Sleep(Wait)
+			}
+
+			if task.State == "Pending" {
+				x, err := k8s.NewClient()
+				if err != nil {
+					t.Fatalf("")
+				}
+				pod := &v1.Pod{}
+				err = x.Get(
+					context.TODO(),
+					k8sclient.ObjectKey{
+						Namespace: path.Dir(task.Pod),
+						Name:      path.Base(task.Pod),
+					},
+					pod)
+				pp.Println(pod)
 			}
 
 			if task.State == "Running" {
