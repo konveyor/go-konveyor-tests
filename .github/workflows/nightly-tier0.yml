@@ -1,11 +1,6 @@
 name: Test nightly TIER0
 
 on:
-  workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'
-        default: 'debug'
   schedule:
     - cron: '14 1,13 * * *'
       
