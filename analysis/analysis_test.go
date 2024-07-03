@@ -163,6 +163,8 @@ func TestApplicationAnalysis(t *testing.T) {
 			analysisDetailPath := binding.Path(api.AnalysisRoot).Inject(binding.Params{api.ID: gotAppAnalyses[len(gotAppAnalyses)-1].ID})
 			assert.Should(t, Client.Get(analysisDetailPath, &gotAnalysis))
 
+			fmt.Printf("TAGS: %#v\n", gotAnalysis)
+
 			// Filter out non-mandatory issues, TODO(maufart): quickfix until decide if we test potential issues too
 			var mandatoryIssues []api.Issue
 			for _, issue := range gotAnalysis.Issues {
@@ -268,6 +270,7 @@ func TestApplicationAnalysis(t *testing.T) {
 			if debug {
 				DumpTags(t, tc, *gotApp)
 			}
+			fmt.Printf("TAGS: %#v\n", *gotApp)
 
 			// Resolve TagRefs to Tags.
 			gotTags := []api.Tag{}
