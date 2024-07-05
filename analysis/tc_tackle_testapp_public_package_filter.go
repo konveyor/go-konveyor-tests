@@ -44,7 +44,7 @@ var TackleTestappPublicPackageFilter = TC{
 				Rule:        "hardcoded-ip-address",
 				Incidents: []api.Incident{
 					{
-						File:     "/addon/source/tackle-testapp-public/src/main/resources/persistence.properties",
+						File:     "/shared/source/tackle-testapp-public/src/main/resources/persistence.properties",
 						Line:     2,
 						Message:  "When migrating environments, hard-coded IP addresses may need to be modified or eliminated.",
 						CodeSnip: "jdbc.url=jdbc:oracle:thin:@10.19.2.93:15",

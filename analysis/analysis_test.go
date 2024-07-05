@@ -13,7 +13,6 @@ import (
 	"time"
 
 	"github.com/k0kubun/pp"
-	"github.com/konveyor/go-konveyor-tests/hack/addon"
 	"github.com/konveyor/go-konveyor-tests/hack/uniq"
 	"github.com/konveyor/tackle2-hub/api"
 	"github.com/konveyor/tackle2-hub/binding"
@@ -92,7 +91,7 @@ func TestApplicationAnalysis(t *testing.T) {
 			// Prepare and submit the analyze task.
 			// tc.Task.Addon = analyzerAddon
 			tc.Task.Application = &api.Ref{ID: tc.Application.ID}
-			taskData := tc.Task.Data.(addon.Data)
+			taskData := AnalyzeDataDefault
 			//for _, r := range tc.CustomRules {
 			//	taskData.Rules = append(taskData.Rules, api.Ref{ID: r.ID, Name: r.Name})
 			//}
@@ -131,6 +130,7 @@ func TestApplicationAnalysis(t *testing.T) {
 			tc.Task.State = "Ready"
 			assert.Should(t, RichClient.Task.Update(&tc.Task))
 
+			_, debug := os.LookupEnv("DEBUG")
 			// Wait until task finishes
 			var task *api.Task
 			var err error
@@ -149,6 +149,9 @@ func TestApplicationAnalysis(t *testing.T) {
 
 			if task.State != "Succeeded" {
 				t.Error("Analyze Task failed. Details:")
+				pp.Println(task)
+			}
+			if debug {
 				pp.Println(task)
 			}
 
@@ -173,7 +176,6 @@ func TestApplicationAnalysis(t *testing.T) {
 			}
 			gotAnalysis.Issues = mandatoryIssues
 
-			_, debug := os.LookupEnv("DEBUG")
 			if debug {
 				DumpAnalysis(t, tc, gotAnalysis)
 			}
@@ -212,12 +214,12 @@ func TestApplicationAnalysis(t *testing.T) {
 					if len(got.Incidents) != len(expected.Incidents) {
 						t.Errorf("Different amount of incidents error. Got %d, expected %d.", len(got.Incidents), len(expected.Incidents))
 						missing, unexpected := getIncidentsDiff(expected.Incidents, got.Incidents)
-					    for _, incident := range missing {
+						for _, incident := range missing {
 							fmt.Printf("Expected incident not found: %s line %d.\n", incident.File, incident.Line)
-					    }
-					    for _, incident := range unexpected {
+						}
+						for _, incident := range unexpected {
 							fmt.Printf("Unexpected incident found: %s line %d.\n", incident.File, incident.Line)
-					    }
+						}
 
 					} else {
 						// Ensure stable order of Incidents.
@@ -289,8 +291,8 @@ func TestApplicationAnalysis(t *testing.T) {
 
 			// Check Tags (if specified by TestCase).
 			if len(tc.AnalysisTags) > 0 {
-				if len(tc.AnalysisTags) != len(gotApp.Tags) {
-					t.Errorf("Different Tags amount error. Got: %d, expected: %d.\n", len(gotApp.Tags), len(tc.AnalysisTags))
+				if len(tc.AnalysisTags) != len(gotTags) {
+					t.Errorf("Different Tags amount error. Got: %d, expected: %d.\n", len(gotTags), len(tc.AnalysisTags))
 					notFoundTags, unexpectedTags := getTagsDiff(tc.AnalysisTags, gotTags)
 					for _, notFoundTag := range notFoundTags {
 						pp.Println("Expected tag not found", notFoundTag)

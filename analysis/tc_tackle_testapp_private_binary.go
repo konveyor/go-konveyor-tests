@@ -31,7 +31,7 @@ var TackleTestappPrivateBinary = TC{
 				Rule:        "jni-native-code-00000",
 				Incidents: []api.Incident{
 					{
-						File:    "/bin/maven/java-project/src/main/java/io/konveyor/demo/config/ApplicationConfiguration.java",
+						File:    "/shared/bin/maven/java-project/src/main/java/io/konveyor/demo/config/ApplicationConfiguration.java",
 						Line:    17,
 						Message: "Java native libraries might not run in a cloud or container environment.",
 					},
@@ -45,42 +45,42 @@ var TackleTestappPrivateBinary = TC{
 				Rule:        "local-storage-00001",
 				Incidents: []api.Incident{
 					{
-						File:    "/bin/maven/java-project/src/main/java/io/konveyor/demo/config/ApplicationConfiguration.java",
+						File:    "/shared/bin/maven/java-project/src/main/java/io/konveyor/demo/config/ApplicationConfiguration.java",
 						Line:    8,
 						Message: "An application running inside a container could lose access to a file in local storage.",
 					},
 					{
-						File:    "/bin/maven/java-project/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
+						File:    "/shared/bin/maven/java-project/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
 						Line:    39,
 						Message: "An application running inside a container could lose access to a file in local storage.",
 					},
 					{
-						File:    "/bin/maven/java-project/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
+						File:    "/shared/bin/maven/java-project/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
 						Line:    40,
 						Message: "An application running inside a container could lose access to a file in local storage.",
 					},
 					{
-						File:    "/bin/maven/java-project/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
+						File:    "/shared/bin/maven/java-project/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
 						Line:    41,
 						Message: "An application running inside a container could lose access to a file in local storage.",
 					},
 					{
-						File:    "/bin/maven/java-project/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
+						File:    "/shared/bin/maven/java-project/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
 						Line:    42,
 						Message: "An application running inside a container could lose access to a file in local storage.",
 					},
 					{
-						File:    "/bin/maven/java-project/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
+						File:    "/shared/bin/maven/java-project/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
 						Line:    61,
 						Message: "An application running inside a container could lose access to a file in local storage.",
 					},
 					{
-						File:    "/bin/maven/java-project/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
+						File:    "/shared/bin/maven/java-project/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
 						Line:    62,
 						Message: "An application running inside a container could lose access to a file in local storage.",
 					},
 					{
-						File:    "/bin/maven/java-project/src/main/java/io/konveyor/demo/ordermanagement/exception/handler/ExceptionHandlingController.java",
+						File:    "/shared/bin/maven/java-project/src/main/java/io/konveyor/demo/ordermanagement/exception/handler/ExceptionHandlingController.java",
 						Line:    20,
 						Message: "An application running inside a container could lose access to a file in local storage.",
 					},
