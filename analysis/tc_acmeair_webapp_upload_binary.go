@@ -18,15 +18,8 @@ var AcmeairWebapp = TC{
 	Binary:   true,
 	Artifact: "/binary/acmeair-webapp-1.0-SNAPSHOT.war",
 	Analysis: api.Analysis{
-		Effort: 36,
+		Effort: 0,
 		Issues: []api.Issue{
-			{
-				Category:    "mandatory",
-				Description: "File system - Java IO",
-				Effort:      1,
-				RuleSet:     "cloud-readiness",
-				Rule:        "local-storage-00001",
-			},
 		},
 		Dependencies: []api.TechDependency{
 			{
