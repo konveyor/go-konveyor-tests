@@ -1,6 +1,7 @@
 package analysis
 
 import (
+	"context"
 	"crypto/aes"
 	"crypto/cipher"
 	"crypto/sha256"
@@ -17,10 +18,19 @@ import (
 	"github.com/konveyor/tackle2-hub/api"
 	"github.com/konveyor/tackle2-hub/binding"
 	"github.com/konveyor/tackle2-hub/test/assert"
+	v1 "k8s.io/api/core/v1"
+	"sigs.k8s.io/controller-runtime/pkg/client"
+	"sigs.k8s.io/controller-runtime/pkg/client/config"
 )
 
 // Test application analysis
 func TestApplicationAnalysis(t *testing.T) {
+
+	// Create a kubernetes client from the default kubeconfig
+	cl, err := client.New(config.GetConfigOrDie(), client.Options{})
+	if err != nil {
+		t.Fatalf("failed to create client: %v", err)
+	}
 	// Find right test cases for given Tier.
 	testCases := Tier0TestCases
 	_, tier1 := os.LookupEnv("TIER1")
@@ -146,15 +156,22 @@ func TestApplicationAnalysis(t *testing.T) {
 			if err != nil {
 				t.Fatalf("unable to get all the tasks, err: %v", err)
 			}
+			podList := &v1.PodList{}
+			err = cl.List(context.TODO(), podList)
+			if err != nil {
+				t.Fatalf("unable to list pods: %v", err)
+			}
 			if task.State == "Running" {
 				t.Error("Timed out running the test. Details:")
 				pp.Println(tasks)
+				pp.Println(podList)
 			}
 
 			if task.State != "Succeeded" {
 				t.Error("Analyze Task failed. Details:")
 				pp.Println(task)
 				pp.Println(tasks)
+				pp.Println(podList)
 			}
 			if debug {
 				pp.Println(task)
