@@ -17,7 +17,7 @@ var Tomcat = TC{
 		},
 	},
 	Analysis: api.Analysis{
-		Effort: 1,
+		Effort: 2,
 		Issues: []api.Issue{
 			{
 				Category:    "mandatory",
@@ -27,7 +27,13 @@ var Tomcat = TC{
 				Rule:        "hardcoded-ip-address",
 				Incidents: []api.Incident{
 					{
-						File:     "/shared/source/example-applications/example-1/src/main/resources/persistence.properties",
+						File:     "/addon/source/example-applications/example-1/src/main/resources/persistence.properties",
+						Line:     2,
+						Message:  "When migrating environments, hard-coded IP addresses may need to be modified or eliminated.",
+						CodeSnip: "jdbc.url=jdbc:oracle:thin:@169.60.225.216:1521/XEPDB1",
+					},
+					{
+						File:     "/addon/source/example-applications/example-1/target/classes/persistence.properties",
 						Line:     2,
 						Message:  "When migrating environments, hard-coded IP addresses may need to be modified or eliminated.",
 						CodeSnip: "jdbc.url=jdbc:oracle:thin:@169.60.225.216:1521/XEPDB1",
@@ -732,14 +738,11 @@ var Tomcat = TC{
 		{Name: "EJB XML", Category: api.Ref{Name: "Bean"}},
 		{Name: "Servlet", Category: api.Ref{Name: "HTTP"}},
 		{Name: "Properties", Category: api.Ref{Name: "Other"}},
-		{Name: "JPA named queries", Category: api.Ref{Name: "Persistence"}},
-		{Name: "JPA named queries", Category: api.Ref{Name: "Java EE"}},
 		{Name: "EJB XML", Category: api.Ref{Name: "Java EE"}},
 		{Name: "Servlet", Category: api.Ref{Name: "Java EE"}},
 		{Name: "EJB XML", Category: api.Ref{Name: "Connect"}},
 		{Name: "Servlet", Category: api.Ref{Name: "Connect"}},
 		{Name: "Properties", Category: api.Ref{Name: "Embedded"}},
-		{Name: "JPA named queries", Category: api.Ref{Name: "Store"}},
 		{Name: "Properties", Category: api.Ref{Name: "Sustain"}},
 	},
 }
