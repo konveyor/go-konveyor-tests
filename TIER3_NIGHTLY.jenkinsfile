@@ -19,8 +19,10 @@ pipeline{
             steps{
                 script{
                     checkout scm
+                    sh"git branch"
+                    sh"git checkout $TEST_BRANCH"
                     tackle.setGoTestsEnvVars() //Sets env sensitive env vars
-                    tackle.deployKonveyorOnMinikube()
+                    tackle.deployKonveyorOnMinikube(params.TEST_BRANCH)
                     echo "Applying tackle CR"
                     tackle.applyTackleCR()
                 }
@@ -51,12 +53,16 @@ pipeline{
         }
         success{
             script{
-                tackle.writeBuildStatus(passed=true,pipeline="tier3-nightly")
+                if(params.TEST_BRANCH=="main"){
+                    tackle.writeBuildStatus(passed=true,pipeline="tier3-nightly")
+                }
             }
         }
         failure{
             script{
-                tackle.writeBuildStatus(passed=false,pipeline="tier3-nightly")
+                if(params.TEST_BRANCH=="main"){
+                    tackle.writeBuildStatus(passed=false,pipeline="tier3-nightly")       
+                }
                 tackle.sendTier3NightlyFailureNotification()
             }
         } 
