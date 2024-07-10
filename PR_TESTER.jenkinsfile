@@ -19,12 +19,13 @@ pipeline{
         stage("Check if their are changed tests"){
             when{
                 branch pattern: '^(PR-.*|main)$',
-                comparator: 'REGEXP';
+                comparator: 'REGEXP'; 
             }
             steps{
                 script{
                     checkout scm
                     env.RUN_TESTS = "true" 
+                    sh"env"
                     tackle.setGoTestsEnvVars() //Sets env sensitive env vars
                 }
             }
