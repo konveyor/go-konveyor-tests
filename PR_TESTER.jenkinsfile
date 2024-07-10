@@ -37,7 +37,9 @@ pipeline{
             }   
             steps{
                 script{
-                    tackle.deployKonveyorOnMinikube()
+                    env.TEST_BRANCH = env.BRANCH_NAME.contains("PR-")? env.CHANGE_TARGET : env.BRANCH_NAME
+                    tackle.setGoTestsEnvVars() //Sets env sensitive env vars
+                    tackle.deployKonveyorOnMinikube(env.TEST_BRANCH)
                     echo "Applying tackle CR"
                     tackle.applyTackleCR()
                 }
