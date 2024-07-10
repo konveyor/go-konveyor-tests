@@ -29,7 +29,7 @@ var defaultAnalyzerData = addon.Data{
 		Labels: addon.Labels{
 			Excluded: []string{},
 			Included: []string{
-				"cloud-readiness",
+				"konveyor.io/target=cloud-readiness",
 			},
 		},
 	},

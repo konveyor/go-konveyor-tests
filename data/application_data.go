@@ -34,8 +34,16 @@ var (
 		},
 		Binary: "io.konveyor.demo:customers-tomcat:0.0.1-SNAPSHOT:war",
 	}
-	UploadBinary = api.Application {
+	UploadBinary = api.Application{
 		Name: "upload-binary",
 	}
-	ApplicationSamples = []api.Application{Minimal, PathfinderGit, BookServer, TackleTestapp, UploadBinary}
+	CustomerTomcatLegacy = api.Application{
+		Name: "Customer Tomcat Legacy",
+		Repository: &api.Repository{
+			Kind: "git",
+			URL:  "https://github.com/konveyor/example-applications.git",
+			Path: "example-1",
+		},
+	}
+	ApplicationSamples = []api.Application{Minimal, PathfinderGit, BookServer, TackleTestapp, UploadBinary, CustomerTomcatLegacy}
 )
