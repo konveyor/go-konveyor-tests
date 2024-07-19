@@ -6,13 +6,13 @@ var Tier0TestCases = []TC{
 	TackleTestappPublicWithDeps,
 	TackleTestappPublicPackageFilter,
 	AcmeairWebapp,
-	BookServerVerified,
+	Tomcat,
 }
 
 // Tier 1 Analysis test cases - should work.
 // List of applications with expected analysis outputs.
 var Tier1TestCases = []TC{
-	Tomcat,
+	BookServerVerified,
 }
 
 // Tier 2 Analysis test cases - great if works.
