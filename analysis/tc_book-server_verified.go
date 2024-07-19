@@ -36,23 +36,23 @@ var BookServerVerified = TC{
 				Rule:        "local-storage-00001",
 				Incidents: []api.Incident{
 					{
-						File:    "/shared/source/book-server/src/main/java/com/telran/application/controller/BookStartEndController.java",
-						Line:    18,
-						Message: "An application running inside a container could lose access to a file in local storage.",
-					},
-					{
-						File:    "/shared/source/book-server/src/main/java/com/telran/application/controller/BookStartEndController.java",
-						Line:    24,
+						File:    "/shared/source/book-server/src/main/java/com/telran/application/model/BookModel.java",
+						Line:    14,
 						Message: "An application running inside a container could lose access to a file in local storage.",
 					},
 					{
 						File:    "/shared/source/book-server/src/main/java/com/telran/application/model/BookModel.java",
-						Line:    23,
+						Line:    17,
 						Message: "An application running inside a container could lose access to a file in local storage.",
 					},
 					{
 						File:    "/shared/source/book-server/src/main/java/com/telran/application/model/BookModel.java",
-						Line:    40,
+						Line:    29,
+						Message: "An application running inside a container could lose access to a file in local storage.",
+					},
+					{
+						File:    "/shared/source/book-server/src/main/java/com/telran/application/model/BookModel.java",
+						Line:    32,
 						Message: "An application running inside a container could lose access to a file in local storage.",
 					},
 				},
@@ -66,7 +66,7 @@ var BookServerVerified = TC{
 				Incidents: []api.Incident{
 					{
 						File:    "/shared/source/book-server/pom.xml",
-						Line:    31,
+						Line:    30,
 						Message: "Lombok supports Java 17 since version 1.18.22. The version of Lombok used in this project is too old and not compatible with Java 17. You should consider upgrading it.",
 					},
 				},
