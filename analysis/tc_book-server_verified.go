@@ -9,7 +9,7 @@ var BookServerApp = api.Application{
 	Name: "BookServer App",
 	Repository: &api.Repository{
 		Kind: "git",
-		URL:  "https://github.com/ibraginsky/book-server",
+		URL:  "https://github.com/ibraginsky/book-server.git",
 	},
 }
 
@@ -17,7 +17,7 @@ var BookServerVerified = TC{
 	Name:        "BookServer verified results",
 	Application: BookServerApp,
 	Task:        Analyze,
-	WithDeps:    false,
+	WithDeps:    true,
 	Labels: addon.Labels{
 		Included: []string{
 			"konveyor.io/target=cloud-readiness",
@@ -26,7 +26,7 @@ var BookServerVerified = TC{
 		},
 	},
 	Analysis: api.Analysis{
-		Effort: 9,	// 6 without deps
+		Effort: 9,
 		Issues: []api.Issue{
 			{
 				Category:    "mandatory",
@@ -57,7 +57,6 @@ var BookServerVerified = TC{
 					},
 				},
 			},
-			// Following comes with WithDeps: true
 			{
 				Category:    "mandatory",
 				Description: "The Lombok version is incompatible with Open JDK 17",
