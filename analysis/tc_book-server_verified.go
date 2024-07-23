@@ -59,7 +59,7 @@ var BookServerVerified = TC{
 				Incidents: []api.Incident{
 					{
 						File:    "/shared/source/book-server/pom.xml",
-						Line:    30,
+						Line:    31,
 						Message: "Lombok supports Java 17 since version 1.18.22. The version of Lombok used in this project is too old and not compatible with Java 17. You should consider upgrading it.",
 					},
 				},
