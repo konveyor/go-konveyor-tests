@@ -1,21 +1,14 @@
 package analysis
 
 import (
+	"github.com/konveyor/go-konveyor-tests/data"
 	"github.com/konveyor/go-konveyor-tests/hack/addon"
 	"github.com/konveyor/tackle2-hub/api"
 )
 
-var BookServerApp = api.Application{
-	Name: "BookServer App",
-	Repository: &api.Repository{
-		Kind: "git",
-		URL:  "https://github.com/ibraginsky/book-server.git",
-	},
-}
-
 var BookServerVerified = TC{
 	Name:        "BookServer verified results",
-	Application: BookServerApp,
+	Application: data.BookServer,
 	Task:        Analyze,
 	WithDeps:    true,
 	Labels: addon.Labels{
