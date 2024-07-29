@@ -151,13 +151,20 @@ func TestApplicationAnalysis(t *testing.T) {
 				pp.Println(tasks)
 			}
 
-			if task.State != "Succeeded" {
-				t.Error("Analyze Task failed. Details:")
-				pp.Println(task)
-				pp.Println(tasks)
-			}
 			if debug {
 				pp.Println(task)
+			}
+
+			if task.State != "Succeeded" {
+				// Print task details and return from this test case -> skip analysis results assertion to decrease verbosity
+				t.Error("Analyze Task failed. Details:")
+				// Print all tasks for application in this testcase
+				for i := range tasks {
+					if tasks[i].Application.ID == tc.Application.ID {
+						pp.Println(tasks[i])
+					}
+				}
+				t.Fatal("Failing this testcase.")
 			}
 
 			var gotAppAnalyses []api.Analysis
@@ -172,7 +179,6 @@ func TestApplicationAnalysis(t *testing.T) {
 			analysisDetailPath := binding.Path(api.AnalysisRoot).Inject(binding.Params{api.ID: gotAppAnalyses[len(gotAppAnalyses)-1].ID})
 			assert.Should(t, Client.Get(analysisDetailPath, &gotAnalysis))
 
-			// Filter out non-mandatory issues, TODO(maufart): quickfix until decide if we test potential issues too
 			var mandatoryIssues []api.Issue
 			for _, issue := range gotAnalysis.Issues {
 				if issue.Category == "mandatory" {
@@ -195,6 +201,8 @@ func TestApplicationAnalysis(t *testing.T) {
 			sort.SliceStable(tc.Analysis.Issues, func(a, b int) bool { return tc.Analysis.Issues[a].Rule < tc.Analysis.Issues[b].Rule })
 
 			// Check the analysis issues
+			failedIssues, failedIncidents := 0, 0
+			totalIssues, totalIncidents := max(len(gotAnalysis.Issues), len(tc.Analysis.Issues)), 0	//using max() for uncertainity if will get more missing or unexpected
 			if len(gotAnalysis.Issues) != len(tc.Analysis.Issues) {
 				t.Errorf("Different amount of issues error. Got %d, expected %d.", len(gotAnalysis.Issues), len(tc.Analysis.Issues))
 				missing, unexpected := getIssuesDiff(tc.Analysis.Issues, gotAnalysis.Issues)
@@ -204,11 +212,13 @@ func TestApplicationAnalysis(t *testing.T) {
 				for _, issue := range unexpected {
 					fmt.Printf("Unexpected issue found for rule %s.\n", issue.Rule)
 				}
+				failedIssues = len(missing) + len(unexpected)
 			} else {
 				for i, got := range gotAnalysis.Issues {
 					expected := tc.Analysis.Issues[i]
 					if got.Category != expected.Category || got.RuleSet != expected.RuleSet || got.Rule != expected.Rule || got.Effort != expected.Effort || !strings.HasPrefix(got.Description, expected.Description) {
 						t.Errorf("\nDifferent issue error. Got %+v\nExpected %+v.\n\n", got, expected)
+						failedIssues = failedIssues + 1
 					}
 
 					// Incidents check.
@@ -216,6 +226,7 @@ func TestApplicationAnalysis(t *testing.T) {
 						t.Log("Skipping empty expected Incidents check.")
 						break
 					}
+					totalIncidents = totalIncidents + max(len(got.Incidents), len(expected.Incidents))
 					if len(got.Incidents) != len(expected.Incidents) {
 						t.Errorf("Different amount of incidents error. Got %d, expected %d.", len(got.Incidents), len(expected.Incidents))
 						missing, unexpected := getIncidentsDiff(expected.Incidents, got.Incidents)
@@ -225,25 +236,40 @@ func TestApplicationAnalysis(t *testing.T) {
 						for _, incident := range unexpected {
 							fmt.Printf("Unexpected incident found: %s line %d.\n", incident.File, incident.Line)
 						}
-
+						failedIncidents = len(missing) + len(unexpected)
 					} else {
 						// Ensure stable order of Incidents.
 						sort.SliceStable(got.Incidents, func(a, b int) bool { return got.Incidents[a].File < got.Incidents[b].File })
 						sort.SliceStable(expected.Incidents, func(a, b int) bool { return expected.Incidents[a].File < expected.Incidents[b].File })
 						for j, gotInc := range got.Incidents {
+							failed := 0
 							expectedInc := expected.Incidents[j]
 							if gotInc.File != expectedInc.File {
 								t.Errorf("\nDifferent incident.File error. Got %+v\nExpected %+v.\n\n", gotInc.File, expectedInc.File)
+								failed = 1
 							}
 							if gotInc.Line != expectedInc.Line {
 								t.Errorf("\nDifferent incident.Line error. Got %+v\nExpected %+v.\n\n", gotInc.Line, expectedInc.Line)
+								failed = 1
 							}
 							if !strings.HasPrefix(gotInc.Message, expectedInc.Message) {
 								t.Errorf("\nDifferent incident.Message error. Got %+v\nExpected %+v.\n\n", gotInc.Message, expectedInc.Message)
+								failed = 1
 							}
+							failedIncidents = failedIncidents + failed
 						}
 					}
 				}
+			}
+			if failedIssues > 0 {
+				t.Run(fmt.Sprintf("Issues_only__%d_%%__", countSuccessRate(totalIssues, failedIssues)), func(t *testing.T) {
+					t.Error("Issues success-rate is below 100%.")
+				})
+			}
+			if failedIncidents > 0 {
+				t.Run(fmt.Sprintf("Incidents_only__%d_%%__", countSuccessRate(totalIncidents, failedIncidents)), func(t *testing.T) {
+					t.Error("Incidents success-rate is below 100%.")
+				})
 			}
 
 			// Ensure stable order of Dependencies.
@@ -360,4 +386,19 @@ func getDefaultToken() string {
 		return ""
 	}
 	return string(decrypted)
+}
+
+func countSuccessRate(all, failed int) int {
+	if all <= 0 {
+		return 0
+	}
+	return int((float64(failed) / float64(all)) * 100)
+}
+
+// math.Max is for floats and too much casting is not that nice in the code
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
 }
