@@ -19,14 +19,13 @@ var AcmeairWebapp = TC{
 	Artifact: "/binary/acmeair-webapp-1.0-SNAPSHOT.war",
 	Analysis: api.Analysis{
 		Effort: 0,
-		Issues: []api.Issue{
-		},
+		Issues: []api.Issue{},
 		Dependencies: []api.TechDependency{
 			{
 				Name:     "asm.asm",
 				Version:  "3.3.1",
 				Provider: "java",
-				SHA: "1d5f20b4ea675e6fab6ab79f1cd60ec268ddc015",
+				SHA:      "1d5f20b4ea675e6fab6ab79f1cd60ec268ddc015",
 				Labels:   []string{"konveyor.io/dep-source=open-source", "konveyor.io/language=java"},
 			},
 			{
@@ -84,10 +83,10 @@ var AcmeairWebapp = TC{
 				Labels:   []string{"konveyor.io/dep-source=open-source", "konveyor.io/language=java"},
 			},
 			{
-			   Provider: "java",
-               Name: "net.wasdev.wlp.sample.acmeair-services-jpa",
-               Version: "1.0-SNAPSHOT",
-			   Labels:   []string{"konveyor.io/dep-source=open-source", "konveyor.io/language=java"},
+				Provider: "java",
+				Name:     "net.wasdev.wlp.sample.acmeair-services-jpa",
+				Version:  "1.0-SNAPSHOT",
+				Labels:   []string{"konveyor.io/dep-source=open-source", "konveyor.io/language=java"},
 			},
 			{
 				Name:     "cglib.cglib",
@@ -150,5 +149,8 @@ var AcmeairWebapp = TC{
 		{Name: "RMI", Category: api.Ref{Name: "Java EE"}},
 		{Name: "Servlet", Category: api.Ref{Name: "Java EE"}},
 		{Name: "JPA named queries", Category: api.Ref{Name: "Store"}},
+		{Name: "EJB XML", Category: api.Ref{Name: "Bean"}},
+		{Name: "EJB XML", Category: api.Ref{Name: "Connect"}},
+		{Name: "EJB XML", Category: api.Ref{Name: "Java EE"}},
 	},
 }
