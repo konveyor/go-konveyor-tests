@@ -34,4 +34,5 @@ var AnalyzeDataDefault = addon.Data{
 	Tagger: addon.Tagger{
 		Enabled: true,
 	},
+	Verbosity: 1,
 }

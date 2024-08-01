@@ -7,6 +7,7 @@ import (
 	"encoding/hex"
 	"fmt"
 	"os"
+	"path/filepath"
 	"sort"
 	"strings"
 	"testing"
@@ -149,12 +150,26 @@ func TestApplicationAnalysis(t *testing.T) {
 			if task.State == "Running" {
 				t.Error("Timed out running the test. Details:")
 				pp.Println(tasks)
+				dir, err := os.MkdirTemp("", "attachments")
+				if err != nil {
+					t.Error(err)
+				}
+				printAllAtachmentsOnTask(task, dir)
+				//if this is still running after timeout, then we should move on, this wont work
+				return
+
 			}
 
 			if task.State != "Succeeded" {
 				t.Error("Analyze Task failed. Details:")
-				pp.Println(task)
 				pp.Println(tasks)
+				dir, err := os.MkdirTemp("", "attachments")
+				if err != nil {
+					t.Error(err)
+				}
+				printAllAtachmentsOnTask(task, dir)
+				// If the task was unsuccessful there is no reason to continue execution.
+				return
 			}
 			if debug {
 				pp.Println(task)
@@ -360,4 +375,20 @@ func getDefaultToken() string {
 		return ""
 	}
 	return string(decrypted)
+}
+
+func printAllAtachmentsOnTask(task *api.Task, dir string) error {
+	for _, attachement := range task.Attached {
+		err := RichClient.File.Get(attachement.ID, dir)
+		if err != nil {
+			return err
+		}
+		b, err := os.ReadFile(filepath.Join(dir, attachement.Name))
+		if err != nil {
+			return err
+		}
+		pp.Println(string(b))
+	}
+
+	return nil
 }
