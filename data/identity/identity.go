@@ -1,8 +1,16 @@
 package identity
 
-import "github.com/konveyor/tackle2-hub/api"
+import (
+	"github.com/konveyor/tackle2-hub/api"
+	"github.com/konveyor/tackle2-hub/test/api/identity"
+)
 
-var TackleTestappMaven = api.Identity{
+// Tackle Testapp public Maven registry expects MAVEN_TESTAPP_USER and MAVEN_TESTAPP_TOKEN env variables.
+// For more information, see: https://github.com/konveyor/tackle-testapp-public?tab=readme-ov-file#building-the-application
+var MavenPublic = identity.Mvn
+
+
+var TackleTestappPrivateMaven = api.Identity{
 	Kind: "maven",
 	Name: "maven-creds",
 	Settings: `<?xml version="1.0" encoding="UTF-8"?>
