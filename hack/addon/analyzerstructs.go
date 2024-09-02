@@ -30,18 +30,16 @@ type Data struct {
 
 // Mode settings.
 type Mode struct {
+	Discovery  bool   `json:"discovery"`
 	Binary     bool   `json:"binary"`
 	Artifact   string `json:"artifact"`
 	WithDeps   bool   `json:"withDeps"`
 	Repository repository.SCM
 	//
-	//path struct {
-	//	appDir string
-	//	binary string
-	//	maven  struct {
-	//		settings string
-	//	}
-	//}
+	// path struct {
+	// 	appDir string
+	// 	binary string
+	// }
 }
 
 // Sources list of sources.
