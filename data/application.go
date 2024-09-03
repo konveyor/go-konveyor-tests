@@ -32,7 +32,7 @@ var (
 			Kind: "git",
 			URL:  "https://github.com/konveyor/tackle-testapp-public",
 		},
-		Binary: "customers-tomcat-0.0.1-SNAPSHOT.war",
+		Binary: "mvn://io.konveyor.demo:customers-tomcat:0.0.1-SNAPSHOT:war",
 	}
 	UploadBinary = api.Application{
 		Name: "upload-binary",
