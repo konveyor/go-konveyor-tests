@@ -7,7 +7,6 @@ var Tier0TestCases = []TC{
 	TackleTestappPublicPackageFilter,
 	AcmeairWebapp,
 	Tomcat,
-	TackleTestappPublicBinary,
 }
 
 // Tier 1 Analysis test cases - should work.
@@ -24,6 +23,7 @@ var Tier2TestCases = []TC{
 	PetclinicHazelcast,
 	ApacheWicket,
 	SeamBooking,
+	TackleTestappPublicBinary,
 }
 
 // Tier 3 Analysis with credentials test cases - should work
