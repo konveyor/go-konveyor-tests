@@ -7,6 +7,7 @@ var Tier0TestCases = []TC{
 	TackleTestappPublicPackageFilter,
 	AcmeairWebapp,
 	Tomcat,
+	AdministracionEfectivo,
 }
 
 // Tier 1 Analysis test cases - should work.
@@ -18,7 +19,6 @@ var Tier1TestCases = []TC{
 // Tier 2 Analysis test cases - great if works.
 // List of applications with expected analysis outputs.
 var Tier2TestCases = []TC{
-	AdministracionEfectivo,
 	Daytrader,
 	PetclinicHazelcast,
 	ApacheWicket,
