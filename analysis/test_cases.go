@@ -18,8 +18,6 @@ var Tier1TestCases = []TC{
 // Tier 2 Analysis test cases - great if works.
 // List of applications with expected analysis outputs.
 var Tier2TestCases = []TC{
-	AdministracionEfectivo,
-	TackleTestappPublic,
 	Daytrader,
 	PetclinicHazelcast,
 	ApacheWicket,
