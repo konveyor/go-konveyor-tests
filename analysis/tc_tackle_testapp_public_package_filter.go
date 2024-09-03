@@ -1,14 +1,21 @@
 package analysis
 
 import (
-	"github.com/konveyor/go-konveyor-tests/data"
 	"github.com/konveyor/go-konveyor-tests/hack/addon"
 	"github.com/konveyor/tackle2-hub/api"
 )
 
+var TackleTestAppPackageFilter = api.Application{
+	Name: "Tackle Testapp public",
+	Repository: &api.Repository{
+		Kind: "git",
+		URL:  "https://github.com/konveyor/tackle-testapp-public",
+	},
+}
+
 var TackleTestappPublicPackageFilter = TC{
 	Name:        "Tackle Testapp public with package filter",
-	Application: data.TackleTestappPublic,
+	Application: TackleTestApp,
 	Task:        Analyze,
 	WithDeps:    false,
 	Labels: addon.Labels{

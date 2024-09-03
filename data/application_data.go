@@ -26,11 +26,11 @@ var (
 			URL:  "https://github.com/ibraginsky/book-server",
 		},
 	}
-	TackleTestappPublic = api.Application{
-		Name: "Tackle Testapp public",
+	TackleTestapp = api.Application{
+		Name: "tackle-testapp",
 		Repository: &api.Repository{
-			Kind: "git",
-			URL:  "https://github.com/konveyor/tackle-testapp-public",
+			Kind: "subversion",
+			URL:  "https://github.com/konveyor/tackle-testapp",
 		},
 		Binary: "io.konveyor.demo:customers-tomcat:0.0.1-SNAPSHOT:war",
 	}
@@ -45,5 +45,5 @@ var (
 			Path: "example-1",
 		},
 	}
-	ApplicationSamples = []api.Application{Minimal, PathfinderGit, BookServer, TackleTestappPublic, UploadBinary, CustomerTomcatLegacy}
+	ApplicationSamples = []api.Application{Minimal, PathfinderGit, BookServer, TackleTestapp, UploadBinary, CustomerTomcatLegacy}
 )

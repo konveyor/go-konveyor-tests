@@ -1,15 +1,16 @@
 package analysis
 
 import (
-	"github.com/konveyor/go-konveyor-tests/data"
-	"github.com/konveyor/go-konveyor-tests/data/identity"
 	"github.com/konveyor/go-konveyor-tests/hack/addon"
 	"github.com/konveyor/tackle2-hub/api"
+	"github.com/konveyor/tackle2-hub/test/api/identity"
 )
+
+var MavenPublic = identity.Mvn
 
 var TackleTestappPublicWithDeps = TC{
 	Name:        "Tackle Testapp public with deps",
-	Application: data.TackleTestappPublic,
+	Application: TackleTestApp,
 	Task:        Analyze,
 	WithDeps:    true,
 	Labels: addon.Labels{
@@ -19,7 +20,8 @@ var TackleTestappPublicWithDeps = TC{
 		},
 	},
 	Identities: []api.Identity{
-		identity.MavenPublic,
+		MavenPublic, // Tackle Testapp public Maven registry expects MAVEN_TESTAPP_USER and MAVEN_TESTAPP_TOKEN env variables.
+
 	},
 	Analysis: api.Analysis{
 		Effort: 2,
