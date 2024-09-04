@@ -7,6 +7,7 @@ var Tier0TestCases = []TC{
 	TackleTestappPublicPackageFilter,
 	Tomcat,
 	AcmeairWebappBinary,	// Binary upload from binary/acmeair-webapp-1.0-SNAPSHOT.war
+  AdministracionEfectivo, // Binary upload
 	TackleTestappPublicBinary,	// Binary fetched from tackle-testapp-public maven registry
 }
 
@@ -19,11 +20,11 @@ var Tier1TestCases = []TC{
 // Tier 2 Analysis test cases - great if works.
 // List of applications with expected analysis outputs.
 var Tier2TestCases = []TC{
-	AdministracionEfectivo,
 	Daytrader,
 	PetclinicHazelcast,
 	ApacheWicket,
 	SeamBooking,
+	TackleTestappPublicBinary,
 }
 
 // Tier 3 Analysis with credentials test cases - should work
