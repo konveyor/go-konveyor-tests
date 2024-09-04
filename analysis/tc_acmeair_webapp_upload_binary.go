@@ -6,7 +6,7 @@ import (
 	"github.com/konveyor/tackle2-hub/api"
 )
 
-var AcmeairWebapp = TC{
+var AcmeairWebappBinary = TC{
 	Name:        "acmeair-webapp",
 	Application: data.UploadBinary,
 	Task:        Analyze,
