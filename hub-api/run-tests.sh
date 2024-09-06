@@ -26,7 +26,7 @@ if [ ! -d $HUB_TMP_DIR ]; then
 fi
 
 cd $HUB_TMP_DIR
-git fetch origin ${BRANCH}:_pr-branch
-git checkout _pr-branch
+git fetch origin ${BRANCH}:fetched
+git checkout fetched
 
 make test-api
