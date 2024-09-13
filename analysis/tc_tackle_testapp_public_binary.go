@@ -9,9 +9,9 @@ import (
 
 var TackleTestappPublicBinary = TC{
 	Name:        "tackle-testapp-binary",
-	Application: data.TackleTestappPublic,
+	Application: data.TackleTestappPublicBinary,
 	Identities: []api.Identity{
-		identity.MavenPublic,
+		identity.TackleTestappPublicMaven,
 	},
 	Task: Analyze,
 	Labels: addon.Labels{
@@ -21,22 +21,8 @@ var TackleTestappPublicBinary = TC{
 	},
 	Binary: true,
 	Analysis: api.Analysis{
-		Effort: 15,
+		Effort: 1,
 		Issues: []api.Issue{
-			{
-				Category:    "mandatory",
-				Description: "Java native libraries (JNI, JNA)",
-				Effort:      7,
-				RuleSet:     "cloud-readiness",
-				Rule:        "jni-native-code-00000",
-				Incidents: []api.Incident{
-					{
-						File:    "/shared/bin/maven/java-project/src/main/java/io/konveyor/demo/config/ApplicationConfiguration.java",
-						Line:    17,
-						Message: "Java native libraries might not run in a cloud or container environment.",
-					},
-				},
-			},
 			{
 				Category:    "mandatory",
 				Description: "File system - Java IO",
@@ -45,43 +31,8 @@ var TackleTestappPublicBinary = TC{
 				Rule:        "local-storage-00001",
 				Incidents: []api.Incident{
 					{
-						File:    "/shared/bin/maven/java-project/src/main/java/io/konveyor/demo/config/ApplicationConfiguration.java",
-						Line:    8,
-						Message: "An application running inside a container could lose access to a file in local storage.",
-					},
-					{
-						File:    "/shared/bin/maven/java-project/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
-						Line:    39,
-						Message: "An application running inside a container could lose access to a file in local storage.",
-					},
-					{
-						File:    "/shared/bin/maven/java-project/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
-						Line:    40,
-						Message: "An application running inside a container could lose access to a file in local storage.",
-					},
-					{
-						File:    "/shared/bin/maven/java-project/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
-						Line:    41,
-						Message: "An application running inside a container could lose access to a file in local storage.",
-					},
-					{
-						File:    "/shared/bin/maven/java-project/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
-						Line:    42,
-						Message: "An application running inside a container could lose access to a file in local storage.",
-					},
-					{
-						File:    "/shared/bin/maven/java-project/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
-						Line:    61,
-						Message: "An application running inside a container could lose access to a file in local storage.",
-					},
-					{
-						File:    "/shared/bin/maven/java-project/src/main/java/io/konveyor/demo/ordermanagement/config/PersistenceConfig.java",
-						Line:    62,
-						Message: "An application running inside a container could lose access to a file in local storage.",
-					},
-					{
-						File:    "/shared/bin/maven/java-project/src/main/java/io/konveyor/demo/ordermanagement/exception/handler/ExceptionHandlingController.java",
-						Line:    20,
+						File:    "/shared/bin/java-project/src/main/java/io/konveyor/demo/config/ApplicationConfiguration.java",
+						Line:    14,
 						Message: "An application running inside a container could lose access to a file in local storage.",
 					},
 				},
@@ -89,14 +40,14 @@ var TackleTestappPublicBinary = TC{
 		},
 	},
 	AnalysisTags: []api.Tag{
+		{Name: "EJB XML", Category: api.Ref{Name: "Bean"}},
 		{Name: "Servlet", Category: api.Ref{Name: "HTTP"}},
-		{Name: "JNI", Category: api.Ref{Name: "Other"}},
-		{Name: "Servlet", Category: api.Ref{Name: "Connect"}},
-		{Name: "JNI", Category: api.Ref{Name: "Connect"}},
-		{Name: "Servlet", Category: api.Ref{Name: "Java EE"}},
-		{Name: "JNI", Category: api.Ref{Name: "Java EE"}},
 		{Name: "JPA named queries", Category: api.Ref{Name: "Persistence"}},
+		{Name: "EJB XML", Category: api.Ref{Name: "Connect"}},
+		{Name: "EJB XML", Category: api.Ref{Name: "Java EE"}},
 		{Name: "JPA named queries", Category: api.Ref{Name: "Java EE"}},
+		{Name: "Servlet", Category: api.Ref{Name: "Java EE"}},
+		{Name: "Servlet", Category: api.Ref{Name: "Connect"}},
 		{Name: "JPA named queries", Category: api.Ref{Name: "Store"}},
 	},
 }
