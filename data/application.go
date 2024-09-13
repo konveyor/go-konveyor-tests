@@ -10,6 +10,8 @@ var (
 	Minimal = api.Application{
 		Name: "Minimal application",
 	}
+
+	// Repository-based applications
 	PathfinderGit = api.Application{
 		Name:        "Pathfinder",
 		Description: "Tackle Pathfinder application.",
@@ -32,10 +34,6 @@ var (
 			Kind: "git",
 			URL:  "https://github.com/konveyor/tackle-testapp-public",
 		},
-		Binary: "io.konveyor.demo:customers-tomcat:0.0.1-SNAPSHOT:war",
-	}
-	UploadBinary = api.Application{
-		Name: "upload-binary",
 	}
 	CustomerTomcatLegacy = api.Application{
 		Name: "Customer Tomcat Legacy",
@@ -45,5 +43,15 @@ var (
 			Path: "example-1",
 		},
 	}
-	ApplicationSamples = []api.Application{Minimal, PathfinderGit, BookServer, TackleTestappPublic, UploadBinary, CustomerTomcatLegacy}
+
+	// Binary applications
+	TackleTestappPublicBinary = api.Application{
+		Name: "Tackle Testapp public binary",
+		Binary: "mvn://io.konveyor.demo:customers-tomcat:0.0.1-SNAPSHOT:war",	// To be downloaded from maven repository
+	}
+	UploadBinary = api.Application{
+		Name: "upload-binary",	// The file itself to be uploaded during the test
+	}
+
+	ApplicationSamples = []api.Application{Minimal, PathfinderGit, BookServer, TackleTestappPublic, CustomerTomcatLegacy, TackleTestappPublicBinary, UploadBinary}
 )

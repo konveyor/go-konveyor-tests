@@ -5,9 +5,10 @@ package analysis
 var Tier0TestCases = []TC{
 	TackleTestappPublicWithDeps,
 	TackleTestappPublicPackageFilter,
-	AcmeairWebapp,
 	Tomcat,
-	AdministracionEfectivo,
+	AcmeairWebappBinary,	// Binary upload
+	AdministracionEfectivoBinary, // Binary upload
+	TackleTestappPublicBinary,	// Binary fetched from tackle-testapp-public maven registry
 }
 
 // Tier 1 Analysis test cases - should work.
