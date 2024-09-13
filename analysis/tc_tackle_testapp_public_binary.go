@@ -9,9 +9,9 @@ import (
 
 var TackleTestappPublicBinary = TC{
 	Name:        "tackle-testapp-binary",
-	Application: data.TackleTestappPublic,
+	Application: data.TackleTestappPublicBinary,
 	Identities: []api.Identity{
-		identity.MavenPublic,
+		identity.TackleTestappPublicMaven,
 	},
 	Task: Analyze,
 	Labels: addon.Labels{

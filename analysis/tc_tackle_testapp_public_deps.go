@@ -19,7 +19,7 @@ var TackleTestappPublicWithDeps = TC{
 		},
 	},
 	Identities: []api.Identity{
-		identity.MavenPublic,
+		identity.TackleTestappPublicMaven,
 	},
 	Analysis: api.Analysis{
 		Effort: 3,
