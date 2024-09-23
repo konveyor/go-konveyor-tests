@@ -2,7 +2,6 @@ package analysis
 
 import (
 	"github.com/konveyor/go-konveyor-tests/data"
-	"github.com/konveyor/go-konveyor-tests/data/identity"
 	"github.com/konveyor/go-konveyor-tests/hack/addon"
 	"github.com/konveyor/tackle2-hub/api"
 )
@@ -13,14 +12,12 @@ var AcmeairWebappBinary = TC{
 	Task:        Analyze,
 	Labels: addon.Labels{
 		Included: []string{
+			"konveyor.io/target=cloud-readiness",
 			"konveyor.io/target=jakarta-ee",
 		},
 	},
 	Binary:   true,
 	Artifact: "/binary/acmeair-webapp-1.0-SNAPSHOT.war",
-	Identities: []api.Identity{
-		identity.TackleTestappPublicMaven,
-	},
 	Analysis: api.Analysis{
 		Effort: 78,
 		Issues: []api.Issue{
