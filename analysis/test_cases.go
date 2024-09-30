@@ -5,9 +5,10 @@ package analysis
 var Tier0TestCases = []TC{
 	TackleTestappPublicWithDeps,
 	TackleTestappPublicPackageFilter,
-	AcmeairWebapp,
 	Tomcat,
-	AdministracionEfectivo,
+	AcmeairWebappBinary,	// Binary upload
+	AdministracionEfectivoBinary, // Binary upload
+	TackleTestappPublicBinary,	// Binary fetched from tackle-testapp-public maven registry
 }
 
 // Tier 1 Analysis test cases - should work.
@@ -28,5 +29,4 @@ var Tier2TestCases = []TC{
 // Tier 3 Analysis with credentials test cases - should work
 // List of applications with expected analysis outputs.
 var Tier3TestCases = []TC{
-	TackleTestappPrivateBinary, // Needs GITHUB_USER and GITHUB_TOKEN env variables with Read access to https://github.com/konveyor/tackle-testapp
 }
