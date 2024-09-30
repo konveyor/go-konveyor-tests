@@ -1,17 +1,17 @@
-name: Test TIER1 release-0.3
+name: Test TIER0 release braches
 
 on:
   pull_request:
-    branches: [ "release-0.3" ]
+    branches: [ "release-0.5", "release-0.4", "release-0.3" ]
     paths-ignore:
       - '**.md'
   push:
-    branches: [ "release-0.3" ]
+    branches: [ "release-0.5", "release-0.4", "release-0.3" ]
     paths-ignore:
       - '**.md'
 
 jobs:
-  test-tier1:
+  test-tier0:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -27,4 +27,7 @@ jobs:
       - name: Install dependencies
         run: |
           go install github.com/onsi/ginkgo/v2/ginkgo
-      - run: HUB_BASE_URL="http://$(minikube ip)/hub" DEBUG=1 make test-tier1
+      - run: HUB_BASE_URL="http://$(minikube ip)/hub" DEBUG=1 make test-tier0
+        env:
+          MAVEN_TESTAPP_USER: ${{ secrets.MAVEN_TESTAPP_USER }}
+          MAVEN_TESTAPP_TOKEN: ${{ secrets.MAVEN_TESTAPP_TOKEN }}

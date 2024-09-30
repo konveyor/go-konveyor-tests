@@ -1,12 +1,12 @@
-name: Test TIER1 release-0.4
+name: Test TIER1 release braches
 
 on:
   pull_request:
-    branches: [ "release-0.4" ]
+    branches: [ "release-0.5", "release-0.4", "release-0.3" ]
     paths-ignore:
       - '**.md'
   push:
-    branches: [ "release-0.4" ]
+    branches: [ "release-0.5", "release-0.4", "release-0.3" ]
     paths-ignore:
       - '**.md'
 
