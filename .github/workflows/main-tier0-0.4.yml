@@ -1,12 +1,12 @@
-name: Test TIER0
+name: Test TIER0 release-0.4
 
 on:
   pull_request:
-    branches: [ "main" ]
+    branches: [ "release-0.4" ]
     paths-ignore:
       - '**.md'
   push:
-    branches: [ "main" ]
+    branches: [ "release-0.4" ]
     paths-ignore:
       - '**.md'
 

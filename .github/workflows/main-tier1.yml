@@ -2,11 +2,11 @@ name: Test TIER1
 
 on:
   pull_request:
-    branches: [ "*" ]
+    branches: [ "main" ]
     paths-ignore:
       - '**.md'
   push:
-    branches: [ "*" ]
+    branches: [ "main" ]
     paths-ignore:
       - '**.md'
 
