@@ -1,0 +1,30 @@
+name: Test TIER1 release braches
+
+on:
+  pull_request:
+    branches: [ "release-0.5", "release-0.4", "release-0.3" ]
+    paths-ignore:
+      - '**.md'
+  push:
+    branches: [ "release-0.5", "release-0.4", "release-0.3" ]
+    paths-ignore:
+      - '**.md'
+
+jobs:
+  test-tier1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: start-minikube
+        uses: konveyor/tackle2-operator/.github/actions/start-minikube@main
+        with:
+          memory: 6500M
+      - name: install-tackle
+        uses: konveyor/tackle2-operator/.github/actions/install-tackle@main
+      - uses: actions/setup-go@v3
+        with:
+          go-version: '1.19'
+      - name: Install dependencies
+        run: |
+          go install github.com/onsi/ginkgo/v2/ginkgo
+      - run: HUB_BASE_URL="http://$(minikube ip)/hub" DEBUG=1 make test-tier1
