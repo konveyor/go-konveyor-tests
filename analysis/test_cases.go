@@ -5,8 +5,9 @@ package analysis
 var Tier0TestCases = []TC{
 	TackleTestappPublicWithDeps,
 	TackleTestappPublicPackageFilter,
-	AcmeairWebapp,
 	Tomcat,
+	AcmeairWebappBinary,	// Binary upload
+	TackleTestappPublicBinary,	// Binary fetched from tackle-testapp-public maven registry
 }
 
 // Tier 1 Analysis test cases - should work.
@@ -18,8 +19,7 @@ var Tier1TestCases = []TC{
 // Tier 2 Analysis test cases - great if works.
 // List of applications with expected analysis outputs.
 var Tier2TestCases = []TC{
-	AdministracionEfectivo,
-	TackleTestappPublic,
+	AdministracionEfectivoBinary, // Bug https://issues.redhat.com/browse/MTA-2606
 	Daytrader,
 	PetclinicHazelcast,
 	ApacheWicket,
@@ -29,5 +29,4 @@ var Tier2TestCases = []TC{
 // Tier 3 Analysis with credentials test cases - should work
 // List of applications with expected analysis outputs.
 var Tier3TestCases = []TC{
-	TackleTestappPrivateBinary, // Needs GITHUB_USER and GITHUB_TOKEN env variables with Read access to https://github.com/konveyor/tackle-testapp
 }

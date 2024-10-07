@@ -6,7 +6,7 @@ import (
 	"github.com/konveyor/tackle2-hub/api"
 )
 
-var AdministracionEfectivo = TC{
+var AdministracionEfectivoBinary = TC{
 	Name:        "administracion-efectivo",
 	Application: data.UploadBinary,
 	Task:        Analyze,

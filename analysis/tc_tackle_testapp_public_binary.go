@@ -7,11 +7,11 @@ import (
 	"github.com/konveyor/tackle2-hub/api"
 )
 
-var TackleTestappPrivateBinary = TC{
+var TackleTestappPublicBinary = TC{
 	Name:        "tackle-testapp-binary",
-	Application: data.TackleTestapp,
+	Application: data.TackleTestappPublicBinary,
 	Identities: []api.Identity{
-		identity.TackleTestappMaven,
+		identity.TackleTestappPublicMaven,
 	},
 	Task: Analyze,
 	Labels: addon.Labels{
