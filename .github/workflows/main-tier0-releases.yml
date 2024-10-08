@@ -19,8 +19,42 @@ jobs:
         uses: konveyor/tackle2-operator/.github/actions/start-minikube@main
         with:
           memory: 6500M
-      - name: install-tackle
-        uses: konveyor/tackle2-operator/.github/actions/install-tackle@main
+
+      # Install Konveyor depending on its branch (operator needs tag, component images need branches)
+      - name: install konveyor
+        uses: konveyor/tackle2-operator/.github/actions/install-tackle@release-0.3
+        if: "${{ startsWith(github.event.pull_request.base.ref, 'release-0.3') }}"
+        with:
+          operator-bundle-image: "quay.io/konveyor/tackle2-operator-bundle:v0.3.2"
+          hub-image: "quay.io/konveyor/tackle2-hub:release-0.3"
+          ui-image: "quay.io/konveyor/tackle2-ui:release-0.3"
+          addon-analyzer-image: "quay.io/konveyor/tackle2-addon-analyzer:release-0.3"
+          image-pull-policy: IfNotPresent
+          analyzer-container-memory: 0
+          analyzer-container-cpu: 0
+      - name: install konveyor
+        uses: konveyor/tackle2-operator/.github/actions/install-tackle@release-0.4
+        if: "${{ startsWith(github.event.pull_request.base.ref, 'release-0.4') }}"
+        with:
+          operator-bundle-image: "quay.io/konveyor/tackle2-operator-bundle:v0.4.0"
+          hub-image: "quay.io/konveyor/tackle2-hub:release-0.4"
+          ui-image: "quay.io/konveyor/tackle2-ui:release-0.4"
+          addon-analyzer-image: "quay.io/konveyor/tackle2-addon-analyzer:release-0.4"
+          image-pull-policy: IfNotPresent
+          analyzer-container-memory: 0
+          analyzer-container-cpu: 0
+      - name: install konveyor
+        uses: konveyor/tackle2-operator/.github/actions/install-tackle@release-0.5
+        if: "${{ startsWith(github.event.pull_request.base.ref, 'release-0.5') }}"
+        with:
+          operator-bundle-image: "quay.io/konveyor/tackle2-operator-bundle:v0.5.3"
+          hub-image: "quay.io/konveyor/tackle2-hub:release-0.5"
+          ui-image: "quay.io/konveyor/tackle2-ui:release-0.5"
+          addon-analyzer-image: "quay.io/konveyor/tackle2-addon-analyzer:release-0.5"
+          image-pull-policy: IfNotPresent
+          analyzer-container-memory: 0
+          analyzer-container-cpu: 0
+
       - uses: actions/setup-go@v3
         with:
           go-version: '1.19'
