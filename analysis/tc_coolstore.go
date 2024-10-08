@@ -24,21 +24,15 @@ var Coolstore = TC{
 		Effort: 113,
 		Issues: []api.Issue{
 			{
-				Category:    "potential",
-				Description: "Implicit name determination for sequences and tables associated with identifier generation has changed",
+				Category:    "mandatory",
+				Description: "HTTP session replication (distributable web.xml)",
 				Effort:      3,
-				RuleSet:     "eap8/eap7",
-				Rule:        "hibernate-00005",
+				RuleSet:     "cloud-readiness",
+				Rule:        "session-00000",
 				Incidents: []api.Incident{
 					{
-						File:     "/shared/source/coolstore/src/main/java/com/redhat/coolstore/model/OrderItem.java",
-						Line:     18,
-						Message:  "Implicit name determination for sequences and tables associated with identifier generation has changed",
-					},
-					{
-						File:     "/shared/source/coolstore/src/main/java/com/redhat/coolstore/model/Order.java",
-						Line:     24,
-						Message:  "Implicit name determination for sequences and tables associated with identifier generation has changed",
+						File:     "/shared/source/coolstore/src/main/webapp/WEB-INF/web.xml",
+						Line:     5,
 					},
 				},
 			},
@@ -63,20 +57,6 @@ var Coolstore = TC{
 			},
 			{
 				Category:    "mandatory",
-				Description: "Replace the Java EE persistence namespace, schemaLocation and version with the Jakarta equivalent",
-				Effort:      1,
-				RuleSet:     "javaee-to-jakarta-namespaces-00002",
-				Rule:        "eap8/eap7",
-				Incidents: []api.Incident{
-					{
-						File:    "/shared/source/coolstore/src/main/resources/META-INF/persistence.xml",
-						Line:    3,
-						Message: "Replace `http://xmlns.jcp.org/xml/ns/persistence` with `https://jakarta.ee/xml/ns/persistence`",
-					},
-				},
-			},
-			{
-				Category:    "mandatory",
 				Description: "javax javaee-api artifactId has been replaced by jakarta.platform jakarta.jakartaee-api",
 				Effort:      1,
 				RuleSet:     "javax-to-jakarta-dependencies-00007",
@@ -86,6 +66,20 @@ var Coolstore = TC{
 						File:    "/shared/source/coolstore/pom.xml",
 						Line:    26,
 						Message: "Update artifact dependency by replacing the javaee-api artifactId with jakarta.jakartaee-api",
+					},
+				},
+			},
+			{
+				Category:    "mandatory",
+				Description: "javax javaee-web-api artifactId has been replaced by jakarta.platform jakarta.jakartaee-api",
+				Effort:      1,
+				RuleSet:     "javax-to-jakarta-dependencies-00008",
+				Rule:        "eap8/eap7",
+				Incidents: []api.Incident{
+					{
+						File:    "/shared/source/coolstore/pom.xml",
+						Line:    20,
+						Message: "Update artifact dependency by replacing the javaee-web-api artifactId with jakarta.jakartaee-web-api",
 					},
 				},
 			},
@@ -180,7 +174,7 @@ var Coolstore = TC{
 					{
 						File:    "/shared/source/coolstore/src/main/webapp/WEB-INF/beans.xml",
 						Line:    21,
-						Message: "Replace beans_1_1.xsd with beans_3_0.xsd and update the version attribute to "3.0"",
+						Message: "Replace beans_1_1.xsd with beans_3_0.xsd and update the version attribute to \"3.0\"",
 					},
 				},
 			},
@@ -194,7 +188,7 @@ var Coolstore = TC{
 					{
 						File:    "/shared/source/coolstore/src/main/resources/META-INF/persistence.xml",
 						Line:    6,
-						Message: "Replace persistence_2_1.xsd with persistence_3_0.xsd and update the version attribute to "3.0"",
+						Message: "Replace persistence_2_1.xsd with persistence_3_0.xsd and update the version attribute to \"3.0\"",
 					},
 				},
 			},
@@ -210,69 +204,230 @@ var Coolstore = TC{
 						Line:    5,
 						Message: "Replace the javax.persistence import statement with jakarta.persistence",
 					},
-				},
-			},
-			{
-				Category:    "mandatory",
-				Description: "WWebLogic ApplicationLifecycleEvent",
-				Effort:      3,
-				RuleSet:     "eap7/weblogic/tests/data",
-				Rule:        "weblogic-webapp-eap7-05000",
-				Incidents: []api.Incident{
 					{
-						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/utils/StartupListener.java",
-						Line:    3,
-						Message: "WebLogic ApplicationLifecycleEvent must be replaced with standard Java EE ServletContextEvent types. Otherwise, a solution using CDI's ApplicationScoped beans or EJB's @Startup beans is required.
-
-						Use a javax.servlet.ServletContextListener with @javax.annotation.servlet.WebListener, or an EJB 3.1 @javax.ejb.Startup @javax.ejb.Singleton service bean.",
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/model/InventoryEntity.java",
+						Line:    6,
+						Message: "Replace the javax.persistence import statement with jakarta.persistence",
 					},
-				},
-			},
-			{
-				Category:    "mandatory",
-				Description: "WebLogic ApplicationLifecycleListener",
-				Effort:      3,
-				RuleSet:     "eap7/weblogic/tests/data",
-				Rule:        "weblogic-webapp-eap7-06000",
-				Incidents: []api.Incident{
 					{
-						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/utils/StartupListener.java",
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/model/InventoryEntity.java",
+						Line:    7,
+						Message: "Replace the javax.persistence import statement with jakarta.persistence",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/model/InventoryEntity.java",
+						Line:    8,
+						Message: "Replace the javax.persistence import statement with jakarta.persistence",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/model/InventoryEntity.java",
 						Line:    9,
-						Message: "WebLogic ApplicationLifecycleEvent must be replaced with standard Java EE ServletContextEvent types. Otherwise, a custom solution using CDI's ApplicationScoped beans or EJB's @Startup beans is required.
-
-						Use a javax.servlet.ServletContextListener with @javax.annotation.servlet.WebListener, or an EJB 3.1 @javax.ejb.Startup @javax.ejb.Singleton service bean."
+						Message: "Replace the javax.persistence import statement with jakarta.persistence",
 					},
-				},
-			},
-			{
-				Category:    "mandatory",
-				Description: "WebLogic InitialContextFactory",
-				Effort:      3,
-				RuleSet:     "eap7/weblogic/tests/data",
-				Rule:        "weblogic-eap7-016000",
-				Incidents: []api.Incident{
 					{
-						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/utils/StartupListener.java",
-						Line:    21,
-						Message: "weblogic.jndi.WLInitialContextFactory is an implementation of InitialContextFactory used to get object instances from JNDI.
-
-						The equivalent functionality needs to be configured on JBoss EAP 7 using org.jboss.naming.remote.client.InitialContextFactory. Then the context could be instanticated as follows: InitialContext ctx = new InitialContext();."
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/model/InventoryEntity.java",
+						Line:    10,
+						Message: "Replace the javax.persistence import statement with jakarta.xml",
 					},
-				},
-			},
-			{
-				Category:    "mandatory",
-				Description: "WebLogic T3 JNDI binding",
-				Effort:      3,
-				RuleSet:     "eap7/weblogic/tests/data",
-				Rule:        "weblogic-eap7-017000",
-				Incidents: []api.Incident{
 					{
-						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java",
-						Line:    75,
-						Message: "Weblogic’s implementation of the RMI specification uses a proprietary protocol known as T3. T3S is the version of the protocol over SSL. t3:// and t3s:// URLs are used to configure a JNDI InitialContext within WebLogic.
-
-						The equivalent functionality needs to be configured in JBoss EAP 7. This could be done either by using standard Java EE JNDI names or by using a WebLogic proprietary library if the connectivity to WebLogic server is still required."
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/model/Order.java",
+						Line:    7,
+						Message: "Replace the javax.persistence import statement with jakarta.persistence",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/model/Order.java",
+						Line:    8,
+						Message: "Replace the javax.persistence import statement with jakarta.persistence",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/model/Order.java",
+						Line:    9,
+						Message: "Replace the javax.persistence import statement with jakarta.persistence",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/model/Order.java",
+						Line:    10,
+						Message: "Replace the javax.persistence import statement with jakarta.persistence",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/model/Order.java",
+						Line:    11,
+						Message: "Replace the javax.persistence import statement with jakarta.persistence",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/model/Order.java",
+						Line:    12,
+						Message: "Replace the javax.persistence import statement with jakarta.persistence",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/model/Order.java",
+						Line:    13,
+						Message: "Replace the javax.persistence import statement with jakarta.persistence",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/model/Order.java",
+						Line:    14,
+						Message: "Replace the javax.persistence import statement with jakarta.persistence",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/model/Order.java",
+						Line:    15,
+						Message: "Replace the javax.persistence import statement with jakarta.persistence",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/model/OrderItem.java",
+						Line:    5,
+						Message: "Replace the javax.persistence import statement with jakarta.persistence",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/model/OrderItem.java",
+						Line:    6,
+						Message: "Replace the javax.persistence import statement with jakarta.persistence",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/model/OrderItem.java",
+						Line:    7,
+						Message: "Replace the javax.persistence import statement with jakarta.persistence",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/model/OrderItem.java",
+						Line:    8,
+						Message: "Replace the javax.persistence import statement with jakarta.persistence",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/model/OrderItem.java",
+						Line:    9,
+						Message: "Replace the javax.persistence import statement with jakarta.persistence",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/model/ShoppingCart.java",
+						Line:    7,
+						Message: "Replace the javax.persistence import statement with jakarta.persistence",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/persistence/Resources.java",
+						Line:    3,
+						Message: "Replace the javax.enterprise import statement with jakarta.enterprise",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/persistence/Resources.java",
+						Line:    4,
+						Message: "Replace the javax.enterprise import statement with jakarta.enterprise",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/persistence/Resources.java",
+						Line:    5,
+						Message: "Replace the javax.enterprise import statement with jakarta.enterprise",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/model/ShoppingCart.java",
+						Line:    6,
+						Message: "Replace the javax.persistence import statement with jakarta.persistence",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/CartEndpoint.java",
+						Line:    9,
+						Message: "Replace the javax.enterprise import statement with jakarta.persistence",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/CartEndpoint.java",
+						Line:    10,
+						Message: "Replace the javax.inject import statement with jakarta.inject",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/CartEndpoint.java",
+						Line:    11,
+						Message: "Replace the javax.ws import statement with jakarta.ws",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/CartEndpoint.java",
+						Line:    12,
+						Message: "Replace the javax.ws import statement with jakarta.ws",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/CartEndpoint.java",
+						Line:    13,
+						Message: "Replace the javax.ws import statement with jakarta.ws",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/CartEndpoint.java",
+						Line:    14,
+						Message: "Replace the javax.ws import statement with jakarta.ws",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/CartEndpoint.java",
+						Line:    15,
+						Message: "Replace the javax.ws import statement with jakarta.ws",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/CartEndpoint.java",
+						Line:    16,
+						Message: "Replace the javax.ws import statement with jakarta.ws",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/CartEndpoint.java",
+						Line:    17,
+						Message: "Replace the javax.ws import statement with jakarta.ws",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/OrderEndpoint.java",
+						Line:    6,
+						Message: "Replace the javax.enterprise import statement with jakarta.enterprise",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/OrderEndpoint.java",
+						Line:    7,
+						Message: "Replace the javax.inject import statement with jakarta.inject",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/OrderEndpoint.java",
+						Line:    8,
+						Message: "Replace the javax.ws import statement with jakarta.ws",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/OrderEndpoint.java",
+						Line:    9,
+						Message: "Replace the javax.ws import statement with jakarta.ws",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/OrderEndpoint.java",
+						Line:    10,
+						Message: "Replace the javax.ws import statement with jakarta.ws",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/OrderEndpoint.java",
+						Line:    11,
+						Message: "Replace the javax.ws import statement with jakarta.ws",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/OrderEndpoint.java",
+						Line:    12,
+						Message: "Replace the javax.ws import statement with jakarta.ws",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/OrderEndpoint.java",
+						Line:    13,
+						Message: "Replace the javax.ws import statement with jakarta.ws",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/ProductEndpoint.java",
+						Line:    6,
+						Message: "Replace the javax.enterprise import statement with jakarta.enterprise",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/ProductEndpoint.java",
+						Line:    7,
+						Message: "Replace the javax.inject import statement with jakarta.inject",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/ProductEndpoint.java",
+						Line:   9,
+						Message: "Replace the javax.inject import statement with jakarta.inject",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/ProductEndpoint.java",
+						Line:   9,
+						Message: "Replace the javax.inject import statement with jakarta.inject",
 					},
 				},
 			},
@@ -334,7 +489,6 @@ var Coolstore = TC{
 	AnalysisTags: []api.Tag{
 		{Name: "EJB XML", Category: api.Ref{Name: "Bean"}},
 		{Name: "Web Session", Category: api.Ref{Name: "Clustering"}},
-		{Name: "Micrometer", Category: api.Ref{Name: "Integration"}},
 		{Name: "CDI", Category: api.Ref{Name: "Inversion of Control"}},
 		{Name: "JPA entities", Category: api.Ref{Name: "Persistence"}},
 		{Name: "JPA named queries", Category: api.Ref{Name: "Persistence"}},
