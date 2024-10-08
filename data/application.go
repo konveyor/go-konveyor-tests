@@ -43,6 +43,13 @@ var (
 			Path: "example-1",
 		},
 	}
+	Coolstore = api.Application{
+		Name: "Coolstore",
+		Repository: &api.Repository{
+			Kind: "git",
+			URL:  "https://github.com/konveyor-ecosystem/coolstore",
+		},
+	}
 
 	// Binary applications
 	TackleTestappPublicBinary = api.Application{
