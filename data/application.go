@@ -47,7 +47,7 @@ var (
 	// Binary applications
 	TackleTestappPublicBinary = api.Application{
 		Name: "Tackle Testapp public binary",
-		Binary: "mvn://io.konveyor.demo:customers-tomcat:0.0.1-SNAPSHOT:war",	// To be downloaded from maven repository
+		Binary: "io.konveyor.demo:customers-tomcat:0.0.1-SNAPSHOT:war",	// To be downloaded from maven repository
 	}
 	UploadBinary = api.Application{
 		Name: "upload-binary",	// The file itself to be uploaded during the test
