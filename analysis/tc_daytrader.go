@@ -26,9 +26,49 @@ var Daytrader = TC{
 	Analysis: api.Analysis{
 		Effort: 10,
 		Issues: []api.Issue{
-			{Category: "mandatory", Effort: 1, Description: "File system - Java IO", RuleSet: "cloud-readiness", Rule: "local-storage-00001" },
-			{Category: "mandatory", Effort: 1, Description: "File system - java.net.URL/URI", RuleSet: "cloud-readiness", Rule: "local-storage-00002"},
-			{Category: "mandatory", Effort: 7, Description: "Local HTTP Calls", RuleSet: "cloud-readiness", Rule: "localhost-http-00001"},
+			{
+				Category: "mandatory",
+				Effort: 1,
+				Description: "File system - Java IO",
+				RuleSet: "cloud-readiness",
+				Rule: "local-storage-00001",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/TradeScenarioServlet.java",
+						Line: 125,
+					},
+				},
+			},
+			{
+				Category: "mandatory",
+				Effort: 1,
+				Description: "File system - java.net.URL/URI",
+				RuleSet: "cloud-readiness",
+				Rule: "local-storage-00002",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/PingReentryServlet.java",
+						Line: 91,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/PingServlet2PDF.java",
+						Line: 86,
+					},
+				},
+			},
+			{
+				Category: "mandatory",
+				Effort: 7,
+				Description: "Local HTTP Calls",
+				RuleSet: "cloud-readiness",
+				Rule: "localhost-http-00001",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/PingServlet2PDF.java",
+						Line: 85,
+					},
+				},
+			},
 		},
 	},
 	AnalysisTags: []api.Tag{
