@@ -60,5 +60,6 @@ var (
 		Name: "upload-binary",	// The file itself to be uploaded during the test
 	}
 
-	ApplicationSamples = []api.Application{Minimal, PathfinderGit, BookServer, TackleTestappPublic, CustomerTomcatLegacy, TackleTestappPublicBinary, UploadBinary}
+	ApplicationSamples = []api.Application{Minimal, PathfinderGit, BookServer, TackleTestappPublic,
+		CustomerTomcatLegacy, Coolstore, TackleTestappPublicBinary, UploadBinary}
 )
