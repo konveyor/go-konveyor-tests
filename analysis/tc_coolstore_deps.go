@@ -7,7 +7,7 @@ import (
 )
 
 var CoolstoreWithDeps = TC{
-	Name:        "Coolstore - Source plus dependencies",
+	Name:        "Coolstore-Source and dependencies",
 	Application: data.Coolstore,
 	Task:        Analyze,
 	WithDeps:    true,
