@@ -36,6 +36,17 @@ var Daytrader = TC{
 					{
 						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/TradeScenarioServlet.java",
 						Line: 125,
+						Message: `An application running inside a container could lose access to a file in local storage.
+
+ Recommendations
+
+ The following recommendations depend on the function of the file in local storage:
+
+ * Logging: Log to standard output and use a centralized log collector to analyze the logs.
+ * Caching: Use a cache backing service.
+ * Configuration: Store configuration settings in environment variables so that they can be updated without code changes.
+ * Data storage: Use a database backing service for relational data or use a persistent data storage system.
+ * Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.`,
 					},
 				},
 			},
@@ -49,10 +60,32 @@ var Daytrader = TC{
 					{
 						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/PingReentryServlet.java",
 						Line: 91,
+						Message: `An application running inside a container could lose access to a file in local storage.
+
+ Recommendations
+
+ The following recommendations depend on the function of the file in local storage:
+
+ * Logging: Log to standard output and use a centralized log collector to analyze the logs.
+ * Caching: Use a cache backing service.
+ * Configuration: Store configuration settings in environment variables so that they can be updated without code changes.
+ * Data storage: Use a database backing service for relational data or use a persistent data storage system.
+ * Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.`,
 					},
 					{
 						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/PingServlet2PDF.java",
 						Line: 86,
+						Message: `An application running inside a container could lose access to a file in local storage.
+
+ Recommendations
+
+ The following recommendations depend on the function of the file in local storage:
+
+ * Logging: Log to standard output and use a centralized log collector to analyze the logs.
+ * Caching: Use a cache backing service.
+ * Configuration: Store configuration settings in environment variables so that they can be updated without code changes.
+ * Data storage: Use a database backing service for relational data or use a persistent data storage system.
+ * Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.`,
 					},
 				},
 			},
