@@ -43,6 +43,13 @@ var (
 			Path: "example-1",
 		},
 	}
+	Coolstore = api.Application{
+		Name: "Coolstore",
+		Repository: &api.Repository{
+			Kind: "git",
+			URL:  "https://github.com/konveyor-ecosystem/coolstore",
+		},
+	}
 
 	// Binary applications
 	TackleTestappPublicBinary = api.Application{
@@ -53,5 +60,6 @@ var (
 		Name: "upload-binary",	// The file itself to be uploaded during the test
 	}
 
-	ApplicationSamples = []api.Application{Minimal, PathfinderGit, BookServer, TackleTestappPublic, CustomerTomcatLegacy, TackleTestappPublicBinary, UploadBinary}
+	ApplicationSamples = []api.Application{Minimal, PathfinderGit, BookServer, TackleTestappPublic,
+		CustomerTomcatLegacy, Coolstore, TackleTestappPublicBinary, UploadBinary}
 )
