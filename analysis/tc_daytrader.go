@@ -99,6 +99,7 @@ var Daytrader = TC{
 					{
 						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/PingServlet2PDF.java",
 						Line: 85,
+						Message: "The app is trying to access local resource by HTTP, please try to migrate the resource to cloud",
 					},
 				},
 			},
