@@ -47,7 +47,7 @@ var TackleTestappPublicWithDeps = TC{
 				Rule:        "local-storage-00001",
 				Incidents: []api.Incident{
 					{
-						File:    "/root/.m2/repository/io/konveyor/demo/configuration-utils/1.0.0/io/konveyor/demo/config/ApplicationConfiguration.java",
+						File:    "/cache/m2/io/konveyor/demo/configuration-utils/1.0.0/io/konveyor/demo/config/ApplicationConfiguration.java",
 						Line:    14,
 						Message: "An application running inside a container could lose access to a file in local storage",
 					},
