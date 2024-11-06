@@ -11,7 +11,7 @@ on:
       - "**.md"
 
 jobs:
-  test-tier0-release03:
+  test-tier1-release03:
     uses: konveyor/ci/.github/workflows/global-ci.yml@main
     if: ${{ github.ref == 'refs/heads/release-0.3' || github.event.pull_request.base.ref == 'release-0.3' }}
     with:
@@ -21,7 +21,7 @@ jobs:
       api_tests_tiers: DEBUG=1 make test-tier1
       run_api_tests: true
       run_ui_tests: false
-  test-tier0-release04:
+  test-tier1-release04:
     uses: konveyor/ci/.github/workflows/global-ci.yml@main
     if: ${{ github.ref == 'refs/heads/release-0.4' || github.event.pull_request.base.ref == 'release-0.4' }}
     with:
@@ -31,7 +31,7 @@ jobs:
       api_tests_tiers: DEBUG=1 make test-tier1
       run_api_tests: true
       run_ui_tests: false
-  test-tier0-release05:
+  test-tier1-release05:
     uses: konveyor/ci/.github/workflows/global-ci.yml@main
     if: ${{ github.ref == 'refs/heads/release-0.5' || github.event.pull_request.base.ref == 'release-0.5' }}
     with:
