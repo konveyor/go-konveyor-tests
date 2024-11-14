@@ -20,7 +20,7 @@ var SeamBooking = TC{
 	Labels: addon.Labels{
 		Included: []string{
 			"konveyor.io/target=cloud-readiness",
-			"konveyor.io/target=eap",
+			"konveyor.io/target=jakarta-ee",
 			},
 	},
 	ReportContent: map[string][]string{
