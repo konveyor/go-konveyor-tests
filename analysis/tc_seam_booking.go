@@ -1,6 +1,9 @@
 package analysis
 
-import "github.com/konveyor/tackle2-hub/api"
+import (
+	"github.com/konveyor/go-konveyor-tests/hack/addon"
+	"github.com/konveyor/tackle2-hub/api"
+)
 
 var SeamBooking = TC{
 	Name: "Seam booking",
@@ -14,17 +17,57 @@ var SeamBooking = TC{
 		},
 	},
 	Task: Analyze,
+	Labels: addon.Labels{
+		Included: []string{
+			"konveyor.io/target=cloud-readiness",
+			"konveyor.io/target=eap",
+			},
+	},
 	ReportContent: map[string][]string{
 		"/windup/report/index.html": {
 			"0\nstory points",
 			"3\nInformation",
 		},
 	},
-	Targets: []string{
-		"cloud-readiness",
-	},
 	Analysis: api.Analysis{
-		Effort: 0,
+		Effort: 3,
+		Issues: []api.Issue{
+			{
+				Category:    "potential",
+				Description: "The groupId `javax` has been replaced by `jakarta` in JBoss EAP 7.3, or later",
+				Effort:       1,
+				RuleSet:     "eap7/weblogic/tests/data",
+				Rule:        "maven-javax-to-jakarta-00004",
+				Name:        "Seam booking 5.2 JLYDS",
+				Incidents: []api.Incident{
+					{
+						File:    "/shared/source/windup/test-files/seam-booking-5.2/pom.xml",
+						Line:    24,
+						Message: "If you migrate your application to JBoss EAP 7.3, or later, and want to ensure its Maven building, running or testing works as expected, use instead the Jakarta EE dependency - groupId jakarta..",
+					},
+				},
+			},
+			{
+				Category: "potential",
+				Description: "web.xml element references a javax-prefixed class name",
+				Effort: 1,
+				RuleSet:     "eap8/eap7",
+				Rule:        "javax-to-jakarta-servlet-00130",
+				Name: "Maven POM (pom.xml)",
+				Incidents: []api.Incident{
+					{
+						File:    "/shared/source/windup/test-files/seam-booking-5.2/resources/WEB-INF/web.xml",
+						Line:    40,
+						Message: "web.xml element references a javax-prefixed class name",
+					},
+					{
+						File:    "/shared/source/windup/test-files/seam-booking-5.2/resources/WEB-INF/web.xml",
+						Line:    51,
+						Message: "web.xml element references a javax-prefixed class name",
+					},
+				},
+			},
+		},
 	},
 	AnalysisTags: []api.Tag{
 		{Name: "EJB XML", Category: api.Ref{Name: "Bean"}},
