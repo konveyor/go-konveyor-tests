@@ -30,7 +30,7 @@ var SeamBooking = TC{
 		},
 	},
 	Analysis: api.Analysis{
-		Effort: 3,
+		Effort: 89,
 		Issues: []api.Issue{
 			{
 				Category:    "mandatory",
