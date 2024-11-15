@@ -22,16 +22,22 @@ var ApacheWicket = TC{
 		"cloud-readiness",
 	},
 	Analysis: api.Analysis{
-		Effort: 5,
+		Effort: 10,
 		Issues: []api.Issue{
-			{Category: "cloud-mandatory", Description: "Trivial change or 1-1 library swap", Effort: 2, Name: "File system - Java IO"},
-			{Category: "cloud-mandatory", Description: "Trivial change or 1-1 library swap", Effort: 3, Name: "Hard-coded IP address"},
-			{Category: "information", Description: "Info", Effort: 0, Name: "Java Servlet"},
-			{Category: "information", Description: "Info", Effort: 0, Name: "Threads"},
+			{
+				Category: "mandatory",
+				Effort: 1,
+				Description: "Hardcoded IP Address",
+				RuleSet: "discovery-rules",
+				Rule: "hardcoded-ip-address",
+			},
+			{
+				Category: "mandatory",
+				Effort: 7,
+				Description: "Local HTTP Calls",
+				RuleSet: "cloud-readiness",
+				Rule: "localhost-http-00001",
+			},
 		},
-	},
-	AnalysisTags: []api.Tag{
-		{Name: "Servlet"},
-		{Name: "Java Threads"},
 	},
 }
