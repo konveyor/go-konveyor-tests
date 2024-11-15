@@ -304,6 +304,33 @@ var SeamBooking = TC{
 				},
 			},
 		},
+		Dependencies: []api.TechDependency{
+			{
+				Name:     "com.fasterxml.classmate",
+				Version:  "1.3.4",
+				Provider: "java",
+			},
+			{
+				Name:     "javax.persistence.persistence-api",
+				Version:  "1.0",
+				Provider: "java",
+			},
+			{
+				Name:     "javax.validation.validation-api",
+				Version:  "2.0.1.Final",
+				Provider: "java",
+			},
+			{
+				Name:     "org.hibernate.validator.hibernate-validator",
+				Version:  "6.0.23.Final",
+				Provider: "java",
+			},
+			{
+				Name:     "org.jboss.logging.jboss-logging",
+				Version:  "3.3.2.Final",
+				Provider: "java",
+			},
+		},
 	},
 	AnalysisTags: []api.Tag{
 		{Name: "EJB XML", Category: api.Ref{Name: "Bean"}},
