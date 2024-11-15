@@ -41,6 +41,11 @@ var ApacheWicket = TC{
 						Line:    584,
 						Message: "When migrating environments, hard-coded IP addresses may need to be modified or eliminated.",
 					},
+					{
+						File:    "/shared/source/windup-sample-apps/test-files/src_example/org/apache/wicket/protocol/http/mock/MockHttpServletRequest.java",
+						Line:    587,
+						Message: "When migrating environments, hard-coded IP addresses may need to be modified or eliminated.",
+					},
 				},
 			},
 			{
