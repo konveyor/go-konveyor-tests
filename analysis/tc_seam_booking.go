@@ -306,6 +306,7 @@ var SeamBooking = TC{
 		},
 	},
 	AnalysisTags: []api.Tag{
+		{Name: "EJB XML", Category: api.Ref{Name: "Bean"}},
 		{Name: "JPA entities", Category: api.Ref{Name: "Persistence"}},
 		{Name: "JPA XML", Category: api.Ref{Name: "Persistence"}},
 		{Name: "Persistence units", Category: api.Ref{Name: "Persistence"}},
