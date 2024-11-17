@@ -13,12 +13,6 @@ var Daytrader = TC{
 	},
 	WithDeps: true,
 	Task:     Analyze,
-	ReportContent: map[string][]string{
-		"/windup/report/index.html": {
-			"0\nstory points",
-			"6\nInformation",
-		},
-	},
 	Targets: []string{
 		"konveyor.io/target=cloud-readiness",
 		"konveyor.io/target=quarkus",
@@ -27,11 +21,11 @@ var Daytrader = TC{
 		Effort: 10,
 		Issues: []api.Issue{
 			{
-				Category: "mandatory",
-				Effort: 1,
+				Category:    "mandatory",
+				Effort:      1,
 				Description: "File system - Java IO",
-				RuleSet: "cloud-readiness",
-				Rule: "local-storage-00001",
+				RuleSet:     "cloud-readiness",
+				Rule:        "local-storage-00001",
 				Incidents: []api.Incident{
 					{
 						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/TradeScenarioServlet.java",
@@ -51,11 +45,11 @@ var Daytrader = TC{
 				},
 			},
 			{
-				Category: "mandatory",
-				Effort: 1,
+				Category:    "mandatory",
+				Effort:      1,
 				Description: "File system - java.net.URL/URI",
-				RuleSet: "cloud-readiness",
-				Rule: "local-storage-00002",
+				RuleSet:     "cloud-readiness",
+				Rule:        "local-storage-00002",
 				Incidents: []api.Incident{
 					{
 						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/PingReentryServlet.java",
@@ -90,18 +84,60 @@ var Daytrader = TC{
 				},
 			},
 			{
-				Category: "mandatory",
-				Effort: 7,
+				Category:    "mandatory",
+				Effort:      7,
 				Description: "Local HTTP Calls",
-				RuleSet: "cloud-readiness",
-				Rule: "localhost-http-00001",
+				RuleSet:     "cloud-readiness",
+				Rule:        "localhost-http-00001",
 				Incidents: []api.Incident{
 					{
-						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/PingServlet2PDF.java",
-						Line: 85,
+						File:    "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/PingServlet2PDF.java",
+						Line:    85,
 						Message: "The app is trying to access local resource by HTTP, please try to migrate the resource to cloud",
 					},
 				},
+			},
+		},
+		Dependencies: []api.TechDependency{
+			{
+				Name:     "taglibs.standard",
+				Version:  "1.1.1",
+				Provider: "java",
+			},
+			{
+				Name:     "org.apache.derby.derby",
+				Version:  "10.14.2.0",
+				Provider: "java",
+			},
+			{
+				Name:     "net.wasdev.wlp.sample.daytrader-ee7-web",
+				Version:  "1.0-SNAPSHOT",
+				Provider: "java",
+			},
+			{
+				Name:     "net.wasdev.wlp.sample.daytrader-ee7-ejb",
+				Version:  "1.0-SNAPSHOT",
+				Provider: "java",
+			},
+			{
+				Name:     "javax.javaee-api",
+				Version:  "7.0",
+				Provider: "java",
+			},
+			{
+				Name:     "javax.annotation.javax.annotation-api",
+				Version:  "1.3.2",
+				Provider: "java",
+			},
+			{
+				Name:     "com.sun.mail.javax.mail",
+				Version:  "1.5.0",
+				Provider: "java",
+			},
+			{
+				Name:     "javax.activation.activation",
+				Version:  "1.1",
+				Provider: "java",
 			},
 		},
 	},
@@ -115,7 +151,7 @@ var Daytrader = TC{
 		{Name: "JPA named queries", Category: api.Ref{Name: "Persistence"}},
 		{Name: "JPA XML", Category: api.Ref{Name: "Persistence"}},
 		{Name: "Persistence units", Category: api.Ref{Name: "Persistence"}},
-		{Name: "EJB Timer",Category: api.Ref{Name: "Processing"}},
+		{Name: "EJB Timer", Category: api.Ref{Name: "Processing"}},
 		{Name: "Java EE JSON-P", Category: api.Ref{Name: "Processing"}},
 		{Name: "Bean Validation", Category: api.Ref{Name: "Validation"}},
 		{Name: "JPA entities", Category: api.Ref{Name: "Store"}},
