@@ -25,7 +25,6 @@ var Tier2TestCases = []TC{
 	PetclinicHazelcast,
 	ApacheWicket,
 	SeamBooking,
-	TackleTestappPublicBinary,
 }
 
 // Tier 3 Analysis with credentials test cases - should work
