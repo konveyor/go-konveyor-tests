@@ -6,13 +6,10 @@ var ApacheWicket = TC{
 	Name: "Apache Wicket",
 	Application: data.ApacheWicket,
 	Task: Analyze,
-	ReportContent: map[string][]string{
-		"/windup/report/index.html": {
-			"5\nstory points",
+	Labels: addon.Labels{
+		Included: []string{
+			"konveyor.io/target=cloud-readiness",
 		},
-	},
-	Targets: []string{
-		"cloud-readiness",
 	},
 	Analysis: api.Analysis{
 		Effort: 10,
