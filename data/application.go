@@ -57,6 +57,14 @@ var (
 			URL:  "https://github.com/WASdev/sample.daytrader7.git",
 		},
 	}
+	ApacheWicket = api.Application{
+		Name: "Apache Wicket",
+		Repository: &api.Repository{
+			Kind: "git",
+			URL:  "https://github.com/windup/windup-sample-apps.git",
+			Path: "test-files/src_example/org/apache/wicket",
+		},
+	}
 
 	// Binary applications
 	TackleTestappPublicBinary = api.Application{
