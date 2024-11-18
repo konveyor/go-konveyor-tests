@@ -76,5 +76,5 @@ var (
 	}
 
 	ApplicationSamples = []api.Application{Minimal, PathfinderGit, BookServer, TackleTestappPublic,
-		CustomerTomcatLegacy, Coolstore, Daytrader, TackleTestappPublicBinary, UploadBinary}
+		CustomerTomcatLegacy, Coolstore, Daytrader, ApacheWicket, TackleTestappPublicBinary, UploadBinary}
 )

@@ -1,6 +1,10 @@
 package analysis
 
-import "github.com/konveyor/tackle2-hub/api"
+import (
+	"github.com/konveyor/go-konveyor-tests/data"
+	"github.com/konveyor/go-konveyor-tests/hack/addon"
+	"github.com/konveyor/tackle2-hub/api"
+)
 
 var ApacheWicket = TC{
 	Name: "Apache Wicket",
@@ -52,7 +56,6 @@ var ApacheWicket = TC{
 					},
 				},
 			},
-			Dependencies: []api.TechDependency{},
 		},
 	},
 }
