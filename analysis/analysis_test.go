@@ -266,7 +266,7 @@ func TestApplicationAnalysis(t *testing.T) {
 			sort.SliceStable(tc.Analysis.Dependencies, func(a, b int) bool { return tc.Analysis.Dependencies[a].Name < tc.Analysis.Dependencies[b].Name })
 
 			// Check the dependencies (if specified by TestCase).
-			if len(tc.Analysis.Dependencies) > 0 {
+			if len(gotAnalysis.Dependencies) > 0 {
 				if len(gotAnalysis.Dependencies) != len(tc.Analysis.Dependencies) {
 					t.Errorf("Different amount of dependencies error. Got %d, expected %d.", len(gotAnalysis.Dependencies), len(tc.Analysis.Dependencies))
 					t.Error("Got:")
