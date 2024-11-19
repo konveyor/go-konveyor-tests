@@ -265,24 +265,23 @@ func TestApplicationAnalysis(t *testing.T) {
 			sort.SliceStable(gotAnalysis.Dependencies, func(a, b int) bool { return gotAnalysis.Dependencies[a].Name < gotAnalysis.Dependencies[b].Name })
 			sort.SliceStable(tc.Analysis.Dependencies, func(a, b int) bool { return tc.Analysis.Dependencies[a].Name < tc.Analysis.Dependencies[b].Name })
 
-			// Check the dependencies (if specified by TestCase).
-			if len(gotAnalysis.Dependencies) > 0 {
-				if len(gotAnalysis.Dependencies) != len(tc.Analysis.Dependencies) {
-					t.Errorf("Different amount of dependencies error. Got %d, expected %d.", len(gotAnalysis.Dependencies), len(tc.Analysis.Dependencies))
-					t.Error("Got:")
-					pp.Println(gotAnalysis.Dependencies)
-					t.Error("Expected:")
-					pp.Println(tc.Analysis.Dependencies)
-				} else {
-					for i, got := range gotAnalysis.Dependencies {
-						expected := tc.Analysis.Dependencies[i]
-						if got.Name != expected.Name || got.Version != expected.Version || got.Provider != expected.Provider {
-							t.Errorf("\nDifferent dependency error. Got %+v\nExpected %+v.\n\n", got, expected)
-						}
+			// Check dependencies
+			if (len(gotAnalysis.Dependencies) == 0 && len(tc.Analysis.Dependencies) == 0) {
+				t.Log("Skipping Dependencies check, Got=Expected=0.")
+			} else if len(gotAnalysis.Dependencies) != len(tc.Analysis.Dependencies) {
+				t.Errorf("Different amount of dependencies error. Got %d, expected %d.", len(gotAnalysis.Dependencies), len(tc.Analysis.Dependencies))
+				t.Error("Got:")
+				pp.Println(gotAnalysis.Dependencies)
+				t.Error("Expected:")
+				pp.Println(tc.Analysis.Dependencies)
+			} else {
+				// if len(gotAnalysis.Dependencies) = len(tc.Analysis.Dependencies)
+				for i, got := range gotAnalysis.Dependencies {
+					expected := tc.Analysis.Dependencies[i]
+					if got.Name != expected.Name || got.Version != expected.Version || got.Provider != expected.Provider {
+						t.Errorf("\nDifferent dependency error. Got %+v\nExpected %+v.\n\n", got, expected)
 					}
 				}
-			} else {
-				t.Log("Skipping Dependencies check, nothing is expected.")
 			}
 
 			// Check analysis-created Tags.
