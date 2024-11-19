@@ -232,7 +232,7 @@ func TestApplicationAnalysis(t *testing.T) {
 						break
 					}
 					if len(got.Incidents) != len(expected.Incidents) {
-						t.Errorf("Different amount of incidents error. Got %d, expected %d.", len(got.Incidents), len(expected.Incidents))
+						t.Errorf("Different amount of incidents error for rule %s. Got %d, expected %d.", got.Rule, len(got.Incidents), len(expected.Incidents))
 						missing, unexpected := getIncidentsDiff(expected.Incidents, got.Incidents)
 						for _, incident := range missing {
 							fmt.Printf("Expected incident not found: %s line %d.\n", incident.File, incident.Line)
