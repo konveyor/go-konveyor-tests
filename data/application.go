@@ -43,15 +43,23 @@ var (
 			Path: "example-1",
 		},
 	}
+	Daytrader = api.Application{
+		Name: "Daytrader 7 EE application",
+		Repository: &api.Repository{
+			Kind: "git",
+			URL:  "https://github.com/WASdev/sample.daytrader7.git",
+		},
+	}
 
 	// Binary applications
 	TackleTestappPublicBinary = api.Application{
-		Name: "Tackle Testapp public binary",
-		Binary: "mvn://io.konveyor.demo:customers-tomcat:0.0.1-SNAPSHOT:war",	// To be downloaded from maven repository
+		Name:   "Tackle Testapp public binary",
+		Binary: "mvn://io.konveyor.demo:customers-tomcat:0.0.1-SNAPSHOT:war", // To be downloaded from maven repository
 	}
 	UploadBinary = api.Application{
-		Name: "upload-binary",	// The file itself to be uploaded during the test
+		Name: "upload-binary", // The file itself to be uploaded during the test
 	}
 
-	ApplicationSamples = []api.Application{Minimal, PathfinderGit, BookServer, TackleTestappPublic, CustomerTomcatLegacy, TackleTestappPublicBinary, UploadBinary}
+	ApplicationSamples = []api.Application{Minimal, PathfinderGit, BookServer, TackleTestappPublic,
+		CustomerTomcatLegacy, Daytrader, TackleTestappPublicBinary, UploadBinary}
 )
