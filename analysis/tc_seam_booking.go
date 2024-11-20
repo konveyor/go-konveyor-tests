@@ -1,33 +1,20 @@
 package analysis
 
 import (
+	"github.com/konveyor/go-konveyor-tests/data"
 	"github.com/konveyor/go-konveyor-tests/hack/addon"
 	"github.com/konveyor/tackle2-hub/api"
 )
 
 var SeamBooking = TC{
 	Name: "Seam booking",
-	Application: api.Application{
-		Name: "Seam booking 5.2",
-		Repository: &api.Repository{
-			Kind:   "git",
-			URL:    "https://github.com/windup/windup.git",
-			Path:   "test-files/seam-booking-5.2",
-			Branch: "master",
-		},
-	},
+	Application: data.SeamBooking,
 	Task: Analyze,
 	Labels: addon.Labels{
 		Included: []string{
 			"konveyor.io/target=cloud-readiness",
 			"konveyor.io/target=eap",
 			},
-	},
-	ReportContent: map[string][]string{
-		"/windup/report/index.html": {
-			"0\nstory points",
-			"3\nInformation",
-		},
 	},
 	Analysis: api.Analysis{
 		Effort: 89,
