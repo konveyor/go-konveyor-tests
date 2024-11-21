@@ -26,15 +26,18 @@ var PetclinicHazelcast = TC{
 		},
 	},
 	Task: Analyze,
+	Labels: addon.Labels{
+		Included: []string{
+			"konveyor.io/target=cloud-readiness",
+			"konveyor.io/target=jakarta-ee",
+		},
+	},
 	ReportContent: map[string][]string{
 		"/windup/report/index.html": {
 			"12\nstory points",
 			"8\nCloud Mandatory",
 			"13\nInformation",
 		},
-	},
-	Targets: []string{
-		"cloud-readiness",
 	},
 	Analysis: api.Analysis{
 		Effort: 14,
@@ -61,15 +64,20 @@ var PetclinicHazelcast = TC{
 		},
 	},
 	AnalysisTags: []api.Tag{
-		{Name: "Java EE JAXB"},
-		{Name: "Servlet"},
-		{Name: "Spring MVC"},
-		{Name: "Spring JMX"},
-		{Name: "Common Annotations"},
-		{Name: "Properties"},
-		{Name: "JPA entities"},
-		{Name: "Spring Data JPA"},
-		{Name: "Bean Validation"},
-		{Name: "JSP Page"},
+		{Name: "EJB XML", Category: api.Ref{Name: "Bean"}},
+		{Name: "Servlet", Category: api.Ref{Name: "HTTP"}},
+		{Name: "Properties", Category: api.Ref{Name: "Other"}},
+		{Name: "JPA named queries", Category: api.Ref{Name: "Persistence"}},
+		{Name: "Bean Validation", Category: api.Ref{Name: "Validation"}},
+		{Name: "Properties", Category: api.Ref{Name: "Sustain"}},
+		{Name: "EJB XML", Category: api.Ref{Name: "Java EE"}},
+		{Name: "Properties", Category: api.Ref{Name: "Embedded"}},
+		{Name: "EJB XML", Category: api.Ref{Name: "Connect"}},
+		{Name: "Servlet", Category: api.Ref{Name: "Connect"}},
+		{Name: "Bean Validation", Category: api.Ref{Name: "Java EE"}},
+		{Name: "JPA named queries", Category: api.Ref{Name: "Java EE"}},
+		{Name: "JPA named queries", Category: api.Ref{Name: "Store"}},
+		{Name: "Bean Validation", Category: api.Ref{Name: "Store"}},
+		{Name: "Servlet", Category: api.Ref{Name: "Java EE"}},
 	},
 }
