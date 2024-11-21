@@ -1,37 +1,61 @@
 package analysis
 
-import "github.com/konveyor/tackle2-hub/api"
+import (
+	"github.com/konveyor/go-konveyor-tests/data"
+	"github.com/konveyor/go-konveyor-tests/hack/addon"
+	"github.com/konveyor/tackle2-hub/api"
+)
 
 var ApacheWicket = TC{
 	Name: "Apache Wicket",
-	Application: api.Application{
-		Name: "Apache Wicket app",
-		Repository: &api.Repository{
-			Kind: "git",
-			URL:  "https://github.com/windup/windup-sample-apps.git",
-			Path: "test-files/src_example/org/apache/wicket",
-		},
-	},
+	Application: data.ApacheWicket,
 	Task: Analyze,
-	ReportContent: map[string][]string{
-		"/windup/report/index.html": {
-			"5\nstory points",
+	Labels: addon.Labels{
+		Included: []string{
+			"konveyor.io/target=cloud-readiness",
 		},
-	},
-	Targets: []string{
-		"cloud-readiness",
 	},
 	Analysis: api.Analysis{
-		Effort: 5,
+		Effort: 10,
 		Issues: []api.Issue{
-			{Category: "cloud-mandatory", Description: "Trivial change or 1-1 library swap", Effort: 2, Name: "File system - Java IO"},
-			{Category: "cloud-mandatory", Description: "Trivial change or 1-1 library swap", Effort: 3, Name: "Hard-coded IP address"},
-			{Category: "information", Description: "Info", Effort: 0, Name: "Java Servlet"},
-			{Category: "information", Description: "Info", Effort: 0, Name: "Threads"},
+			{
+				Category: "mandatory",
+				Effort: 1,
+				Description: "Hardcoded IP Address",
+				RuleSet: "discovery-rules",
+				Rule: "hardcoded-ip-address",
+				Incidents: []api.Incident{
+					{
+						File:    "/shared/source/windup-sample-apps/test-files/src_example/org/apache/wicket/protocol/http/mock/MockHttpServletRequest.java",
+						Line:    51,
+						Message: "When migrating environments, hard-coded IP addresses may need to be modified or eliminated.",
+					},
+					{
+						File:    "/shared/source/windup-sample-apps/test-files/src_example/org/apache/wicket/protocol/http/mock/MockHttpServletRequest.java",
+						Line:    584,
+						Message: "When migrating environments, hard-coded IP addresses may need to be modified or eliminated.",
+					},
+					{
+						File:    "/shared/source/windup-sample-apps/test-files/src_example/org/apache/wicket/protocol/http/mock/MockHttpServletRequest.java",
+						Line:    587,
+						Message: "When migrating environments, hard-coded IP addresses may need to be modified or eliminated.",
+					},
+				},
+			},
+			{
+				Category: "mandatory",
+				Effort: 7,
+				Description: "Local HTTP Calls",
+				RuleSet: "cloud-readiness",
+				Rule: "localhost-http-00001",
+				Incidents: []api.Incident{
+					{
+						File:    "/shared/source/windup-sample-apps/test-files/src_example/org/apache/wicket/protocol/http/mock/MockHttpServletRequest.java",
+						Line:    362,
+						Message: "The app is trying to access local resource by HTTP, please try to migrate the resource to cloud",
+					},
+				},
+			},
 		},
-	},
-	AnalysisTags: []api.Tag{
-		{Name: "Servlet"},
-		{Name: "Java Threads"},
 	},
 }
