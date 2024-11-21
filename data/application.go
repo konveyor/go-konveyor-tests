@@ -65,6 +65,15 @@ var (
 			Path: "test-files/src_example/org/apache/wicket",
 		},
 	}
+	PetclinicHazelcast = api.Application{
+		Name:        "Petclinic",
+		Description: "Spring framework app",
+		Repository: &api.Repository{
+			Kind:   "git",
+			URL:    "https://github.com/savitharaghunathan/spring-framework-petclinic.git",
+			Branch: "legacy",
+		},
+	}
 
 	// Binary applications
 	TackleTestappPublicBinary = api.Application{
@@ -76,5 +85,5 @@ var (
 	}
 
 	ApplicationSamples = []api.Application{Minimal, PathfinderGit, BookServer, TackleTestappPublic,
-		CustomerTomcatLegacy, Coolstore, Daytrader, ApacheWicket, TackleTestappPublicBinary, UploadBinary}
+		CustomerTomcatLegacy, Coolstore, Daytrader, ApacheWicket, PetclinicHazelcast, TackleTestappPublicBinary, UploadBinary}
 )
