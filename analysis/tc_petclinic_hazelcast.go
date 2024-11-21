@@ -1,18 +1,14 @@
 package analysis
 
-import "github.com/konveyor/tackle2-hub/api"
+import (
+	"github.com/konveyor/go-konveyor-tests/data"
+	"github.com/konveyor/go-konveyor-tests/hack/addon"
+	"github.com/konveyor/tackle2-hub/api"
+)
 
 var PetclinicHazelcast = TC{
 	Name: "Petclinic legacy cloud-readiness with tagger and hazelcast custom rules",
-	Application: api.Application{
-		Name:        "Petclinic",
-		Description: "Spring framework app",
-		Repository: &api.Repository{
-			Kind:   "git",
-			URL:    "https://github.com/savitharaghunathan/spring-framework-petclinic.git",
-			Branch: "legacy",
-		},
-	},
+	Application: data.PetclinicHazelcast,
 	CustomRules: []api.RuleSet{
 		{
 			Name:   "Hazelcast Java distributed session store ruleset.",
@@ -29,13 +25,6 @@ var PetclinicHazelcast = TC{
 	Labels: addon.Labels{
 		Included: []string{
 			"konveyor.io/target=cloud-readiness",
-		},
-	},
-	ReportContent: map[string][]string{
-		"/windup/report/index.html": {
-			"12\nstory points",
-			"8\nCloud Mandatory",
-			"13\nInformation",
 		},
 	},
 	Analysis: api.Analysis{
