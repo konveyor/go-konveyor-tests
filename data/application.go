@@ -50,16 +50,40 @@ var (
 			URL:  "https://github.com/konveyor-ecosystem/coolstore",
 		},
 	}
+	Daytrader = api.Application{
+		Name: "Daytrader 7 EE application",
+		Repository: &api.Repository{
+			Kind: "git",
+			URL:  "https://github.com/WASdev/sample.daytrader7.git",
+		},
+	}
+	ApacheWicket = api.Application{
+		Name: "Apache Wicket",
+		Repository: &api.Repository{
+			Kind: "git",
+			URL:  "https://github.com/windup/windup-sample-apps.git",
+			Path: "test-files/src_example/org/apache/wicket",
+		},
+	}
+	PetclinicHazelcast = api.Application{
+		Name:        "Petclinic",
+		Description: "Spring framework app",
+		Repository: &api.Repository{
+			Kind:   "git",
+			URL:    "https://github.com/savitharaghunathan/spring-framework-petclinic.git",
+			Branch: "legacy",
+		},
+	}
 
 	// Binary applications
 	TackleTestappPublicBinary = api.Application{
-		Name: "Tackle Testapp public binary",
-		Binary: "mvn://io.konveyor.demo:customers-tomcat:0.0.1-SNAPSHOT:war",	// To be downloaded from maven repository
+		Name:   "Tackle Testapp public binary",
+		Binary: "mvn://io.konveyor.demo:customers-tomcat:0.0.1-SNAPSHOT:war", // To be downloaded from maven repository
 	}
 	UploadBinary = api.Application{
-		Name: "upload-binary",	// The file itself to be uploaded during the test
+		Name: "upload-binary", // The file itself to be uploaded during the test
 	}
 
 	ApplicationSamples = []api.Application{Minimal, PathfinderGit, BookServer, TackleTestappPublic,
-		CustomerTomcatLegacy, Coolstore, TackleTestappPublicBinary, UploadBinary}
+		CustomerTomcatLegacy, Coolstore, Daytrader, ApacheWicket, PetclinicHazelcast, TackleTestappPublicBinary, UploadBinary}
 )
