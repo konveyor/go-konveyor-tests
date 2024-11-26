@@ -65,6 +65,24 @@ var (
 			Path: "test-files/src_example/org/apache/wicket",
 		},
 	}
+	PetclinicHazelcast = api.Application{
+		Name:        "Petclinic",
+		Description: "Spring framework app",
+		Repository: &api.Repository{
+			Kind:   "git",
+			URL:    "https://github.com/savitharaghunathan/spring-framework-petclinic.git",
+			Branch: "legacy",
+		},
+	}
+	SeamBooking = api.Application{
+		Name: "Seam booking 5.2",
+		Repository: &api.Repository{
+			Kind:   "git",
+			URL:    "https://github.com/windup/windup.git",
+			Path:   "test-files/seam-booking-5.2",
+			Branch: "master",
+		},
+	}
 
 	// Binary applications
 	TackleTestappPublicBinary = api.Application{
@@ -76,5 +94,5 @@ var (
 	}
 
 	ApplicationSamples = []api.Application{Minimal, PathfinderGit, BookServer, TackleTestappPublic,
-		CustomerTomcatLegacy, Coolstore, Daytrader, ApacheWicket, TackleTestappPublicBinary, UploadBinary}
+		CustomerTomcatLegacy, Coolstore, Daytrader, ApacheWicket, PetclinicHazelcast, SeamBooking, TackleTestappPublicBinary, UploadBinary}
 )
