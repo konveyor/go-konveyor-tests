@@ -66,6 +66,15 @@ var (
 			Path: "test-files/src_example/org/apache/wicket",
 		},
 	}
+	PetclinicHazelcast = api.Application{
+		Name:        "Petclinic",
+		Description: "Spring framework app",
+		Repository: &api.Repository{
+			Kind:   "git",
+			URL:    "https://github.com/savitharaghunathan/spring-framework-petclinic.git",
+			Branch: "legacy",
+		},
+	}
 	SeamBooking = api.Application{
 		Name: "Seam booking 5.2",
 		Repository: &api.Repository{
@@ -85,6 +94,6 @@ var (
 		Name: "upload-binary", // The file itself to be uploaded during the test
 	}
 
-	ApplicationSamples = []api.Application{Minimal, PathfinderGit, BookServer, TackleTestappPublic,
-		CustomerTomcatLegacy, Coolstore, Daytrader, ApacheWicket, SeamBooking, TackleTestappPublicBinary, UploadBinary}
+	ApplicationSamples = []api.Application{Minimal, PathfinderGit, BookServer, TackleTestappPublic, CustomerTomcatLegacy,
+		Coolstore, Daytrader, ApacheWicket, PetclinicHazelcast, SeamBooking, TackleTestappPublicBinary, UploadBinary}
 )
