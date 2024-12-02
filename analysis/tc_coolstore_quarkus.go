@@ -7,8 +7,8 @@ import (
 	"github.com/konveyor/tackle2-hub/api"
 )
 
-var CoolstoreQuarkus = TC{
-	Name:        "Coolstore Quarkus branch",
+var CoolstoreDepsQuarkus = TC{
+	Name:        "Coolstore Source and Deps analysis using Quarkus branch",
 	Application: data.CoolstoreQuarkus,
 	WithDeps: true,
 	Task:        Analyze,
