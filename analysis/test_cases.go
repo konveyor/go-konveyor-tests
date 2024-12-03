@@ -7,7 +7,7 @@ var Tier0TestCases = []TC{
 	TackleTestappPublicPackageFilter,
 	Tomcat,
 	CoolstoreWithDeps,
-	CoolstoreQuarkus,
+	CoolstoreWithDepsQuarkus,
 	AcmeairWebappBinary,          // Binary upload
 	AdministracionEfectivoBinary, // Binary upload
 	TackleTestappPublicBinary,    // Binary fetched from tackle-testapp-public maven registry
