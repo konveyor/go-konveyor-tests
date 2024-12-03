@@ -23,23 +23,23 @@ var CoolstoreDepsQuarkus = TC{
 	},
 	Analysis: api.Analysis{
 		Effort: 7,
-    	Issues: []api.Issue{
-        	{
-            	Category: "mandatory",
-            	Description: "Local HTTP Calls",
-            	Effort: 7,
-            	RuleSet: "cloud-readiness",
-            	Rule: "localhost-http-00001",
-            	Incidents: []api.Incident{
-                	{
-                    	File: "/shared/source/coolstore/src/main/resources/application.properties",
-                    	Line: 10,
-                    	Message: "The app is trying to access local resource by HTTP, please try to migrate the resource to cloud",
-                	},
-            	},
-        	},
-    	},
-	    Dependencies: []api.TechDependency{
+		Issues: []api.Issue{
+			{
+				Category: "mandatory",
+				Description: "Local HTTP Calls",
+				Effort: 7,
+				RuleSet: "cloud-readiness",
+				Rule: "localhost-http-00001",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/coolstore/src/main/resources/application.properties",
+						Line: 10,
+						Message: "The app is trying to access local resource by HTTP, please try to migrate the resource to cloud",
+					},
+				},
+			},
+		},
+		Dependencies: []api.TechDependency{
 			{
 				Name: "io.quarkus.quarkus-jdbc-postgresql",
 				Version: "3.12.3",
@@ -301,11 +301,6 @@ var CoolstoreDepsQuarkus = TC{
 				Provider: "java",
 			},
 			{
-				Name: "io.quarkus.quarkus-bootstrap-runner",
-				Version: "3.12.3",
-				Provider: "java",
-			},
-			{
 				Name: "io.quarkus.quarkus-caffeine",
 				Version: "3.12.3",
 				Provider: "java",
@@ -433,6 +428,16 @@ var CoolstoreDepsQuarkus = TC{
 			{
 				Name: "io.quarkus.quarkus-rest-client-config",
 				Version: "3.12.3",
+				Provider: "java",
+			},
+			{
+				Name: "com.fasterxml.jackson.core.jackson-databind",
+				Version: "2.17.2",
+				Provider: "java",
+			},
+			{
+				Name: "com.fasterxml.jackson.core.jackson-core",
+				Version: "2.17.2",
 				Provider: "java",
 			},
 			{
@@ -1049,24 +1054,24 @@ var CoolstoreDepsQuarkus = TC{
 	},
 	AnalysisTags: []api.Tag{
 		{Name: "EJB XML", Category: api.Ref{Name: "Bean"}},
-    	{Name: "CDI", Category: api.Ref{Name: "Inversion of Control"}},
-    	{Name: "Properties", Category: api.Ref{Name: "Other"}},
-    	{Name: "RMI", Category: api.Ref{Name: "Other"}},
-    	{Name: "JPA named queries", Category: api.Ref{Name: "Persistence"}},
-    	{Name: "Apache License 2.0", Category: api.Ref{Name: "License"}},
-    	{Name: "EJB XML", Category: api.Ref{Name: "Connect"}},
-    	{Name: "Properties", Category: api.Ref{Name: "Embedded"}},
-    	{Name: "CDI", Category: api.Ref{Name: "Java EE"}},
-    	{Name: "RMI", Category: api.Ref{Name: "Java EE"}},
-    	{Name: "GNU GPL", Category: api.Ref{Name: "License"}},
-    	{Name: "Application Properties File", Category: api.Ref{Name: "Embedded"}},
-    	{Name: "EJB XML", Category: api.Ref{Name: "Java EE"}},
-    	{Name: "JPA named queries", Category: api.Ref{Name: "Java EE"}},
-    	{Name: "Properties", Category: api.Ref{Name: "Sustain"}},
-    	{Name: "Application Properties File", Category: api.Ref{Name: "Configuration Management"}},
-    	{Name: "CDI", Category: api.Ref{Name: "Execute"}},
-    	{Name: "Application Properties File", Category: api.Ref{Name: "Sustain"}},
-    	{Name: "RMI", Category: api.Ref{Name: "Connect"}},
-    	{Name: "JPA named queries", Category: api.Ref{Name: "Store"}},
+		{Name: "CDI", Category: api.Ref{Name: "Inversion of Control"}},
+		{Name: "Properties", Category: api.Ref{Name: "Other"}},
+		{Name: "RMI", Category: api.Ref{Name: "Other"}},
+		{Name: "JPA named queries", Category: api.Ref{Name: "Persistence"}},
+		{Name: "Apache License 2.0", Category: api.Ref{Name: "License"}},
+		{Name: "EJB XML", Category: api.Ref{Name: "Connect"}},
+		{Name: "Properties", Category: api.Ref{Name: "Embedded"}},
+		{Name: "CDI", Category: api.Ref{Name: "Java EE"}},
+		{Name: "RMI", Category: api.Ref{Name: "Java EE"}},
+		{Name: "GNU GPL", Category: api.Ref{Name: "License"}},
+		{Name: "Application Properties File", Category: api.Ref{Name: "Embedded"}},
+		{Name: "EJB XML", Category: api.Ref{Name: "Java EE"}},
+		{Name: "JPA named queries", Category: api.Ref{Name: "Java EE"}},
+		{Name: "Properties", Category: api.Ref{Name: "Sustain"}},
+		{Name: "Application Properties File", Category: api.Ref{Name: "Configuration Management"}},
+		{Name: "CDI", Category: api.Ref{Name: "Execute"}},
+		{Name: "Application Properties File", Category: api.Ref{Name: "Sustain"}},
+		{Name: "RMI", Category: api.Ref{Name: "Connect"}},
+		{Name: "JPA named queries", Category: api.Ref{Name: "Store"}},
 	},
 }
