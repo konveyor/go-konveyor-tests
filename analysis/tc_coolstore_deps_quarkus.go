@@ -301,6 +301,11 @@ var CoolstoreWithDepsQuarkus = TC{
 				Provider: "java",
 			},
 			{
+				Name: "io.quarkus.quarkus-bootstrap-runner",
+				Version: "3.12.3",
+				Provider: "java",
+			},
+			{
 				Name: "io.quarkus.quarkus-caffeine",
 				Version: "3.12.3",
 				Provider: "java",
