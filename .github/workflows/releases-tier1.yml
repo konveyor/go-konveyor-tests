@@ -2,26 +2,15 @@ name: Test TIER1 release braches
 
 on:
   pull_request:
-    branches: ["release-0.5", "release-0.4", "release-0.3"]
+    branches: ["release-0.6", "release-0.5", "release-0.4"]
     paths-ignore:
       - "**.md"
   push:
-    branches: ["release-0.5", "release-0.4", "release-0.3"]
+    branches: ["release-0.6", "release-0.5", "release-0.4"]
     paths-ignore:
       - "**.md"
 
 jobs:
-  test-tier1-release03:
-    uses: konveyor/ci/.github/workflows/global-ci.yml@main
-    if: ${{ github.ref == 'refs/heads/release-0.3' || github.event.pull_request.base.ref == 'release-0.3' }}
-    with:
-      tag: release-0.3
-      operator_tag: v0.3.2
-      api_tests_ref: ${{ github.ref }}
-      api_tests_tiers: DEBUG=1 make test-tier1
-      run_api_tests: true
-      run_ui_tests: false
-      api_hub_tests_ref: "release-0.3"
   test-tier1-release04:
     uses: konveyor/ci/.github/workflows/global-ci.yml@main
     if: ${{ github.ref == 'refs/heads/release-0.4' || github.event.pull_request.base.ref == 'release-0.4' }}
@@ -44,3 +33,14 @@ jobs:
       run_api_tests: true
       run_ui_tests: false
       api_hub_tests_ref: "release-0.5"
+  test-tier0-release06:
+    uses: konveyor/ci/.github/workflows/global-ci.yml@main
+    if: ${{ github.ref == 'refs/heads/release-0.6' || github.event.pull_request.base.ref == 'release-0.6' }}
+    with:
+      tag: release-0.6
+      operator_tag: v0.6.0-beta.1
+      api_tests_ref: ${{ github.ref }}
+      api_tests_tiers: DEBUG=1 make test-tier1
+      run_api_tests: true
+      run_ui_tests: false
+      api_hub_tests_ref: "release-0.6"
