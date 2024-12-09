@@ -33,7 +33,7 @@ jobs:
       run_api_tests: true
       run_ui_tests: false
       api_hub_tests_ref: "release-0.5"
-  test-tier0-release06:
+  test-tier1-release06:
     uses: konveyor/ci/.github/workflows/global-ci.yml@main
     if: ${{ github.ref == 'refs/heads/release-0.6' || github.event.pull_request.base.ref == 'release-0.6' }}
     with:
