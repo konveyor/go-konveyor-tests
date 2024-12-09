@@ -50,6 +50,14 @@ var (
 			URL:  "https://github.com/konveyor-ecosystem/coolstore",
 		},
 	}
+	CoolstoreQuarkus = api.Application{
+		Name: "Coolstore",
+		Repository: &api.Repository{
+			Kind: "git",
+			URL:  "https://github.com/konveyor-ecosystem/coolstore",
+			Branch: "quarkus",
+		},
+	}
 	Daytrader = api.Application{
 		Name: "Daytrader 7 EE application",
 		Repository: &api.Repository{
@@ -94,5 +102,6 @@ var (
 	}
 
 	ApplicationSamples = []api.Application{Minimal, PathfinderGit, BookServer, TackleTestappPublic,
-		CustomerTomcatLegacy, Coolstore, Daytrader, ApacheWicket, PetclinicHazelcast, SeamBooking, TackleTestappPublicBinary, UploadBinary}
+		CustomerTomcatLegacy, Coolstore, CoolstoreQuarkus, Daytrader, ApacheWicket, PetclinicHazelcast,
+		SeamBooking, TackleTestappPublicBinary, UploadBinary}
 )
