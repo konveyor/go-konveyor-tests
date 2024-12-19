@@ -37,16 +37,16 @@ type TC struct {
 	CustomRules []api.RuleSet
 	Identities  []api.Identity
 	// Analysis parameters.
-	Task     api.Task
-	TaskData string
-	Sources  []string
-	Targets  []string
-	Labels   addon.Labels
-	Rules    addon.Rules
-	Scope    *addon.Scope
-	WithDeps bool
-	Binary   bool
-	Artifact string
+	Task      api.Task
+	TaskData  string
+	Sources   []string
+	Targets   []string
+	Labels    addon.Labels
+	RulesPath string
+	Scope     *addon.Scope
+	WithDeps  bool
+	Binary    bool
+	Artifact  string
 	// After-analysis assertions.
 	ReportContent map[string][]string
 	Analysis      api.Analysis
