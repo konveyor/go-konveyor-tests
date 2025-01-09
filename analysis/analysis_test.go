@@ -243,8 +243,8 @@ func TestApplicationAnalysis(t *testing.T) {
 
 					} else {
 						// Ensure stable order of Incidents.
-						sort.SliceStable(got.Incidents, func(a, b int) bool { return got.Incidents[a].File < got.Incidents[b].File })
-						sort.SliceStable(expected.Incidents, func(a, b int) bool { return expected.Incidents[a].File < expected.Incidents[b].File })
+						sort.SliceStable(got.Incidents, func(a, b int) bool { return got.Incidents[a].File + fmt.Sprint(got.Incidents[a].Line) < got.Incidents[b].File + fmt.Sprint(got.Incidents[b].Line) })
+						sort.SliceStable(expected.Incidents, func(a, b int) bool { return expected.Incidents[a].File + fmt.Sprint(expected.Incidents[a].Line) < expected.Incidents[b].File + fmt.Sprint(expected.Incidents[b].Line)})
 						for j, gotInc := range got.Incidents {
 							expectedInc := expected.Incidents[j]
 							if gotInc.File != expectedInc.File {
