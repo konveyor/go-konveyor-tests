@@ -69,33 +69,10 @@ func TestApplicationAnalysis(t *testing.T) {
 			uniq.ApplicationName(&tc.Application)
 			assert.Should(t, RichClient.Application.Create(&tc.Application))
 
-			// Prepare custom rules.
-			for i := range tc.CustomRules {
-				r := &tc.CustomRules[i]
-				uniq.RuleSetName(r)
-				// ruleFiles := []api.File{}
-				rules := []api.Rule{}
-				for _, rule := range r.Rules {
-					ruleFile, err := RichClient.File.Put(rule.File.Name)
-					assert.Should(t, err)
-					rules = append(rules, api.Rule{
-						File: &api.Ref{
-							ID: ruleFile.ID,
-						},
-					})
-					// ruleFiles = append(ruleFiles, *ruleFile)
-				}
-				r.Rules = rules
-				assert.Should(t, RichClient.RuleSet.Create(r))
-			}
-
 			// Prepare and submit the analyze task.
 			// tc.Task.Addon = analyzerAddon
 			tc.Task.Application = &api.Ref{ID: tc.Application.ID}
 			taskData := AnalyzeDataDefault
-			//for _, r := range tc.CustomRules {
-			//	taskData.Rules = append(taskData.Rules, api.Ref{ID: r.ID, Name: r.Name})
-			//}
 			if len(tc.Sources) > 0 {
 				taskData.Sources = tc.Sources
 			}
@@ -105,8 +82,8 @@ func TestApplicationAnalysis(t *testing.T) {
 			if len(tc.Labels.Included) > 0 || len(tc.Labels.Excluded) > 0 {
 				taskData.Rules.Labels = tc.Labels
 			}
-			if tc.Rules.Path != "" { // TODO: better rules handling
-				taskData.Rules = tc.Rules
+			if tc.RulesPath != "" {
+				taskData.Rules.Path = tc.RulesPath
 			}
 			if tc.WithDeps == true {
 				taskData.Mode.WithDeps = true
@@ -122,10 +99,21 @@ func TestApplicationAnalysis(t *testing.T) {
 			tc.Task.Data = taskData
 			assert.Should(t, RichClient.Task.Create(&tc.Task))
 
+			bucketContent := RichClient.Bucket.Content(tc.Task.Bucket.ID)
+			dataDir := "data"
 			if tc.Artifact != "" {
 				// Upload binary file into the bucket
-				bucketContent := RichClient.Bucket.Content(tc.Task.Bucket.ID)
-				bucketContent.Put("data"+tc.Artifact, tc.Artifact)
+				bucketContent.Put(dataDir+tc.Artifact, tc.Artifact)
+			}
+
+			// Prepare custom rules.
+			for i := range tc.CustomRules {
+				r := &tc.CustomRules[i]
+				for _, rule := range r.Rules {
+					// Upload rule file into the application bucket
+					err := bucketContent.Put(dataDir+rule.File.Name, rule.File.Name)
+					assert.Should(t, err)
+				}
 			}
 
 			tc.Task.State = "Ready"
@@ -243,8 +231,8 @@ func TestApplicationAnalysis(t *testing.T) {
 
 					} else {
 						// Ensure stable order of Incidents.
-						sort.SliceStable(got.Incidents, func(a, b int) bool { return got.Incidents[a].File < got.Incidents[b].File })
-						sort.SliceStable(expected.Incidents, func(a, b int) bool { return expected.Incidents[a].File < expected.Incidents[b].File })
+						sort.SliceStable(got.Incidents, func(a, b int) bool { return got.Incidents[a].File + fmt.Sprint(got.Incidents[a].Line) < got.Incidents[b].File + fmt.Sprint(got.Incidents[b].Line) })
+						sort.SliceStable(expected.Incidents, func(a, b int) bool { return expected.Incidents[a].File + fmt.Sprint(expected.Incidents[a].Line) < expected.Incidents[b].File + fmt.Sprint(expected.Incidents[b].Line)})
 						for j, gotInc := range got.Incidents {
 							expectedInc := expected.Incidents[j]
 							if gotInc.File != expectedInc.File {
