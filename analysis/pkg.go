@@ -11,6 +11,11 @@ import (
 	"github.com/konveyor/tackle2-hub/test/api/client"
 )
 
+const (
+	Username = "HUB_USERNAME"
+	Password = "HUB_PASSWORD"
+)
+
 var (
 	// Setup Hub API client
 	Client     *binding.Client
