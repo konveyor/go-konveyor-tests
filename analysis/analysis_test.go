@@ -46,6 +46,12 @@ func TestApplicationAnalysis(t *testing.T) {
 				t.Parallel()
 			}
 
+			// Ensure API Login and tokens for each test_case
+			err := RichClient.Login(os.Getenv(Username), os.Getenv(Password))
+			if err != nil {
+				panic(fmt.Sprintf("Cannot login to API: %v.", err.Error()))
+			}
+
 			// Prepare Identities, e.g. for Maven repo
 			for idx := range tc.Identities {
 				identity := &tc.Identities[idx]
@@ -122,7 +128,6 @@ func TestApplicationAnalysis(t *testing.T) {
 			_, debug := os.LookupEnv("DEBUG")
 			// Wait until task finishes
 			var task *api.Task
-			var err error
 			for i := 0; i < Retry; i++ {
 				task, err = RichClient.Task.Get(tc.Task.ID)
 				if err != nil || task.State == "Succeeded" || task.State == "Failed" {
