@@ -51,7 +51,6 @@ var TackleTestappPublicBinary = TC{
 					},
 				},
 			},
-
 		},
 	},
 	AnalysisTags: []api.Tag{
@@ -64,5 +63,8 @@ var TackleTestappPublicBinary = TC{
 		{Name: "Servlet", Category: api.Ref{Name: "Java EE"}},
 		{Name: "Servlet", Category: api.Ref{Name: "Connect"}},
 		{Name: "JPA named queries", Category: api.Ref{Name: "Store"}},
+		{Name: "Properties", Category: api.Ref{Name: "Embedded"}},
+		{Name: "Properties", Category: api.Ref{Name: "Other"}},
+		{Name: "Properties", Category: api.Ref{Name: "Sustain"}},
 	},
 }
