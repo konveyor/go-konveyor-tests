@@ -21,7 +21,7 @@ var TackleTestappPublicBinary = TC{
 	},
 	Binary: true,
 	Analysis: api.Analysis{
-		Effort: 1,
+		Effort: 2,
 		Issues: []api.Issue{
 			{
 				Category:    "mandatory",
@@ -37,6 +37,21 @@ var TackleTestappPublicBinary = TC{
 					},
 				},
 			},
+			{
+				Category:    "mandatory",
+				Description: "Hardcoded IP Address",
+				Effort:      1,
+				RuleSet:     "cloud-readiness",
+				Rule:        "hardcoded-ip-address",
+				Incidents: []api.Incident{
+					{
+						File:    "/shared/bin/java-project/customers-tomcat-0-0-1-20240913-093117-1-war-exploded/WEB-INF/classes/persistence.properties",
+						Line:    2,
+						Message: "When migrating environments, hard-coded IP addresses may need to be modified or eliminated.",
+					},
+				},
+			},
+
 		},
 	},
 	AnalysisTags: []api.Tag{
