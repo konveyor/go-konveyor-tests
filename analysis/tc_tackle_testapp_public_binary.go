@@ -41,7 +41,7 @@ var TackleTestappPublicBinary = TC{
 				Category:    "mandatory",
 				Description: "Hardcoded IP Address",
 				Effort:      1,
-				RuleSet:     "cloud-readiness",
+				RuleSet:     "discovery-rules",
 				Rule:        "hardcoded-ip-address",
 				Incidents: []api.Incident{
 					{
