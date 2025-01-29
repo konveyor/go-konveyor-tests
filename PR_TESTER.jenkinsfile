@@ -24,7 +24,14 @@ pipeline{
             steps{
                 script{
                     checkout scm
-                    env.RUN_TESTS = "true" 
+                    env.RUN_TESTS = 'false'
+                    if(env.BRANCH_NAME.contains("PR-") && env.CHANGE_TARGET == 'main') {
+                        env.TEST_BRANCH = env.CHANGE_TARGET
+                        env.RUN_TESTS = 'true' 
+                    }else if(env.BRANCH_NAME == 'main'){
+                        env.TEST_BRANCH = env.BRANCH_NAME
+                        env.RUN_TESTS = 'true'
+                    }
                     tackle.setGoTestsEnvVars() //Sets env sensitive env vars
                 }
             }
@@ -37,7 +44,8 @@ pipeline{
             }   
             steps{
                 script{
-                    tackle.deployKonveyorOnMinikube()
+                    tackle.setGoTestsEnvVars() //Sets env sensitive env vars
+                    tackle.deployKonveyorOnMinikube(env.TEST_BRANCH)
                     echo "Applying tackle CR"
                     tackle.applyTackleCR()
                 }
