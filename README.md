@@ -12,7 +12,7 @@
 [![Test nightly TIER2](https://github.com/konveyor/go-konveyor-tests/actions/workflows/nightly-tier2.yml/badge.svg)](https://github.com/konveyor/go-konveyor-tests/actions/workflows/nightly-tier2.yml)
 [![Test nightly TIER3](https://img.shields.io/endpoint?url=https%3A%2F%2Fsajidmansoori12.pythonanywhere.com%2Fretrieve_data%3Fpipeline%3Dtier3-nightly&cacheSeconds=60)](https://main-jenkins-csb-migrationqe.apps.ocp-c1.prod.psi.redhat.com/view/MTA/job/mta/job/konveyor-tier3-nightly/)
 
-This repository contains application-level tests for Konveyor. That means test focusing on integration of multiple components and real-world Koveyor use-cases. Basic components tests should be placed and executed in their own repositories.
+This repository contains application-level API test suite for Konveyor. That means test focusing on integration of multiple components and real-world Koveyor use-cases. Basic components tests should be placed and executed in their own repositories.
 
 Test are organized in packages/directories by the high-level Konveyor features.
 
