@@ -344,7 +344,7 @@ func TestApplicationAnalysis(t *testing.T) {
 
 func getDefaultToken() string {
 	key := sha256.Sum256([]byte("k0nv3y0r.io"))
-	enc, _ := hex.DecodeString("4b47536d696c993113c25974e461e2c8ae759dd9ef3c417d6be13e97f57b59b0c39ce49c1613641ec890e84dc7896e31f161747147e7ab3c024f3fbcb645cd8e57eacb6d")
+	enc, _ := hex.DecodeString("516209dc15113147463eb2c48cf2f4f50282276b15f44b2ed2de3c323b28d7eb300e6efd8533745a1804cb7eedb6eee5edb0e63daf65912f20ea0f2301f355a635480bfc")
 	block, err := aes.NewCipher(key[:])
 	if err != nil {
 		return ""
