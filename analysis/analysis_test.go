@@ -147,7 +147,7 @@ func TestApplicationAnalysis(t *testing.T) {
 				if err != nil {
 					t.Error(err)
 				}
-				printAllAtachmentsOnTask(task, dir)
+				printAllAttachmentsOnTask(task, dir)
 				//if this is still running after timeout, then we should move on, this wont work
 				return
 
@@ -160,7 +160,7 @@ func TestApplicationAnalysis(t *testing.T) {
 				if err != nil {
 					t.Error(err)
 				}
-				printAllAtachmentsOnTask(task, dir)
+				printAllAttachmentsOnTask(task, dir)
 				// If the task was unsuccessful there is no reason to continue execution.
 				return
 			}
@@ -236,8 +236,8 @@ func TestApplicationAnalysis(t *testing.T) {
 
 					} else {
 						// Ensure stable order of Incidents.
-						sort.SliceStable(got.Incidents, func(a, b int) bool { return got.Incidents[a].File + fmt.Sprint(got.Incidents[a].Line) < got.Incidents[b].File + fmt.Sprint(got.Incidents[b].Line) })
-						sort.SliceStable(expected.Incidents, func(a, b int) bool { return expected.Incidents[a].File + fmt.Sprint(expected.Incidents[a].Line) < expected.Incidents[b].File + fmt.Sprint(expected.Incidents[b].Line)})
+						sort.SliceStable(got.Incidents, func(a, b int) bool { return got.Incidents[a].File+fmt.Sprint(got.Incidents[a].Line) < got.Incidents[b].File+fmt.Sprint(got.Incidents[b].Line) })
+						sort.SliceStable(expected.Incidents, func(a, b int) bool { return expected.Incidents[a].File+fmt.Sprint(expected.Incidents[a].Line) < expected.Incidents[b].File+fmt.Sprint(expected.Incidents[b].Line) })
 						for j, gotInc := range got.Incidents {
 							expectedInc := expected.Incidents[j]
 							if gotInc.File != expectedInc.File {
@@ -370,17 +370,19 @@ func getDefaultToken() string {
 	return string(decrypted)
 }
 
-func printAllAtachmentsOnTask(task *api.Task, dir string) error {
-	for _, attachement := range task.Attached {
-		err := RichClient.File.Get(attachement.ID, dir)
+func printAllAttachmentsOnTask(task *api.Task, dir string) error {
+	for _, attachment := range task.Attached {
+		fmt.Printf("\nAttached: %s\n", attachment.Name)
+		err := RichClient.File.Get(attachment.ID, dir)
 		if err != nil {
 			return err
 		}
-		b, err := os.ReadFile(filepath.Join(dir, attachement.Name))
+		b, err := os.ReadFile(filepath.Join(dir, attachment.Name))
 		if err != nil {
 			return err
 		}
-		pp.Println(string(b))
+		fmt.Println(string(b))
+		fmt.Println("")
 	}
 
 	return nil
