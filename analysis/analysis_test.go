@@ -147,7 +147,7 @@ func TestApplicationAnalysis(t *testing.T) {
 				if err != nil {
 					t.Error(err)
 				}
-				printAllAttachmentsOnTask(task, dir)
+				printTaskAttachments(task, dir)
 				//if this is still running after timeout, then we should move on, this wont work
 				return
 
@@ -160,7 +160,7 @@ func TestApplicationAnalysis(t *testing.T) {
 				if err != nil {
 					t.Error(err)
 				}
-				printAllAttachmentsOnTask(task, dir)
+				printTaskAttachments(task, dir)
 				// If the task was unsuccessful there is no reason to continue execution.
 				return
 			}
@@ -370,9 +370,8 @@ func getDefaultToken() string {
 	return string(decrypted)
 }
 
-func printAllAttachmentsOnTask(task *api.Task, dir string) error {
+func printTaskAttachments(task *api.Task, dir string) error {
 	for _, attachment := range task.Attached {
-		fmt.Printf("\nAttached: %s\n", attachment.Name)
 		err := RichClient.File.Get(attachment.ID, dir)
 		if err != nil {
 			return err
@@ -381,6 +380,7 @@ func printAllAttachmentsOnTask(task *api.Task, dir string) error {
 		if err != nil {
 			return err
 		}
+		fmt.Printf("\nAttachment: %s\n", attachment.Name)
 		fmt.Println(string(b))
 		fmt.Println("")
 	}
