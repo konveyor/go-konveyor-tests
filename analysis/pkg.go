@@ -21,8 +21,8 @@ var (
 	Client     *binding.Client
 	RichClient *binding.RichClient
 
-	// Analysis waiting loop 5 minutes (60 * 5s)
-	Retry = 200
+	// Analysis waiting loop 20 minutes.
+	Retry = 240
 	Wait  = 5 * time.Second
 )
 
