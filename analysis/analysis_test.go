@@ -168,6 +168,9 @@ func TestApplicationAnalysis(t *testing.T) {
 				pp.Println(task)
 			}
 
+			dir, err := os.MkdirTemp("", "attachments")
+			printTaskAttachments(task, dir)
+
 			var gotAppAnalyses []api.Analysis
 			var gotAnalysis api.Analysis
 
