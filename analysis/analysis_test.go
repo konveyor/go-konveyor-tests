@@ -153,8 +153,8 @@ func TestApplicationAnalysis(t *testing.T) {
 
 			}
 
-			if task.State != "Succeeded" {
-				t.Error("Analyze Task failed. Details:")
+			if task.State != "Succeeded" || len(task.Errors) > 0 {
+				t.Error("Analyze Task failed or has errors. Details:")
 				pp.Println(tasks)
 				dir, err := os.MkdirTemp("", "attachments")
 				if err != nil {
