@@ -173,11 +173,11 @@ func TestApplicationAnalysis(t *testing.T) {
 }
 
 func validateAnalysis(t TaskTest, tc TC, debug bool) {
-	fmt.Printf("(BEGIN) VALIDATE ANALYSIS CONTENT")
+	fmt.Println("\n(BEGIN) VALIDATE ANALYSIS")
 
 	defer func() {
 		t.printAtEnd()
-		fmt.Printf("(END) VALIDATE ANALYSIS CONTENT")
+		fmt.Println("(END) VALIDATE ANALYSIS")
 	}()
 
 	var gotAppAnalyses []api.Analysis
@@ -385,27 +385,29 @@ func printTaskAttachments(task *api.Task) (err error) {
 	if err != nil {
 		return
 	}
-	for _, attachment := range task.Attached {
-		err = RichClient.File.Get(attachment.ID, dir)
+	for _, m := range task.Attached {
+		err = RichClient.File.Get(m.ID, dir)
 		if err != nil {
 			return
 		}
-		b, err := os.ReadFile(filepath.Join(dir, attachment.Name))
+		var b []byte
+		b, err = os.ReadFile(filepath.Join(dir, m.Name))
 		if err != nil {
 			return
 		}
-		fmt.Printf("\nAttachment(task:%d):%s\n", task.ID, attachment.Name)
+		fmt.Printf("\n(BEGIN) ATTACHMENT id:%d name: %s\n", m.ID, m.Name)
 		fmt.Println(string(b))
-		fmt.Println("")
+		fmt.Printf("(END) ATTACHMENT id:%d\n", m.ID)
 	}
 	return
 }
 
 func printTask(task *api.Task) (err error) {
 	b, _ := yaml.Marshal(task)
-	fmt.Printf("\nTask: id=%d\n", task.ID)
+	fmt.Printf("\n(BEGIN) TASK id:%d, name: %s\n", task.ID, task.Name)
 	fmt.Println(string(b))
 	err = printTaskAttachments(task)
+	fmt.Printf("(END) TASK id:%d\n", task.ID)
 	return
 }
 
@@ -421,7 +423,7 @@ func printTasks() (err error) {
 			break
 		}
 	}
-	fmt.Println("\n(BEGIN) ALL TASKS")
+	fmt.Println("(END) ALL TASKS")
 	return
 }
 
