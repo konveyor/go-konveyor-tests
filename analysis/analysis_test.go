@@ -175,7 +175,7 @@ func validateAnalysis(t TaskTest, tc TC, debug bool) {
 	fmt.Printf("\n(BEGIN) ANALYSIS-VALIDATION task:%d\n", t.task.ID)
 	defer func() {
 		fmt.Printf("(END) ANALYSIS-VALIDATION task:%d\n", t.task.ID)
-		t.Done()
+		t.Done("Validation")
 	}()
 
 	var gotAppAnalyses []api.Analysis
@@ -453,8 +453,10 @@ func (r *TaskTest) Fatalf(m string, a ...any) {
 
 func (r *TaskTest) Done() {
 	if r.nError == 0 {
+		fmt.Println("**PASSED**")
 		return
 	}
+	fmt.Println("**FAILED**")
 	err := printTask(r.task)
 	if err != nil {
 		r.T.Error(err)
