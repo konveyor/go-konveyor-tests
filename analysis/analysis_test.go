@@ -175,7 +175,7 @@ func validateAnalysis(t TaskTest, tc TC, debug bool) {
 	fmt.Printf("\n(BEGIN) ANALYSIS-VALIDATION task:%d\n", t.task.ID)
 	defer func() {
 		fmt.Printf("(END) ANALYSIS-VALIDATION task:%d\n", t.task.ID)
-		t.Done("Validation")
+		t.Done()
 	}()
 
 	var gotAppAnalyses []api.Analysis
