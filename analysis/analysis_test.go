@@ -23,6 +23,7 @@ import (
 
 // Test application analysis
 func TestApplicationAnalysis(t *testing.T) {
+	_, debug := os.LookupEnv("DEBUG")
 	// Find right test cases for given Tier.
 	testCases := Tier0TestCases
 	_, tier1 := os.LookupEnv("TIER1")
@@ -126,7 +127,6 @@ func TestApplicationAnalysis(t *testing.T) {
 			tc.Task.State = "Ready"
 			assert.Should(t, RichClient.Task.Update(&tc.Task))
 
-			_, debug := os.LookupEnv("DEBUG")
 			// Wait until task finishes
 			var task *api.Task
 			for i := 0; i < Retry; i++ {
@@ -157,23 +157,22 @@ func TestApplicationAnalysis(t *testing.T) {
 				return
 			}
 
-			if debug {
-				err = printTasks()
-				if err != nil {
-					t.Error(err)
-				}
-			}
-
 			validateAnalysis(
 				TaskTest{T: t, task: task},
 				tc,
 				debug)
 		})
+		if debug {
+			err := printTasks()
+			if err != nil {
+				t.Error(err)
+			}
+		}
 	}
 }
 
 func validateAnalysis(t TaskTest, tc TC, debug bool) {
-	fmt.Printf("\n(BEGIN) ANALYSIS-VALIDATION task:%d", t.task.ID)
+	fmt.Printf("\n(BEGIN) ANALYSIS-VALIDATION task:%d\n", t.task.ID)
 	defer func() {
 		fmt.Printf("(END) ANALYSIS-VALIDATION task:%d\n", t.task.ID)
 		t.Done()
@@ -463,6 +462,6 @@ func (r *TaskTest) Done() {
 }
 
 func (r *TaskTest) addPrefix(m string) (s string) {
-	s = fmt.Sprintf("task:%d|%s", r.task.ID, m)
+	s = fmt.Sprintf("ERROR|task:%d|%s", r.task.ID, m)
 	return
 }
