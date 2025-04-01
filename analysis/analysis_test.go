@@ -157,7 +157,7 @@ func TestApplicationAnalysis(t *testing.T) {
 				return
 			}
 
-			validateAnalysis(
+			verifyAnalysis(
 				TaskTest{T: t, task: task},
 				tc,
 				debug)
@@ -171,10 +171,12 @@ func TestApplicationAnalysis(t *testing.T) {
 	}
 }
 
-func validateAnalysis(t TaskTest, tc TC, debug bool) {
-	fmt.Printf("\n(BEGIN) ANALYSIS-VALIDATION task:%d\n", t.task.ID)
+// verifyAnalysis verifies the analysis report contains what is
+// expected for each test case.
+func verifyAnalysis(t TaskTest, tc TC, debug bool) {
+	fmt.Printf("\n(BEGIN) ANALYSIS-VERIFICATION task:%d\n", t.task.ID)
 	defer func() {
-		fmt.Printf("(END) ANALYSIS-VALIDATION task:%d\n", t.task.ID)
+		fmt.Printf("(END) ANALYSIS-VERIFICATION task:%d\n", t.task.ID)
 		t.Done()
 	}()
 
