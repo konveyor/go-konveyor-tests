@@ -741,5 +741,8 @@ var Tomcat = TC{
 		{Name: "Properties", Category: api.Ref{Name: "Embedded"}},
 		{Name: "JPA named queries", Category: api.Ref{Name: "Store"}},
 		{Name: "Properties", Category: api.Ref{Name: "Sustain"}},
+		{Name: "Application Properties File", Category: api.Ref{Name: "Configuration Management"}},
+		{Name: "Application Properties File", Category: api.Ref{Name: "Sustain"}},
+		{Name: "Application Properties File", Category: api.Ref{Name: "Embedded"}},
 	},
 }
