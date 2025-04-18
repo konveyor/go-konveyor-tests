@@ -138,7 +138,7 @@ func TestApplicationAnalysis(t *testing.T) {
 			}
 
 			if task.State == "Running" {
-				t.Error("Timed out running the test. Details:")
+				t.Error("Timed out running the test.")
 				err = printTask(task)
 				if err != nil {
 					t.Error(err)
@@ -147,8 +147,8 @@ func TestApplicationAnalysis(t *testing.T) {
 				return
 			}
 
-			if task.State != "Succeeded" {
-				t.Error("Analyze Task failed. Details:")
+			if task.State != "Succeeded" || len(task.Errors) > 0 {
+				t.Error("Task failed or has errors.")
 				err = printTask(task)
 				if err != nil {
 					t.Error(err)
