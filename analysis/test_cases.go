@@ -8,7 +8,6 @@ var Tier0TestCases = []TC{
 	Tomcat,
 	CoolstoreWithDeps,
 	CoolstoreWithDepsQuarkus,
-	AcmeairWebappBinary,          // Binary upload
 	AdministracionEfectivoBinary, // Binary upload
 	TackleTestappPublicBinary,    // Binary fetched from tackle-testapp-public maven registry
 }
@@ -26,6 +25,7 @@ var Tier2TestCases = []TC{
 	PetclinicHazelcast,
 	ApacheWicket,
 	SeamBooking,
+	AcmeairWebappBinary, // Binary upload, TODO: verify results and move back to Tier 0
 }
 
 // Tier 3 Analysis with credentials test cases - should work
