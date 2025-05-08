@@ -559,5 +559,8 @@ var AdministracionEfectivoBinary = TC{
 		{Name: "JSF XML", Category: api.Ref{Name: "Web"}},
 		{Name: "Properties", Category: api.Ref{Name: "Other"}},
 		{Name: "Properties", Category: api.Ref{Name: "Sustain"}},
+		{Name: "Common Annotations", Category: api.Ref{Name: "Java EE"}},
+		{Name: "Common Annotations", Category: api.Ref{Name: "Other"}},
+		{Name: "Common Annotations", Category: api.Ref{Name: "Connect"}},
 	},
 }
