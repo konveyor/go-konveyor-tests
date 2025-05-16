@@ -18,7 +18,7 @@ var CoolstoreWithDeps = TC{
 		},
 	},
 	Analysis: api.Analysis{
-		Effort: 114,
+		Effort: 113,
 		Issues: []api.Issue{
 			{
 				Category:    "mandatory",
