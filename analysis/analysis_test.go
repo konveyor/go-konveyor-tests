@@ -428,8 +428,13 @@ func printTasks(debugDirectory string) (err error) {
 	if err != nil {
 		return
 	}
+	tasksDir := path.Join(debugDirectory, "ALL-TASKS")
+	err = os.Mkdir(tasksDir, 0750)
+	if err != nil {
+		fmt.Printf("Cannot create debug All Tasks directory: %v.", err.Error())
+	}
 	for i := range tasks {
-		err = printTask(&tasks[i], debugDirectory)
+		err = printTask(&tasks[i], tasksDir)
 		if err != nil {
 			break
 		}
