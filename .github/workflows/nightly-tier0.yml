@@ -21,4 +21,12 @@ jobs:
       - name: Install dependencies
         run: |
           go install github.com/onsi/ginkgo/v2/ginkgo
-      - run: HUB_BASE_URL="http://$(minikube ip)/hub" DEBUG=1 make test-tier0
+      - name: Run tests
+        run: HUB_BASE_URL="http://$(minikube ip)/hub" DEBUG=1 make test-tier0
+      - name: Upload tests output
+        uses: actions/upload-artifact@v4
+        with:
+          name: tests-output
+          include-hidden-files: true
+          path: tmp_output
+

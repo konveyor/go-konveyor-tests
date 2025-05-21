@@ -7,7 +7,6 @@ import (
 	"encoding/hex"
 	"fmt"
 	"os"
-	"path/filepath"
 	"sort"
 	"strings"
 	"testing"
@@ -381,23 +380,16 @@ func getDefaultToken() string {
 }
 
 func printTaskAttachments(task *api.Task) (err error) {
-	dir, err := os.MkdirTemp("", "attachments")
+	dir, err := os.MkdirTemp(TempOutputDir, "attachments")
 	if err != nil {
 		return
 	}
+	fmt.Printf("###### tempdir: %v", dir)
 	for _, m := range task.Attached {
 		err = RichClient.File.Get(m.ID, dir)
 		if err != nil {
 			return
 		}
-		var b []byte
-		b, err = os.ReadFile(filepath.Join(dir, m.Name))
-		if err != nil {
-			return
-		}
-		fmt.Printf("\n(BEGIN) ATTACHMENT id:%d name: %s\n", m.ID, m.Name)
-		fmt.Println(string(b))
-		fmt.Printf("(END) ATTACHMENT id:%d\n", m.ID)
 	}
 	return
 }
