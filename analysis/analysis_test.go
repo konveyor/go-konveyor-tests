@@ -7,6 +7,7 @@ import (
 	"encoding/hex"
 	"fmt"
 	"os"
+	"path"
 	"sort"
 	"strings"
 	"testing"
@@ -23,6 +24,9 @@ import (
 // Test application analysis
 func TestApplicationAnalysis(t *testing.T) {
 	_, debug := os.LookupEnv("DEBUG")
+	// Create or clean TempOutputDir
+	_ = os.RemoveAll(TempOutputDir)
+	_ = os.Mkdir(TempOutputDir, 0750)
 	// Find right test cases for given Tier.
 	testCases := Tier0TestCases
 	_, tier1 := os.LookupEnv("TIER1")
@@ -51,6 +55,13 @@ func TestApplicationAnalysis(t *testing.T) {
 			err := RichClient.Login(os.Getenv(Username), os.Getenv(Password))
 			if err != nil {
 				panic(fmt.Sprintf("Cannot login to API: %v.", err.Error()))
+			}
+
+			// Prepare TC debug output directory
+			debugDirectory := path.Join(TempOutputDir, preparePathName(testcase.Name))
+			err = os.Mkdir(debugDirectory, 0750)
+			if err != nil {
+				fmt.Printf("Cannot create debug tmp directory: %v. Debug or failed task output might not work.", err.Error())
 			}
 
 			// Prepare Identities, e.g. for Maven repo
@@ -138,7 +149,7 @@ func TestApplicationAnalysis(t *testing.T) {
 
 			if task.State == "Running" {
 				t.Error("Timed out running the test. Details:")
-				err = printTask(task)
+				err = printTask(task, debugDirectory)
 				if err != nil {
 					t.Error(err)
 				}
@@ -148,7 +159,7 @@ func TestApplicationAnalysis(t *testing.T) {
 
 			if task.State != "Succeeded" {
 				t.Error("Analyze Task failed. Details:")
-				err = printTask(task)
+				err = printTask(task, debugDirectory)
 				if err != nil {
 					t.Error(err)
 				}
@@ -162,7 +173,7 @@ func TestApplicationAnalysis(t *testing.T) {
 				debug)
 		})
 		if debug {
-			err := printTasks()
+			err := printTasks(TempOutputDir)
 			if err != nil {
 				t.Error(err)
 			}
@@ -379,43 +390,50 @@ func getDefaultToken() string {
 	return string(decrypted)
 }
 
-func printTaskAttachments(task *api.Task) (err error) {
-	dir, err := os.MkdirTemp(TempOutputDir, "attachments")
-	if err != nil {
-		return
-	}
-	fmt.Printf("###### tempdir: %v", dir)
+// get filename, just write
+func dumpTaskAttachments(task *api.Task, dir string) (err error) {
+	fmt.Printf("###### print TaskAttch tempdir: %v\n", dir)
 	for _, m := range task.Attached {
 		err = RichClient.File.Get(m.ID, dir)
 		if err != nil {
+			fmt.Printf("Error cannot get Task %d Attachment %d: %s\n", task.ID, m.ID, err.Error())
 			return
 		}
 	}
 	return
 }
 
-func printTask(task *api.Task) (err error) {
+//create dir, set filename
+func printTask(task *api.Task, destDir string) (err error) {
+	taskDir := path.Join(destDir, fmt.Sprintf("%s_task_%d", preparePathName(task.Name), task.ID))
+	err = os.Mkdir(taskDir, 0750)
+	if err != nil {
+		fmt.Printf("Cannot create debug Task directory: %v.", err.Error())
+	}
+	fmt.Printf("(DEBUG) DUMP TASK id:%d to %s\n", task.ID, taskDir)
 	b, _ := yaml.Marshal(task)
-	fmt.Printf("\n(BEGIN) TASK id:%d, name: %s\n", task.ID, task.Name)
-	fmt.Println(string(b))
-	err = printTaskAttachments(task)
-	fmt.Printf("(END) TASK id:%d\n", task.ID)
+	f, err := os.Create(path.Join(taskDir, fmt.Sprintf("task_%d_%s.yaml", task.ID, task.Name)))
+	if err != nil {
+			fmt.Printf("Error cannot get Task %d : %s\n", task.ID, err.Error())
+			return
+		}
+	defer f.Close()
+	f.Write(b)
+	err = dumpTaskAttachments(task, taskDir)
 	return
 }
 
-func printTasks() (err error) {
+func printTasks(debugDirectory string) (err error) {
 	tasks, err := RichClient.Task.List()
 	if err != nil {
 		return
 	}
-	fmt.Println("\n(BEGIN) ALL TASKS")
 	for i := range tasks {
-		err = printTask(&tasks[i])
+		err = printTask(&tasks[i], debugDirectory)
 		if err != nil {
 			break
 		}
 	}
-	fmt.Println("(END) ALL TASKS")
 	return
 }
 
@@ -451,7 +469,7 @@ func (r *TaskTest) Done() {
 		return
 	}
 	fmt.Println("**FAILED**")
-	err := printTask(r.task)
+	err := printTask(r.task, TempOutputDir)
 	if err != nil {
 		r.T.Error(err)
 	}
@@ -459,5 +477,11 @@ func (r *TaskTest) Done() {
 
 func (r *TaskTest) addPrefix(m string) (s string) {
 	s = fmt.Sprintf("ERROR|task:%d|%s", r.task.ID, m)
+	return
+}
+
+func preparePathName(fname string) (cleanName string) {
+	cleanName = strings.ReplaceAll(fname, " ", "_")
+	cleanName = strings.ReplaceAll(cleanName, "/", "-")
 	return
 }
