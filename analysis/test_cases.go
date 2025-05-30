@@ -4,8 +4,9 @@ package analysis
 // List of applications with expected analysis outputs.
 var Tier0TestCases = []TC{
 	TackleTestappPublicWithDeps,
+	TackleTestappPublicPackageFilter,
 	Tomcat,
-	CoolstoreWithDepsQuarkus,
+	CoolstoreWithDeps,
 	DaytraderWithDeps,
 	AcmeairWebappBinary,          // Binary upload
 	TackleTestappPublicBinary,    // Binary fetched from tackle-testapp-public maven registry
@@ -14,8 +15,7 @@ var Tier0TestCases = []TC{
 // Tier 1 Analysis test cases - should work.
 // List of applications with expected analysis outputs.
 var Tier1TestCases = []TC{
-	TackleTestappPublicPackageFilter,
-	CoolstoreWithDeps,
+	CoolstoreWithDepsQuarkus,
 	AdministracionEfectivoBinary, // Binary upload
 }
 
