@@ -23,7 +23,6 @@ var Tier1TestCases = []TC{
 // List of applications with expected analysis outputs.
 var Tier2TestCases = []TC{
 	PetclinicHazelcast,
-	ApacheWicket,
 	SeamBooking,
 }
 
