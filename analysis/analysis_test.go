@@ -24,9 +24,9 @@ import (
 // Test application analysis
 func TestApplicationAnalysis(t *testing.T) {
 	_, debug := os.LookupEnv("DEBUG")
-	// Create or clean TempOutputDir
-	_ = os.RemoveAll(TempOutputDir)
-	_ = os.Mkdir(TempOutputDir, 0750)
+	// Create or clean TmpOutputDir
+	_ = os.RemoveAll(TmpOutputDir)
+	_ = os.Mkdir(TmpOutputDir, 0750)
 	// Find right test cases for given Tier.
 	testCases := Tier0TestCases
 	_, tier1 := os.LookupEnv("TIER1")
@@ -58,7 +58,7 @@ func TestApplicationAnalysis(t *testing.T) {
 			}
 
 			// Prepare TC debug output directory
-			debugDirectory := path.Join(TempOutputDir, preparePathName(testcase.Name))
+			debugDirectory := path.Join(TmpOutputDir, preparePathName(testcase.Name))
 			err = os.Mkdir(debugDirectory, 0750)
 			if err != nil {
 				fmt.Printf("Cannot create debug tmp directory: %v. Debug or failed task output might not work.", err.Error())
@@ -173,7 +173,7 @@ func TestApplicationAnalysis(t *testing.T) {
 				debug)
 		})
 		if debug {
-			err := printTasks(TempOutputDir)
+			err := printTasks(TmpOutputDir)
 			if err != nil {
 				t.Error(err)
 			}
@@ -392,7 +392,7 @@ func getDefaultToken() string {
 
 // get filename, just write
 func dumpTaskAttachments(task *api.Task, dir string) (err error) {
-	fmt.Printf("###### print TaskAttch tempdir: %v\n", dir)
+	fmt.Printf("###### print TaskAttch tmpdir: %v\n", dir)
 	for _, m := range task.Attached {
 		err = RichClient.File.Get(m.ID, dir)
 		if err != nil {
@@ -471,7 +471,7 @@ func (r *TaskTest) Done() {
 		return
 	}
 	fmt.Println("**FAILED**")
-	err := printTask(r.task, TempOutputDir)
+	err := printTask(r.task, TmpOutputDir)
 	if err != nil {
 		r.T.Error(err)
 	}

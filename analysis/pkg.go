@@ -26,7 +26,7 @@ var (
 	Wait  = 5 * time.Second
 
 	// Test output dir temp name
-	TempOutputDir = "tmp_output"
+	TmpOutputDir = "tmp_output"
 )
 
 func init() {

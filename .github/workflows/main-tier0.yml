@@ -28,7 +28,9 @@ jobs:
         run: |
           go install github.com/onsi/ginkgo/v2/ginkgo
       - name: Run tests
-        run: HUB_BASE_URL="http://$(minikube ip)/hub" DEBUG=1 make test-tier0
+        run: HUB_BASE_URL="http://$(minikube ip)/hub" DEBUG=1 make test-tier0 | tee analysis/tmp_output/tests.log
+      - name: Prepare summary
+        run: cat analysis/tmp_output/tests.log | grep -- --- >> $GITHUB_STEP_SUMMARY
       - name: Upload analysis tests output
         if: always()
         uses: actions/upload-artifact@v4
