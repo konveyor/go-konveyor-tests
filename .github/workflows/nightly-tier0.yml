@@ -22,15 +22,15 @@ jobs:
         run: |
           go install github.com/onsi/ginkgo/v2/ginkgo
       - name: Run tests
-        run: HUB_BASE_URL="http://$(minikube ip)/hub" DEBUG=1 make test-tier0 | tee analysis/tmp_output/tests.log
+        run: HUB_BASE_URL="http://$(minikube ip)/hub" DEBUG=1 make test-tier0 | tee /tmp/tests.log
       - name: Prepare summary
         if: always()
-        run: cat analysis/tmp_output/tests.log | grep -- --- >> $GITHUB_STEP_SUMMARY
+        run: cat /tmp/tests.log | grep -- --- >> $GITHUB_STEP_SUMMARY
       - name: Upload tests output
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: tests-output
           include-hidden-files: true
-          path: tmp_output
+          path: analysis/tmp_output
 
