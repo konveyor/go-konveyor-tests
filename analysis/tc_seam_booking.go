@@ -7,14 +7,14 @@ import (
 )
 
 var SeamBooking = TC{
-	Name: "Seam booking",
+	Name:        "Seam booking",
 	Application: data.SeamBooking,
-	Task: Analyze,
+	Task:        Analyze,
 	Labels: addon.Labels{
 		Included: []string{
 			"konveyor.io/target=cloud-readiness",
 			"konveyor.io/target=eap",
-			},
+		},
 	},
 	Analysis: api.Analysis{
 		Effort: 89,
@@ -22,7 +22,7 @@ var SeamBooking = TC{
 			{
 				Category:    "mandatory",
 				Description: "Hibernate 5.3 - default_schema or default_catalog must be defined or set jdbc_metadata_extraction_strategy",
-				Effort:       1,
+				Effort:      1,
 				RuleSet:     "eap7/weblogic/tests/data",
 				Rule:        "hibernate51-53-01000",
 				Incidents: []api.Incident{
@@ -39,49 +39,49 @@ var SeamBooking = TC{
 				},
 			},
 			{
-				Category: "mandatory",
+				Category:    "mandatory",
 				Description: "JSF Seam 2 UI control s:button",
-				Effort: 1,
+				Effort:      1,
 				RuleSet:     "eap6/java-ee/seam",
 				Rule:        "seam-ui-jsf-00001-01",
 				Incidents: []api.Incident{
 					{
-						File:    "/shared/source/windup/test-files/seam-booking-5.2/view/book.xhtml",
-						Line:    94,
+						File: "/shared/source/windup/test-files/seam-booking-5.2/view/book.xhtml",
+						Line: 94,
 						Message: "Seam UI's `<s:button>` JSF control should be replaced by `<h:button>`.\n" +
-			 " There are differences in attributes, for example the _action_ attribute maps to _outcome_ and there is no _propagation_ attribute.",
+							" There are differences in attributes, for example the _action_ attribute maps to _outcome_ and there is no _propagation_ attribute.",
 					},
 					{
-						File:    "/shared/source/windup/test-files/seam-booking-5.2/view/confirm.xhtml",
-						Line:    42,
+						File: "/shared/source/windup/test-files/seam-booking-5.2/view/confirm.xhtml",
+						Line: 42,
 						Message: "Seam UI's `<s:button>` JSF control should be replaced by `<h:button>`.\n" +
-						" There are differences in attributes, for example the _action_ attribute maps to _outcome_ and there is no _propagation_ attribute.",
+							" There are differences in attributes, for example the _action_ attribute maps to _outcome_ and there is no _propagation_ attribute.",
 					},
 					{
-						File:    "/shared/source/windup/test-files/seam-booking-5.2/view/password.xhtml",
-						Line:    36,
+						File: "/shared/source/windup/test-files/seam-booking-5.2/view/password.xhtml",
+						Line: 36,
 						Message: "Seam UI's `<s:button>` JSF control should be replaced by `<h:button>`.\n" +
-						" There are differences in attributes, for example the _action_ attribute maps to _outcome_ and there is no _propagation_ attribute.",
+							" There are differences in attributes, for example the _action_ attribute maps to _outcome_ and there is no _propagation_ attribute.",
 					},
 					{
-						File:    "/shared/source/windup/test-files/seam-booking-5.2/view/register.xhtml",
-						Line:    81,
+						File: "/shared/source/windup/test-files/seam-booking-5.2/view/register.xhtml",
+						Line: 81,
 						Message: "Seam UI's `<s:button>` JSF control should be replaced by `<h:button>`.\n" +
-						" There are differences in attributes, for example the _action_ attribute maps to _outcome_ and there is no _propagation_ attribute",
+							" There are differences in attributes, for example the _action_ attribute maps to _outcome_ and there is no _propagation_ attribute",
 					},
 				},
 			},
 			{
-				Category: "mandatory",
+				Category:    "mandatory",
 				Description: "JSF Seam 2 UI control s:convertDateTime",
-				Effort: 1,
+				Effort:      1,
 				RuleSet:     "eap6/java-ee/seam",
 				Rule:        "seam-ui-jsf-01005",
 			},
 			{
-				Category: "mandatory",
+				Category:    "mandatory",
 				Description: "JSF Seam 2 UI control s:decorate",
-				Effort: 3,
+				Effort:      3,
 				RuleSet:     "eap6/java-ee/seam",
 				Rule:        "seam-ui-jsf-01023",
 				Incidents: []api.Incident{
@@ -208,9 +208,9 @@ var SeamBooking = TC{
 				},
 			},
 			{
-				Category: "mandatory",
+				Category:    "mandatory",
 				Description: "JSF Seam 2 UI control s:label",
-				Effort: 1,
+				Effort:      1,
 				RuleSet:     "eap6/java-ee/seam",
 				Rule:        "seam-ui-jsf-01026",
 				Incidents: []api.Incident{
@@ -222,36 +222,36 @@ var SeamBooking = TC{
 				},
 			},
 			{
-				Category: "mandatory",
+				Category:    "mandatory",
 				Description: "JSF Seam 2 UI control s:link",
-				Effort: 1,
+				Effort:      1,
 				RuleSet:     "eap6/java-ee/seam",
 				Rule:        "seam-ui-jsf-01000",
 				Incidents: []api.Incident{
 					{
-						File:    "/shared/source/windup/test-files/seam-booking-5.2/view/home.xhtml",
-						Line:    10,
+						File: "/shared/source/windup/test-files/seam-booking-5.2/view/home.xhtml",
+						Line: 10,
 						Message: "Seam UI's `<s:link>` should be replaced by `<h:link>`.\n" +
-						" There are differences in attributes, for example the _action_ attribute maps to _outcome_ and there is no _propagation_ attribute.",
+							" There are differences in attributes, for example the _action_ attribute maps to _outcome_ and there is no _propagation_ attribute.",
 					},
 					{
-						File:    "/shared/source/windup/test-files/seam-booking-5.2/view/main.xhtml",
-						Line:    68,
+						File: "/shared/source/windup/test-files/seam-booking-5.2/view/main.xhtml",
+						Line: 68,
 						Message: "Seam UI's `<s:link>` should be replaced by `<h:link>`.\n" +
-						" There are differences in attributes, for example the _action_ attribute maps to _outcome_ and there is no _propagation_ attribute.",
+							" There are differences in attributes, for example the _action_ attribute maps to _outcome_ and there is no _propagation_ attribute.",
 					},
 					{
-						File:    "/shared/source/windup/test-files/seam-booking-5.2/view/template.xhtml",
-						Line:    13,
-						Message: "Seam UI's `<s:link>` should be replaced by `<h:link>`.\n"+
-						" There are differences in attributes, for example the _action_ attribute maps to _outcome_ and there is no _propagation_ attribute.",
+						File: "/shared/source/windup/test-files/seam-booking-5.2/view/template.xhtml",
+						Line: 13,
+						Message: "Seam UI's `<s:link>` should be replaced by `<h:link>`.\n" +
+							" There are differences in attributes, for example the _action_ attribute maps to _outcome_ and there is no _propagation_ attribute.",
 					},
 				},
 			},
 			{
-				Category: "mandatory",
+				Category:    "mandatory",
 				Description: "JSF Seam 2 UI control s:message",
-				Effort: 1,
+				Effort:      1,
 				RuleSet:     "eap6/java-ee/seam",
 				Rule:        "seam-ui-jsf-01027",
 				Incidents: []api.Incident{
@@ -263,9 +263,9 @@ var SeamBooking = TC{
 				},
 			},
 			{
-				Category: "mandatory",
+				Category:    "mandatory",
 				Description: "JSF Seam 2 UI control s:span",
-				Effort: 1,
+				Effort:      1,
 				RuleSet:     "eap6/java-ee/seam",
 				Rule:        "seam-ui-jsf-01025",
 				Incidents: []api.Incident{
@@ -277,9 +277,9 @@ var SeamBooking = TC{
 				},
 			},
 			{
-				Category: "mandatory",
+				Category:    "mandatory",
 				Description: "JSF Seam 2 UI control s:validateAll",
-				Effort: 1,
+				Effort:      1,
 				RuleSet:     "eap6/java-ee/seam",
 				Rule:        "seam-ui-jsf-01022",
 				Incidents: []api.Incident{
@@ -321,28 +321,34 @@ var SeamBooking = TC{
 	},
 	AnalysisTags: []api.Tag{
 		{Name: "EJB XML", Category: api.Ref{Name: "Bean"}},
+		{Name: "JSF", Category: api.Ref{Name: "MVC"}},
+		{Name: "Properties", Category: api.Ref{Name: "Other"}},
 		{Name: "JPA entities", Category: api.Ref{Name: "Persistence"}},
 		{Name: "JPA XML", Category: api.Ref{Name: "Persistence"}},
 		{Name: "Persistence units", Category: api.Ref{Name: "Persistence"}},
-		{Name: "Properties", Category: api.Ref{Name: "Other"}},
-		{Name: "EJB XML", Category: api.Ref{Name: "Java EE"}},
-		{Name: "JSF XML", Category: api.Ref{Name: "Java EE"}},
-		{Name: "Persistence units", Category: api.Ref{Name: "Java EE"}},
-		{Name: "JPA XML", Category: api.Ref{Name: "Java EE"}},
-		{Name: "JPA entities", Category: api.Ref{Name: "Java EE"}},
-		{Name: "Java EE XML", Category: api.Ref{Name: "Java EE"}},
-		{Name: "EJB", Category: api.Ref{Name: "Java EE"}},
-		{Name: "JPA entities", Category: api.Ref{Name: "Store"}},
-		{Name: "JPA XML", Category: api.Ref{Name: "Store"}},
+		{Name: "JSF Page", Category: api.Ref{Name: "Web"}},
+		{Name: "JSF", Category: api.Ref{Name: "Embedded"}},
 		{Name: "Persistence units", Category: api.Ref{Name: "Store"}},
+		{Name: "JPA XML", Category: api.Ref{Name: "Store"}},
+		{Name: "JPA entities", Category: api.Ref{Name: "Store"}},
+		{Name: "JSF XML", Category: api.Ref{Name: "Web"}},
+		{Name: "JPA entities", Category: api.Ref{Name: "Java EE"}},
+		{Name: "JSF Page", Category: api.Ref{Name: "Java EE"}},
+		{Name: "EJB XML", Category: api.Ref{Name: "Java EE"}},
 		{Name: "EJB XML", Category: api.Ref{Name: "Connect"}},
-		{Name: "Properties", Category: api.Ref{Name: "Sustain"}},
-		{Name: "EJB", Category: api.Ref{Name: "Sustain"}},
 		{Name: "JSF XML", Category: api.Ref{Name: "View"}},
+		{Name: "JSF", Category: api.Ref{Name: "View"}},
+		{Name: "JSF Page", Category: api.Ref{Name: "View"}},
 		{Name: "Properties", Category: api.Ref{Name: "Embedded"}},
+		{Name: "JPA XML", Category: api.Ref{Name: "Java EE"}},
+		{Name: "Properties", Category: api.Ref{Name: "Sustain"}},
+		{Name: "Persistence units", Category: api.Ref{Name: "Java EE"}},
+		{Name: "JSF XML", Category: api.Ref{Name: "Java EE"}},
+		{Name: "EJB", Category: api.Ref{Name: "Sustain"}},
+		{Name: "EJB", Category: api.Ref{Name: "Java EE"}},
 		{Name: "EJB", Category: api.Ref{Name: "Clustering"}},
 		{Name: "Java EE XML", Category: api.Ref{Name: "Execute"}},
-		{Name: "JSF XML", Category: api.Ref{Name: "Web"}},
+		{Name: "Java EE XML", Category: api.Ref{Name: "Java EE"}},
 		{Name: "Java EE XML", Category: api.Ref{Name: "Processing"}},
 	},
 }
