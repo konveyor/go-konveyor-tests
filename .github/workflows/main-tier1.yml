@@ -27,4 +27,15 @@ jobs:
       - name: Install dependencies
         run: |
           go install github.com/onsi/ginkgo/v2/ginkgo
-      - run: HUB_BASE_URL="http://$(minikube ip)/hub" DEBUG=1 make test-tier1
+      - name: Run tests
+        run: set -o pipefail; HUB_BASE_URL="http://$(minikube ip)/hub" DEBUG=1 make test-tier1 | tee /tmp/tests.log
+      - name: Prepare summary
+        if: always()
+        run: cat /tmp/tests.log | grep -- --- >> $GITHUB_STEP_SUMMARY
+      - name: Upload analysis tests output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: analysis-tests-output
+          include-hidden-files: true
+          path: analysis/tmp_output
