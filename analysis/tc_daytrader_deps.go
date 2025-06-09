@@ -29,6 +29,11 @@ var DaytraderWithDeps = TC{
 						Line:    125,
 						Message: "An application running inside a container could lose access to a file in local storage.",
 					},
+					{
+						File:    "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/TradeBuildDB.java",
+						Line:    43,
+						Message: "An application running inside a container could lose access to a file in local storage.",
+					},
 				},
 			},
 			{
