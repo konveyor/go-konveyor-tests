@@ -15,7 +15,7 @@ var DaytraderWithDeps = TC{
 		"konveyor.io/target=quarkus",
 	},
 	Analysis: api.Analysis{
-		Effort: 10,
+		Effort: 11,
 		Issues: []api.Issue{
 			{
 				Category:    "mandatory",
