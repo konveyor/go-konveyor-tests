@@ -15,7 +15,7 @@ var DaytraderWithDeps = TC{
 		"konveyor.io/target=quarkus",
 	},
 	Analysis: api.Analysis{
-		Effort: 10,
+		Effort: 11,
 		Issues: []api.Issue{
 			{
 				Category:    "mandatory",
@@ -38,6 +38,11 @@ var DaytraderWithDeps = TC{
  * Configuration: Store configuration settings in environment variables so that they can be updated without code changes.
  * Data storage: Use a database backing service for relational data or use a persistent data storage system.
  * Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.`,
+					},
+					{
+						File:    "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/TradeBuildDB.java",
+						Line:    43,
+						Message: "An application running inside a container could lose access to a file in local storage.",
 					},
 				},
 			},
