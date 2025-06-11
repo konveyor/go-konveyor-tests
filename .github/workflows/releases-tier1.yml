@@ -16,7 +16,7 @@ jobs:
     if: ${{ github.ref == 'refs/heads/release-0.7' || github.event.pull_request.base.ref == 'release-0.7' }}
     with:
       tag: release-0.7
-      operator_tag: v0.6.2  # TODO: update when operator tag for 0.7 is created
+      operator_tag: v0.7.0  # TODO: update when operator tag for 0.7 is created
       api_tests_ref: ${{ github.ref }}
       api_tests_tiers: DEBUG=1 make test-tier1
       run_api_tests: true
