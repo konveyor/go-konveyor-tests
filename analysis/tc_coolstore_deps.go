@@ -755,5 +755,8 @@ var CoolstoreWithDeps = TC{
 		{Name: "Web Session", Category: api.Ref{Name: "Sustain"}},
 		{Name: "CDI", Category: api.Ref{Name: "Execute"}},
 		{Name: "Java EE JSON-P", Category: api.Ref{Name: "Execute"}},
+		{Name: "Common Annotations", Category: api.Ref{Name: "Java EE"}},
+		{Name: "Common Annotations", Category: api.Ref{Name: "Connect"}},
+		{Name: "Common Annotations", Category: api.Ref{Name: "Other"}},
 	},
 }
