@@ -18,7 +18,7 @@ var CoolstoreWithDeps = TC{
 		},
 	},
 	Analysis: api.Analysis{
-		Effort: 114,
+		Effort: 113,
 		Issues: []api.Issue{
 			{
 				Category:    "mandatory",
@@ -165,11 +165,6 @@ var CoolstoreWithDeps = TC{
 					{
 						File:    "/shared/source/coolstore/src/main/resources/META-INF/persistence.xml",
 						Line:    2,
-						Message: "In the root tag, replace the `version` attribute value `2.1` with `3.0`",
-					},
-					{
-						File:    "/shared/source/coolstore/src/main/resources/META-INF/persistence.xml",
-						Line:    8,
 						Message: "In the root tag, replace the `version` attribute value `2.1` with `3.0`",
 					},
 				},
