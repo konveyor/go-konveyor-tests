@@ -7,22 +7,21 @@ var Tier0TestCases = []TC{
 	TackleTestappPublicPackageFilter,
 	Tomcat,
 	CoolstoreWithDeps,
-	CoolstoreWithDepsQuarkus,
+	DaytraderWithDeps,
 	AcmeairWebappBinary,          // Binary upload
-	AdministracionEfectivoBinary, // Binary upload
 	TackleTestappPublicBinary,    // Binary fetched from tackle-testapp-public maven registry
 }
 
 // Tier 1 Analysis test cases - should work.
 // List of applications with expected analysis outputs.
 var Tier1TestCases = []TC{
-	// Setting empty until have working applications.
+	CoolstoreWithDepsQuarkus,
+	AdministracionEfectivoBinary, // Binary upload
 }
 
 // Tier 2 Analysis test cases - great if works.
 // List of applications with expected analysis outputs.
 var Tier2TestCases = []TC{
-	DaytraderWithDeps,
 	PetclinicHazelcast,
 	ApacheWicket,
 	SeamBooking,
