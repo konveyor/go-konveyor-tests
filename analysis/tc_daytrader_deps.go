@@ -19,25 +19,15 @@ var DaytraderWithDeps = TC{
 		Issues: []api.Issue{
 			{
 				Category:    "mandatory",
-				Effort:      1,
 				Description: "File system - Java IO",
+				Effort:      1,
 				RuleSet:     "cloud-readiness",
 				Rule:        "local-storage-00001",
 				Incidents: []api.Incident{
 					{
-						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/TradeScenarioServlet.java",
-						Line: 125,
-						Message: `An application running inside a container could lose access to a file in local storage.
-
- Recommendations
-
- The following recommendations depend on the function of the file in local storage:
-
- * Logging: Log to standard output and use a centralized log collector to analyze the logs.
- * Caching: Use a cache backing service.
- * Configuration: Store configuration settings in environment variables so that they can be updated without code changes.
- * Data storage: Use a database backing service for relational data or use a persistent data storage system.
- * Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.`,
+						File:    "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/TradeScenarioServlet.java",
+						Line:    125,
+						Message: "An application running inside a container could lose access to a file in local storage.",
 					},
 					{
 						File:    "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/TradeBuildDB.java",
@@ -48,47 +38,27 @@ var DaytraderWithDeps = TC{
 			},
 			{
 				Category:    "mandatory",
-				Effort:      1,
 				Description: "File system - java.net.URL/URI",
+				Effort:      1,
 				RuleSet:     "cloud-readiness",
 				Rule:        "local-storage-00002",
 				Incidents: []api.Incident{
 					{
-						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/PingReentryServlet.java",
-						Line: 91,
-						Message: `An application running inside a container could lose access to a file in local storage.
-
- Recommendations
-
- The following recommendations depend on the function of the file in local storage:
-
- * Logging: Log to standard output and use a centralized log collector to analyze the logs.
- * Caching: Use a cache backing service.
- * Configuration: Store configuration settings in environment variables so that they can be updated without code changes.
- * Data storage: Use a database backing service for relational data or use a persistent data storage system.
- * Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.`,
+						File:    "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/PingReentryServlet.java",
+						Line:    91,
+						Message: "An application running inside a container could lose access to a file in local storage.",
 					},
 					{
-						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/PingServlet2PDF.java",
-						Line: 86,
-						Message: `An application running inside a container could lose access to a file in local storage.
-
- Recommendations
-
- The following recommendations depend on the function of the file in local storage:
-
- * Logging: Log to standard output and use a centralized log collector to analyze the logs.
- * Caching: Use a cache backing service.
- * Configuration: Store configuration settings in environment variables so that they can be updated without code changes.
- * Data storage: Use a database backing service for relational data or use a persistent data storage system.
- * Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.`,
+						File:    "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/PingServlet2PDF.java",
+						Line:    86,
+						Message: "An application running inside a container could lose access to a file in local storage.",
 					},
 				},
 			},
 			{
 				Category:    "mandatory",
-				Effort:      7,
 				Description: "Local HTTP Calls",
+				Effort:      7,
 				RuleSet:     "cloud-readiness",
 				Rule:        "localhost-http-00001",
 				Incidents: []api.Incident{
@@ -147,7 +117,8 @@ var DaytraderWithDeps = TC{
 		{Name: "EJB XML", Category: api.Ref{Name: "Bean"}},
 		{Name: "Servlet", Category: api.Ref{Name: "HTTP"}},
 		{Name: "CDI", Category: api.Ref{Name: "Inversion of Control"}},
-		{Name: "CDI XML", Category: api.Ref{Name: "Inversion of Control"}},
+		{Name: "JSF", Category: api.Ref{Name: "MVC"}},
+		{Name: "Common Annotations", Category: api.Ref{Name: "Other"}},
 		{Name: "Properties", Category: api.Ref{Name: "Other"}},
 		{Name: "JPA entities", Category: api.Ref{Name: "Persistence"}},
 		{Name: "JPA named queries", Category: api.Ref{Name: "Persistence"}},
@@ -156,32 +127,46 @@ var DaytraderWithDeps = TC{
 		{Name: "EJB Timer", Category: api.Ref{Name: "Processing"}},
 		{Name: "Java EE JSON-P", Category: api.Ref{Name: "Processing"}},
 		{Name: "Bean Validation", Category: api.Ref{Name: "Validation"}},
-		{Name: "JPA entities", Category: api.Ref{Name: "Store"}},
-		{Name: "JPA named queries", Category: api.Ref{Name: "Store"}},
-		{Name: "JPA XML", Category: api.Ref{Name: "Store"}},
-		{Name: "Persistence units", Category: api.Ref{Name: "Store"}},
-		{Name: "Bean Validation", Category: api.Ref{Name: "Store"}},
-		{Name: "EJB XML", Category: api.Ref{Name: "Connect"}},
-		{Name: "Servlet", Category: api.Ref{Name: "Connect"}},
-		{Name: "EJB XML", Category: api.Ref{Name: "Java EE"}},
-		{Name: "JPA XML", Category: api.Ref{Name: "Java EE"}},
-		{Name: "Java EE JSON-P", Category: api.Ref{Name: "Java EE"}},
-		{Name: "JPA named queries", Category: api.Ref{Name: "Java EE"}},
-		{Name: "Persistence units", Category: api.Ref{Name: "Java EE"}},
-		{Name: "JPA entities", Category: api.Ref{Name: "Java EE"}},
-		{Name: "CDI", Category: api.Ref{Name: "Java EE"}},
-		{Name: "Servlet", Category: api.Ref{Name: "Java EE"}},
-		{Name: "Bean Validation", Category: api.Ref{Name: "Java EE"}},
-		{Name: "EJB Timer", Category: api.Ref{Name: "Java EE"}},
-		{Name: "JSF XML", Category: api.Ref{Name: "Java EE"}},
+		{Name: "JSF Page", Category: api.Ref{Name: "Web"}},
+		{Name: "JSP Page", Category: api.Ref{Name: "Web"}},
+		{Name: "WebSocket", Category: api.Ref{Name: "Web"}},
 		{Name: "CDI XML", Category: api.Ref{Name: "Java EE"}},
-		{Name: "CDI", Category: api.Ref{Name: "Execute"}},
-		{Name: "Java EE JSON-P", Category: api.Ref{Name: "Execute"}},
+		{Name: "JPA named queries", Category: api.Ref{Name: "Java EE"}},
+		{Name: "JSF", Category: api.Ref{Name: "Embedded"}},
 		{Name: "EJB Timer", Category: api.Ref{Name: "Execute"}},
-		{Name: "CDI XML", Category: api.Ref{Name: "Execute"}},
-		{Name: "Properties", Category: api.Ref{Name: "Sustain"}},
-		{Name: "Properties", Category: api.Ref{Name: "Embedded"}},
+		{Name: "WebSocket", Category: api.Ref{Name: "View"}},
+		{Name: "Persistence units", Category: api.Ref{Name: "Store"}},
+		{Name: "Bean Validation", Category: api.Ref{Name: "Java EE"}},
+		{Name: "JPA XML", Category: api.Ref{Name: "Store"}},
+		{Name: "JPA entities", Category: api.Ref{Name: "Store"}},
 		{Name: "JSF XML", Category: api.Ref{Name: "Web"}},
+		{Name: "EJB Timer", Category: api.Ref{Name: "Java EE"}},
+		{Name: "JPA entities", Category: api.Ref{Name: "Java EE"}},
+		{Name: "JSF Page", Category: api.Ref{Name: "Java EE"}},
+		{Name: "JSP Page", Category: api.Ref{Name: "Java EE"}},
+		{Name: "Common Annotations", Category: api.Ref{Name: "Java EE"}},
+		{Name: "EJB XML", Category: api.Ref{Name: "Java EE"}},
+		{Name: "EJB XML", Category: api.Ref{Name: "Connect"}},
+		{Name: "CDI XML", Category: api.Ref{Name: "Execute"}},
+		{Name: "Java EE JSON-P", Category: api.Ref{Name: "Execute"}},
+		{Name: "JPA named queries", Category: api.Ref{Name: "Store"}},
 		{Name: "JSF XML", Category: api.Ref{Name: "View"}},
+		{Name: "Servlet", Category: api.Ref{Name: "Connect"}},
+		{Name: "CDI", Category: api.Ref{Name: "Execute"}},
+		{Name: "Common Annotations", Category: api.Ref{Name: "Connect"}},
+		{Name: "Java EE JSON-P", Category: api.Ref{Name: "Java EE"}},
+		{Name: "JSF", Category: api.Ref{Name: "View"}},
+		{Name: "JSF Page", Category: api.Ref{Name: "View"}},
+		{Name: "CDI XML", Category: api.Ref{Name: "Inversion of Control"}},
+		{Name: "CDI", Category: api.Ref{Name: "Java EE"}},
+		{Name: "Properties", Category: api.Ref{Name: "Embedded"}},
+		{Name: "JSP Page", Category: api.Ref{Name: "View"}},
+		{Name: "JPA XML", Category: api.Ref{Name: "Java EE"}},
+		{Name: "Properties", Category: api.Ref{Name: "Sustain"}},
+		{Name: "Persistence units", Category: api.Ref{Name: "Java EE"}},
+		{Name: "Bean Validation", Category: api.Ref{Name: "Store"}},
+		{Name: "JSF XML", Category: api.Ref{Name: "Java EE"}},
+		{Name: "Servlet", Category: api.Ref{Name: "Java EE"}},
+		{Name: "WebSocket", Category: api.Ref{Name: "Java EE"}},
 	},
 }
