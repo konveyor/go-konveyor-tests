@@ -2,6 +2,7 @@ package analysis
 
 import (
 	"github.com/konveyor/go-konveyor-tests/data"
+	"github.com/konveyor/go-konveyor-tests/hack/addon"
 	"github.com/konveyor/tackle2-hub/api"
 )
 
@@ -10,9 +11,11 @@ var DaytraderWithDeps = TC{
 	Application: data.Daytrader,
 	WithDeps:    true,
 	Task:        Analyze,
-	Targets: []string{
-		"konveyor.io/target=cloud-readiness",
-		"konveyor.io/target=quarkus",
+	Labels: addon.Labels{
+		Included: []string{
+			"konveyor.io/target=cloud-readiness",
+			"konveyor.io/target=quarkus",
+		},
 	},
 	Analysis: api.Analysis{
 		Effort: 11,
