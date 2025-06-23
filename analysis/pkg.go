@@ -24,6 +24,9 @@ var (
 	// Analysis waiting loop 20 minutes.
 	Retry = 240
 	Wait  = 5 * time.Second
+
+	// Test output dir temp name
+	TmpOutputDir = "tmp_output"
 )
 
 func init() {
