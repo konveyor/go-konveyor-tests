@@ -19,7 +19,7 @@ var AcmeairWebappBinary = TC{
 	Binary:   true,
 	Artifact: "/binary/acmeair-webapp-1.0-SNAPSHOT.war",
 	Analysis: api.Analysis{
-		Effort: 79,
+		Effort: 88,
 		Issues: []api.Issue{
 			{
 				Category:    "mandatory",
