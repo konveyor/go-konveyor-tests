@@ -63,60 +63,60 @@ var AcmeairWebappBinary = TC{
 						Line: 613,
 						Message: `An application running inside a container could lose access to a file in local storage.
 
-								Recommendations
+						Recommendations
 
-								The following recommendations depend on the function of the file in local storage:
+						The following recommendations depend on the function of the file in local storage:
 
-								* Logging: Log to standard output and use a centralized log collector to analyze the logs.
-								* Caching: Use a cache backing service.
-								* Configuration: Store configuration settings in environment variables so that they can be updated without code changes.
-								* Data storage: Use a database backing service for relational data or use a persistent data storage system.
-								* Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.`,
+						* Logging: Log to standard output and use a centralized log collector to analyze the logs.
+						* Caching: Use a cache backing service.
+						* Configuration: Store configuration settings in environment variables so that they can be updated without code changes.
+						* Data storage: Use a database backing service for relational data or use a persistent data storage system.
+						* Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.`,
 					},
 					{
 						File: "/shared/bin/java-project/src/main/java/org/apache/commons/logging/LogFactory.java",
 						Line: 614,
 						Message: `An application running inside a container could lose access to a file in local storage.
 
-								Recommendations
+						Recommendations
 
-								The following recommendations depend on the function of the file in local storage:
+						The following recommendations depend on the function of the file in local storage:
 
-								* Logging: Log to standard output and use a centralized log collector to analyze the logs.
-								* Caching: Use a cache backing service.
-								* Configuration: Store configuration settings in environment variables so that they can be updated without code changes.
-								* Data storage: Use a database backing service for relational data or use a persistent data storage system.
-								* Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.`,
+						* Logging: Log to standard output and use a centralized log collector to analyze the logs.
+						* Caching: Use a cache backing service.
+						* Configuration: Store configuration settings in environment variables so that they can be updated without code changes.
+						* Data storage: Use a database backing service for relational data or use a persistent data storage system.
+						* Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.`,
 					},
 					{
 						File: "/shared/bin/java-project/src/main/java/org/apache/commons/logging/impl/Jdk13LumberjackLogger.java",
 						Line: 48,
 						Message: `An application running inside a container could lose access to a file in local storage.
 
-								Recommendations
+						Recommendations
 
-								The following recommendations depend on the function of the file in local storage:
+						The following recommendations depend on the function of the file in local storage:
 
-								* Logging: Log to standard output and use a centralized log collector to analyze the logs.
-								* Caching: Use a cache backing service.
-								* Configuration: Store configuration settings in environment variables so that they can be updated without code changes.
-								* Data storage: Use a database backing service for relational data or use a persistent data storage system.
-								* Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.`,
+						* Logging: Log to standard output and use a centralized log collector to analyze the logs.
+						* Caching: Use a cache backing service.
+						* Configuration: Store configuration settings in environment variables so that they can be updated without code changes.
+						* Data storage: Use a database backing service for relational data or use a persistent data storage system.
+						* Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.`,
 					},
 					{
 						File: "/shared/bin/java-project/src/main/java/org/apache/commons/logging/impl/SimpleLog.java",
 						Line: 157,
 						Message: `An application running inside a container could lose access to a file in local storage.
 
-								Recommendations
+						Recommendations
 
-								The following recommendations depend on the function of the file in local storage:
+						The following recommendations depend on the function of the file in local storage:
 
-								* Logging: Log to standard output and use a centralized log collector to analyze the logs.
-								* Caching: Use a cache backing service.
-								* Configuration: Store configuration settings in environment variables so that they can be updated without code changes.
-								* Data storage: Use a database backing service for relational data or use a persistent data storage system.
-								* Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.`,
+						* Logging: Log to standard output and use a centralized log collector to analyze the logs.
+						* Caching: Use a cache backing service.
+						* Configuration: Store configuration settings in environment variables so that they can be updated without code changes.
+						* Data storage: Use a database backing service for relational data or use a persistent data storage system.
+						* Temporary data storage: Use the file system of a running container as a brief, single-transaction cache.`,
 					},
 				},
 			},
