@@ -23,10 +23,10 @@ var AcmeairWebappBinary = TC{
 		Issues: []api.Issue{
 			{
 				Category:    "mandatory",
-				Description: "The package 'javax' has been replaced by 'jakarta'.",
+				Description: "File system - Java IO",
 				Effort:      1,
-				RuleSet:     "eap8/eap7",
-				Rule:        "javax-to-jakarta-import-00001",
+				RuleSet:     "cloud-readiness",
+				Rule:        "local-storage-00001",
 				Incidents: []api.Incident{
 					{
 						File: "/shared/bin/java-project/src/main/java/org/aopalliance/aop/AspectException.java",
