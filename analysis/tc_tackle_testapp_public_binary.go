@@ -22,7 +22,7 @@ var TackleTestappPublicBinary = TC{
 	Binary: true,
 	Analysis: api.Analysis{
 		Effort: 2,
-		Issues: []api.Issue{
+		Insights: []api.Insight{
 			{
 				Category:    "mandatory",
 				Description: "File system - Java IO",

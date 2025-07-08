@@ -19,7 +19,7 @@ var CoolstoreWithDeps = TC{
 	},
 	Analysis: api.Analysis{
 		Effort: 113,
-		Issues: []api.Issue{
+		Insights: []api.Insight{
 			{
 				Category:    "mandatory",
 				Description: "HTTP session replication (distributable web.xml)",

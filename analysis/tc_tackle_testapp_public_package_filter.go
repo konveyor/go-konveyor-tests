@@ -28,7 +28,7 @@ var TackleTestappPublicPackageFilter = TC{
 	},
 	Analysis: api.Analysis{
 		Effort: 1,
-		Issues: []api.Issue{
+		Insights: []api.Insight{
 			{
 				Category:    "mandatory",
 				Description: "Hardcoded IP Address",

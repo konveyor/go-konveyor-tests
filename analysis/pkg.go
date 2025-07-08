@@ -65,16 +65,16 @@ func DumpAnalysis(t *testing.T, tc TC, analysis api.Analysis) {
 	fmt.Printf("## GOT ANALYSIS OUTPUT FOR \"%s\":", tc.Name)
 	fmt.Printf("\napi.Analysis{\n")
 	fmt.Printf("    Effort: %d,\n", analysis.Effort)
-	fmt.Printf("    Issues: []api.Issue{\n")
-	for _, issue := range analysis.Issues {
+	fmt.Printf("    Insights: []api.Insight{\n")
+	for _, insight := range analysis.Insights {
 		fmt.Printf("        {\n")
-		fmt.Printf("            Category: \"%s\",\n", issue.Category)
-		fmt.Printf("            Description: \"%s\",\n", issue.Description)
-		fmt.Printf("            Effort: %d,\n", issue.Effort)
-		fmt.Printf("            RuleSet: \"%s\",\n", issue.RuleSet)
-		fmt.Printf("            Rule: \"%s\",\n", issue.Rule)
+		fmt.Printf("            Category: \"%s\",\n", insight.Category)
+		fmt.Printf("            Description: \"%s\",\n", insight.Description)
+		fmt.Printf("            Effort: %d,\n", insight.Effort)
+		fmt.Printf("            RuleSet: \"%s\",\n", insight.RuleSet)
+		fmt.Printf("            Rule: \"%s\",\n", insight.Rule)
 		fmt.Printf("            Incidents: []api.Incident{\n")
-		for _, incident := range issue.Incidents {
+		for _, incident := range insight.Incidents {
 			fmt.Printf("                {\n")
 			fmt.Printf("                    File: \"%s\",\n", incident.File)
 			fmt.Printf("                    Line: %d,\n", incident.Line)

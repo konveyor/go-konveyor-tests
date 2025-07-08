@@ -30,10 +30,10 @@ func getTagsDiff(want, got []api.Tag) (notFound []api.Tag, extras []api.Tag) {
 	return
 }
 
-func getIssuesDiff(wantList, gotList []api.Issue) (notFound []api.Issue, extras []api.Issue) {
-	key := func(r api.Issue) string { return fmt.Sprintf("%s-%s-%s-%d", r.Category, r.RuleSet, r.Rule, r.Effort) }
-	wantMap := map[string]api.Issue{}
-	gotMap := map[string]api.Issue{}
+func getInsightsDiff(wantList, gotList []api.Insight) (notFound []api.Insight, extras []api.Insight) {
+	key := func(r api.Insight) string { return fmt.Sprintf("%s-%s-%s-%d", r.Category, r.RuleSet, r.Rule, r.Effort) }
+	wantMap := map[string]api.Insight{}
+	gotMap := map[string]api.Insight{}
 	for _, got := range gotList {
 		gotMap[key(got)] = got
 	}

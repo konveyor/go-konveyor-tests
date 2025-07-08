@@ -19,7 +19,7 @@ var DaytraderWithDeps = TC{
 	},
 	Analysis: api.Analysis{
 		Effort: 318,
-		Issues: []api.Issue{
+		Insights: []api.Insight{
 			{
 				Category:    "mandatory",
 				Description: "File system - java.net.URL/URI",

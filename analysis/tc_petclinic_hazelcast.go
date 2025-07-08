@@ -29,7 +29,7 @@ var PetclinicHazelcast = TC{
 	},
 	Analysis: api.Analysis{
 		Effort: 20,
-		Issues: []api.Issue{
+		Insights: []api.Insight{
 			{
 				Category:    "mandatory",
 				Description: "Embedded Hazelcast",

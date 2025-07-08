@@ -18,7 +18,7 @@ var SeamBooking = TC{
 	},
 	Analysis: api.Analysis{
 		Effort: 89,
-		Issues: []api.Issue{
+		Insights: []api.Insight{
 			{
 				Category:    "mandatory",
 				Description: "Hibernate 5.3 - default_schema or default_catalog must be defined or set jdbc_metadata_extraction_strategy",
