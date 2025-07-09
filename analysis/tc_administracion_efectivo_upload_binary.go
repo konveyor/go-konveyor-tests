@@ -19,7 +19,7 @@ var AdministracionEfectivoBinary = TC{
 	Artifact: "/binary/administracion_efectivo.ear",
 	Analysis: api.Analysis{
 		Effort: 36,
-		Issues: []api.Issue{
+		Insights: []api.Insight{
 			{
 				Category:    "mandatory",
 				Description: "File system - Java IO",

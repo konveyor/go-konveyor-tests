@@ -202,43 +202,46 @@ func verifyAnalysis(t TaskTest, tc TC, debug bool) {
 	analysisDetailPath := binding.Path(api.AnalysisRoot).Inject(binding.Params{api.ID: gotAppAnalyses[len(gotAppAnalyses)-1].ID})
 	assert.Should(t.T, Client.Get(analysisDetailPath, &gotAnalysis))
 
-	// Filter out non-mandatory issues, TODO(maufart): quickfix until decide if we test potential issues too
-	var mandatoryIssues []api.Issue
-	for _, issue := range gotAnalysis.Issues {
-		if issue.Category == "mandatory" {
-			mandatoryIssues = append(mandatoryIssues, issue)
+	// Test issues.
+	filterIssues(&gotAnalysis)
+
+	// Filter out non-mandatory insights, TODO(maufart): quickfix until decide if we test potential insights too
+	var mandatoryInsights []api.Insight
+	for _, insight := range gotAnalysis.Insights {
+		if insight.Category == "mandatory" {
+			mandatoryInsights = append(mandatoryInsights, insight)
 		}
 	}
-	gotAnalysis.Issues = mandatoryIssues
+	gotAnalysis.Insights = mandatoryInsights
 
 	if debug {
 		DumpAnalysis(t.T, tc, gotAnalysis)
 	}
 
-	// Check the analysis result (effort, issues, etc).
+	// Check the analysis result (effort, insights, etc).
 	if gotAnalysis.Effort != tc.Analysis.Effort {
 		t.Errorf("Different effort error. Got %d, expected %d", gotAnalysis.Effort, tc.Analysis.Effort)
 	}
 
-	// Ensure stable order of Issues.
-	sort.SliceStable(gotAnalysis.Issues, func(a, b int) bool { return gotAnalysis.Issues[a].Rule < gotAnalysis.Issues[b].Rule })
-	sort.SliceStable(tc.Analysis.Issues, func(a, b int) bool { return tc.Analysis.Issues[a].Rule < tc.Analysis.Issues[b].Rule })
+	// Ensure stable order of Insights.
+	sort.SliceStable(gotAnalysis.Insights, func(a, b int) bool { return gotAnalysis.Insights[a].Rule < gotAnalysis.Insights[b].Rule })
+	sort.SliceStable(tc.Analysis.Insights, func(a, b int) bool { return tc.Analysis.Insights[a].Rule < tc.Analysis.Insights[b].Rule })
 
-	// Check the analysis issues
-	if len(gotAnalysis.Issues) != len(tc.Analysis.Issues) {
-		t.Errorf("Different amount of issues error. Got %d, expected %d.", len(gotAnalysis.Issues), len(tc.Analysis.Issues))
-		missing, unexpected := getIssuesDiff(tc.Analysis.Issues, gotAnalysis.Issues)
-		for _, issue := range missing {
-			fmt.Printf("Expected issue not found for rule %s.\n", issue.Rule)
+	// Check the analysis insights
+	if len(gotAnalysis.Insights) != len(tc.Analysis.Insights) {
+		t.Errorf("Different amount of insights error. Got %d, expected %d.", len(gotAnalysis.Insights), len(tc.Analysis.Insights))
+		missing, unexpected := getInsightsDiff(tc.Analysis.Insights, gotAnalysis.Insights)
+		for _, insight := range missing {
+			fmt.Printf("Expected insight not found for rule %s.\n", insight.Rule)
 		}
-		for _, issue := range unexpected {
-			fmt.Printf("Unexpected issue found for rule %s.\n", issue.Rule)
+		for _, insight := range unexpected {
+			fmt.Printf("Unexpected insight found for rule %s.\n", insight.Rule)
 		}
 	} else {
-		for i, got := range gotAnalysis.Issues {
-			expected := tc.Analysis.Issues[i]
+		for i, got := range gotAnalysis.Insights {
+			expected := tc.Analysis.Insights[i]
 			if got.Category != expected.Category || got.RuleSet != expected.RuleSet || got.Rule != expected.Rule || got.Effort != expected.Effort || !strings.HasPrefix(got.Description, expected.Description) {
-				t.Errorf("\nDifferent issue error. Got %+v\nExpected %+v.\n\n", got, expected)
+				t.Errorf("\nDifferent insight error. Got %+v\nExpected %+v.\n\n", got, expected)
 			}
 
 			// Incidents check.
@@ -414,9 +417,9 @@ func printTask(task *api.Task, destDir string) (err error) {
 	b, _ := yaml.Marshal(task)
 	f, err := os.Create(path.Join(taskDir, fmt.Sprintf("task_%d_%s.yaml", task.ID, task.Name)))
 	if err != nil {
-			fmt.Printf("Error cannot get Task %d : %s\n", task.ID, err.Error())
-			return
-		}
+		fmt.Printf("Error cannot get Task %d : %s\n", task.ID, err.Error())
+		return
+	}
 	defer f.Close()
 	f.Write(b)
 	err = dumpTaskAttachments(task, taskDir)
@@ -429,7 +432,7 @@ func printTasks(debugDirectory string) (err error) {
 		return
 	}
 	tasksDir := path.Join(debugDirectory, "ALL-TASKS")
-	_ = os.Mkdir(tasksDir, 0750)	// The directory might exist already
+	_ = os.Mkdir(tasksDir, 0750) // The directory might exist already
 	for i := range tasks {
 		err = printTask(&tasks[i], tasksDir)
 		if err != nil {
@@ -437,6 +440,17 @@ func printTasks(debugDirectory string) (err error) {
 		}
 	}
 	return
+}
+
+// filterIssues updates the analysis to include only issues.
+func filterIssues(analysis *api.Analysis) {
+	var issues []api.Insight
+	for _, insight := range analysis.Insights {
+		if insight.Effort > 0 {
+			issues = append(issues, insight)
+		}
+	}
+	analysis.Insights = issues
 }
 
 type TaskTest struct {

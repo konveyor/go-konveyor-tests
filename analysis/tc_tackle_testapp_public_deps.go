@@ -23,7 +23,7 @@ var TackleTestappPublicWithDeps = TC{
 	},
 	Analysis: api.Analysis{
 		Effort: 2,
-		Issues: []api.Issue{
+		Insights: []api.Insight{
 			{
 				Category:    "mandatory",
 				Description: "Hardcoded IP Address",
