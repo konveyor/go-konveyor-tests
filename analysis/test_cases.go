@@ -7,7 +7,6 @@ var Tier0TestCases = []TC{
 	TackleTestappPublicPackageFilter,
 	Tomcat,
 	CoolstoreWithDeps,
-	DaytraderWithDeps,
 	AcmeairWebappBinary,          // Binary upload
 	TackleTestappPublicBinary,    // Binary fetched from tackle-testapp-public maven registry
 }
@@ -25,6 +24,7 @@ var Tier2TestCases = []TC{
 	PetclinicHazelcast,
 	ApacheWicket,
 	SeamBooking,
+	DaytraderWithDeps,
 }
 
 // Tier 3 Analysis with credentials test cases - should work
