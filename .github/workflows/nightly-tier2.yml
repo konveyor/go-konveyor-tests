@@ -17,8 +17,20 @@ jobs:
         uses: konveyor/tackle2-operator/.github/actions/install-tackle@main
       - uses: actions/setup-go@v3
         with:
-          go-version: '1.19'
+          go-version: '1.21'
       - name: Install dependencies
         run: |
           go install github.com/onsi/ginkgo/v2/ginkgo
-      - run: HUB_BASE_URL="http://$(minikube ip)/hub" DEBUG=1 make test-tier2
+      - name: Run tests
+        run: set -o pipefail; HUB_BASE_URL="http://$(minikube ip)/hub" DEBUG=1 make test-tier2 | tee /tmp/tests.log
+      - name: Prepare summary
+        if: always()
+        run: cat /tmp/tests.log | grep -- --- >> $GITHUB_STEP_SUMMARY
+      - name: Upload tests output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tests-output
+          include-hidden-files: true
+          path: analysis/tmp_output
+

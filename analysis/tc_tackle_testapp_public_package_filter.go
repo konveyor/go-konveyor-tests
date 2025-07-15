@@ -1,21 +1,14 @@
 package analysis
 
 import (
+	"github.com/konveyor/go-konveyor-tests/data"
 	"github.com/konveyor/go-konveyor-tests/hack/addon"
 	"github.com/konveyor/tackle2-hub/api"
 )
 
-var TackleTestAppPackageFilter = api.Application{
-	Name: "Tackle Testapp public",
-	Repository: &api.Repository{
-		Kind: "git",
-		URL:  "https://github.com/konveyor/tackle-testapp-public",
-	},
-}
-
 var TackleTestappPublicPackageFilter = TC{
 	Name:        "Tackle Testapp public with package filter",
-	Application: TackleTestApp,
+	Application: data.TackleTestappPublic,
 	Task:        Analyze,
 	WithDeps:    false,
 	Labels: addon.Labels{
@@ -35,7 +28,7 @@ var TackleTestappPublicPackageFilter = TC{
 	},
 	Analysis: api.Analysis{
 		Effort: 1,
-		Issues: []api.Issue{
+		Insights: []api.Insight{
 			{
 				Category:    "mandatory",
 				Description: "Hardcoded IP Address",
@@ -55,14 +48,8 @@ var TackleTestappPublicPackageFilter = TC{
 	},
 	AnalysisTags: []api.Tag{
 		{Name: "EJB XML", Category: api.Ref{Name: "Bean"}},
-		{Name: "Servlet", Category: api.Ref{Name: "HTTP"}},
 		{Name: "Properties", Category: api.Ref{Name: "Other"}},
 		{Name: "EJB XML", Category: api.Ref{Name: "Java EE"}},
-		{Name: "Servlet", Category: api.Ref{Name: "Java EE"}},
-		{Name: "JPA named queries", Category: api.Ref{Name: "Java EE"}},
-		{Name: "JPA named queries", Category: api.Ref{Name: "Persistence"}},
-		{Name: "JPA named queries", Category: api.Ref{Name: "Store"}},
-		{Name: "Servlet", Category: api.Ref{Name: "Connect"}},
 		{Name: "Properties", Category: api.Ref{Name: "Sustain"}},
 		{Name: "EJB XML", Category: api.Ref{Name: "Connect"}},
 		{Name: "Properties", Category: api.Ref{Name: "Embedded"}},

@@ -9,7 +9,6 @@ import (
 // Originally from https://github.com/konveyor/tackle2-addon-windup/blob/main/cmd as of 2023-06-26
 // Would love replace this when https://github.com/konveyor/tackle2-addon-windup/issues/98 gets resolved.
 
-//
 // Data Addon data passed in the secret.
 type Data struct {
 	// Output directory within application bucket.
@@ -25,10 +24,10 @@ type Data struct {
 	// Rules options.
 	Rules Rules `json:"rules"`
 	// Tagger options.
-	Tagger Tagger `json:"tagger"`
+	Tagger    Tagger `json:"tagger"`
+	Verbosity int    `json:"verbosity"`
 }
 
-//
 // Mode settings.
 type Mode struct {
 	Binary     bool   `json:"binary"`
@@ -45,15 +44,12 @@ type Mode struct {
 	//}
 }
 
-//
 // Sources list of sources.
 type Sources []string
 
-//
 // Targets list of target.
 type Targets []string
 
-//
 // Scope settings.
 type Scope struct {
 	WithKnown bool `json:"withKnown"`
@@ -63,7 +59,6 @@ type Scope struct {
 	} `json:"packages"`
 }
 
-//
 // Rules settings.
 type Rules struct {
 	Path       string          `json:"path"`
@@ -72,14 +67,12 @@ type Rules struct {
 	Labels     Labels          `json:"labels"`
 }
 
-//
 // Labels collection.
 type Labels struct {
 	Included []string `json:"included,omitempty"`
 	Excluded []string `json:"excluded,omitempty"`
 }
 
-//
 // Tagger tags an application.
 type Tagger struct {
 	Enabled bool `json:"enabled"`

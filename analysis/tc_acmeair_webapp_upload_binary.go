@@ -6,27 +6,427 @@ import (
 	"github.com/konveyor/tackle2-hub/api"
 )
 
-var AcmeairWebapp = TC{
+var AcmeairWebappBinary = TC{
 	Name:        "acmeair-webapp",
 	Application: data.UploadBinary,
 	Task:        Analyze,
 	Labels: addon.Labels{
 		Included: []string{
 			"konveyor.io/target=cloud-readiness",
+			"konveyor.io/target=jakarta-ee",
 		},
 	},
 	Binary:   true,
 	Artifact: "/binary/acmeair-webapp-1.0-SNAPSHOT.war",
 	Analysis: api.Analysis{
-		Effort: 0,
-		Issues: []api.Issue{
+		Effort: 79,
+		Insights: []api.Insight{
+			{
+				Category:    "mandatory",
+				Description: "The package 'javax' has been replaced by 'jakarta'.",
+				Effort:      1,
+				RuleSet:     "eap8/eap7",
+				Rule:        "javax-to-jakarta-import-00001",
+				Incidents: []api.Incident{
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/entities/AirportCodeMapping.java",
+						Line:    4,
+						Message: "Replace the `javax.persistence` import statement with `jakarta.persistence`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/entities/AirportCodeMapping.java",
+						Line:    5,
+						Message: "Replace the `javax.persistence` import statement with `jakarta.persistence`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/entities/Booking.java",
+						Line:    5,
+						Message: "Replace the `javax.persistence` import statement with `jakarta.persistence`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/entities/Booking.java",
+						Line:    6,
+						Message: "Replace the `javax.persistence` import statement with `jakarta.persistence`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/entities/Booking.java",
+						Line:    7,
+						Message: "Replace the `javax.persistence` import statement with `jakarta.persistence`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/entities/Booking.java",
+						Line:    8,
+						Message: "Replace the `javax.persistence` import statement with `jakarta.persistence`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/entities/BookingPK.java",
+						Line:    4,
+						Message: "Replace the `javax.persistence` import statement with `jakarta.persistence`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/entities/BookingPK.java",
+						Line:    5,
+						Message: "Replace the `javax.persistence` import statement with `jakarta.persistence`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/entities/Customer.java",
+						Line:    4,
+						Message: "Replace the `javax.persistence` import statement with `jakarta.persistence`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/entities/Customer.java",
+						Line:    5,
+						Message: "Replace the `javax.persistence` import statement with `jakarta.persistence`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/entities/Customer.java",
+						Line:    6,
+						Message: "Replace the `javax.persistence` import statement with `jakarta.persistence`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/entities/Customer.java",
+						Line:    7,
+						Message: "Replace the `javax.persistence` import statement with `jakarta.persistence`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/entities/CustomerAddress.java",
+						Line:    4,
+						Message: "Replace the `javax.persistence` import statement with `jakarta.persistence`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/entities/CustomerSession.java",
+						Line:    5,
+						Message: "Replace the `javax.persistence` import statement with `jakarta.persistence`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/entities/CustomerSession.java",
+						Line:    6,
+						Message: "Replace the `javax.persistence` import statement with `jakarta.persistence`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/entities/CustomerSession.java",
+						Line:    7,
+						Message: "Replace the `javax.persistence` import statement with `jakarta.persistence`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/entities/Flight.java",
+						Line:    6,
+						Message: "Replace the `javax.persistence` import statement with `jakarta.persistence`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/entities/Flight.java",
+						Line:    7,
+						Message: "Replace the `javax.persistence` import statement with `jakarta.persistence`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/entities/FlightPK.java",
+						Line:    4,
+						Message: "Replace the `javax.persistence` import statement with `jakarta.persistence`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/entities/FlightPK.java",
+						Line:    5,
+						Message: "Replace the `javax.persistence` import statement with `jakarta.persistence`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/entities/FlightSegment.java",
+						Line:    4,
+						Message: "Replace the `javax.persistence` import statement with `jakarta.persistence`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/entities/FlightSegment.java",
+						Line:    5,
+						Message: "Replace the `javax.persistence` import statement with `jakarta.persistence`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/jpa/service/BookingServiceImpl.java",
+						Line:    14,
+						Message: "Replace the `javax.annotation` import statement with `jakarta.annotation`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/jpa/service/BookingServiceImpl.java",
+						Line:    15,
+						Message: "Replace the `javax.persistence` import statement with `jakarta.persistence`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/jpa/service/BookingServiceImpl.java",
+						Line:    16,
+						Message: "Replace the `javax.persistence` import statement with `jakarta.persistence`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/jpa/service/CustomerServiceImpl.java",
+						Line:    10,
+						Message: "Replace the `javax.annotation` import statement with `jakarta.annotation`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/jpa/service/CustomerServiceImpl.java",
+						Line:    11,
+						Message: "Replace the `javax.persistence` import statement with `jakarta.persistence`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/jpa/service/FlightServiceImpl.java",
+						Line:    14,
+						Message: "Replace the `javax.annotation` import statement with `jakarta.annotation`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/jpa/service/FlightServiceImpl.java",
+						Line:    15,
+						Message: "Replace the `javax.persistence` import statement with `jakarta.persistence`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/jpa/service/FlightServiceImpl.java",
+						Line:    16,
+						Message: "Replace the `javax.persistence` import statement with `jakarta.persistence`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/BookingsREST.java",
+						Line:    8,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/BookingsREST.java",
+						Line:    9,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/BookingsREST.java",
+						Line:    10,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/BookingsREST.java",
+						Line:    11,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/BookingsREST.java",
+						Line:    12,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/BookingsREST.java",
+						Line:    13,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/BookingsREST.java",
+						Line:    14,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/BookingsREST.java",
+						Line:    15,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/BookingsREST.java",
+						Line:    16,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/CustomerREST.java",
+						Line:    6,
+						Message: "Replace the `javax.servlet` import statement with `jakarta.servlet`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/CustomerREST.java",
+						Line:    7,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/CustomerREST.java",
+						Line:    8,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/CustomerREST.java",
+						Line:    9,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/CustomerREST.java",
+						Line:    10,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/CustomerREST.java",
+						Line:    11,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/CustomerREST.java",
+						Line:    12,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/CustomerREST.java",
+						Line:    13,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/CustomerREST.java",
+						Line:    14,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/CustomerREST.java",
+						Line:    15,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/FlightsREST.java",
+						Line:    7,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/FlightsREST.java",
+						Line:    8,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/FlightsREST.java",
+						Line:    9,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/FlightsREST.java",
+						Line:    10,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/FlightsREST.java",
+						Line:    11,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/LoaderREST.java",
+						Line:    19,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/LoaderREST.java",
+						Line:    20,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/LoaderREST.java",
+						Line:    21,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/LoginREST.java",
+						Line:    5,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/LoginREST.java",
+						Line:    6,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/LoginREST.java",
+						Line:    7,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/LoginREST.java",
+						Line:    8,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/LoginREST.java",
+						Line:    9,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/LoginREST.java",
+						Line:    10,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/LoginREST.java",
+						Line:    11,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/LoginREST.java",
+						Line:    12,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/LoginREST.java",
+						Line:    13,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/LoginREST.java",
+						Line:    14,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/LoginREST.java",
+						Line:    15,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/RESTCookieSessionFilter.java",
+						Line:    6,
+						Message: "Replace the `javax.annotation` import statement with `jakarta.annotation`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/RESTCookieSessionFilter.java",
+						Line:    7,
+						Message: "Replace the `javax.servlet` import statement with `jakarta.servlet`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/RESTCookieSessionFilter.java",
+						Line:    8,
+						Message: "Replace the `javax.servlet` import statement with `jakarta.servlet`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/RESTCookieSessionFilter.java",
+						Line:    9,
+						Message: "Replace the `javax.servlet` import statement with `jakarta.servlet`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/RESTCookieSessionFilter.java",
+						Line:    10,
+						Message: "Replace the `javax.servlet` import statement with `jakarta.servlet`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/RESTCookieSessionFilter.java",
+						Line:    11,
+						Message: "Replace the `javax.servlet` import statement with `jakarta.servlet`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/RESTCookieSessionFilter.java",
+						Line:    12,
+						Message: "Replace the `javax.servlet` import statement with `jakarta.servlet`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/RESTCookieSessionFilter.java",
+						Line:    13,
+						Message: "Replace the `javax.servlet` import statement with `jakarta.servlet`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/RESTCookieSessionFilter.java",
+						Line:    14,
+						Message: "Replace the `javax.servlet` import statement with `jakarta.servlet`",
+					},
+					{
+						File:    "/shared/bin/java-project/src/main/java/com/acmeair/web/RESTCookieSessionFilter.java",
+						Line:    15,
+						Message: "Replace the `javax.servlet` import statement with `jakarta.servlet`",
+					},
+				},
+			},
 		},
 		Dependencies: []api.TechDependency{
 			{
 				Name:     "asm.asm",
 				Version:  "3.3.1",
 				Provider: "java",
-				SHA: "1d5f20b4ea675e6fab6ab79f1cd60ec268ddc015",
+				SHA:      "1d5f20b4ea675e6fab6ab79f1cd60ec268ddc015",
 				Labels:   []string{"konveyor.io/dep-source=open-source", "konveyor.io/language=java"},
 			},
 			{
@@ -84,10 +484,10 @@ var AcmeairWebapp = TC{
 				Labels:   []string{"konveyor.io/dep-source=open-source", "konveyor.io/language=java"},
 			},
 			{
-			   Provider: "java",
-               Name: "net.wasdev.wlp.sample.acmeair-services-jpa",
-               Version: "1.0-SNAPSHOT",
-			   Labels:   []string{"konveyor.io/dep-source=open-source", "konveyor.io/language=java"},
+				Provider: "java",
+				Name:     "net.wasdev.wlp.sample.acmeair-services-jpa",
+				Version:  "1.0-SNAPSHOT",
+				Labels:   []string{"konveyor.io/dep-source=open-source", "konveyor.io/language=java"},
 			},
 			{
 				Name:     "cglib.cglib",
@@ -144,11 +544,29 @@ var AcmeairWebapp = TC{
 		{Name: "Servlet", Category: api.Ref{Name: "HTTP"}},
 		{Name: "RMI", Category: api.Ref{Name: "Other"}},
 		{Name: "JPA named queries", Category: api.Ref{Name: "Persistence"}},
+		{Name: "JPA XML", Category: api.Ref{Name: "Persistence"}},
+		{Name: "JPA entities", Category: api.Ref{Name: "Persistence"}},
+		{Name: "Persistence units", Category: api.Ref{Name: "Persistence"}},
 		{Name: "RMI", Category: api.Ref{Name: "Connect"}},
 		{Name: "Servlet", Category: api.Ref{Name: "Connect"}},
 		{Name: "JPA named queries", Category: api.Ref{Name: "Java EE"}},
+		{Name: "JPA XML", Category: api.Ref{Name: "Java EE"}},
+		{Name: "JPA entities", Category: api.Ref{Name: "Java EE"}},
 		{Name: "RMI", Category: api.Ref{Name: "Java EE"}},
 		{Name: "Servlet", Category: api.Ref{Name: "Java EE"}},
+		{Name: "Persistence units", Category: api.Ref{Name: "Java EE"}},
 		{Name: "JPA named queries", Category: api.Ref{Name: "Store"}},
+		{Name: "JPA XML", Category: api.Ref{Name: "Store"}},
+		{Name: "JPA entities", Category: api.Ref{Name: "Store"}},
+		{Name: "Persistence units", Category: api.Ref{Name: "Store"}},
+		{Name: "EJB XML", Category: api.Ref{Name: "Bean"}},
+		{Name: "EJB XML", Category: api.Ref{Name: "Connect"}},
+		{Name: "EJB XML", Category: api.Ref{Name: "Java EE"}},
+		{Name: "Properties", Category: api.Ref{Name: "Embedded"}},
+		{Name: "Properties", Category: api.Ref{Name: "Other"}},
+		{Name: "Properties", Category: api.Ref{Name: "Sustain"}},
+		{Name: "Common Annotations", Category: api.Ref{Name: "Java EE"}},
+		{Name: "Common Annotations", Category: api.Ref{Name: "Other"}},
+		{Name: "Common Annotations", Category: api.Ref{Name: "Connect"}},
 	},
 }

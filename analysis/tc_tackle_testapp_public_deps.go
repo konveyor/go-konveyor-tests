@@ -1,16 +1,15 @@
 package analysis
 
 import (
+	"github.com/konveyor/go-konveyor-tests/data"
+	"github.com/konveyor/go-konveyor-tests/data/identity"
 	"github.com/konveyor/go-konveyor-tests/hack/addon"
 	"github.com/konveyor/tackle2-hub/api"
-	"github.com/konveyor/tackle2-hub/test/api/identity"
 )
-
-var MavenPublic = identity.Mvn
 
 var TackleTestappPublicWithDeps = TC{
 	Name:        "Tackle Testapp public with deps",
-	Application: TackleTestApp,
+	Application: data.TackleTestappPublic,
 	Task:        Analyze,
 	WithDeps:    true,
 	Labels: addon.Labels{
@@ -20,12 +19,11 @@ var TackleTestappPublicWithDeps = TC{
 		},
 	},
 	Identities: []api.Identity{
-		MavenPublic, // Tackle Testapp public Maven registry expects MAVEN_TESTAPP_USER and MAVEN_TESTAPP_TOKEN env variables.
-
+		identity.TackleTestappPublicMaven,
 	},
 	Analysis: api.Analysis{
 		Effort: 2,
-		Issues: []api.Issue{
+		Insights: []api.Insight{
 			{
 				Category:    "mandatory",
 				Description: "Hardcoded IP Address",
@@ -49,7 +47,7 @@ var TackleTestappPublicWithDeps = TC{
 				Rule:        "local-storage-00001",
 				Incidents: []api.Incident{
 					{
-						File:    "/root/.m2/repository/io/konveyor/demo/configuration-utils/1.0.0/io/konveyor/demo/config/ApplicationConfiguration.java",
+						File:    "/cache/m2/io/konveyor/demo/configuration-utils/1.0.0/io/konveyor/demo/config/ApplicationConfiguration.java",
 						Line:    14,
 						Message: "An application running inside a container could lose access to a file in local storage",
 					},
@@ -570,6 +568,7 @@ var TackleTestappPublicWithDeps = TC{
 		{Name: "Spring DI", Category: api.Ref{Name: "Inversion of Control"}},
 		{Name: "Spring Data JPA", Category: api.Ref{Name: "Persistence"}},
 		{Name: "JPA named queries", Category: api.Ref{Name: "Persistence"}},
+		{Name: "Spring MVC", Category: api.Ref{Name: "MVC"}},
 		{Name: "Properties", Category: api.Ref{Name: "Other"}},
 		{Name: "Spring Web", Category: api.Ref{Name: "Web"}},
 		{Name: "Spring DI", Category: api.Ref{Name: "Execute"}},
@@ -580,13 +579,18 @@ var TackleTestappPublicWithDeps = TC{
 		{Name: "EJB XML", Category: api.Ref{Name: "Java EE"}},
 		{Name: "JPA named queries", Category: api.Ref{Name: "Java EE"}},
 		{Name: "Properties", Category: api.Ref{Name: "Sustain"}},
+		{Name: "Spring Boot Actuator", Category: api.Ref{Name: "Sustain"}},
 		{Name: "Properties", Category: api.Ref{Name: "Embedded"}},
 		{Name: "Spring Web", Category: api.Ref{Name: "Embedded"}},
 		{Name: "Spring DI", Category: api.Ref{Name: "Embedded"}},
 		{Name: "Spring Data JPA", Category: api.Ref{Name: "Embedded"}},
+		{Name: "Spring MVC", Category: api.Ref{Name: "Embedded"}},
+		{Name: "Spring Boot Actuator", Category: api.Ref{Name: "Embedded"}},
 		{Name: "Micrometer", Category: api.Ref{Name: "Embedded"}},
 		{Name: "Spring Web", Category: api.Ref{Name: "View"}},
+		{Name: "Spring MVC", Category: api.Ref{Name: "View"}},
 		{Name: "Spring Data JPA", Category: api.Ref{Name: "Store"}},
 		{Name: "JPA named queries", Category: api.Ref{Name: "Store"}},
+		{Name: "Spring Boot Actuator", Category: api.Ref{Name: "Observability"}},
 	},
 }
