@@ -2,14 +2,14 @@ module github.com/konveyor/go-konveyor-tests
 
 go 1.21
 
-toolchain go1.22.0
+toolchain go1.24.4
 
 require (
 	github.com/PuerkitoBio/goquery v1.8.1
 	github.com/jortel/go-utils v0.1.4
 	github.com/k0kubun/pp v2.4.0+incompatible
 	github.com/konveyor/tackle2-addon v0.2.0
-	github.com/konveyor/tackle2-hub v0.7.0-alpha.2.0.20250708195852-4e3f74795b04
+	github.com/konveyor/tackle2-hub v0.8.0-alpha.1
 	github.com/onsi/ginkgo/v2 v2.15.0
 	github.com/onsi/gomega v1.31.1
 	gopkg.in/yaml.v3 v3.0.1
