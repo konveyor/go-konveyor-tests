@@ -20,7 +20,7 @@ var BookServerVerified = TC{
 	},
 	Analysis: api.Analysis{
 		Effort: 9,
-		Issues: []api.Insight{
+		Insights: []api.Insight{
 			{
 				Category:    "mandatory",
 				Description: "File system - Java IO",
