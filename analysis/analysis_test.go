@@ -261,8 +261,12 @@ func verifyAnalysis(t TaskTest, tc TC, debug bool) {
 
 			} else {
 				// Ensure stable order of Incidents.
-				sort.SliceStable(got.Incidents, func(a, b int) bool { return got.Incidents[a].File+fmt.Sprint(got.Incidents[a].Line) < got.Incidents[b].File+fmt.Sprint(got.Incidents[b].Line) })
-				sort.SliceStable(expected.Incidents, func(a, b int) bool { return expected.Incidents[a].File+fmt.Sprint(expected.Incidents[a].Line) < expected.Incidents[b].File+fmt.Sprint(expected.Incidents[b].Line) })
+				sort.SliceStable(got.Incidents, func(a, b int) bool {
+					return got.Incidents[a].File+fmt.Sprint(got.Incidents[a].Line) < got.Incidents[b].File+fmt.Sprint(got.Incidents[b].Line)
+				})
+				sort.SliceStable(expected.Incidents, func(a, b int) bool {
+					return expected.Incidents[a].File+fmt.Sprint(expected.Incidents[a].Line) < expected.Incidents[b].File+fmt.Sprint(expected.Incidents[b].Line)
+				})
 				for j, gotInc := range got.Incidents {
 					expectedInc := expected.Incidents[j]
 					if gotInc.File != expectedInc.File {
@@ -406,7 +410,7 @@ func dumpTaskAttachments(task *api.Task, dir string) (err error) {
 	return
 }
 
-//create dir, set filename
+// create dir, set filename
 func printTask(task *api.Task, destDir string) (err error) {
 	taskDir := path.Join(destDir, fmt.Sprintf("%s_task_%d", preparePathName(task.Name), task.ID))
 	err = os.Mkdir(taskDir, 0750)

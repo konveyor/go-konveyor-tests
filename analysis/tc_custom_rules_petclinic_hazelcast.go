@@ -15,7 +15,7 @@ var PetclinicHazelcast = TC{
 			Rules: []api.Rule{
 				{
 					File: &api.Ref{
-						Name: "/rules/hz.windup.xml",
+						Name: "/rules/01-hz.windup.yaml",
 					},
 				},
 			},
@@ -34,7 +34,7 @@ var PetclinicHazelcast = TC{
 				Category:    "mandatory",
 				Description: "Embedded Hazelcast",
 				Effort:      3,
-				RuleSet:     "",
+				RuleSet:     "files",
 				Rule:        "hazelcast-cloud-readiness-hz001",
 				Incidents: []api.Incident{
 					{
