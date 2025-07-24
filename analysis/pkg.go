@@ -37,6 +37,11 @@ func init() {
 	Client = RichClient.Client
 }
 
+type SkipTestConfig struct {
+	Reason string
+	Skip   bool // Skip test if true.
+}
+
 // Test cases for Application Analysis.
 type TC struct {
 	Name string
@@ -59,6 +64,9 @@ type TC struct {
 	ReportContent map[string][]string
 	Analysis      api.Analysis
 	AnalysisTags  []api.Tag
+
+	// Skip test if true.
+	SkipTest SkipTestConfig
 }
 
 func DumpAnalysis(t *testing.T, tc TC, analysis api.Analysis) {
