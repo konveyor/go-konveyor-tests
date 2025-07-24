@@ -44,6 +44,9 @@ func TestApplicationAnalysis(t *testing.T) {
 	// Run test cases.
 	for _, testcase := range testCases {
 		t.Run(testcase.Name, func(t *testing.T) {
+			if testcase.SkipTest.Skip {
+				t.Skipf("Skipping test: %s", testcase.SkipTest.Reason)
+			}
 			// Prepare parallel execution if env variable PARALLEL is set.
 			tc := testcase
 			_, parallel := os.LookupEnv("PARALLEL")
@@ -258,8 +261,12 @@ func verifyAnalysis(t TaskTest, tc TC, debug bool) {
 
 			} else {
 				// Ensure stable order of Incidents.
-				sort.SliceStable(got.Incidents, func(a, b int) bool { return got.Incidents[a].File+fmt.Sprint(got.Incidents[a].Line) < got.Incidents[b].File+fmt.Sprint(got.Incidents[b].Line) })
-				sort.SliceStable(expected.Incidents, func(a, b int) bool { return expected.Incidents[a].File+fmt.Sprint(expected.Incidents[a].Line) < expected.Incidents[b].File+fmt.Sprint(expected.Incidents[b].Line) })
+				sort.SliceStable(got.Incidents, func(a, b int) bool {
+					return got.Incidents[a].File+fmt.Sprint(got.Incidents[a].Line) < got.Incidents[b].File+fmt.Sprint(got.Incidents[b].Line)
+				})
+				sort.SliceStable(expected.Incidents, func(a, b int) bool {
+					return expected.Incidents[a].File+fmt.Sprint(expected.Incidents[a].Line) < expected.Incidents[b].File+fmt.Sprint(expected.Incidents[b].Line)
+				})
 				for j, gotInc := range got.Incidents {
 					expectedInc := expected.Incidents[j]
 					if gotInc.File != expectedInc.File {
@@ -403,7 +410,7 @@ func dumpTaskAttachments(task *api.Task, dir string) (err error) {
 	return
 }
 
-//create dir, set filename
+// create dir, set filename
 func printTask(task *api.Task, destDir string) (err error) {
 	taskDir := path.Join(destDir, fmt.Sprintf("%s_task_%d", preparePathName(task.Name), task.ID))
 	err = os.Mkdir(taskDir, 0750)
@@ -414,9 +421,9 @@ func printTask(task *api.Task, destDir string) (err error) {
 	b, _ := yaml.Marshal(task)
 	f, err := os.Create(path.Join(taskDir, fmt.Sprintf("task_%d_%s.yaml", task.ID, task.Name)))
 	if err != nil {
-			fmt.Printf("Error cannot get Task %d : %s\n", task.ID, err.Error())
-			return
-		}
+		fmt.Printf("Error cannot get Task %d : %s\n", task.ID, err.Error())
+		return
+	}
 	defer f.Close()
 	f.Write(b)
 	err = dumpTaskAttachments(task, taskDir)
@@ -429,7 +436,7 @@ func printTasks(debugDirectory string) (err error) {
 		return
 	}
 	tasksDir := path.Join(debugDirectory, "ALL-TASKS")
-	_ = os.Mkdir(tasksDir, 0750)	// The directory might exist already
+	_ = os.Mkdir(tasksDir, 0750) // The directory might exist already
 	for i := range tasks {
 		err = printTask(&tasks[i], tasksDir)
 		if err != nil {
