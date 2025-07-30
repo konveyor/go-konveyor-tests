@@ -1,25 +1,14 @@
 package analysis
 
 import (
-	"github.com/konveyor/go-konveyor-tests/data"
-	"github.com/konveyor/go-konveyor-tests/hack/addon"
 	"github.com/konveyor/tackle2-hub/api"
 )
 
 var BookServerVerified = TC{
-	Name:        "BookServer verified results",
-	Application: data.BookServer,
-	Task:        Analyze,
-	WithDeps:    true,
-	Labels: addon.Labels{
-		Included: []string{
-			"konveyor.io/target=cloud-readiness",
-			"konveyor.io/target=linux",
-			"konveyor.io/target=openjdk21",
-		},
-	},
+	Name: "analysis_book-server_deps",
+	Task: Analyze,
 	Analysis: api.Analysis{
-		Effort: 9,
+		Effort: 28,
 		Insights: []api.Insight{
 			{
 				Category:    "mandatory",
@@ -63,6 +52,76 @@ var BookServerVerified = TC{
 						Message: "Lombok supports Java 17 since version 1.18.22. The version of Lombok used in this project is too old and not compatible with Java 17. You should consider upgrading it.",
 					},
 				},
+			},
+			{
+				Category:    "mandatory",
+				Description: "Adopt Quarkus BOM",
+				Effort:      1,
+				RuleSet:     "quarkus/springboot",
+				Rule:        "javaee-pom-to-quarkus-00010",
+			},
+			{
+				Category:    "mandatory",
+				Description: "Adopt Quarkus Maven plugin",
+				Effort:      1,
+				RuleSet:     "quarkus/springboot",
+				Rule:        "javaee-pom-to-quarkus-00020",
+			},
+			{
+				Category:    "mandatory",
+				Description: "Adopt Maven Compiler plugin",
+				Effort:      1,
+				RuleSet:     "quarkus/springboot",
+				Rule:        "javaee-pom-to-quarkus-00030",
+			},
+			{
+				Category:    "mandatory",
+				Description: "Adopt Maven Surefire plugin",
+				Effort:      1,
+				RuleSet:     "quarkus/springboot",
+				Rule:        "javaee-pom-to-quarkus-00040",
+			},
+			{
+				Category:    "mandatory",
+				Description: "Adopt Maven Failsafe plugin",
+				Effort:      1,
+				RuleSet:     "quarkus/springboot",
+				Rule:        "javaee-pom-to-quarkus-00050",
+			},
+			{
+				Category:    "mandatory",
+				Description: "Add Maven profile to run the Quarkus native build",
+				Effort:      1,
+				RuleSet:     "quarkus/springboot",
+				Rule:        "javaee-pom-to-quarkus-00060",
+			},
+			{
+				Category:    "mandatory",
+				Description: "Remove the SpringBoot @SpringBootApplication annotation",
+				Effort:      1,
+				RuleSet:     "quarkus/springboot",
+				Rule:        "springboot-annotations-to-quarkus-00000",
+			},
+			{
+				Category:    "potential",
+				Description: "Replace the SpringBoot Dependency Injection artifact with Quarkus 'spring-di' extension",
+				Effort:      1,
+				RuleSet:     "quarkus/springboot",
+				Rule:        "springboot-di-to-quarkus-00000",
+			},
+			{
+				Category:    "mandatory",
+				Description: "Replace the spring-boot-maven-plugin dependency",
+				Effort:      1,
+				RuleSet:     "quarkus/springboot",
+				Rule:        "springboot-plugins-to-quarkus-0000",
+			},
+			{
+				Category:    "mandatory",
+				Description: "Replace the SpringBoot artifact with Quarkus 'spring-boot-properties' extension",
+				Effort:      1,
+				RuleSet:     "quarkus/springboot",
+				Rule:        "springboot-properties-to-quarkus-00000",
 			},
 		},
 	},
