@@ -1,0 +1,5 @@
+language: "en-US"
+early_access: false
+reviews:
+  profile: "chill"
+  # further per-review customisations can be added here when needed
