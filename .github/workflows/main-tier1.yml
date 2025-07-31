@@ -2,40 +2,20 @@ name: Test TIER1
 
 on:
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
     paths-ignore:
-      - '**.md'
+      - "**.md"
   push:
-    branches: [ "main" ]
+    branches: ["main"]
     paths-ignore:
-      - '**.md'
+      - "**.md"
 
 jobs:
   test-tier1:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: start-minikube
-        uses: konveyor/tackle2-operator/.github/actions/start-minikube@main
-        with:
-          memory: 6500M
-      - name: install-tackle
-        uses: konveyor/tackle2-operator/.github/actions/install-tackle@main
-      - uses: actions/setup-go@v3
-        with:
-          go-version: '1.21'
-      - name: Install dependencies
-        run: |
-          go install github.com/onsi/ginkgo/v2/ginkgo
-      - name: Run tests
-        run: set -o pipefail; HUB_BASE_URL="http://$(minikube ip)/hub" DEBUG=1 make test-tier1 | tee /tmp/tests.log
-      - name: Prepare summary
-        if: always()
-        run: cat /tmp/tests.log | grep -- --- >> $GITHUB_STEP_SUMMARY
-      - name: Upload analysis tests output
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: analysis-tests-output
-          include-hidden-files: true
-          path: analysis/tmp_output
+    uses: konveyor/ci/.github/workflows/global-ci-bundle.yml@main
+    with:
+      operator_bundle: quay.io/konveyor/tackle2-operator-bundle:latest
+      api_tests_ref: ${{ github.ref }}
+      run_api_tests: true
+      run_ui_tests: false
+      api_tests_tiers: DEBUG=1 make test-tier1
