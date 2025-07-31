@@ -7,6 +7,10 @@ import (
 )
 
 var AdministracionEfectivoBinary = TC{
+	SkipTest: SkipTestConfig{
+		Reason: "Skip binary test. https://issues.redhat.com/browse/MTA-5588",
+		Skip:   true,
+	},
 	Name:        "administracion-efectivo",
 	Application: data.UploadBinary,
 	Task:        Analyze,
