@@ -7,10 +7,6 @@ import (
 )
 
 var DaytraderWithDeps = TC{
-	SkipTest: SkipTestConfig{
-		Reason: "Skip failed test. https://issues.redhat.com/browse/MTA-4598",
-		Skip:   true,
-	},
 	Name:        "Daytrader",
 	Application: data.Daytrader,
 	WithDeps:    true,
