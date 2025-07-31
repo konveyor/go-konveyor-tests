@@ -44,6 +44,9 @@ func TestApplicationAnalysis(t *testing.T) {
 	// Run test cases.
 	for _, testcase := range testCases {
 		t.Run(testcase.Name, func(t *testing.T) {
+			if testcase.SkipTest.Skip {
+				t.Skipf("Skipping test: %s", testcase.SkipTest.Reason)
+			}
 			// Prepare parallel execution if env variable PARALLEL is set.
 			tc := testcase
 			_, parallel := os.LookupEnv("PARALLEL")
@@ -273,7 +276,7 @@ func verifyAnalysis(t TaskTest, tc TC, debug bool) {
 						t.Errorf("\nDifferent incident.File error. Got %+v\nExpected %+v.\n\n", gotInc.File, expectedInc.File)
 					}
 					if gotInc.Line != expectedInc.Line {
-						t.Errorf("\nDifferent incident.Line error. Got %+v\nExpected %+v.\n\n", gotInc.Line, expectedInc.Line)
+						t.Errorf("\nDifferent incident.Line error. Got %+v\nExpected %+v.\nCodeSnip: %s\n\n", gotInc.Line, expectedInc.Line, gotInc.CodeSnip)
 					}
 					if !strings.HasPrefix(gotInc.Message, expectedInc.Message) {
 						t.Errorf("\nDifferent incident.Message error. Got %+v\nExpected %+v.\n\n", gotInc.Message, expectedInc.Message)
