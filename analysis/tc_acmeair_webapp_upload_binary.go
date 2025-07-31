@@ -7,6 +7,10 @@ import (
 )
 
 var AcmeairWebappBinary = TC{
+	SkipTest: SkipTestConfig{
+		Reason: "Skip binary test. https://issues.redhat.com/browse/MTA-5588",
+		Skip:   true,
+	},
 	Name:        "acmeair-webapp",
 	Application: data.UploadBinary,
 	Task:        Analyze,
