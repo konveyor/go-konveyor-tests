@@ -8,16 +8,20 @@ Run with `$ make test-analysis`
 
 Test cases can be configured using YAML files in addition to or instead of hardcoded Go structs.
 
-#### tc.yaml File Format
+#### Configuration source
 
-Test cases can be configured using `tc.yaml` files located in the dynamically cloned CI repository at `shared_tests/{test-case-name}/tc.yaml`.
+Configuration is loaded from a single aggregated YAML file in the dynamically cloned CI repository:
+
+- `shared_tests/test_cases.yml`
+
+Each entry in this file is keyed by the test case `Name` (as defined in `tc_*.go`) and may provide values for selected fields. Only empty/unset fields in the Go struct are populated from YAML.
 
 #### Hybrid Configuration
 
 The YAML configuration system works as a **hybrid approach**:
 
 1. Test cases can be partially defined in Go code (`tc_*.go` files)
-2. Missing fields are automatically populated from `tc.yaml` files during test execution
+2. Missing fields are automatically populated from `shared_tests/test_cases.yml` during test execution
 3. Only empty/unset fields in the Go struct are populated from YAML
 
 This allows for:
@@ -29,19 +33,6 @@ This allows for:
 ### CI Integration and Dynamic Repository Cloning
 
 The YAML-based configuration system integrates with CI systems by dynamically cloning the [konveyor/ci](https://github.com/konveyor/ci) repository during test execution.
-
-#### Directory Structure (Runtime)
-
-```
-/tmp/konveyor-ci-<random>/            # Temporary clone during test execution
-└── shared_tests/
-    ├── analysis_book-server_deps/
-    │   ├── tc.yaml                   # Test case configuration
-    │   ├── dependencies.yaml         # Expected dependencies
-    │   └── output.yaml               # Expected analysis output
-    └── other-test-cases/
-
-```
 
 ## Tiers
 

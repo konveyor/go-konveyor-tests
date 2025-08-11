@@ -3,14 +3,12 @@ package analysis
 import (
 	"fmt"
 	"os"
-	"path/filepath"
-
-	"gopkg.in/yaml.v3"
 
 	"github.com/konveyor/tackle2-hub/api"
+	"gopkg.in/yaml.v3"
 )
 
-// Application represents the application configuration section in tc.yaml files.
+// Application represents the application configuration section in test_cases.yml file.
 type Application struct {
 	Name       string `yaml:"name"`
 	Repository struct {
@@ -19,7 +17,7 @@ type Application struct {
 	} `yaml:"repository"`
 }
 
-// TCYamlData represents the structure of tc.yaml files for parsing
+// TCYamlData represents the structure of test_cases.yml file for parsing
 type TCYamlData struct {
 	Description string      `yaml:"description"`
 	Application Application `yaml:"application"`
@@ -38,39 +36,21 @@ func loadYAMLFromFile(path string, out interface{}) error {
 	return yaml.Unmarshal(data, out)
 }
 
-// PopulateTCFromYaml loads configuration from a tc.yaml file and populates the corresponding
-// fields in a TC (Test Case) struct. This enables a hybrid approach where test cases can be
-// partially defined in Go code and completed with YAML configuration.
-//
-// The function looks for tc.yaml files in the CI shared tests directory structure:
-// {ciRepoDir}/shared_tests/{tc.Name}/tc.yaml
-//
+// loadTestConfig updates a TC struct with values from the testCasesData map for the given test case name if available	.
 // Fields are only populated if they are empty/unset in the TC struct, allowing for selective override behavior.
-//
-// Returns an error if:
-// - The tc.yaml file cannot be read or parsed (missing files are ignored)
-func PopulateTCFromYaml(tc *TC, ciRepoDir string) error {
-	// Construct the path to the tc.yaml file
-	tcPath := filepath.Join(ciRepoDir, "shared_tests", tc.Name, "tc.yaml")
-
-	// Check if file exists
-	if _, err := os.Stat(tcPath); os.IsNotExist(err) {
+func loadTestConfig(tc *TC, testCasesData map[string]TCYamlData) error {
+	// Get the test case data for the current test case
+	testCaseData, ok := testCasesData[tc.Name]
+	if !ok {
 		return nil
-	}
-
-	// Load and parse the YAML file
-	var yamlData TCYamlData
-	err := loadYAMLFromFile(tcPath, &yamlData)
-	if err != nil {
-		return fmt.Errorf("failed to parse tc.yaml for test case '%s': %w", tc.Name, err)
 	}
 
 	// Update the Application fields
 	if tc.Application.Name == "" && tc.Application.Repository == nil {
-		tc.Application.Name = yamlData.Application.Name
+		tc.Application.Name = testCaseData.Application.Name
 		tc.Application.Repository = &api.Repository{
-			URL:  yamlData.Application.Repository.URL,
-			Kind: yamlData.Application.Repository.Kind,
+			URL:  testCaseData.Application.Repository.URL,
+			Kind: testCaseData.Application.Repository.Kind,
 		}
 	}
 	// Convert sources and targets from YAML to labels
@@ -78,12 +58,12 @@ func PopulateTCFromYaml(tc *TC, ciRepoDir string) error {
 		var labels []string
 
 		// Convert sources to konveyor.io/source=<value> labels
-		for _, source := range yamlData.Sources {
+		for _, source := range testCaseData.Sources {
 			labels = append(labels, fmt.Sprintf("konveyor.io/source=%s", source))
 		}
 
 		// Convert targets to konveyor.io/target=<value> labels
-		for _, target := range yamlData.Targets {
+		for _, target := range testCaseData.Targets {
 			labels = append(labels, fmt.Sprintf("konveyor.io/target=%s", target))
 		}
 
@@ -93,7 +73,7 @@ func PopulateTCFromYaml(tc *TC, ciRepoDir string) error {
 
 	// Set the withDeps flag
 	if !tc.WithDeps {
-		tc.WithDeps = yamlData.WithDeps
+		tc.WithDeps = testCaseData.WithDeps
 	}
 
 	return nil

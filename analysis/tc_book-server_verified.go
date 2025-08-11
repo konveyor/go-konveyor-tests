@@ -5,7 +5,7 @@ import (
 )
 
 var BookServerVerified = TC{
-	Name: "analysis_book-server_deps",
+	Name: "book-server_deps",
 	Task: Analyze,
 	Analysis: api.Analysis{
 		Effort: 28,

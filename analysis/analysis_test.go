@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"os"
 	"path"
+	"path/filepath"
 	"sort"
 	"strings"
 	"testing"
@@ -56,6 +57,14 @@ func TestApplicationAnalysis(t *testing.T) {
 	}
 	defer os.RemoveAll(ciTempDir)
 
+	// Load test cases from YAML file
+	var testCasesData map[string]TCYamlData
+	testCasesYamlPath := filepath.Join(ciTempDir, "shared_tests", "test_cases.yml")
+	err = loadYAMLFromFile(testCasesYamlPath, &testCasesData)
+	if err != nil {
+		t.Fatalf("Failed to load test cases from YAML file: %v", err)
+	}
+
 	// Run test cases.
 	for _, testcase := range testCases {
 		t.Run(testcase.Name, func(t *testing.T) {
@@ -82,8 +91,8 @@ func TestApplicationAnalysis(t *testing.T) {
 				fmt.Printf("Cannot create debug tmp directory: %v. Debug or failed task output might not work.", err.Error())
 			}
 
-			// Populate missing fields in TC from tc.yaml if available
-			err = PopulateTCFromYaml(&tc, ciTempDir)
+			// Populate missing fields in TC if available
+			err = loadTestConfig(&tc, testCasesData)
 			if err != nil {
 				t.Error(err)
 				return
