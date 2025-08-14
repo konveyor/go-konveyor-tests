@@ -76,7 +76,7 @@ test-hub-api:
 # Add next features tests here and call the target from appropriate stage.
 
 # Execute all tests.
-test-all: test-tier0 test-tier1 test-tier2
+test-all: test-tier0 test-tier1 test-tier2 test-tier3
 
 # Merge Junit reports
 merge-report:
