@@ -2,4 +2,9 @@ language: "en-US"
 early_access: false
 reviews:
   profile: "chill"
-  # further per-review customisations can be added here when needed
+  high_level_summary: true
+  poem: false
+  changed_files_summary: false
+  sequence_diagrams: false
+  estimate_code_review_effort: false
+  related_issues: false
