@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"os"
 	"path"
+	"path/filepath"
 	"sort"
 	"strings"
 	"testing"
@@ -15,6 +16,7 @@ import (
 
 	"github.com/k0kubun/pp"
 	"github.com/konveyor/go-konveyor-tests/hack/uniq"
+	"github.com/konveyor/go-konveyor-tests/utils"
 	"github.com/konveyor/tackle2-hub/api"
 	"github.com/konveyor/tackle2-hub/binding"
 	"github.com/konveyor/tackle2-hub/test/assert"
@@ -41,6 +43,28 @@ func TestApplicationAnalysis(t *testing.T) {
 	if tier3 {
 		testCases = Tier3TestCases
 	}
+
+	// Create a temporary directory for cloning the ci repo
+	ciTempDir, err := os.MkdirTemp("", "konveyor-ci-*")
+	if err != nil {
+		t.Fatalf("Failed to create temp dir for ci repo: %v", err)
+	}
+	// Clone the konveyor/ci repository into the temp directory
+	cloneCmd := fmt.Sprintf("git clone https://github.com/konveyor/ci %s", ciTempDir)
+	cloneErr := utils.RunShellCommand(cloneCmd)
+	if cloneErr != nil {
+		t.Fatalf("Failed to clone konveyor/ci repo: %v", cloneErr)
+	}
+	defer os.RemoveAll(ciTempDir)
+
+	// Load test cases from YAML file
+	var testCasesData map[string]TCYamlData
+	testCasesYamlPath := filepath.Join(ciTempDir, "shared_tests", "test_cases.yml")
+	err = loadYAMLFromFile(testCasesYamlPath, &testCasesData)
+	if err != nil {
+		t.Fatalf("Failed to load test cases from YAML file: %v", err)
+	}
+
 	// Run test cases.
 	for _, testcase := range testCases {
 		t.Run(testcase.Name, func(t *testing.T) {
@@ -65,6 +89,13 @@ func TestApplicationAnalysis(t *testing.T) {
 			err = os.Mkdir(debugDirectory, 0750)
 			if err != nil {
 				fmt.Printf("Cannot create debug tmp directory: %v. Debug or failed task output might not work.", err.Error())
+			}
+
+			// Populate missing fields in TC if available
+			err = loadTestConfig(&tc, testCasesData)
+			if err != nil {
+				t.Error(err)
+				return
 			}
 
 			// Prepare Identities, e.g. for Maven repo
