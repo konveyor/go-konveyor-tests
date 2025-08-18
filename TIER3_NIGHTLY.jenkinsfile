@@ -7,7 +7,7 @@ pipeline{
         ansiColor('xterm')
     }
     environment{
-        PATH="$PATH:/usr/local/go/bin" 
+        PATH="$PATH:/usr/local/go/bin:/home/fedora/go/bin" 
         JIRA_CLOUD_PASSWORD=credentials('mta_jira_cloud_token')
         JIRA_SERVER_TOKEN=credentials('mta_jira_stage_token')
         CRED=credentials('tackle_git_pass')
