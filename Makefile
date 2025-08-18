@@ -55,7 +55,8 @@ test-tier3:
 test-analysis:
 	go install github.com/jstemmer/go-junit-report/v2@latest
 	mkdir -pv ${JUNIT_REPORT_DIR}
-	go test -count=1 -p=1 -timeout 7200s -v ./analysis/... 2>&1 | go-junit-report -iocopy -set-exit-code -out ${JUNIT_REPORT_DIR}/analysis-report.xml
+	go test -count=1 -p=1 -timeout 7200s -v ./analysis/... 2>&1 | \
+	go-junit-report -iocopy -set-exit-code -out ${JUNIT_REPORT_DIR}/analysis-report_$$(date +%s).xml
 
 # Metrics.
 test-metrics:
