@@ -77,7 +77,7 @@ To provide maximum information about the project functionality, tests were separ
 
 ### Tier 0
 
-Very basic and core functionality. A bug here would lead to mostly useless project. This tier should never fail. Examples: Hub API or a basic application analysis flow.
+Very basic and core functionality. A bug here would lead to mostly useless project. This tier should never fail. Examples: basic application analysis flow.
 
 ```
 $ make test-tier0
@@ -105,6 +105,16 @@ Tests involving credentials or private resources which are supplied as part of t
 
 ```
 $ make test-tier3
+```
+
+## Hub API tests
+
+Runs the upstream Hub API tests suite against a running Konveyor instance. It clones `konveyor/tackle2-hub` and executes its `make test-api`.
+
+These tests are not part of any tier and are run separately.
+
+```
+$ make test-hub-api
 ```
 
 ## Test execution options
