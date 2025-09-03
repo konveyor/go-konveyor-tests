@@ -14,6 +14,9 @@ type Application struct {
 	Repository struct {
 		URL  string `yaml:"url"`
 		Kind string `yaml:"kind"`
+		Branch string `yaml:"branch"`
+		Tag    string `yaml:"tag"`
+		Path   string `yaml:"path"`
 	} `yaml:"repository"`
 }
 
@@ -51,6 +54,9 @@ func loadTestConfig(tc *TC, testCasesData map[string]TCYamlData) error {
 		tc.Application.Repository = &api.Repository{
 			URL:  testCaseData.Application.Repository.URL,
 			Kind: testCaseData.Application.Repository.Kind,
+			Branch: testCaseData.Application.Repository.Branch,
+			Tag: testCaseData.Application.Repository.Tag,
+			Path: testCaseData.Application.Repository.Path,
 		}
 	}
 	// Convert sources and targets from YAML to labels
