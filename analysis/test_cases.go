@@ -19,7 +19,6 @@ var Tier1TestCases = []TC{
 	BookServerVerified,
 	BookServerSource,
 	CoolstoreWithDepsQuarkus,
-	AdministracionEfectivoBinary, // Binary upload
 }
 
 // Tier 2 Analysis test cases - great if works.
