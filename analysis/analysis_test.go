@@ -114,7 +114,9 @@ func TestApplicationAnalysis(t *testing.T) {
 					t.Logf("using mvn user %s", mvnUser)
 				}
 				assert.Should(t, RichClient.Identity.Create(&identity))
-				tc.Application.Identities = append(tc.Application.Identities, api.Ref{ID: identity.ID})
+				tc.Application.Identities = append(
+					tc.Application.Identities,
+					api.IdentityRef{ID: identity.ID, Role: "maven"})
 			}
 
 			// Create the application.
