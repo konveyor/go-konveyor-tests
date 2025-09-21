@@ -58,8 +58,8 @@ func TestApplicationAnalysis(t *testing.T) {
 	if ciBranch == "" {
 		ciBranch = "main"
 	}
-	cloneCmd := fmt.Sprintf("git clone -b %s https://github.com/%s/ci %s", ciBranch, ciAuthor, ciTempDir)
-	cloneErr := utils.RunShellCommand(cloneCmd)
+	ciRepoURL := fmt.Sprintf("https://github.com/%s/ci", ciAuthor)
+	cloneErr := utils.RunGitClone(ciRepoURL, ciBranch, ciTempDir)
 	if cloneErr != nil {
 		t.Fatalf("Failed to clone konveyor/ci repo: %v", cloneErr)
 	}
