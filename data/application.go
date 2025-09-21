@@ -48,6 +48,7 @@ var (
 		Repository: &api.Repository{
 			Kind: "git",
 			URL:  "https://github.com/konveyor-ecosystem/coolstore",
+			Branch: "konveyor-tests",
 		},
 	}
 	CoolstoreQuarkus = api.Application{
