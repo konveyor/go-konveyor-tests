@@ -34,6 +34,13 @@ This allows for:
 
 The YAML-based configuration system integrates with CI systems by dynamically cloning the [konveyor/ci](https://github.com/konveyor/ci) repository during test execution.
 
+#### CI Repository Configuration
+
+You can customize which CI repository and branch to clone using environment variables:
+
+- `CI_REPO_URL`: Full repository URL (defaults to `https://github.com/konveyor/ci`)
+- `CI_REPO_BRANCH`: Branch to clone (defaults to `main`)
+
 ## Tiers
 
 Due to fragile nature of some analysis parameters for more complex applications, analysis test execution supports multiple tiers.

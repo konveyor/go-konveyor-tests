@@ -50,8 +50,15 @@ func TestApplicationAnalysis(t *testing.T) {
 		t.Fatalf("Failed to create temp dir for ci repo: %v", err)
 	}
 	// Clone the konveyor/ci repository into the temp directory
-	cloneCmd := fmt.Sprintf("git clone https://github.com/konveyor/ci %s", ciTempDir)
-	cloneErr := utils.RunShellCommand(cloneCmd)
+	ciRepoURL := os.Getenv("CI_REPO_URL")
+	if ciRepoURL == "" {
+		ciRepoURL = "https://github.com/konveyor/ci"
+	}
+	ciBranch := os.Getenv("CI_REPO_BRANCH")
+	if ciBranch == "" {
+		ciBranch = "main"
+	}
+	cloneErr := utils.RunGitClone(ciRepoURL, ciBranch, ciTempDir)
 	if cloneErr != nil {
 		t.Fatalf("Failed to clone konveyor/ci repo: %v", cloneErr)
 	}
