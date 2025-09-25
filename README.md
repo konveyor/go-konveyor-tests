@@ -130,13 +130,13 @@ For keep data created by test e.g. for debugging purposes, set `export KEEP=1`.
 
 For parallel test execution, set `export PARALLEL=1`.
 
-### CI_REPO_AUTHOR
+### CI_REPO_URL
 
-For using a custom GitHub author/organization for the konveyor/ci repository clone, set `export CI_REPO_AUTHOR=<github-username>`. Defaults to `konveyor`.
+For using a custom CI repository URL, set `export CI_REPO_URL=<repository-url>`. Defaults to `https://github.com/konveyor/ci`.
 
 ### CI_REPO_BRANCH
 
-For using a custom branch of the konveyor/ci repository clone, set `export CI_REPO_BRANCH=<branch-name>`. Defaults to `main`.
+For using a custom branch of the CI repository clone, set `export CI_REPO_BRANCH=<branch-name>`. Defaults to `main`.
 
 ## Configuration
 

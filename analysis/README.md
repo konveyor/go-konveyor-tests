@@ -38,7 +38,7 @@ The YAML-based configuration system integrates with CI systems by dynamically cl
 
 You can customize which CI repository and branch to clone using environment variables:
 
-- `CI_REPO_AUTHOR`: GitHub username/organization (defaults to `konveyor`)
+- `CI_REPO_URL`: Full repository URL (defaults to `https://github.com/konveyor/ci`)
 - `CI_REPO_BRANCH`: Branch to clone (defaults to `main`)
 
 ## Tiers
