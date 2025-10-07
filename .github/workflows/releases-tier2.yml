@@ -2,45 +2,34 @@ name: Test TIER2 release braches
 
 on:
   pull_request:
-    branches: ["release-0.6", "release-0.5", "release-0.4"]
+    branches: ["release-0.7", "release-0.8"]
     paths-ignore:
       - "**.md"
   push:
-    branches: ["release-0.6", "release-0.5", "release-0.4"]
+    branches: ["release-0.7", "release-0.8"]
     paths-ignore:
       - "**.md"
 
 jobs:
-  test-tier2-release04:
+  test-tier2-release07:
     uses: konveyor/ci/.github/workflows/global-ci.yml@main
-    if: ${{ github.ref == 'refs/heads/release-0.4' || github.event.pull_request.base.ref == 'release-0.4' }}
+    if: ${{ github.ref == 'refs/heads/release-0.7' || github.event.pull_request.base.ref == 'release-0.7' }}
     with:
-      tag: release-0.4
-      operator_tag: v0.4.0
+      tag: release-0.7
+      operator_tag: v0.6.2  # TODO: update when operator tag for 0.7 is created
       api_tests_ref: ${{ github.ref }}
       api_tests_tiers: DEBUG=1 make test-tier2
       run_api_tests: true
       run_ui_tests: false
-      api_hub_tests_ref: "release-0.4"
-  test-tier2-release05:
+      api_hub_tests_ref: "release-0.7"
+  test-tier2-release08:
     uses: konveyor/ci/.github/workflows/global-ci.yml@main
-    if: ${{ github.ref == 'refs/heads/release-0.5' || github.event.pull_request.base.ref == 'release-0.5' }}
+    if: ${{ github.ref == 'refs/heads/release-0.8' || github.event.pull_request.base.ref == 'release-0.8' }}
     with:
-      tag: release-0.5
-      operator_tag: v0.5.1
+      tag: release-0.8
+      operator_tag: v0.8.0-beta.4
       api_tests_ref: ${{ github.ref }}
       api_tests_tiers: DEBUG=1 make test-tier2
       run_api_tests: true
       run_ui_tests: false
-      api_hub_tests_ref: "release-0.5"
-  test-tier2-release06:
-    uses: konveyor/ci/.github/workflows/global-ci.yml@main
-    if: ${{ github.ref == 'refs/heads/release-0.6' || github.event.pull_request.base.ref == 'release-0.6' }}
-    with:
-      tag: release-0.6
-      operator_tag: v0.6.2
-      api_tests_ref: ${{ github.ref }}
-      api_tests_tiers: DEBUG=1 make test-tier2
-      run_api_tests: true
-      run_ui_tests: false
-      api_hub_tests_ref: "release-0.6"
+      api_hub_tests_ref: "release-0.8"

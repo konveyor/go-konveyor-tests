@@ -5,7 +5,6 @@
 [![Test TIER0](https://github.com/konveyor/go-konveyor-tests/actions/workflows/main-tier0.yml/badge.svg)](https://github.com/konveyor/go-konveyor-tests/actions/workflows/main-tier0.yml)
 [![Test TIER1](https://github.com/konveyor/go-konveyor-tests/actions/workflows/main-tier1.yml/badge.svg)](https://github.com/konveyor/go-konveyor-tests/actions/workflows/main-tier1.yml)
 [![Test TIER2](https://github.com/konveyor/go-konveyor-tests/actions/workflows/main-tier2.yml/badge.svg)](https://github.com/konveyor/go-konveyor-tests/actions/workflows/main-tier2.yml)
-[![TEST TIER3](https://img.shields.io/endpoint?url=https%3A%2F%2Fsajidmansoori12.pythonanywhere.com%2Fretrieve_data%3Fpipeline%3Dtier3-pr&cacheSeconds=60)](https://jenkins-csb-migrationqe-main.dno.corp.redhat.com/view/MTA/job/mta/job/konveyor-go-tests-pr-tester/job/main/)
 
 [![Test nightly TIER0](https://github.com/konveyor/go-konveyor-tests/actions/workflows/nightly-tier0.yml/badge.svg)](https://github.com/konveyor/go-konveyor-tests/actions/workflows/nightly-tier0.yml)
 [![Test nightly TIER1](https://github.com/konveyor/go-konveyor-tests/actions/workflows/nightly-tier1.yml/badge.svg)](https://github.com/konveyor/go-konveyor-tests/actions/workflows/nightly-tier1.yml)
@@ -77,7 +76,7 @@ To provide maximum information about the project functionality, tests were separ
 
 ### Tier 0
 
-Very basic and core functionality. A bug here would lead to mostly useless project. This tier should never fail. Examples: Hub API or a basic application analysis flow.
+Very basic and core functionality. A bug here would lead to mostly useless project. This tier should never fail. Examples: basic application analysis flow.
 
 ```
 $ make test-tier0
@@ -107,6 +106,16 @@ Tests involving credentials or private resources which are supplied as part of t
 $ make test-tier3
 ```
 
+## Hub API tests
+
+Runs the upstream Hub API tests suite against a running Konveyor instance. It clones `konveyor/tackle2-hub` and executes its `make test-api`.
+
+These tests are not part of any tier and are run separately.
+
+```
+$ make test-hub-api
+```
+
 ## Test execution options
 
 ### DEBUG
@@ -120,6 +129,14 @@ For keep data created by test e.g. for debugging purposes, set `export KEEP=1`.
 ### PARALLEL
 
 For parallel test execution, set `export PARALLEL=1`.
+
+### CI_REPO_URL
+
+For using a custom CI repository URL, set `export CI_REPO_URL=<repository-url>`. Defaults to `https://github.com/konveyor/ci`.
+
+### CI_REPO_BRANCH
+
+For using a custom branch of the CI repository clone, set `export CI_REPO_BRANCH=<branch-name>`. Defaults to `main`.
 
 ## Configuration
 

@@ -28,7 +28,7 @@ var TackleTestappPublicPackageFilter = TC{
 	},
 	Analysis: api.Analysis{
 		Effort: 1,
-		Issues: []api.Issue{
+		Insights: []api.Insight{
 			{
 				Category:    "mandatory",
 				Description: "Hardcoded IP Address",
@@ -48,14 +48,8 @@ var TackleTestappPublicPackageFilter = TC{
 	},
 	AnalysisTags: []api.Tag{
 		{Name: "EJB XML", Category: api.Ref{Name: "Bean"}},
-		{Name: "Servlet", Category: api.Ref{Name: "HTTP"}},
 		{Name: "Properties", Category: api.Ref{Name: "Other"}},
 		{Name: "EJB XML", Category: api.Ref{Name: "Java EE"}},
-		{Name: "Servlet", Category: api.Ref{Name: "Java EE"}},
-		{Name: "JPA named queries", Category: api.Ref{Name: "Java EE"}},
-		{Name: "JPA named queries", Category: api.Ref{Name: "Persistence"}},
-		{Name: "JPA named queries", Category: api.Ref{Name: "Store"}},
-		{Name: "Servlet", Category: api.Ref{Name: "Connect"}},
 		{Name: "Properties", Category: api.Ref{Name: "Sustain"}},
 		{Name: "EJB XML", Category: api.Ref{Name: "Connect"}},
 		{Name: "Properties", Category: api.Ref{Name: "Embedded"}},

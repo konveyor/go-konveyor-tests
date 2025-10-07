@@ -15,7 +15,7 @@ var PetclinicHazelcast = TC{
 			Rules: []api.Rule{
 				{
 					File: &api.Ref{
-						Name: "/rules/hz.windup.xml",
+						Name: "/rules/01-hz.windup.yaml",
 					},
 				},
 			},
@@ -29,12 +29,12 @@ var PetclinicHazelcast = TC{
 	},
 	Analysis: api.Analysis{
 		Effort: 20,
-		Issues: []api.Issue{
+		Insights: []api.Insight{
 			{
 				Category:    "mandatory",
 				Description: "Embedded Hazelcast",
 				Effort:      3,
-				RuleSet:     "",
+				RuleSet:     "files",
 				Rule:        "hazelcast-cloud-readiness-hz001",
 				Incidents: []api.Incident{
 					{
@@ -474,18 +474,27 @@ var PetclinicHazelcast = TC{
 	AnalysisTags: []api.Tag{
 		{Name: "EJB XML", Category: api.Ref{Name: "Bean"}},
 		{Name: "Servlet", Category: api.Ref{Name: "HTTP"}},
+		{Name: "Spring", Category: api.Ref{Name: "Inversion of Control"}},
+		{Name: "Common Annotations", Category: api.Ref{Name: "Other"}},
 		{Name: "Properties", Category: api.Ref{Name: "Other"}},
 		{Name: "JPA named queries", Category: api.Ref{Name: "Persistence"}},
 		{Name: "Bean Validation", Category: api.Ref{Name: "Validation"}},
-		{Name: "Properties", Category: api.Ref{Name: "Sustain"}},
-		{Name: "EJB XML", Category: api.Ref{Name: "Java EE"}},
-		{Name: "Properties", Category: api.Ref{Name: "Embedded"}},
-		{Name: "EJB XML", Category: api.Ref{Name: "Connect"}},
-		{Name: "Servlet", Category: api.Ref{Name: "Connect"}},
-		{Name: "Bean Validation", Category: api.Ref{Name: "Java EE"}},
+		{Name: "JSP Page", Category: api.Ref{Name: "Web"}},
 		{Name: "JPA named queries", Category: api.Ref{Name: "Java EE"}},
+		{Name: "Bean Validation", Category: api.Ref{Name: "Java EE"}},
+		{Name: "JSP Page", Category: api.Ref{Name: "Java EE"}},
+		{Name: "Common Annotations", Category: api.Ref{Name: "Java EE"}},
+		{Name: "EJB XML", Category: api.Ref{Name: "Java EE"}},
+		{Name: "EJB XML", Category: api.Ref{Name: "Connect"}},
 		{Name: "JPA named queries", Category: api.Ref{Name: "Store"}},
+		{Name: "Servlet", Category: api.Ref{Name: "Connect"}},
+		{Name: "Common Annotations", Category: api.Ref{Name: "Connect"}},
+		{Name: "Properties", Category: api.Ref{Name: "Embedded"}},
+		{Name: "JSP Page", Category: api.Ref{Name: "View"}},
+		{Name: "Properties", Category: api.Ref{Name: "Sustain"}},
 		{Name: "Bean Validation", Category: api.Ref{Name: "Store"}},
 		{Name: "Servlet", Category: api.Ref{Name: "Java EE"}},
+		{Name: "Spring", Category: api.Ref{Name: "Embedded"}},
+		{Name: "Spring", Category: api.Ref{Name: "Execute"}},
 	},
 }

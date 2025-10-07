@@ -8,6 +8,10 @@ import (
 )
 
 var TackleTestappPublicBinary = TC{
+	SkipTest: SkipTestConfig{
+		Reason: "Skip binary test. https://issues.redhat.com/browse/MTA-5588",
+		Skip:   true,
+	},
 	Name:        "tackle-testapp-binary",
 	Application: data.TackleTestappPublicBinary,
 	Identities: []api.Identity{
@@ -22,7 +26,7 @@ var TackleTestappPublicBinary = TC{
 	Binary: true,
 	Analysis: api.Analysis{
 		Effort: 2,
-		Issues: []api.Issue{
+		Insights: []api.Insight{
 			{
 				Category:    "mandatory",
 				Description: "File system - Java IO",

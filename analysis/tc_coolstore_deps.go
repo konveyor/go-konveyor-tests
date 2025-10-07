@@ -18,8 +18,8 @@ var CoolstoreWithDeps = TC{
 		},
 	},
 	Analysis: api.Analysis{
-		Effort: 114,
-		Issues: []api.Issue{
+		Effort: 113,
+		Insights: []api.Insight{
 			{
 				Category:    "mandatory",
 				Description: "HTTP session replication (distributable web.xml)",
@@ -165,11 +165,6 @@ var CoolstoreWithDeps = TC{
 					{
 						File:    "/shared/source/coolstore/src/main/resources/META-INF/persistence.xml",
 						Line:    2,
-						Message: "In the root tag, replace the `version` attribute value `2.1` with `3.0`",
-					},
-					{
-						File:    "/shared/source/coolstore/src/main/resources/META-INF/persistence.xml",
-						Line:    8,
 						Message: "In the root tag, replace the `version` attribute value `2.1` with `3.0`",
 					},
 				},
@@ -755,5 +750,8 @@ var CoolstoreWithDeps = TC{
 		{Name: "Web Session", Category: api.Ref{Name: "Sustain"}},
 		{Name: "CDI", Category: api.Ref{Name: "Execute"}},
 		{Name: "Java EE JSON-P", Category: api.Ref{Name: "Execute"}},
+		{Name: "Common Annotations", Category: api.Ref{Name: "Java EE"}},
+		{Name: "Common Annotations", Category: api.Ref{Name: "Connect"}},
+		{Name: "Common Annotations", Category: api.Ref{Name: "Other"}},
 	},
 }

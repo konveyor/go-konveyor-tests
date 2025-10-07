@@ -7,6 +7,10 @@ import (
 )
 
 var AdministracionEfectivoBinary = TC{
+	SkipTest: SkipTestConfig{
+		Reason: "Skip binary test. https://issues.redhat.com/browse/MTA-5588",
+		Skip:   true,
+	},
 	Name:        "administracion-efectivo",
 	Application: data.UploadBinary,
 	Task:        Analyze,
@@ -19,7 +23,7 @@ var AdministracionEfectivoBinary = TC{
 	Artifact: "/binary/administracion_efectivo.ear",
 	Analysis: api.Analysis{
 		Effort: 36,
-		Issues: []api.Issue{
+		Insights: []api.Insight{
 			{
 				Category:    "mandatory",
 				Description: "File system - Java IO",
@@ -557,7 +561,16 @@ var AdministracionEfectivoBinary = TC{
 		{Name: "Java EE XML", Category: api.Ref{Name: "Execute"}},
 		{Name: "JSF XML", Category: api.Ref{Name: "View"}},
 		{Name: "JSF XML", Category: api.Ref{Name: "Web"}},
+		{Name: "JSF Page", Category: api.Ref{Name: "Java EE"}},
+		{Name: "JSF Page", Category: api.Ref{Name: "View"}},
+		{Name: "JSF Page", Category: api.Ref{Name: "Web"}},
+		{Name: "JSF", Category: api.Ref{Name: "MVC"}},
+		{Name: "JSF", Category: api.Ref{Name: "View"}},
+		{Name: "JSF", Category: api.Ref{Name: "Embedded"}},
 		{Name: "Properties", Category: api.Ref{Name: "Other"}},
 		{Name: "Properties", Category: api.Ref{Name: "Sustain"}},
+		{Name: "Common Annotations", Category: api.Ref{Name: "Java EE"}},
+		{Name: "Common Annotations", Category: api.Ref{Name: "Other"}},
+		{Name: "Common Annotations", Category: api.Ref{Name: "Connect"}},
 	},
 }

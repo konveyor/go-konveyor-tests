@@ -7,6 +7,10 @@ import (
 )
 
 var AcmeairWebappBinary = TC{
+	SkipTest: SkipTestConfig{
+		Reason: "Skip binary test. https://issues.redhat.com/browse/MTA-5588",
+		Skip:   true,
+	},
 	Name:        "acmeair-webapp",
 	Application: data.UploadBinary,
 	Task:        Analyze,
@@ -20,7 +24,7 @@ var AcmeairWebappBinary = TC{
 	Artifact: "/binary/acmeair-webapp-1.0-SNAPSHOT.war",
 	Analysis: api.Analysis{
 		Effort: 79,
-		Issues: []api.Issue{
+		Insights: []api.Insight{
 			{
 				Category:    "mandatory",
 				Description: "The package 'javax' has been replaced by 'jakarta'.",
@@ -565,5 +569,8 @@ var AcmeairWebappBinary = TC{
 		{Name: "Properties", Category: api.Ref{Name: "Embedded"}},
 		{Name: "Properties", Category: api.Ref{Name: "Other"}},
 		{Name: "Properties", Category: api.Ref{Name: "Sustain"}},
+		{Name: "Common Annotations", Category: api.Ref{Name: "Java EE"}},
+		{Name: "Common Annotations", Category: api.Ref{Name: "Other"}},
+		{Name: "Common Annotations", Category: api.Ref{Name: "Connect"}},
 	},
 }

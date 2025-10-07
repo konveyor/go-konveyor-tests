@@ -7,6 +7,7 @@ import (
 	"encoding/hex"
 	"fmt"
 	"os"
+	"path"
 	"path/filepath"
 	"sort"
 	"strings"
@@ -15,6 +16,7 @@ import (
 
 	"github.com/k0kubun/pp"
 	"github.com/konveyor/go-konveyor-tests/hack/uniq"
+	"github.com/konveyor/go-konveyor-tests/utils"
 	"github.com/konveyor/tackle2-hub/api"
 	"github.com/konveyor/tackle2-hub/binding"
 	"github.com/konveyor/tackle2-hub/test/assert"
@@ -24,6 +26,9 @@ import (
 // Test application analysis
 func TestApplicationAnalysis(t *testing.T) {
 	_, debug := os.LookupEnv("DEBUG")
+	// Create or clean TmpOutputDir
+	_ = os.RemoveAll(TmpOutputDir)
+	_ = os.Mkdir(TmpOutputDir, 0750)
 	// Find right test cases for given Tier.
 	testCases := Tier0TestCases
 	_, tier1 := os.LookupEnv("TIER1")
@@ -38,9 +43,41 @@ func TestApplicationAnalysis(t *testing.T) {
 	if tier3 {
 		testCases = Tier3TestCases
 	}
+
+	// Create a temporary directory for cloning the ci repo
+	ciTempDir, err := os.MkdirTemp("", "konveyor-ci-*")
+	if err != nil {
+		t.Fatalf("Failed to create temp dir for ci repo: %v", err)
+	}
+	// Clone the konveyor/ci repository into the temp directory
+	ciRepoURL := os.Getenv("CI_REPO_URL")
+	if ciRepoURL == "" {
+		ciRepoURL = "https://github.com/konveyor/ci"
+	}
+	ciBranch := os.Getenv("CI_REPO_BRANCH")
+	if ciBranch == "" {
+		ciBranch = "main"
+	}
+	cloneErr := utils.RunGitClone(ciRepoURL, ciBranch, ciTempDir)
+	if cloneErr != nil {
+		t.Fatalf("Failed to clone konveyor/ci repo: %v", cloneErr)
+	}
+	defer os.RemoveAll(ciTempDir)
+
+	// Load test cases from YAML file
+	var testCasesData map[string]TCYamlData
+	testCasesYamlPath := filepath.Join(ciTempDir, "shared_tests", "test_cases.yml")
+	err = loadYAMLFromFile(testCasesYamlPath, &testCasesData)
+	if err != nil {
+		t.Fatalf("Failed to load test cases from YAML file: %v", err)
+	}
+
 	// Run test cases.
 	for _, testcase := range testCases {
 		t.Run(testcase.Name, func(t *testing.T) {
+			if testcase.SkipTest.Skip {
+				t.Skipf("Skipping test: %s", testcase.SkipTest.Reason)
+			}
 			// Prepare parallel execution if env variable PARALLEL is set.
 			tc := testcase
 			_, parallel := os.LookupEnv("PARALLEL")
@@ -52,6 +89,20 @@ func TestApplicationAnalysis(t *testing.T) {
 			err := RichClient.Login(os.Getenv(Username), os.Getenv(Password))
 			if err != nil {
 				panic(fmt.Sprintf("Cannot login to API: %v.", err.Error()))
+			}
+
+			// Prepare TC debug output directory
+			debugDirectory := path.Join(TmpOutputDir, preparePathName(testcase.Name))
+			err = os.Mkdir(debugDirectory, 0750)
+			if err != nil {
+				fmt.Printf("Cannot create debug tmp directory: %v. Debug or failed task output might not work.", err.Error())
+			}
+
+			// Populate missing fields in TC if available
+			err = loadTestConfig(&tc, testCasesData)
+			if err != nil {
+				t.Error(err)
+				return
 			}
 
 			// Prepare Identities, e.g. for Maven repo
@@ -70,7 +121,9 @@ func TestApplicationAnalysis(t *testing.T) {
 					t.Logf("using mvn user %s", mvnUser)
 				}
 				assert.Should(t, RichClient.Identity.Create(&identity))
-				tc.Application.Identities = append(tc.Application.Identities, api.Ref{ID: identity.ID})
+				tc.Application.Identities = append(
+					tc.Application.Identities,
+					api.IdentityRef{ID: identity.ID, Role: "maven"})
 			}
 
 			// Create the application.
@@ -138,8 +191,8 @@ func TestApplicationAnalysis(t *testing.T) {
 			}
 
 			if task.State == "Running" {
-				t.Error("Timed out running the test.")
-				err = printTask(task)
+				t.Error("Timed out running the test. Details:")
+				err = printTask(task, debugDirectory)
 				if err != nil {
 					t.Error(err)
 				}
@@ -148,8 +201,8 @@ func TestApplicationAnalysis(t *testing.T) {
 			}
 
 			if task.State != "Succeeded" || len(task.Errors) > 0 {
-				t.Error("Task failed or has errors.")
-				err = printTask(task)
+				t.Error("Analyze Task failed. Details:")
+				err = printTask(task, debugDirectory)
 				if err != nil {
 					t.Error(err)
 				}
@@ -163,7 +216,7 @@ func TestApplicationAnalysis(t *testing.T) {
 				debug)
 		})
 		if debug {
-			err := printTasks()
+			err := printTasks(TmpOutputDir)
 			if err != nil {
 				t.Error(err)
 			}
@@ -192,43 +245,46 @@ func verifyAnalysis(t TaskTest, tc TC, debug bool) {
 	analysisDetailPath := binding.Path(api.AnalysisRoot).Inject(binding.Params{api.ID: gotAppAnalyses[len(gotAppAnalyses)-1].ID})
 	assert.Should(t.T, Client.Get(analysisDetailPath, &gotAnalysis))
 
-	// Filter out non-mandatory issues, TODO(maufart): quickfix until decide if we test potential issues too
-	var mandatoryIssues []api.Issue
-	for _, issue := range gotAnalysis.Issues {
-		if issue.Category == "mandatory" {
-			mandatoryIssues = append(mandatoryIssues, issue)
+	// Test issues.
+	filterIssues(&gotAnalysis)
+
+	// Filter out non-mandatory insights, TODO(maufart): quickfix until decide if we test potential insights too
+	var mandatoryInsights []api.Insight
+	for _, insight := range gotAnalysis.Insights {
+		if insight.Category == "mandatory" {
+			mandatoryInsights = append(mandatoryInsights, insight)
 		}
 	}
-	gotAnalysis.Issues = mandatoryIssues
+	gotAnalysis.Insights = mandatoryInsights
 
 	if debug {
 		DumpAnalysis(t.T, tc, gotAnalysis)
 	}
 
-	// Check the analysis result (effort, issues, etc).
+	// Check the analysis result (effort, insights, etc).
 	if gotAnalysis.Effort != tc.Analysis.Effort {
 		t.Errorf("Different effort error. Got %d, expected %d", gotAnalysis.Effort, tc.Analysis.Effort)
 	}
 
-	// Ensure stable order of Issues.
-	sort.SliceStable(gotAnalysis.Issues, func(a, b int) bool { return gotAnalysis.Issues[a].Rule < gotAnalysis.Issues[b].Rule })
-	sort.SliceStable(tc.Analysis.Issues, func(a, b int) bool { return tc.Analysis.Issues[a].Rule < tc.Analysis.Issues[b].Rule })
+	// Ensure stable order of Insights.
+	sort.SliceStable(gotAnalysis.Insights, func(a, b int) bool { return gotAnalysis.Insights[a].Rule < gotAnalysis.Insights[b].Rule })
+	sort.SliceStable(tc.Analysis.Insights, func(a, b int) bool { return tc.Analysis.Insights[a].Rule < tc.Analysis.Insights[b].Rule })
 
-	// Check the analysis issues
-	if len(gotAnalysis.Issues) != len(tc.Analysis.Issues) {
-		t.Errorf("Different amount of issues error. Got %d, expected %d.", len(gotAnalysis.Issues), len(tc.Analysis.Issues))
-		missing, unexpected := getIssuesDiff(tc.Analysis.Issues, gotAnalysis.Issues)
-		for _, issue := range missing {
-			fmt.Printf("Expected issue not found for rule %s.\n", issue.Rule)
+	// Check the analysis insights
+	if len(gotAnalysis.Insights) != len(tc.Analysis.Insights) {
+		t.Errorf("Different amount of insights error. Got %d, expected %d.", len(gotAnalysis.Insights), len(tc.Analysis.Insights))
+		missing, unexpected := getInsightsDiff(tc.Analysis.Insights, gotAnalysis.Insights)
+		for _, insight := range missing {
+			fmt.Printf("Expected insight not found for rule %s.\n", insight.Rule)
 		}
-		for _, issue := range unexpected {
-			fmt.Printf("Unexpected issue found for rule %s.\n", issue.Rule)
+		for _, insight := range unexpected {
+			fmt.Printf("Unexpected insight found for rule %s.\n", insight.Rule)
 		}
 	} else {
-		for i, got := range gotAnalysis.Issues {
-			expected := tc.Analysis.Issues[i]
+		for i, got := range gotAnalysis.Insights {
+			expected := tc.Analysis.Insights[i]
 			if got.Category != expected.Category || got.RuleSet != expected.RuleSet || got.Rule != expected.Rule || got.Effort != expected.Effort || !strings.HasPrefix(got.Description, expected.Description) {
-				t.Errorf("\nDifferent issue error. Got %+v\nExpected %+v.\n\n", got, expected)
+				t.Errorf("\nDifferent insight error. Got %+v\nExpected %+v.\n\n", got, expected)
 			}
 
 			// Incidents check.
@@ -248,15 +304,19 @@ func verifyAnalysis(t TaskTest, tc TC, debug bool) {
 
 			} else {
 				// Ensure stable order of Incidents.
-				sort.SliceStable(got.Incidents, func(a, b int) bool { return got.Incidents[a].File+fmt.Sprint(got.Incidents[a].Line) < got.Incidents[b].File+fmt.Sprint(got.Incidents[b].Line) })
-				sort.SliceStable(expected.Incidents, func(a, b int) bool { return expected.Incidents[a].File+fmt.Sprint(expected.Incidents[a].Line) < expected.Incidents[b].File+fmt.Sprint(expected.Incidents[b].Line) })
+				sort.SliceStable(got.Incidents, func(a, b int) bool {
+					return got.Incidents[a].File+fmt.Sprint(got.Incidents[a].Line) < got.Incidents[b].File+fmt.Sprint(got.Incidents[b].Line)
+				})
+				sort.SliceStable(expected.Incidents, func(a, b int) bool {
+					return expected.Incidents[a].File+fmt.Sprint(expected.Incidents[a].Line) < expected.Incidents[b].File+fmt.Sprint(expected.Incidents[b].Line)
+				})
 				for j, gotInc := range got.Incidents {
 					expectedInc := expected.Incidents[j]
 					if gotInc.File != expectedInc.File {
 						t.Errorf("\nDifferent incident.File error. Got %+v\nExpected %+v.\n\n", gotInc.File, expectedInc.File)
 					}
 					if gotInc.Line != expectedInc.Line {
-						t.Errorf("\nDifferent incident.Line error. Got %+v\nExpected %+v.\n\n", gotInc.Line, expectedInc.Line)
+						t.Errorf("\nDifferent incident.Line error. Got %+v\nExpected %+v.\nCodeSnip: %s\n\n", gotInc.Line, expectedInc.Line, gotInc.CodeSnip)
 					}
 					if !strings.HasPrefix(gotInc.Message, expectedInc.Message) {
 						t.Errorf("\nDifferent incident.Message error. Got %+v\nExpected %+v.\n\n", gotInc.Message, expectedInc.Message)
@@ -380,51 +440,64 @@ func getDefaultToken() string {
 	return string(decrypted)
 }
 
-func printTaskAttachments(task *api.Task) (err error) {
-	dir, err := os.MkdirTemp("", "attachments")
-	if err != nil {
-		return
-	}
+// get filename, just write
+func dumpTaskAttachments(task *api.Task, dir string) (err error) {
+	fmt.Printf("###### print TaskAttch tmpdir: %v\n", dir)
 	for _, m := range task.Attached {
 		err = RichClient.File.Get(m.ID, dir)
 		if err != nil {
+			fmt.Printf("Error cannot get Task %d Attachment %d: %s\n", task.ID, m.ID, err.Error())
 			return
 		}
-		var b []byte
-		b, err = os.ReadFile(filepath.Join(dir, m.Name))
-		if err != nil {
-			return
-		}
-		fmt.Printf("\n(BEGIN) ATTACHMENT id:%d name: %s\n", m.ID, m.Name)
-		fmt.Println(string(b))
-		fmt.Printf("(END) ATTACHMENT id:%d\n", m.ID)
 	}
 	return
 }
 
-func printTask(task *api.Task) (err error) {
+// create dir, set filename
+func printTask(task *api.Task, destDir string) (err error) {
+	taskDir := path.Join(destDir, fmt.Sprintf("%s_task_%d", preparePathName(task.Name), task.ID))
+	err = os.Mkdir(taskDir, 0750)
+	if err != nil {
+		fmt.Printf("Cannot create debug Task directory: %v.", err.Error())
+	}
+	fmt.Printf("(DEBUG) DUMP TASK id:%d to %s\n", task.ID, taskDir)
 	b, _ := yaml.Marshal(task)
-	fmt.Printf("\n(BEGIN) TASK id:%d, name: %s\n", task.ID, task.Name)
-	fmt.Println(string(b))
-	err = printTaskAttachments(task)
-	fmt.Printf("(END) TASK id:%d\n", task.ID)
+	f, err := os.Create(path.Join(taskDir, fmt.Sprintf("task_%d_%s.yaml", task.ID, task.Name)))
+	if err != nil {
+		fmt.Printf("Error cannot get Task %d : %s\n", task.ID, err.Error())
+		return
+	}
+	defer f.Close()
+	f.Write(b)
+	err = dumpTaskAttachments(task, taskDir)
 	return
 }
 
-func printTasks() (err error) {
+func printTasks(debugDirectory string) (err error) {
 	tasks, err := RichClient.Task.List()
 	if err != nil {
 		return
 	}
-	fmt.Println("\n(BEGIN) ALL TASKS")
+	tasksDir := path.Join(debugDirectory, "ALL-TASKS")
+	_ = os.Mkdir(tasksDir, 0750) // The directory might exist already
 	for i := range tasks {
-		err = printTask(&tasks[i])
+		err = printTask(&tasks[i], tasksDir)
 		if err != nil {
 			break
 		}
 	}
-	fmt.Println("(END) ALL TASKS")
 	return
+}
+
+// filterIssues updates the analysis to include only issues.
+func filterIssues(analysis *api.Analysis) {
+	var issues []api.Insight
+	for _, insight := range analysis.Insights {
+		if insight.Effort > 0 {
+			issues = append(issues, insight)
+		}
+	}
+	analysis.Insights = issues
 }
 
 type TaskTest struct {
@@ -459,7 +532,7 @@ func (r *TaskTest) Done() {
 		return
 	}
 	fmt.Println("**FAILED**")
-	err := printTask(r.task)
+	err := printTask(r.task, TmpOutputDir)
 	if err != nil {
 		r.T.Error(err)
 	}
@@ -467,5 +540,11 @@ func (r *TaskTest) Done() {
 
 func (r *TaskTest) addPrefix(m string) (s string) {
 	s = fmt.Sprintf("ERROR|task:%d|%s", r.task.ID, m)
+	return
+}
+
+func preparePathName(fname string) (cleanName string) {
+	cleanName = strings.ReplaceAll(fname, " ", "_")
+	cleanName = strings.ReplaceAll(cleanName, "/", "-")
 	return
 }
