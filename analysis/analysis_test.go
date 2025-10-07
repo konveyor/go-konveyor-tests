@@ -200,7 +200,7 @@ func TestApplicationAnalysis(t *testing.T) {
 				return
 			}
 
-			if task.State != "Succeeded" {
+			if task.State != "Succeeded" || len(task.Errors) > 0 {
 				t.Error("Analyze Task failed. Details:")
 				err = printTask(task, debugDirectory)
 				if err != nil {
