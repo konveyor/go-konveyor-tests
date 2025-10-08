@@ -200,46 +200,6 @@ var DaytraderWithDeps = TC{
 						Line: 104,
 					},
 					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
-						Line: 160,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
-						Line: 217,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
-						Line: 248,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
-						Line: 262,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
-						Line: 268,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
-						Line: 302,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
-						Line: 398,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
-						Line: 413,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
-						Line: 546,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
-						Line: 646,
-					},
-					{
 						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/PingServletCDI.java",
 						Line: 41,
 					},
