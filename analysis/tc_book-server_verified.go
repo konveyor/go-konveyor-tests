@@ -55,6 +55,19 @@ var BookServerVerified = TC{
 			},
 			{
 				Category:    "mandatory",
+				Description: "Replace the Spring Web artifact with Quarkus 'spring-web' extension",
+				Effort:      1,
+				RuleSet:     "quarkus/springboot",
+				Rule:        "springboot-web-to-quarkus-00000",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/book-server/pom.xml",
+						Line: 24,
+					},
+				},
+			},
+			{
+				Category:    "mandatory",
 				Description: "Adopt Quarkus BOM",
 				Effort:      1,
 				RuleSet:     "quarkus/springboot",
