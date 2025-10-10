@@ -7,6 +7,12 @@ import (
 var BookServerVerified = TC{
 	Name: "book-server_deps",
 	Task: Analyze,
+	Labels: addon.Labels{
+		Included: []string{
+			"konveyor.io/target=cloud-readiness",
+			"konveyor.io/target=quarkus",
+		},
+	},
 	Analysis: api.Analysis{
 		Effort: 28,
 		Insights: []api.Insight{
