@@ -6,12 +6,13 @@ import (
 )
 
 var BookServerVerified = TC{
-	Name: "book-server_deps",
+	Name: "book-server_deps_updated",
 	Task: Analyze,
 	Labels: addon.Labels{
 		Included: []string{
 			"konveyor.io/target=cloud-readiness",
 			"konveyor.io/target=quarkus",
+			"konveyor.io/source=springboot",
 		},
 	},
 	Analysis: api.Analysis{
