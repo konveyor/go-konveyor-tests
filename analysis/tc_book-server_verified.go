@@ -10,9 +10,10 @@ var BookServerVerified = TC{
 	Task: Analyze,
 	Labels: addon.Labels{
 		Included: []string{
+			"konveyor.io/source=java-ee",
+			"konveyor.io/source=springboot",
 			"konveyor.io/target=cloud-readiness",
 			"konveyor.io/target=quarkus",
-			"konveyor.io/source=springboot",
 		},
 	},
 	Analysis: api.Analysis{
