@@ -84,7 +84,7 @@ var DaytraderWithDeps = TC{
 					},
 					{
 						File: "/shared/source/sample/daytrader-ee7/pom.xml",
-						Line: 2,
+						Line: 4,
 					},
 					{
 						File: "/shared/source/sample/pom.xml",
@@ -109,7 +109,7 @@ var DaytraderWithDeps = TC{
 					},
 					{
 						File: "/shared/source/sample/daytrader-ee7/pom.xml",
-						Line: 2,
+						Line: 4,
 					},
 					{
 						File: "/shared/source/sample/pom.xml",
@@ -210,7 +210,7 @@ var DaytraderWithDeps = TC{
 					},
 					{
 						File: "/shared/source/sample/daytrader-ee7/pom.xml",
-						Line: 29,
+						Line: 31,
 					},
 					{
 						File: "/shared/source/sample/pom.xml",
@@ -235,7 +235,7 @@ var DaytraderWithDeps = TC{
 					},
 					{
 						File: "/shared/source/sample/daytrader-ee7/pom.xml",
-						Line: 2,
+						Line: 4,
 					},
 					{
 						File: "/shared/source/sample/pom.xml",
@@ -277,7 +277,7 @@ var DaytraderWithDeps = TC{
 					},
 					{
 						File: "/shared/source/sample/daytrader-ee7/pom.xml",
-						Line: 2,
+						Line: 4,
 					},
 					{
 						File: "/shared/source/sample/pom.xml",
@@ -302,7 +302,7 @@ var DaytraderWithDeps = TC{
 					},
 					{
 						File: "/shared/source/sample/daytrader-ee7/pom.xml",
-						Line: 2,
+						Line: 4,
 					},
 					{
 						File: "/shared/source/sample/pom.xml",
@@ -431,7 +431,7 @@ var DaytraderWithDeps = TC{
 					},
 					{
 						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/websocket/MarketSummaryWebSocket.java",
-						Line: 25,
+						Line: 30,
 					},
 					{
 						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/websocket/RecentStockChangeList.java",
@@ -456,7 +456,7 @@ var DaytraderWithDeps = TC{
 					},
 					{
 						File: "/shared/source/sample/daytrader-ee7/pom.xml",
-						Line: 2,
+						Line: 4,
 					},
 					{
 						File: "/shared/source/sample/pom.xml",

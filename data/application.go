@@ -63,7 +63,7 @@ var (
 		Name: "Daytrader 7 EE application",
 		Repository: &api.Repository{
 			Kind: "git",
-			URL:  "https://github.com/WASdev/sample.daytrader7.git",
+			URL:  "https://github.com/konveyor-ecosystem/sample.daytrader7.git",
 		},
 	}
 	ApacheWicket = api.Application{
