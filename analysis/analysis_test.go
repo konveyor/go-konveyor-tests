@@ -313,13 +313,13 @@ func verifyAnalysis(t TaskTest, tc TC, debug bool) {
 				for j, gotInc := range got.Incidents {
 					expectedInc := expected.Incidents[j]
 					if gotInc.File != expectedInc.File {
-						t.Errorf("\nDifferent incident.File error. Got %+v\nExpected %+v.\n\n", gotInc.File, expectedInc.File)
+						t.Errorf("\nDifferent incident.File error for rule %+v.\nGot %+v, expected %+v.\n\n", got.Rule, gotInc.File, expectedInc.File)
 					}
 					if gotInc.Line != expectedInc.Line {
-						t.Errorf("\nDifferent incident.Line error. Got %+v\nExpected %+v.\nCodeSnip: %s\n\n", gotInc.Line, expectedInc.Line, gotInc.CodeSnip)
+						t.Errorf("\nDifferent incident.Line error for rule %+v in file %+v.\nGot %+v, expected %+v.\nCodeSnip:\n %s\n\n", got.Rule, gotInc.File, gotInc.Line, expectedInc.Line, gotInc.CodeSnip)
 					}
 					if !strings.HasPrefix(gotInc.Message, expectedInc.Message) {
-						t.Errorf("\nDifferent incident.Message error. Got %+v\nExpected %+v.\n\n", gotInc.Message, expectedInc.Message)
+						t.Errorf("\nDifferent incident.Message error for rule %+v in file %+v.\nGot %+v, expected %+v.\n\n", got.Rule, gotInc.File, gotInc.Message, expectedInc.Message)
 					}
 				}
 			}
