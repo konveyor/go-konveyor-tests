@@ -18,7 +18,7 @@ var CoolstoreWithDeps = TC{
 		},
 	},
 	Analysis: api.Analysis{
-		Effort: 113,
+		Effort: 115,
 		Insights: []api.Insight{
 			{
 				Category:    "mandatory",
@@ -438,6 +438,16 @@ var CoolstoreWithDeps = TC{
 						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/RestApplication.java",
 						Line:    4,
 						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/model/CatalogItemEntity.java",
+						Line:    3,
+						Message: "Replace the `javax.persistence` import statement with `jakarta.persistence`",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java",
+						Line:    7,
+						Message: "Replace the `javax.jms` import statement with `jakarta.jms`",
 					},
 					{
 						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/service/CatalogService.java",
