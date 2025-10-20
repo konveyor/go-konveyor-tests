@@ -427,7 +427,7 @@ var CoolstoreWithDeps = TC{
 					{
 						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/ProductEndpoint.java",
 						Line:    8,
-						Message: "Replace the `javax.inject` import statement with `jakarta.inject`",
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
 					},
 					{
 						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/ProductEndpoint.java",

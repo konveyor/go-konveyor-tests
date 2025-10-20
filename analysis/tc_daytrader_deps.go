@@ -18,7 +18,7 @@ var DaytraderWithDeps = TC{
 		},
 	},
 	Analysis: api.Analysis{
-		Effort: 348,
+		Effort: 377,
 		Insights: []api.Insight{
 			{
 				Category:    "mandatory",
