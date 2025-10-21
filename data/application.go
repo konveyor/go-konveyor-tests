@@ -64,7 +64,7 @@ var (
 		Repository: &api.Repository{
 			Kind: "git",
 			URL:  "https://github.com/konveyor-ecosystem/sample.daytrader7.git",
-			Branch: "ci-2024",
+			Branch: "ci-oct2025",
 		},
 	}
 	ApacheWicket = api.Application{
