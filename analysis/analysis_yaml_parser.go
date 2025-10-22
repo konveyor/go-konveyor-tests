@@ -12,8 +12,8 @@ import (
 type Application struct {
 	Name       string `yaml:"name"`
 	Repository struct {
-		URL  string `yaml:"url"`
-		Kind string `yaml:"kind"`
+		URL    string `yaml:"url"`
+		Kind   string `yaml:"kind"`
 		Branch string `yaml:"branch"`
 		Tag    string `yaml:"tag"`
 		Path   string `yaml:"path"`
@@ -30,6 +30,33 @@ type TCYamlData struct {
 	Targets     []string    `yaml:"targets"`
 	WithDeps    bool        `yaml:"withDeps"`
 }
+
+// AnalysisIncident represents an incident in the analysis output YAML
+type AnalysisIncident struct {
+	CodeSnip   string `yaml:"codeSnip"`
+	LineNumber int    `yaml:"lineNumber"`
+	Message    string `yaml:"message"`
+	URI        string `yaml:"uri"`
+}
+
+// AnalysisViolation represents a violation in the analysis output YAML
+type AnalysisViolation struct {
+	Category    string             `yaml:"category"`
+	Description string             `yaml:"description"`
+	Effort      int                `yaml:"effort"`
+	Incidents   []AnalysisIncident `yaml:"incidents"`
+}
+
+// AnalysisRuleset represents a ruleset in the analysis output YAML
+type AnalysisRuleset struct {
+	Description string                       `yaml:"description"`
+	Name        string                       `yaml:"name"`
+	Violations  map[string]AnalysisViolation `yaml:"violations"`
+	Tags        []string                     `yaml:"tags"`
+}
+
+// OutputYamlData represents the structure of output.yaml file for parsing
+type OutputYamlData []AnalysisRuleset
 
 func loadYAMLFromFile(path string, out interface{}) error {
 	data, err := os.ReadFile(path)
@@ -52,11 +79,11 @@ func loadTestConfig(tc *TC, testCasesData map[string]TCYamlData) error {
 	if tc.Application.Name == "" && tc.Application.Repository == nil {
 		tc.Application.Name = testCaseData.Application.Name
 		tc.Application.Repository = &api.Repository{
-			URL:  testCaseData.Application.Repository.URL,
-			Kind: testCaseData.Application.Repository.Kind,
+			URL:    testCaseData.Application.Repository.URL,
+			Kind:   testCaseData.Application.Repository.Kind,
 			Branch: testCaseData.Application.Repository.Branch,
-			Tag: testCaseData.Application.Repository.Tag,
-			Path: testCaseData.Application.Repository.Path,
+			Tag:    testCaseData.Application.Repository.Tag,
+			Path:   testCaseData.Application.Repository.Path,
 		}
 	}
 	// Convert sources and targets from YAML to labels
@@ -82,5 +109,51 @@ func loadTestConfig(tc *TC, testCasesData map[string]TCYamlData) error {
 		tc.WithDeps = testCaseData.WithDeps
 	}
 
+	return nil
+}
+
+// populateAnalysisOutput updates a TC struct with analysis results from the analysisOutput.
+// Fields are only populated if the TC.Analysis is empty/unset, allowing for selective override behavior.
+func populateAnalysisOutput(tc *TC, analysisOutput OutputYamlData) error {
+	var insights []api.Insight
+	var totalEffort int
+
+	// Iterate through each ruleset
+	for _, ruleset := range analysisOutput {
+		// Iterate through each violation in the ruleset
+		for ruleID, violation := range ruleset.Violations {
+			insight := api.Insight{
+				Category:    violation.Category,
+				Description: violation.Description,
+				Effort:      violation.Effort,
+				RuleSet:     ruleset.Name,
+				Rule:        ruleID,
+			}
+
+			// Convert YAML incidents to API incidents
+			for _, yamlIncident := range violation.Incidents {
+				totalEffort += violation.Effort
+				incident := api.Incident{
+					File:    yamlIncident.URI,
+					Line:    yamlIncident.LineNumber,
+					Message: yamlIncident.Message,
+				}
+				insight.Incidents = append(insight.Incidents, incident)
+			}
+			if violation.Category != "mandatory" {
+				// Do not record non-mandatory insights
+				continue
+			}
+			insights = append(insights, insight)
+		}
+	}
+
+	// Only populate if empty
+	if tc.Analysis.Effort == 0 {
+		tc.Analysis.Effort = totalEffort
+	}
+	if len(tc.Analysis.Insights) == 0 {
+		tc.Analysis.Insights = insights
+	}
 	return nil
 }
