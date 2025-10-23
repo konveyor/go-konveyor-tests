@@ -878,324 +878,264 @@ var DaytraderWithDeps = TC{
 		},
 		},
 		Dependencies: []api.TechDependency{
-		{
-			Name:     "com.sun.mail.javax.mail",
-			Version:  "1.5.0",
-			Provider: "java",
-		},
-		{
-			Name:     "javax.activation.activation",
-			Version:  "1.1",
-			Provider: "java",
-		},
-		{
-			Name:     "javax.annotation.javax.annotation-api",
-			Version:  "1.3.2",
-			Provider: "java",
-		},
-		{
-			Name:     "javax.javaee-api",
-			Version:  "7.0",
-			Provider: "java",
-		},
-		{
-			Name:     "net.wasdev.wlp.sample.daytrader-ee7-ejb",
-			Version:  "1.0-SNAPSHOT",
-			Provider: "java",
-		},
-		{
-			Name:     "net.wasdev.wlp.sample.daytrader-ee7-web",
-			Version:  "1.0-SNAPSHOT",
-			Provider: "java",
-		},
-		{
-			Name:     "org.apache.derby.derby",
-			Version:  "10.14.2.0",
-			Provider: "java",
-		},
-		{
-			Name:     "taglibs.standard",
-			Version:  "1.1.1",
-			Provider: "java",
-		},
+			{
+				Name:     "com.sun.mail.javax.mail",
+				Version:  "1.5.0",
+				Provider: "java",
+			},
+			{
+				Name:     "javax.activation.activation",
+				Version:  "1.1",
+				Provider: "java",
+			},
+			{
+				Name:     "javax.annotation.javax.annotation-api",
+				Version:  "1.3.2",
+				Provider: "java",
+			},
+			{
+				Name:     "javax.javaee-api",
+				Version:  "7.0",
+				Provider: "java",
+			},
+			{
+				Name:     "net.wasdev.wlp.sample.daytrader-ee7-ejb",
+				Version:  "1.0-SNAPSHOT",
+				Provider: "java",
+			},
+			{
+				Name:     "net.wasdev.wlp.sample.daytrader-ee7-web",
+				Version:  "1.0-SNAPSHOT",
+				Provider: "java",
+			},
+			{
+				Name:     "org.apache.derby.derby",
+				Version:  "10.14.2.0",
+				Provider: "java",
+			},
+			{
+				Name:     "taglibs.standard",
+				Version:  "1.1.1",
+				Provider: "java",
+			},
 		},
 	},
 	AnalysisTags: []api.Tag{
-	{
-		Name:     "Bean Validation",
-		Category: api.Ref{Name: "Technology"},
-	},
-	{
-		Name:     "Bean Validation",
-		Category: api.Ref{Name: "Java EE"},
-	},
-	{
-		Name:     "Bean Validation",
-		Category: api.Ref{Name: "Store"},
-	},
-	{
-		Name:     "Bean Validation",
-		Category: api.Ref{Name: "Validation"},
-	},
-	{
-		Name:     "CDI",
-		Category: api.Ref{Name: "Technology"},
-	},
-	{
-		Name:     "CDI",
-		Category: api.Ref{Name: "Execute"},
-	},
-	{
-		Name:     "CDI",
-		Category: api.Ref{Name: "Inversion of Control"},
-	},
-	{
-		Name:     "CDI",
-		Category: api.Ref{Name: "Java EE"},
-	},
-	{
-		Name:     "CDI XML",
-		Category: api.Ref{Name: "Technology"},
-	},
-	{
-		Name:     "CDI XML",
-		Category: api.Ref{Name: "Execute"},
-	},
-	{
-		Name:     "CDI XML",
-		Category: api.Ref{Name: "Inversion of Control"},
-	},
-	{
-		Name:     "CDI XML",
-		Category: api.Ref{Name: "Java EE"},
-	},
-	{
-		Name:     "Common Annotations",
-		Category: api.Ref{Name: "Technology"},
-	},
-	{
-		Name:     "Common Annotations",
-		Category: api.Ref{Name: "Connect"},
-	},
-	{
-		Name:     "Common Annotations",
-		Category: api.Ref{Name: "Java EE"},
-	},
-	{
-		Name:     "Common Annotations",
-		Category: api.Ref{Name: "Other"},
-	},
-	{
-		Name:     "EJB Timer",
-		Category: api.Ref{Name: "Technology"},
-	},
-	{
-		Name:     "EJB Timer",
-		Category: api.Ref{Name: "Execute"},
-	},
-	{
-		Name:     "EJB Timer",
-		Category: api.Ref{Name: "Java EE"},
-	},
-	{
-		Name:     "EJB Timer",
-		Category: api.Ref{Name: "Processing"},
-	},
-	{
-		Name:     "EJB XML",
-		Category: api.Ref{Name: "Bean"},
-	},
-	{
-		Name:     "EJB XML",
-		Category: api.Ref{Name: "Connect"},
-	},
-	{
-		Name:     "EJB XML",
-		Category: api.Ref{Name: "Java EE"},
-	},
-	{
-		Name:     "Embedded technology - Java Server Faces",
-		Category: api.Ref{Name: "Technology"},
-	},
-	{
-		Name:     "Embedded technology - Java Server Pages",
-		Category: api.Ref{Name: "Technology"},
-	},
-	{
-		Name:     "Embedded technology - WebSocket",
-		Category: api.Ref{Name: "Technology"},
-	},
-	{
-		Name:     "JPA XML",
-		Category: api.Ref{Name: "Java EE"},
-	},
-	{
-		Name:     "JPA XML",
-		Category: api.Ref{Name: "Persistence"},
-	},
-	{
-		Name:     "JPA XML",
-		Category: api.Ref{Name: "Store"},
-	},
-	{
-		Name:     "JPA entities",
-		Category: api.Ref{Name: "Java EE"},
-	},
-	{
-		Name:     "JPA entities",
-		Category: api.Ref{Name: "Persistence"},
-	},
-	{
-		Name:     "JPA entities",
-		Category: api.Ref{Name: "Store"},
-	},
-	{
-		Name:     "JPA named queries",
-		Category: api.Ref{Name: "Java EE"},
-	},
-	{
-		Name:     "JPA named queries",
-		Category: api.Ref{Name: "Persistence"},
-	},
-	{
-		Name:     "JPA named queries",
-		Category: api.Ref{Name: "Store"},
-	},
-	{
-		Name:     "JSF",
-		Category: api.Ref{Name: "Embedded"},
-	},
-	{
-		Name:     "JSF",
-		Category: api.Ref{Name: "Technology"},
-	},
-	{
-		Name:     "JSF",
-		Category: api.Ref{Name: "MVC"},
-	},
-	{
-		Name:     "JSF",
-		Category: api.Ref{Name: "View"},
-	},
-	{
-		Name:     "JSF Page",
-		Category: api.Ref{Name: "Java EE"},
-	},
-	{
-		Name:     "JSF Page",
-		Category: api.Ref{Name: "View"},
-	},
-	{
-		Name:     "JSF Page",
-		Category: api.Ref{Name: "Web"},
-	},
-	{
-		Name:     "JSF XML",
-		Category: api.Ref{Name: "Technology"},
-	},
-	{
-		Name:     "JSF XML",
-		Category: api.Ref{Name: "Java EE"},
-	},
-	{
-		Name:     "JSF XML",
-		Category: api.Ref{Name: "View"},
-	},
-	{
-		Name:     "JSF XML",
-		Category: api.Ref{Name: "Web"},
-	},
-	{
-		Name:     "JSP",
-		Category: api.Ref{Name: "Technology"},
-	},
-	{
-		Name:     "JSP Page",
-		Category: api.Ref{Name: "Java EE"},
-	},
-	{
-		Name:     "JSP Page",
-		Category: api.Ref{Name: "View"},
-	},
-	{
-		Name:     "JSP Page",
-		Category: api.Ref{Name: "Web"},
-	},
-	{
-		Name:     "Java EE JSON-P",
-		Category: api.Ref{Name: "Execute"},
-	},
-	{
-		Name:     "Java EE JSON-P",
-		Category: api.Ref{Name: "Technology"},
-	},
-	{
-		Name:     "Java EE JSON-P",
-		Category: api.Ref{Name: "Java EE"},
-	},
-	{
-		Name:     "Java EE JSON-P",
-		Category: api.Ref{Name: "Processing"},
-	},
-	{
-		Name:     "Java Servlet",
-		Category: api.Ref{Name: "Technology"},
-	},
-	{
-		Name:     "Persistence units",
-		Category: api.Ref{Name: "Java EE"},
-	},
-	{
-		Name:     "Persistence units",
-		Category: api.Ref{Name: "Persistence"},
-	},
-	{
-		Name:     "Persistence units",
-		Category: api.Ref{Name: "Store"},
-	},
-	{
-		Name:     "Properties",
-		Category: api.Ref{Name: "Embedded"},
-	},
-	{
-		Name:     "Properties",
-		Category: api.Ref{Name: "Other"},
-	},
-	{
-		Name:     "Properties",
-		Category: api.Ref{Name: "Sustain"},
-	},
-	{
-		Name:     "Servlet",
-		Category: api.Ref{Name: "Connect"},
-	},
-	{
-		Name:     "Servlet",
-		Category: api.Ref{Name: "HTTP"},
-	},
-	{
-		Name:     "Servlet",
-		Category: api.Ref{Name: "Java EE"},
-	},
-	{
-		Name:     "Servlet",
-		Category: api.Ref{Name: "Technology"},
-	},
-	{
-		Name:     "WebSocket",
-		Category: api.Ref{Name: "Java EE"},
-	},
-	{
-		Name:     "WebSocket",
-		Category: api.Ref{Name: "View"},
-	},
-	{
-		Name:     "WebSocket",
-		Category: api.Ref{Name: "Web"},
-	},
-	{
-		Name:     "WebSocket",
-		Category: api.Ref{Name: "Technology"},
-	},
+		{
+			Name:     "Bean Validation",
+			Category: api.Ref{Name: "Java EE"},
+		},
+		{
+			Name:     "Bean Validation",
+			Category: api.Ref{Name: "Store"},
+		},
+		{
+			Name:     "Bean Validation",
+			Category: api.Ref{Name: "Validation"},
+		},
+		{
+			Name:     "CDI",
+			Category: api.Ref{Name: "Execute"},
+		},
+		{
+			Name:     "CDI",
+			Category: api.Ref{Name: "Inversion of Control"},
+		},
+		{
+			Name:     "CDI",
+			Category: api.Ref{Name: "Java EE"},
+		},
+		{
+			Name:     "CDI XML",
+			Category: api.Ref{Name: "Execute"},
+		},
+		{
+			Name:     "CDI XML",
+			Category: api.Ref{Name: "Inversion of Control"},
+		},
+		{
+			Name:     "CDI XML",
+			Category: api.Ref{Name: "Java EE"},
+		},
+		{
+			Name:     "Common Annotations",
+			Category: api.Ref{Name: "Connect"},
+		},
+		{
+			Name:     "Common Annotations",
+			Category: api.Ref{Name: "Java EE"},
+		},
+		{
+			Name:     "Common Annotations",
+			Category: api.Ref{Name: "Other"},
+		},
+		{
+			Name:     "EJB Timer",
+			Category: api.Ref{Name: "Execute"},
+		},
+		{
+			Name:     "EJB Timer",
+			Category: api.Ref{Name: "Java EE"},
+		},
+		{
+			Name:     "EJB Timer",
+			Category: api.Ref{Name: "Processing"},
+		},
+		{
+			Name:     "EJB XML",
+			Category: api.Ref{Name: "Bean"},
+		},
+		{
+			Name:     "EJB XML",
+			Category: api.Ref{Name: "Connect"},
+		},
+		{
+			Name:     "EJB XML",
+			Category: api.Ref{Name: "Java EE"},
+		},
+		{
+			Name:     "JPA XML",
+			Category: api.Ref{Name: "Java EE"},
+		},
+		{
+			Name:     "JPA XML",
+			Category: api.Ref{Name: "Persistence"},
+		},
+		{
+			Name:     "JPA XML",
+			Category: api.Ref{Name: "Store"},
+		},
+		{
+			Name:     "JPA entities",
+			Category: api.Ref{Name: "Java EE"},
+		},
+		{
+			Name:     "JPA entities",
+			Category: api.Ref{Name: "Persistence"},
+		},
+		{
+			Name:     "JPA entities",
+			Category: api.Ref{Name: "Store"},
+		},
+		{
+			Name:     "JPA named queries",
+			Category: api.Ref{Name: "Java EE"},
+		},
+		{
+			Name:     "JPA named queries",
+			Category: api.Ref{Name: "Persistence"},
+		},
+		{
+			Name:     "JPA named queries",
+			Category: api.Ref{Name: "Store"},
+		},
+		{
+			Name:     "JSF",
+			Category: api.Ref{Name: "Embedded"},
+		},
+		{
+			Name:     "JSF",
+			Category: api.Ref{Name: "MVC"},
+		},
+		{
+			Name:     "JSF",
+			Category: api.Ref{Name: "View"},
+		},
+		{
+			Name:     "JSF Page",
+			Category: api.Ref{Name: "Java EE"},
+		},
+		{
+			Name:     "JSF Page",
+			Category: api.Ref{Name: "View"},
+		},
+		{
+			Name:     "JSF Page",
+			Category: api.Ref{Name: "Web"},
+		},
+		{
+			Name:     "JSF XML",
+			Category: api.Ref{Name: "Java EE"},
+		},
+		{
+			Name:     "JSF XML",
+			Category: api.Ref{Name: "View"},
+		},
+		{
+			Name:     "JSF XML",
+			Category: api.Ref{Name: "Web"},
+		},
+		{
+			Name:     "JSP Page",
+			Category: api.Ref{Name: "Java EE"},
+		},
+		{
+			Name:     "JSP Page",
+			Category: api.Ref{Name: "View"},
+		},
+		{
+			Name:     "JSP Page",
+			Category: api.Ref{Name: "Web"},
+		},
+		{
+			Name:     "Java EE JSON-P",
+			Category: api.Ref{Name: "Execute"},
+		},
+		{
+			Name:     "Java EE JSON-P",
+			Category: api.Ref{Name: "Java EE"},
+		},
+		{
+			Name:     "Java EE JSON-P",
+			Category: api.Ref{Name: "Processing"},
+		},
+		{
+			Name:     "Persistence units",
+			Category: api.Ref{Name: "Java EE"},
+		},
+		{
+			Name:     "Persistence units",
+			Category: api.Ref{Name: "Persistence"},
+		},
+		{
+			Name:     "Persistence units",
+			Category: api.Ref{Name: "Store"},
+		},
+		{
+			Name:     "Properties",
+			Category: api.Ref{Name: "Embedded"},
+		},
+		{
+			Name:     "Properties",
+			Category: api.Ref{Name: "Other"},
+		},
+		{
+			Name:     "Properties",
+			Category: api.Ref{Name: "Sustain"},
+		},
+		{
+			Name:     "Servlet",
+			Category: api.Ref{Name: "Connect"},
+		},
+		{
+			Name:     "Servlet",
+			Category: api.Ref{Name: "HTTP"},
+		},
+		{
+			Name:     "Servlet",
+			Category: api.Ref{Name: "Java EE"},
+		},
+		{
+			Name:     "WebSocket",
+			Category: api.Ref{Name: "Java EE"},
+		},
+		{
+			Name:     "WebSocket",
+			Category: api.Ref{Name: "View"},
+		},
+		{
+			Name:     "WebSocket",
+			Category: api.Ref{Name: "Web"},
+		},
 	},
 }
