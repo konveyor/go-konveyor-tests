@@ -112,7 +112,6 @@ func TestApplicationAnalysis(t *testing.T) {
 				err = loadYAMLFromFile(analysisYamlPath, &analysisOutput)
 				if err != nil {
 					t.Fatalf("Failed to load analysis output from YAML file: %v", err)
-					return
 				}
 				err = populateAnalysisOutput(&tc, analysisOutput)
 				if err != nil {
