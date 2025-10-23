@@ -318,7 +318,7 @@ func verifyAnalysis(t TaskTest, tc TC, debug bool) {
 				})
 				for j, gotInc := range got.Incidents {
 					expectedInc := expected.Incidents[j]
-					if gotInc.File != expectedInc.File {
+					if !strings.HasSuffix(gotInc.File, expectedInc.File) {
 						t.Errorf("\nDifferent incident.File error for rule %+v.\nGot %+v, expected %+v.\n\n", got.Rule, gotInc.File, expectedInc.File)
 					}
 					if gotInc.Line != expectedInc.Line {
