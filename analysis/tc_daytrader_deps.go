@@ -47,26 +47,17 @@ var DaytraderWithDeps = TC{
 					{
 						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/entities/AccountDataBean.java",
 						Line: 53,
-						Message: "The way in which Hibernate determines implicit names for sequences and tables associated with identifier generation has changed in 6.0 which may affect migrating applications. 
- As of 6.0, Hibernate by default creates a sequence per entity hierarchy instead of a single sequence hibernate_sequence. 
- Due to this change, users that previously used `@GeneratedValue(strategy = GenerationStrategy.AUTO)` or simply `@GeneratedValue` (since `AUTO` is the default), need to ensure that the database now contains sequences for every entity, named `<entity name>_seq`. For an entity Person, a sequence person_seq is expected to exist. 
- It’s best to run hbm2ddl (e.g. by temporarily setting `hbm2ddl.auto=create`) to obtain a list of DDL statements for the sequences.",
+						Message: "The way in which Hibernate determines implicit names for sequences and tables associated with identifier generation has changed in 6.0 which may affect migrating applications. As of 6.0, Hibernate by default creates a sequence per entity hierarchy instead of a single sequence hibernate_sequence. Due to this change, users that previously used `@GeneratedValue(strategy = GenerationStrategy.AUTO)` or simply `@GeneratedValue` (since `AUTO` is the default), need to ensure that the database now contains sequences for every entity, named `<entity name>_seq`. For an entity Person, a sequence person_seq is expected to exist. It’s best to run hbm2ddl (e.g. by temporarily setting `hbm2ddl.auto=create`) to obtain a list of DDL statements for the sequences.",
 					},
 					{
 						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/entities/HoldingDataBean.java",
 						Line: 50,
-						Message: "The way in which Hibernate determines implicit names for sequences and tables associated with identifier generation has changed in 6.0 which may affect migrating applications. 
- As of 6.0, Hibernate by default creates a sequence per entity hierarchy instead of a single sequence hibernate_sequence. 
- Due to this change, users that previously used `@GeneratedValue(strategy = GenerationStrategy.AUTO)` or simply `@GeneratedValue` (since `AUTO` is the default), need to ensure that the database now contains sequences for every entity, named `<entity name>_seq`. For an entity Person, a sequence person_seq is expected to exist. 
- It’s best to run hbm2ddl (e.g. by temporarily setting `hbm2ddl.auto=create`) to obtain a list of DDL statements for the sequences.",
+						Message: "The way in which Hibernate determines implicit names for sequences and tables associated with identifier generation has changed in 6.0 which may affect migrating applications. As of 6.0, Hibernate by default creates a sequence per entity hierarchy instead of a single sequence hibernate_sequence. Due to this change, users that previously used `@GeneratedValue(strategy = GenerationStrategy.AUTO)` or simply `@GeneratedValue` (since `AUTO` is the default), need to ensure that the database now contains sequences for every entity, named `<entity name>_seq`. For an entity Person, a sequence person_seq is expected to exist. It’s best to run hbm2ddl (e.g. by temporarily setting `hbm2ddl.auto=create`) to obtain a list of DDL statements for the sequences.",
 					},
 					{
 						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/entities/OrderDataBean.java",
 						Line: 66,
-						Message: "The way in which Hibernate determines implicit names for sequences and tables associated with identifier generation has changed in 6.0 which may affect migrating applications. 
- As of 6.0, Hibernate by default creates a sequence per entity hierarchy instead of a single sequence hibernate_sequence. 
- Due to this change, users that previously used `@GeneratedValue(strategy = GenerationStrategy.AUTO)` or simply `@GeneratedValue` (since `AUTO` is the default), need to ensure that the database now contains sequences for every entity, named `<entity name>_seq`. For an entity Person, a sequence person_seq is expected to exist. 
- It’s best to run hbm2ddl (e.g. by temporarily setting `hbm2ddl.auto=create`) to obtain a list of DDL statements for the sequences.",
+						Message: "The way in which Hibernate determines implicit names for sequences and tables associated with identifier generation has changed in 6.0 which may affect migrating applications. As of 6.0, Hibernate by default creates a sequence per entity hierarchy instead of a single sequence hibernate_sequence. Due to this change, users that previously used `@GeneratedValue(strategy = GenerationStrategy.AUTO)` or simply `@GeneratedValue` (since `AUTO` is the default), need to ensure that the database now contains sequences for every entity, named `<entity name>_seq`. For an entity Person, a sequence person_seq is expected to exist. It’s best to run hbm2ddl (e.g. by temporarily setting `hbm2ddl.auto=create`) to obtain a list of DDL statements for the sequences.",
 					},
 				},
 			},
@@ -110,8 +101,7 @@ var DaytraderWithDeps = TC{
     				{
     					File: "/shared/source/sample/daytrader-ee7-web/src/main/webapp/WEB-INF/beans.xml",
     					Line: 17,
-    					Message: "`beans.xml` descriptor content is ignored and it could be removed from the application. 
- Refer to the guide referenced below to check the supported CDI feature in Quarkus.",
+    					Message: "`beans.xml` descriptor content is ignored and it could be removed from the application. Refer to the guide referenced below to check the supported CDI feature in Quarkus.",
 					},
 				},
 			},
@@ -125,14 +115,12 @@ var DaytraderWithDeps = TC{
 					{
 						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/ExternalContextProducer.java",
 						Line: 24,
-						Message: "In Quarkus, you can skip the @Produces annotation completely if the producer method is annotated with a scope annotation, a stereotype or a qualifier..
- This field could be accessed using a `@Named` getter method instead.",
+						Message: "In Quarkus, you can skip the @Produces annotation completely if the producer method is annotated with a scope annotation, a stereotype or a qualifier.. This field could be accessed using a `@Named` getter method instead.",
 					},
 					{
 						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/TradeActionProducer.java",
 						Line: 24,
-						Message: "In Quarkus, you can skip the @Produces annotation completely if the producer method is annotated with a scope annotation, a stereotype or a qualifier..
- This field could be accessed using a `@Named` getter method instead.",
+						Message: "In Quarkus, you can skip the @Produces annotation completely if the producer method is annotated with a scope annotation, a stereotype or a qualifier.. This field could be accessed using a `@Named` getter method instead.",
 					},
 				},
 			},
