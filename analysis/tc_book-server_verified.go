@@ -102,6 +102,13 @@ var BookServerVerified = TC{
 				Rule:        "springboot-annotations-to-quarkus-00000",
 			},
 			{
+				Category: "potential",
+				Description: "Replace the SpringBoot Dependency Injection artifact with Quarkus 'spring-di' extension",
+				Effort: 1,
+				RuleSet: "quarkus/springboot",
+				Rule: "springboot-di-to-quarkus-00000",
+    		},
+			{
 				Category:    "mandatory",
 				Description: "Replace the spring-boot-maven-plugin dependency",
 				Effort:      1,
