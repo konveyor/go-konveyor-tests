@@ -59,7 +59,7 @@ var CoolstoreWithDeps = TC{
 						Message: "If you migrate your application to JBoss EAP 7.3, or later, and want to ensure its Maven building, running or testing works as expected, use instead the Jakarta EE dependency with groupId `com.sun.activation`",
 					},
 				},
-			}.
+			},
 			{
 				Category:    "mandatory",
 				Description: "javax groupId has been replaced by jakarta.platform",
