@@ -18,7 +18,7 @@ var CoolstoreWithDeps = TC{
 		},
 	},
 	Analysis: api.Analysis{
-		Effort: 115,
+		Effort: 116,
 		Insights: []api.Insight{
 			{
 				Category:    "mandatory",
@@ -423,6 +423,11 @@ var CoolstoreWithDeps = TC{
 						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/ProductEndpoint.java",
 						Line:    7,
 						Message: "Replace the `javax.inject` import statement with `jakarta.inject`",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/ProductEndpoint.java",
+						Line:    8,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
 					},
 					{
 						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/ProductEndpoint.java",

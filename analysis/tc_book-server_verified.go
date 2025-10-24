@@ -8,7 +8,7 @@ var BookServerVerified = TC{
 	Name: "book-server_deps",
 	Task: Analyze,
 	Analysis: api.Analysis{
-		Effort: 28,
+		Effort: 15,
 		Insights: []api.Insight{
 			{
 				Category:    "mandatory",
@@ -41,15 +41,14 @@ var BookServerVerified = TC{
 			},
 			{
 				Category:    "mandatory",
-				Description: "The Lombok version is incompatible with Open JDK 17",
-				Effort:      3,
-				RuleSet:     "openjdk17/openjdk11",
-				Rule:        "lombok-incompatibility-00001",
+				Description: "Replace the Spring Web artifact with Quarkus 'spring-web' extension",
+				Effort:      1,
+				RuleSet:     "quarkus/springboot",
+				Rule:        "springboot-web-to-quarkus-00000",
 				Incidents: []api.Incident{
 					{
-						File:    "/shared/source/book-server/pom.xml",
-						Line:    31,
-						Message: "Lombok supports Java 17 since version 1.18.22. The version of Lombok used in this project is too old and not compatible with Java 17. You should consider upgrading it.",
+						File: "/shared/source/book-server/pom.xml",
+						Line: 24,
 					},
 				},
 			},
@@ -101,13 +100,6 @@ var BookServerVerified = TC{
 				Effort:      1,
 				RuleSet:     "quarkus/springboot",
 				Rule:        "springboot-annotations-to-quarkus-00000",
-			},
-			{
-				Category:    "potential",
-				Description: "Replace the SpringBoot Dependency Injection artifact with Quarkus 'spring-di' extension",
-				Effort:      1,
-				RuleSet:     "quarkus/springboot",
-				Rule:        "springboot-di-to-quarkus-00000",
 			},
 			{
 				Category:    "mandatory",
