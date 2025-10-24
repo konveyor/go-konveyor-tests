@@ -47,6 +47,20 @@ var CoolstoreWithDeps = TC{
 				},
 			},
 			{
+				Category: "potential",
+				Description: "Move to Jakarta EE Maven Artifacts - replace groupId javax.activation",
+    			Effort: 1,
+				RuleSet: "eap7/weblogic/tests/data",
+				Rule: "maven-javax-to-jakarta-00002",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/coolstore/pom.xml",
+						Line: 25,
+						Message: "If you migrate your application to JBoss EAP 7.3, or later, and want to ensure its Maven building, running or testing works as expected, use instead the Jakarta EE dependency with groupId `com.sun.activation`",
+					},
+				},
+			}.
+			{
 				Category:    "mandatory",
 				Description: "javax groupId has been replaced by jakarta.platform",
 				Effort:      1,
