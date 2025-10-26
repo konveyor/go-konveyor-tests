@@ -140,10 +140,6 @@ func populateAnalysisOutput(tc *TC, analysisOutput OutputYamlData) error {
 				}
 				insight.Incidents = append(insight.Incidents, incident)
 			}
-			if violation.Category != "mandatory" {
-				// Do not record non-mandatory insights
-				continue
-			}
 			insights = append(insights, insight)
 		}
 	}
