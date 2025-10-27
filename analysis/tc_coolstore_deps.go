@@ -18,7 +18,7 @@ var CoolstoreWithDeps = TC{
 		},
 	},
 	Analysis: api.Analysis{
-		Effort: 113,
+		Effort: 116,
 		Insights: []api.Insight{
 			{
 				Category:    "mandatory",
@@ -43,6 +43,20 @@ var CoolstoreWithDeps = TC{
  * The application is more scaleable and elastic.
  * The application can survive EAP node failures because a JVM failure does not cause session data loss.
  * Session data can be shared by multiple applications.`,
+					},
+				},
+			},
+			{
+				Category: "potential",
+				Description: "Move to Jakarta EE Maven Artifacts - replace groupId javax.activation",
+    			Effort: 1,
+				RuleSet: "eap7/weblogic/tests/data",
+				Rule: "maven-javax-to-jakarta-00002",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/coolstore/pom.xml",
+						Line: 25,
+						Message: "If you migrate your application to JBoss EAP 7.3, or later, and want to ensure its Maven building, running or testing works as expected, use instead the Jakarta EE dependency with groupId `com.sun.activation`",
 					},
 				},
 			},
@@ -426,6 +440,11 @@ var CoolstoreWithDeps = TC{
 					},
 					{
 						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/ProductEndpoint.java",
+						Line:    8,
+						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/ProductEndpoint.java",
 						Line:    9,
 						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
 					},
@@ -438,6 +457,16 @@ var CoolstoreWithDeps = TC{
 						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/rest/RestApplication.java",
 						Line:    4,
 						Message: "Replace the `javax.ws` import statement with `jakarta.ws`",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/model/CatalogItemEntity.java",
+						Line:    3,
+						Message: "Replace the `javax.persistence` import statement with `jakarta.persistence`",
+					},
+					{
+						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java",
+						Line:    7,
+						Message: "Replace the `javax.jms` import statement with `jakarta.jms`",
 					},
 					{
 						File:    "/shared/source/coolstore/src/main/java/com/redhat/coolstore/service/CatalogService.java",
