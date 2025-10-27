@@ -63,7 +63,7 @@ var DaytraderWithDeps = TC{
 			Incidents:   []api.Incident{
 				{
 					File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/PingServlet2PDF.java",
-					Line: 15573,
+					Line: 85,
 				},
 			},
 		},
