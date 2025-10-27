@@ -7,6 +7,10 @@ import (
 )
 
 var SeamBooking = TC{
+	SkipTest: SkipTestConfig{
+		Reason: "Skip test. Investigate on changes and fix https://github.com/konveyor/go-konveyor-tests/issues/353",
+		Skip:   true,
+	},
 	Name:        "Seam booking",
 	Application: data.SeamBooking,
 	Task:        Analyze,

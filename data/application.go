@@ -48,6 +48,7 @@ var (
 		Repository: &api.Repository{
 			Kind: "git",
 			URL:  "https://github.com/konveyor-ecosystem/coolstore",
+			Branch: "konveyor-tests",
 		},
 	}
 	CoolstoreQuarkus = api.Application{
@@ -62,7 +63,8 @@ var (
 		Name: "Daytrader 7 EE application",
 		Repository: &api.Repository{
 			Kind: "git",
-			URL:  "https://github.com/WASdev/sample.daytrader7.git",
+			URL:  "https://github.com/konveyor-ecosystem/sample.daytrader7.git",
+			Branch: "ci-oct2025",
 		},
 	}
 	ApacheWicket = api.Application{

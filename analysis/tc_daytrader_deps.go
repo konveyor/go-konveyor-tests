@@ -18,7 +18,7 @@ var DaytraderWithDeps = TC{
 		},
 	},
 	Analysis: api.Analysis{
-		Effort: 318,
+		Effort: 378,
 		Insights: []api.Insight{
 			{
 				Category:    "mandatory",
@@ -34,6 +34,27 @@ var DaytraderWithDeps = TC{
 					{
 						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/PingServlet2PDF.java",
 						Line: 86,
+					},
+				},
+			},
+			{
+				Category: "potential",
+				Description: "Implicit name determination for sequences and tables associated with identifier generation has changed",
+				Effort: 3,
+				RuleSet: "eap8/eap7",
+				Rule: "hibernate-00005",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/entities/AccountDataBean.java",
+						Line: 53,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/entities/HoldingDataBean.java",
+						Line: 50,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/entities/OrderDataBean.java",
+						Line: 66,
 					},
 				},
 			},
@@ -68,6 +89,164 @@ var DaytraderWithDeps = TC{
 				},
 			},
 			{
+				Category: "potential",
+				Description: "`beans.xml` descriptor content is ignored",
+				Effort: 3,
+				RuleSet: "quarkus/springboot",
+				Rule: "cdi-to-quarkus-00030",
+				Incidents: []api.Incident{
+    				{
+    					File: "/shared/source/sample/daytrader-ee7-web/src/main/webapp/WEB-INF/beans.xml",
+    					Line: 17,
+					},
+				},
+			},
+			{
+				Category: "potential",
+				Description: "Producer annotation no longer required",
+				Effort: 1,
+				RuleSet: "quarkus/springboot",
+				Rule: "cdi-to-quarkus-00040",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/ExternalContextProducer.java",
+						Line: 24,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/TradeActionProducer.java",
+						Line: 24,
+					},
+				},
+			},
+			{
+				Category: "potential",
+				Description: "@Stateless annotation must be replaced",
+				Effort: 1,
+				RuleSet: "quarkus/springboot",
+				Rule: "ee-to-quarkus-00000",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 64,
+					},
+				},
+			},
+			{
+				Category: "optional",
+				Description: "HTTP Session data storage",
+				Effort: 3,
+				RuleSet: "cloud-readiness",
+				Rule: "session-00001",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/TradeServletAction.java",
+						Line: 320,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/TradeServletAction.java",
+						Line: 321,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/AccountDataJSF.java",
+						Line: 108,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/AccountDataJSF.java",
+						Line: 88,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/PortfolioJSF.java",
+						Line: 126,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/QuoteJSF.java",
+						Line: 97,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/QuoteJSF.java",
+						Line: 57,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/QuoteJSF.java",
+						Line: 63,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/TradeAppJSF.java",
+						Line: 63,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/TradeAppJSF.java",
+						Line: 64,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/TradeConfigJSF.java",
+						Line: 188,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/TradeConfigJSF.java",
+						Line: 189,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/TradeConfigJSF.java",
+						Line: 194,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/PingSession1.java",
+						Line: 89,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/PingSession2.java",
+						Line: 89,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/PingSession3.java",
+						Line: 134,
+					},
+				},
+			},
+			{
+				Category: "optional",
+				Description: "Move persistence config to a properties file",
+				Effort: 1,
+				RuleSet: "quarkus/springboot",
+				Rule: "persistence-to-quarkus-00000",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/resources/META-INF/persistence.xml",
+						Line: 0,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/META-INF/persistence.xml",
+						Line: 0,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/webapp/WEB-INF/classes/META-INF/persistence.xml",
+						Line: 0,
+					},
+				},
+			},
+			{
+				Category: "potential",
+				Description: "@Produces cannot annotate an EntityManager",
+				Effort: 1,
+				RuleSet: "quarkus/springboot",
+				Rule: "persistence-to-quarkus-00011",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/MarketSummarySingleton.java",
+						Line: 27,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 42,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2Entity.java",
+						Line: 20,
+					},
+				},
+			},
+			{
 				Category:    "mandatory",
 				Description: "Adopt Maven Surefire plugin",
 				Effort:      1,
@@ -84,7 +263,7 @@ var DaytraderWithDeps = TC{
 					},
 					{
 						File: "/shared/source/sample/daytrader-ee7/pom.xml",
-						Line: 2,
+						Line: 4,
 					},
 					{
 						File: "/shared/source/sample/pom.xml",
@@ -109,7 +288,7 @@ var DaytraderWithDeps = TC{
 					},
 					{
 						File: "/shared/source/sample/daytrader-ee7/pom.xml",
-						Line: 2,
+						Line: 4,
 					},
 					{
 						File: "/shared/source/sample/pom.xml",
@@ -192,8 +371,88 @@ var DaytraderWithDeps = TC{
 				Rule:        "ee-to-quarkus-00020",
 				Incidents: []api.Incident{
 					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/direct/TradeDirect.java",
-						Line: 1421,
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/DTBroker3MDB.java",
+						Line: 49,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 104,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/PingServletCDI.java",
+						Line: 41,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2Session2CMROne2Many.java",
+						Line: 50,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2Session2CMROne2One.java",
+						Line: 48,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2Session2Entity.java",
+						Line: 52,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2Session2Entity2JSP.java",
+						Line: 49,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2Session2EntityCollection.java",
+						Line: 54,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2SessionLocal.java",
+						Line: 52,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2SessionRemote.java",
+						Line: 52,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2TwoPhase.java",
+						Line: 50,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 160,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 217,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 248,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 262,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 268,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 302,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 398,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 413,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 546,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 646,
 					},
 				},
 			},
@@ -210,7 +469,7 @@ var DaytraderWithDeps = TC{
 					},
 					{
 						File: "/shared/source/sample/daytrader-ee7/pom.xml",
-						Line: 29,
+						Line: 31,
 					},
 					{
 						File: "/shared/source/sample/pom.xml",
@@ -235,7 +494,7 @@ var DaytraderWithDeps = TC{
 					},
 					{
 						File: "/shared/source/sample/daytrader-ee7/pom.xml",
-						Line: 2,
+						Line: 4,
 					},
 					{
 						File: "/shared/source/sample/pom.xml",
@@ -277,7 +536,7 @@ var DaytraderWithDeps = TC{
 					},
 					{
 						File: "/shared/source/sample/daytrader-ee7/pom.xml",
-						Line: 2,
+						Line: 4,
 					},
 					{
 						File: "/shared/source/sample/pom.xml",
@@ -302,7 +561,7 @@ var DaytraderWithDeps = TC{
 					},
 					{
 						File: "/shared/source/sample/daytrader-ee7/pom.xml",
-						Line: 2,
+						Line: 4,
 					},
 					{
 						File: "/shared/source/sample/pom.xml",
@@ -431,7 +690,7 @@ var DaytraderWithDeps = TC{
 					},
 					{
 						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/websocket/MarketSummaryWebSocket.java",
-						Line: 25,
+						Line: 30,
 					},
 					{
 						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/websocket/RecentStockChangeList.java",
@@ -456,7 +715,7 @@ var DaytraderWithDeps = TC{
 					},
 					{
 						File: "/shared/source/sample/daytrader-ee7/pom.xml",
-						Line: 2,
+						Line: 4,
 					},
 					{
 						File: "/shared/source/sample/pom.xml",
