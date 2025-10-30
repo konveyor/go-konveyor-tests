@@ -253,15 +253,6 @@ func verifyAnalysis(t TaskTest, tc TC, debug bool) {
 	// Test issues.
 	filterIssues(&gotAnalysis)
 
-	// Filter out non-mandatory insights, TODO(maufart): quickfix until decide if we test potential insights too
-	var mandatoryInsights []api.Insight
-	for _, insight := range gotAnalysis.Insights {
-		if insight.Category == "mandatory" {
-			mandatoryInsights = append(mandatoryInsights, insight)
-		}
-	}
-	gotAnalysis.Insights = mandatoryInsights
-
 	if debug {
 		DumpAnalysis(t.T, tc, gotAnalysis)
 	}
