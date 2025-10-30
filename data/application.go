@@ -25,7 +25,8 @@ var (
 		Name: "Book Server",
 		Repository: &api.Repository{
 			Kind: "git",
-			URL:  "https://github.com/ibraginsky/book-server",
+			URL:  "https://github.com/konveyor-ecosystem/book-server",
+			Branch: "ci-oct2025",	// branch is a Tag name, similar in following apps
 		},
 	}
 	TackleTestappPublic = api.Application{
@@ -33,6 +34,7 @@ var (
 		Repository: &api.Repository{
 			Kind: "git",
 			URL:  "https://github.com/konveyor/tackle-testapp-public",
+			Branch: "ci-2024",
 		},
 	}
 	CustomerTomcatLegacy = api.Application{
@@ -41,6 +43,7 @@ var (
 			Kind: "git",
 			URL:  "https://github.com/konveyor/example-applications.git",
 			Path: "example-1",
+			Branch: "ci-2023",
 		},
 	}
 	Coolstore = api.Application{
@@ -48,7 +51,7 @@ var (
 		Repository: &api.Repository{
 			Kind: "git",
 			URL:  "https://github.com/konveyor-ecosystem/coolstore",
-			Branch: "konveyor-tests",
+			Branch: "ci-2024",
 		},
 	}
 	CoolstoreQuarkus = api.Application{
@@ -56,7 +59,7 @@ var (
 		Repository: &api.Repository{
 			Kind: "git",
 			URL:  "https://github.com/konveyor-ecosystem/coolstore",
-			Branch: "quarkus",
+			Branch: "ci-2024-quarkus",
 		},
 	}
 	Daytrader = api.Application{
@@ -71,8 +74,9 @@ var (
 		Name: "Apache Wicket",
 		Repository: &api.Repository{
 			Kind: "git",
-			URL:  "https://github.com/windup/windup-sample-apps.git",
+			URL:  "https://github.com/konveyor-ecosystem/windup-sample-apps.git",
 			Path: "test-files/src_example/org/apache/wicket",
+			Branch: "ci-2020",
 		},
 	}
 	PetclinicHazelcast = api.Application{
@@ -80,17 +84,17 @@ var (
 		Description: "Spring framework app",
 		Repository: &api.Repository{
 			Kind:   "git",
-			URL:    "https://github.com/savitharaghunathan/spring-framework-petclinic.git",
-			Branch: "legacy",
+			URL:    "https://github.com/konveyor/spring-framework-petclinic.git",
+			Branch: "ci-2023-legacy",
 		},
 	}
 	SeamBooking = api.Application{
 		Name: "Seam booking 5.2",
 		Repository: &api.Repository{
 			Kind:   "git",
-			URL:    "https://github.com/windup/windup.git",
+			URL:    "https://github.com/konveyor-ecosystem/windup.git",
 			Path:   "test-files/seam-booking-5.2",
-			Branch: "master",
+			Branch: "ci-2024",
 		},
 	}
 
