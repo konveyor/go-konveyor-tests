@@ -84,7 +84,7 @@ var (
 		Description: "Spring framework app",
 		Repository: &api.Repository{
 			Kind:   "git",
-			URL:    "https://github.com/savitharaghunathan/spring-framework-petclinic.git",
+			URL:    "https://github.com/konveyor/spring-framework-petclinic.git",
 			Branch: "ci-2023-legacy",
 		},
 	}
@@ -92,7 +92,7 @@ var (
 		Name: "Seam booking 5.2",
 		Repository: &api.Repository{
 			Kind:   "git",
-			URL:    "https://github.com/windup/windup.git",
+			URL:    "https://github.com/konveyor-ecosystem/windup.git",
 			Path:   "test-files/seam-booking-5.2",
 			Branch: "ci-2024",
 		},
