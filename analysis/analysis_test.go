@@ -192,7 +192,7 @@ func TestApplicationAnalysis(t *testing.T) {
 				}
 
 				if task.State == "Running" {
-					t.Errorf("Timed out running the test. Errors: %+v, details: %+v", task.Errors, task.Activity)
+					t.Errorf("Timed out running the test. Errors: %s\nActivity: %+v", formatTaskErrors(task.Errors), task.Activity)
 					err = printTask(task, debugDirectory)
 					if err != nil {
 						t.Error(err)
@@ -202,7 +202,7 @@ func TestApplicationAnalysis(t *testing.T) {
 				}
 
 				if task.State != "Succeeded" || len(task.Errors) > 0 {
-					t.Errorf("Analyze Task failed. Errors: %+v, details: %+v", task.Errors, task.Activity)
+					t.Errorf("Analyze Task failed. Errors: %s\nActivity: %+v", formatTaskErrors(task.Errors), task.Activity)
 					err = printTask(task, debugDirectory)
 					if err != nil {
 						t.Error(err)
@@ -456,6 +456,18 @@ func dumpTaskAttachments(task *api.Task, dir string) (err error) {
 		}
 	}
 	return
+}
+// formatTaskErrors formats task errors for better readability
+func formatTaskErrors(errors []api.TaskError) string {
+	if len(errors) == 0 {
+		return "none"
+	}
+	var result strings.Builder
+	result.WriteString("\n")
+	for i, err := range errors {
+		result.WriteString(fmt.Sprintf("  [%d] Severity: %s, Description: %s\n", i+1, err.Severity, err.Description))
+	}
+	return result.String()
 }
 
 // create dir, set filename
