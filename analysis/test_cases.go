@@ -16,6 +16,7 @@ var Tier0TestCases = []TC{
 // List of applications with expected analysis outputs.
 var Tier1TestCases = []TC{
 	BookServerVerified,
+	BookServerSource,
 	CoolstoreWithDepsQuarkus,
 	AdministracionEfectivoBinary, // Binary upload
 
