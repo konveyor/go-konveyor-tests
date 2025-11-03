@@ -3,6 +3,10 @@ package analysis
 import "github.com/konveyor/tackle2-hub/api"
 
 var BookServerSource = TC{
+	SkipTest: SkipTestConfig{
+		Reason: "Skip test. Fails due to https://github.com/konveyor/analyzer-lsp/issues/936",
+		Skip:   true,
+	},
 	Name: "book-server_source",
 	Task: Analyze,
 	Analysis: api.Analysis{
