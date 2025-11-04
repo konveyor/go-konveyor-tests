@@ -856,27 +856,6 @@ var DaytraderWithDeps = TC{
 			},
 		},
 		{
-			Category:    "potential",
-			Description: "@Produces cannot annotate an EntityManager",
-			Effort:      1,
-			RuleSet:     "quarkus/springboot",
-			Rule:        "persistence-to-quarkus-00011",
-			Incidents:   []api.Incident{
-				{
-					File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/MarketSummarySingleton.java",
-					Line: 27,
-				},
-				{
-					File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
-					Line: 42,
-				},
-				{
-					File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2Entity.java",
-					Line: 20,
-				},
-			},
-		},
-		{
 			Category:    "mandatory",
 			Description: "Remote EJBs are not supported in Quarkus",
 			Effort:      1,
