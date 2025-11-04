@@ -105,6 +105,21 @@ func TestApplicationAnalysis(t *testing.T) {
 				return
 			}
 
+			// Load analysis output from YAML file if it exists
+			analysisYamlPath := filepath.Join(ciTempDir, "shared_tests", testcase.Name, "output.yaml")
+			if _, err := os.Stat(analysisYamlPath); err == nil {
+				var analysisOutput OutputYamlData
+				err = loadYAMLFromFile(analysisYamlPath, &analysisOutput)
+				if err != nil {
+					t.Fatalf("Failed to load analysis output from YAML file: %v", err)
+				}
+				err = populateAnalysisOutput(&tc, analysisOutput)
+				if err != nil {
+					t.Error(err)
+					return
+				}
+			}
+
 			// Prepare Identities, e.g. for Maven repo
 			for idx := range tc.Identities {
 				identity := tc.Identities[idx]
@@ -308,7 +323,7 @@ func verifyAnalysis(t TaskTest, tc TC, debug bool) {
 				})
 				for j, gotInc := range got.Incidents {
 					expectedInc := expected.Incidents[j]
-					if gotInc.File != expectedInc.File {
+					if !strings.HasSuffix(gotInc.File, expectedInc.File) {
 						t.Errorf("\nDifferent incident.File error for rule %+v.\nGot %+v, expected %+v.\n\n", got.Rule, gotInc.File, expectedInc.File)
 					}
 					if gotInc.Line != expectedInc.Line {
