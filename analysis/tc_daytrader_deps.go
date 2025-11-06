@@ -18,8 +18,25 @@ var DaytraderWithDeps = TC{
 		},
 	},
 	Analysis: api.Analysis{
-		Effort: 378,
+		Effort: 487,
 		Insights: []api.Insight{
+			{
+				Category:    "mandatory",
+				Description: "File system - Java IO",
+				Effort:      1,
+				RuleSet:     "cloud-readiness",
+				Rule:        "local-storage-00001",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/TradeBuildDB.java",
+						Line: 43,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/TradeScenarioServlet.java",
+						Line: 125,
+					},
+				},
+			},
 			{
 				Category:    "mandatory",
 				Description: "File system - java.net.URL/URI",
@@ -51,19 +68,341 @@ var DaytraderWithDeps = TC{
 				},
 			},
 			{
-				Category:    "mandatory",
-				Description: "File system - Java IO",
-				Effort:      1,
+				Category:    "optional",
+				Description: "HTTP Session data storage",
+				Effort:      3,
 				RuleSet:     "cloud-readiness",
-				Rule:        "local-storage-00001",
+				Rule:        "session-00001",
 				Incidents: []api.Incident{
 					{
-						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/TradeBuildDB.java",
-						Line: 43,
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/TradeServletAction.java",
+						Line: 320,
 					},
 					{
-						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/TradeScenarioServlet.java",
-						Line: 125,
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/TradeServletAction.java",
+						Line: 321,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/AccountDataJSF.java",
+						Line: 88,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/AccountDataJSF.java",
+						Line: 108,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/PortfolioJSF.java",
+						Line: 126,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/QuoteJSF.java",
+						Line: 57,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/QuoteJSF.java",
+						Line: 63,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/QuoteJSF.java",
+						Line: 97,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/TradeAppJSF.java",
+						Line: 63,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/TradeAppJSF.java",
+						Line: 64,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/TradeConfigJSF.java",
+						Line: 188,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/TradeConfigJSF.java",
+						Line: 189,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/TradeConfigJSF.java",
+						Line: 194,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/PingSession1.java",
+						Line: 89,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/PingSession2.java",
+						Line: 89,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/PingSession3.java",
+						Line: 134,
+					},
+				},
+			},
+			{
+				Category:    "potential",
+				Description: "Implicit name determination for sequences and tables associated with identifier generation has changed",
+				Effort:      3,
+				RuleSet:     "eap8/eap7",
+				Rule:        "hibernate-00005",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/entities/AccountDataBean.java",
+						Line: 53,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/entities/HoldingDataBean.java",
+						Line: 50,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/entities/OrderDataBean.java",
+						Line: 66,
+					},
+				},
+			},
+			{
+				Category:    "potential",
+				Description: "`beans.xml` descriptor content is ignored",
+				Effort:      3,
+				RuleSet:     "quarkus/springboot",
+				Rule:        "cdi-to-quarkus-00030",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/webapp/WEB-INF/beans.xml",
+						Line: 17,
+					},
+				},
+			},
+			{
+				Category:    "potential",
+				Description: "@Produces annotation no longer required",
+				Effort:      1,
+				RuleSet:     "quarkus/springboot",
+				Rule:        "cdi-to-quarkus-00040",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/ExternalContextProducer.java",
+						Line: 24,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/TradeActionProducer.java",
+						Line: 24,
+					},
+				},
+			},
+			{
+				Category:    "potential",
+				Description: "@Stateless annotation must be replaced",
+				Effort:      1,
+				RuleSet:     "quarkus/springboot",
+				Rule:        "ee-to-quarkus-00000",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 64,
+					},
+				},
+			},
+			{
+				Category:    "mandatory",
+				Description: "@Stateful annotation must be replaced",
+				Effort:      3,
+				RuleSet:     "quarkus/springboot",
+				Rule:        "ee-to-quarkus-00010",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/PingEJBLocal.java",
+						Line: 24,
+					},
+				},
+			},
+			{
+				Category:    "mandatory",
+				Description: "Method should be marked as @Transactional",
+				Effort:      3,
+				RuleSet:     "quarkus/springboot",
+				Rule:        "ee-to-quarkus-00020",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/DTBroker3MDB.java",
+						Line: 49,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 104,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 160,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 217,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 248,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 262,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 268,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 302,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 398,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 413,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 546,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 646,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/PingServletCDI.java",
+						Line: 41,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2Session2CMROne2Many.java",
+						Line: 50,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2Session2CMROne2One.java",
+						Line: 48,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2Session2Entity.java",
+						Line: 52,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2Session2Entity2JSP.java",
+						Line: 49,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2Session2EntityCollection.java",
+						Line: 54,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2SessionLocal.java",
+						Line: 52,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2SessionRemote.java",
+						Line: 52,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2TwoPhase.java",
+						Line: 50,
+					},
+				},
+			},
+			{
+				Category:    "mandatory",
+				Description: "The expected project artifact's extension is `jar`",
+				Effort:      1,
+				RuleSet:     "quarkus/springboot",
+				Rule:        "javaee-pom-to-quarkus-00000",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/pom.xml",
+						Line: 6,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7/pom.xml",
+						Line: 31,
+					},
+					{
+						File: "/shared/source/sample/pom.xml",
+						Line: 9,
+					},
+				},
+			},
+			{
+				Category:    "mandatory",
+				Description: "Adopt Quarkus BOM",
+				Effort:      1,
+				RuleSet:     "quarkus/springboot",
+				Rule:        "javaee-pom-to-quarkus-00010",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/pom.xml",
+						Line: 3,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/pom.xml",
+						Line: 3,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7/pom.xml",
+						Line: 4,
+					},
+					{
+						File: "/shared/source/sample/pom.xml",
+						Line: 5,
+					},
+				},
+			},
+			{
+				Category:    "mandatory",
+				Description: "Adopt Quarkus Maven plugin",
+				Effort:      1,
+				RuleSet:     "quarkus/springboot",
+				Rule:        "javaee-pom-to-quarkus-00020",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/pom.xml",
+						Line: 3,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/pom.xml",
+						Line: 3,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7/pom.xml",
+						Line: 4,
+					},
+					{
+						File: "/shared/source/sample/pom.xml",
+						Line: 5,
+					},
+				},
+			},
+			{
+				Category:    "mandatory",
+				Description: "Adopt Maven Compiler plugin",
+				Effort:      1,
+				RuleSet:     "quarkus/springboot",
+				Rule:        "javaee-pom-to-quarkus-00030",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/pom.xml",
+						Line: 3,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/pom.xml",
+						Line: 3,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7/pom.xml",
+						Line: 4,
+					},
+					{
+						File: "/shared/source/sample/pom.xml",
+						Line: 5,
 					},
 				},
 			},
@@ -73,6 +412,31 @@ var DaytraderWithDeps = TC{
 				Effort:      1,
 				RuleSet:     "quarkus/springboot",
 				Rule:        "javaee-pom-to-quarkus-00040",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/pom.xml",
+						Line: 3,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/pom.xml",
+						Line: 3,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7/pom.xml",
+						Line: 4,
+					},
+					{
+						File: "/shared/source/sample/pom.xml",
+						Line: 5,
+					},
+				},
+			},
+			{
+				Category:    "mandatory",
+				Description: "Adopt Maven Failsafe plugin",
+				Effort:      1,
+				RuleSet:     "quarkus/springboot",
+				Rule:        "javaee-pom-to-quarkus-00050",
 				Incidents: []api.Incident{
 					{
 						File: "/shared/source/sample/daytrader-ee7-ejb/pom.xml",
@@ -118,208 +482,61 @@ var DaytraderWithDeps = TC{
 				},
 			},
 			{
-				Category:    "mandatory",
-				Description: "JMS' Queue must be replaced with an Emitter",
+				Category:    "optional",
+				Description: "Mixed JDBC and JPA usage detected",
+				Effort:      5,
+				RuleSet:     "quarkus/springboot",
+				Rule:        "jdbc-jpa-mixed-to-quarkus-00001",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/direct/KeySequenceDirect.java",
+						Line: 19,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/direct/TradeDirect.java",
+						Line: 21,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/MarketSummarySingleton.java",
+						Line: 27,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 42,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2Entity.java",
+						Line: 20,
+					},
+				},
+			},
+			{
+				Category:    "optional",
+				Description: "Direct JDBC Connection usage detected",
 				Effort:      3,
 				RuleSet:     "quarkus/springboot",
-				Rule:        "jms-to-reactive-quarkus-00030",
+				Rule:        "jdbc-jpa-mixed-to-quarkus-00002",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/direct/KeySequenceDirect.java",
+						Line: 18,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/direct/TradeDirect.java",
+						Line: 19,
+					},
+				},
+			},
+			{
+				Category:    "optional",
+				Description: "Statement usage should be reviewed",
+				Effort:      3,
+				RuleSet:     "quarkus/springboot",
+				Rule:        "jdbc-jpa-mixed-to-quarkus-00003",
 				Incidents: []api.Incident{
 					{
 						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/direct/TradeDirect.java",
-						Line: 2044,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/direct/TradeDirect.java",
-						Line: 2047,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/direct/TradeDirect.java",
-						Line: 2095,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/direct/TradeDirect.java",
-						Line: 33,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
-						Line: 37,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
-						Line: 79,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2MDBQueue.java",
 						Line: 24,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2MDBQueue.java",
-						Line: 58,
-					},
-				},
-			},
-			{
-				Category:    "mandatory",
-				Description: "Remote EJBs are not supported in Quarkus",
-				Effort:      1,
-				RuleSet:     "quarkus/springboot",
-				Rule:        "remote-ejb-to-quarkus-00000",
-				Incidents: []api.Incident{
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBRemote.java",
-						Line: 26,
-					},
-				},
-			},
-			{
-				Category:    "mandatory",
-				Description: "@Stateful annotation must be replaced",
-				Effort:      3,
-				RuleSet:     "quarkus/springboot",
-				Rule:        "ee-to-quarkus-00010",
-				Incidents: []api.Incident{
-					{
-						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/PingEJBLocal.java",
-						Line: 24,
-					},
-				},
-			},
-			{
-				Category:    "mandatory",
-				Description: "Method should be marked as @Transactional",
-				Effort:      3,
-				RuleSet:     "quarkus/springboot",
-				Rule:        "ee-to-quarkus-00020",
-				Incidents: []api.Incident{
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/DTBroker3MDB.java",
-						Line: 49,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
-						Line: 104,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/PingServletCDI.java",
-						Line: 41,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2Session2CMROne2Many.java",
-						Line: 50,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2Session2CMROne2One.java",
-						Line: 48,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2Session2Entity.java",
-						Line: 52,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2Session2Entity2JSP.java",
-						Line: 49,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2Session2EntityCollection.java",
-						Line: 54,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2SessionLocal.java",
-						Line: 52,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2SessionRemote.java",
-						Line: 52,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2TwoPhase.java",
-						Line: 50,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
-						Line: 160,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
-						Line: 217,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
-						Line: 248,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
-						Line: 262,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
-						Line: 268,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
-						Line: 302,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
-						Line: 398,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
-						Line: 413,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
-						Line: 546,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
-						Line: 646,
-					},
-				},
-			},
-			{
-				Category:    "mandatory",
-				Description: "The expected project artifact's extension is `jar`",
-				Effort:      1,
-				RuleSet:     "quarkus/springboot",
-				Rule:        "javaee-pom-to-quarkus-00000",
-				Incidents: []api.Incident{
-					{
-						File: "/shared/source/sample/daytrader-ee7-web/pom.xml",
-						Line: 6,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7/pom.xml",
-						Line: 31,
-					},
-					{
-						File: "/shared/source/sample/pom.xml",
-						Line: 9,
-					},
-				},
-			},
-			{
-				Category:    "mandatory",
-				Description: "Adopt Quarkus Maven plugin",
-				Effort:      1,
-				RuleSet:     "quarkus/springboot",
-				Rule:        "javaee-pom-to-quarkus-00020",
-				Incidents: []api.Incident{
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/pom.xml",
-						Line: 3,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-web/pom.xml",
-						Line: 3,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7/pom.xml",
-						Line: 4,
-					},
-					{
-						File: "/shared/source/sample/pom.xml",
-						Line: 5,
 					},
 				},
 			},
@@ -342,51 +559,83 @@ var DaytraderWithDeps = TC{
 			},
 			{
 				Category:    "mandatory",
-				Description: "Adopt Maven Compiler plugin",
-				Effort:      1,
+				Description: "JMS' Queue must be replaced with an Emitter",
+				Effort:      3,
 				RuleSet:     "quarkus/springboot",
-				Rule:        "javaee-pom-to-quarkus-00030",
+				Rule:        "jms-to-reactive-quarkus-00030",
 				Incidents: []api.Incident{
 					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/pom.xml",
-						Line: 3,
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/direct/TradeDirect.java",
+						Line: 33,
 					},
 					{
-						File: "/shared/source/sample/daytrader-ee7-web/pom.xml",
-						Line: 3,
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/direct/TradeDirect.java",
+						Line: 2044,
 					},
 					{
-						File: "/shared/source/sample/daytrader-ee7/pom.xml",
-						Line: 4,
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/direct/TradeDirect.java",
+						Line: 2047,
 					},
 					{
-						File: "/shared/source/sample/pom.xml",
-						Line: 5,
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/direct/TradeDirect.java",
+						Line: 2095,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 37,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 79,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2MDBQueue.java",
+						Line: 24,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2MDBQueue.java",
+						Line: 58,
 					},
 				},
 			},
 			{
 				Category:    "mandatory",
-				Description: "Adopt Maven Failsafe plugin",
-				Effort:      1,
+				Description: "JMS' Topic must be replaced with an Emitter",
+				Effort:      3,
 				RuleSet:     "quarkus/springboot",
-				Rule:        "javaee-pom-to-quarkus-00050",
+				Rule:        "jms-to-reactive-quarkus-00040",
 				Incidents: []api.Incident{
 					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/pom.xml",
-						Line: 3,
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/direct/TradeDirect.java",
+						Line: 35,
 					},
 					{
-						File: "/shared/source/sample/daytrader-ee7-web/pom.xml",
-						Line: 3,
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/direct/TradeDirect.java",
+						Line: 2062,
 					},
 					{
-						File: "/shared/source/sample/daytrader-ee7/pom.xml",
-						Line: 4,
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/direct/TradeDirect.java",
+						Line: 2065,
 					},
 					{
-						File: "/shared/source/sample/pom.xml",
-						Line: 5,
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/direct/TradeDirect.java",
+						Line: 2099,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 40,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 76,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2MDBTopic.java",
+						Line: 25,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2MDBTopic.java",
+						Line: 58,
 					},
 				},
 			},
@@ -447,10 +696,6 @@ var DaytraderWithDeps = TC{
 					},
 					{
 						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
-						Line: 41,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
 						Line: 36,
 					},
 					{
@@ -468,6 +713,10 @@ var DaytraderWithDeps = TC{
 					{
 						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
 						Line: 40,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 41,
 					},
 					{
 						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2MDBQueue.java",
@@ -521,67 +770,168 @@ var DaytraderWithDeps = TC{
 			},
 			{
 				Category:    "mandatory",
-				Description: "Adopt Quarkus BOM",
-				Effort:      1,
+				Description: "JNDI InitialContext is not supported in Quarkus",
+				Effort:      5,
 				RuleSet:     "quarkus/springboot",
-				Rule:        "javaee-pom-to-quarkus-00010",
+				Rule:        "jndi-to-quarkus-00001",
 				Incidents: []api.Incident{
 					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/pom.xml",
-						Line: 3,
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/TradeAction.java",
+						Line: 114,
 					},
 					{
-						File: "/shared/source/sample/daytrader-ee7-web/pom.xml",
-						Line: 3,
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/direct/TradeDirect.java",
+						Line: 2029,
 					},
 					{
-						File: "/shared/source/sample/daytrader-ee7/pom.xml",
-						Line: 4,
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/util/CompleteOrderThread.java",
+						Line: 47,
 					},
 					{
-						File: "/shared/source/sample/pom.xml",
-						Line: 5,
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/PingCDIBean.java",
+						Line: 40,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/PingWebSocketJson.java",
+						Line: 57,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2Session2Entity.java",
+						Line: 114,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2Session2Entity2JSP.java",
+						Line: 106,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2SessionLocal.java",
+						Line: 121,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2SessionRemote.java",
+						Line: 120,
+					},
+				},
+			},
+			{
+				Category:    "optional",
+				Description: "Move persistence config to a properties file",
+				Effort:      1,
+				RuleSet:     "quarkus/springboot",
+				Rule:        "persistence-to-quarkus-00000",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/resources/META-INF/persistence.xml",
+						Line: 0,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/META-INF/persistence.xml",
+						Line: 0,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/webapp/WEB-INF/classes/META-INF/persistence.xml",
+						Line: 0,
+					},
+				},
+			},
+			{
+				Category:    "optional",
+				Description: "Replace @PersistenceContext with @Inject",
+				Effort:      1,
+				RuleSet:     "quarkus/springboot",
+				Rule:        "persistence-to-quarkus-00010",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/MarketSummarySingleton.java",
+						Line: 45,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 98,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2Entity.java",
+						Line: 49,
 					},
 				},
 			},
 			{
 				Category:    "mandatory",
-				Description: "JMS' Topic must be replaced with an Emitter",
-				Effort:      3,
+				Description: "Remote EJBs are not supported in Quarkus",
+				Effort:      1,
 				RuleSet:     "quarkus/springboot",
-				Rule:        "jms-to-reactive-quarkus-00040",
+				Rule:        "remote-ejb-to-quarkus-00000",
 				Incidents: []api.Incident{
 					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/direct/TradeDirect.java",
-						Line: 2062,
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBRemote.java",
+						Line: 26,
 					},
+				},
+			},
+			{
+				Category:    "mandatory",
+				Description: "EntityManager persistence operations require @Transactional in Quarkus",
+				Effort:      3,
+				RuleSet:     "quarkus/springboot",
+				Rule:        "transaction-to-quarkus-00001",
+				Incidents: []api.Incident{
 					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/direct/TradeDirect.java",
-						Line: 2065,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/direct/TradeDirect.java",
-						Line: 2099,
-					},
-					{
-						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/direct/TradeDirect.java",
-						Line: 35,
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 184,
 					},
 					{
 						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
-						Line: 40,
+						Line: 406,
 					},
 					{
 						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
-						Line: 76,
+						Line: 601,
 					},
 					{
-						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2MDBTopic.java",
-						Line: 25,
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 602,
 					},
 					{
-						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/prims/ejb3/PingServlet2MDBTopic.java",
-						Line: 58,
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 661,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 671,
+					},
+				},
+			},
+			{
+				Category:    "mandatory",
+				Description: "EntityManager merge operations require @Transactional in Quarkus",
+				Effort:      3,
+				RuleSet:     "quarkus/springboot",
+				Rule:        "transaction-to-quarkus-00002",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 464,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 536,
+					},
+				},
+			},
+			{
+				Category:    "mandatory",
+				Description: "EntityManager remove operations require @Transactional in Quarkus",
+				Effort:      3,
+				RuleSet:     "quarkus/springboot",
+				Rule:        "transaction-to-quarkus-00003",
+				Incidents: []api.Incident{
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 304,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-ejb/src/main/java/com/ibm/websphere/samples/daytrader/ejb3/TradeSLSBBean.java",
+						Line: 387,
 					},
 				},
 			},
