@@ -18,7 +18,7 @@ var DaytraderWithDeps = TC{
 		},
 	},
 	Analysis: api.Analysis{
-		Effort: 487,
+		Effort: 489,
 		Insights: []api.Insight{
 			{
 				Category:    "mandatory",
@@ -34,6 +34,14 @@ var DaytraderWithDeps = TC{
 					{
 						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/TradeScenarioServlet.java",
 						Line: 125,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/TradeConfigJSF.java",
+						Line: 204,
+					},
+					{
+						File: "/shared/source/sample/daytrader-ee7-web/src/main/java/com/ibm/websphere/samples/daytrader/web/jsf/TradeConfigJSF.java",
+						Line: 257,
 					},
 				},
 			},
