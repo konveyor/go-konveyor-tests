@@ -20,6 +20,7 @@ var TackleTestappPublicBinary = TC{
 		},
 	},
 	Binary: true,
+	WithDeps: true,
 	Analysis: api.Analysis{
 		Effort: 2,
 		Insights: []api.Insight{
