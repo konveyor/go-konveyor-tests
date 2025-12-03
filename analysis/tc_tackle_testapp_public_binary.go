@@ -32,7 +32,7 @@ var TackleTestappPublicBinary = TC{
 				Rule:        "local-storage-00001",
 				Incidents: []api.Incident{
 					{
-						File:    "/shared/bin/java-project/src/main/java/io/konveyor/demo/config/ApplicationConfiguration.java",
+						File:    "/cache/m2/io/konveyor/demo/configuration-utils/1.0.0/io/konveyor/demo/config/ApplicationConfiguration.java",
 						Line:    14,
 						Message: "An application running inside a container could lose access to a file in local storage.",
 					},
@@ -46,7 +46,7 @@ var TackleTestappPublicBinary = TC{
 				Rule:        "hardcoded-ip-address",
 				Incidents: []api.Incident{
 					{
-						File:    "/shared/bin/java-project/customers-tomcat-0-0-1-20240913-093117-1-war-exploded/WEB-INF/classes/persistence.properties",
+						File:    "/shared/bin/java-project/src/main/java/persistence.properties",
 						Line:    2,
 						Message: "When migrating environments, hard-coded IP addresses may need to be modified or eliminated.",
 					},
@@ -67,5 +67,22 @@ var TackleTestappPublicBinary = TC{
 		{Name: "Properties", Category: api.Ref{Name: "Embedded"}},
 		{Name: "Properties", Category: api.Ref{Name: "Other"}},
 		{Name: "Properties", Category: api.Ref{Name: "Sustain"}},
+		{Name: "Micrometer", Category: api.Ref{Name: "Embedded"}},
+		{Name: "Micrometer", Category: api.Ref{Name: "Execute"}},
+		{Name: "Micrometer", Category: api.Ref{Name: "Integration"}},
+		{Name: "Spring", Category: api.Ref{Name: "Embedded"}},
+		{Name: "Spring", Category: api.Ref{Name: "Spring"}},
+		{Name: "Observability", Category: api.Ref{Name: "Spring"}},
+		{Name: "Sustain", Category: api.Ref{Name: "Spring"}},
+		{Name: "Embedded", Category: api.Ref{Name: "Spring"}},
+		{Name: "Inversion", Category: api.Ref{Name: "Spring"}},
+		{Name: "Embedded", Category: api.Ref{Name: "Spring"}},
+		{Name: "Persistence", Category: api.Ref{Name: "Spring"}},
+		{Name: "Store", Category: api.Ref{Name: "Embedded"}},
+		{Name: "Spring", Category: api.Ref{Name: "MVC"}},
+		{Name: "Spring", Category: api.Ref{Name: "View"}},
+		{Name: "Spring", Category: api.Ref{Name: "Embedded"}},
+		{Name: "Spring", Category: api.Ref{Name: "View"}},
+		{Name: "Spring", Category: api.Ref{Name: "Web"}},
 	},
 }
