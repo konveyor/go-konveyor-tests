@@ -27,7 +27,7 @@ jobs:
     if: ${{ github.ref == 'refs/heads/release-0.8' || github.event.pull_request.base.ref == 'release-0.8' }}
     with:
       tag: release-0.8
-      operator_tag: v0.8.0-beta.4
+      operator_tag: v0.8.1-beta.2
       api_tests_ref: ${{ github.ref }}
       api_tests_tiers: DEBUG=1 make test-tier2
       run_api_tests: true
