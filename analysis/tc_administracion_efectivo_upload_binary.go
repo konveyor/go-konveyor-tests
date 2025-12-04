@@ -8,7 +8,7 @@ import (
 
 var AdministracionEfectivoBinary = TC{
 	SkipTest: SkipTestConfig{
-		Reason: "Skip binary test. https://issues.redhat.com/browse/MTA-5588",
+		Reason: "Skip binary test. https://github.com/konveyor/analyzer-lsp/issues/906",
 		Skip:   true,
 	},
 	Name:        "administracion-efectivo",
