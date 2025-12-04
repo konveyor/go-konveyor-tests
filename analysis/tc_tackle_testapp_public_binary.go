@@ -78,6 +78,7 @@ var TackleTestappPublicBinary = TC{
 		{Name: "Spring Boot Actuator", Category: api.Ref{Name: "Sustain"}},
 		{Name: "Spring Data JPA", Category: api.Ref{Name: "Persistence"}},
 		{Name: "Spring Data JPA", Category: api.Ref{Name: "Store"}},
+		{Name: "Spring Data JPA", Category: api.Ref{Name: "Embedded"}},
 		{Name: "Spring MVC", Category: api.Ref{Name: "Embedded"}},
 		{Name: "Spring MVC", Category: api.Ref{Name: "MVC"}},
 		{Name: "Spring MVC", Category: api.Ref{Name: "View"}},
