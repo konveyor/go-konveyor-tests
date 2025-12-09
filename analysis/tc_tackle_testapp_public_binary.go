@@ -8,10 +8,6 @@ import (
 )
 
 var TackleTestappPublicBinary = TC{
-	SkipTest: SkipTestConfig{
-		Reason: "Skip binary test. https://issues.redhat.com/browse/MTA-5588",
-		Skip:   true,
-	},
 	Name:        "tackle-testapp-binary",
 	Application: data.TackleTestappPublicBinary,
 	Identities: []api.Identity{
@@ -24,6 +20,7 @@ var TackleTestappPublicBinary = TC{
 		},
 	},
 	Binary: true,
+	WithDeps: true,
 	Analysis: api.Analysis{
 		Effort: 2,
 		Insights: []api.Insight{
@@ -35,7 +32,7 @@ var TackleTestappPublicBinary = TC{
 				Rule:        "local-storage-00001",
 				Incidents: []api.Incident{
 					{
-						File:    "/shared/bin/java-project/src/main/java/io/konveyor/demo/config/ApplicationConfiguration.java",
+						File:    "/cache/m2/io/konveyor/demo/configuration-utils/1.0.0/io/konveyor/demo/config/ApplicationConfiguration.java",
 						Line:    14,
 						Message: "An application running inside a container could lose access to a file in local storage.",
 					},
@@ -49,7 +46,7 @@ var TackleTestappPublicBinary = TC{
 				Rule:        "hardcoded-ip-address",
 				Incidents: []api.Incident{
 					{
-						File:    "/shared/bin/java-project/customers-tomcat-0-0-1-20240913-093117-1-war-exploded/WEB-INF/classes/persistence.properties",
+						File:    "/shared/bin/java-project/src/main/java/persistence.properties",
 						Line:    2,
 						Message: "When migrating environments, hard-coded IP addresses may need to be modified or eliminated.",
 					},
@@ -59,16 +56,34 @@ var TackleTestappPublicBinary = TC{
 	},
 	AnalysisTags: []api.Tag{
 		{Name: "EJB XML", Category: api.Ref{Name: "Bean"}},
-		{Name: "Servlet", Category: api.Ref{Name: "HTTP"}},
-		{Name: "JPA named queries", Category: api.Ref{Name: "Persistence"}},
 		{Name: "EJB XML", Category: api.Ref{Name: "Connect"}},
 		{Name: "EJB XML", Category: api.Ref{Name: "Java EE"}},
-		{Name: "JPA named queries", Category: api.Ref{Name: "Java EE"}},
+		{Name: "Servlet", Category: api.Ref{Name: "HTTP"}},
 		{Name: "Servlet", Category: api.Ref{Name: "Java EE"}},
 		{Name: "Servlet", Category: api.Ref{Name: "Connect"}},
+		{Name: "JPA named queries", Category: api.Ref{Name: "Persistence"}},
+		{Name: "JPA named queries", Category: api.Ref{Name: "Java EE"}},
 		{Name: "JPA named queries", Category: api.Ref{Name: "Store"}},
 		{Name: "Properties", Category: api.Ref{Name: "Embedded"}},
 		{Name: "Properties", Category: api.Ref{Name: "Other"}},
 		{Name: "Properties", Category: api.Ref{Name: "Sustain"}},
+		{Name: "Micrometer", Category: api.Ref{Name: "Embedded"}},
+		{Name: "Micrometer", Category: api.Ref{Name: "Execute"}},
+		{Name: "Micrometer", Category: api.Ref{Name: "Integration"}},
+		{Name: "Spring DI", Category: api.Ref{Name: "Embedded"}},
+		{Name: "Spring DI", Category: api.Ref{Name: "Execute"}},
+		{Name: "Spring DI", Category: api.Ref{Name: "Inversion of Control"}},
+		{Name: "Spring Boot Actuator", Category: api.Ref{Name: "Embedded"}},
+		{Name: "Spring Boot Actuator", Category: api.Ref{Name: "Observability"}},
+		{Name: "Spring Boot Actuator", Category: api.Ref{Name: "Sustain"}},
+		{Name: "Spring Data JPA", Category: api.Ref{Name: "Persistence"}},
+		{Name: "Spring Data JPA", Category: api.Ref{Name: "Store"}},
+		{Name: "Spring Data JPA", Category: api.Ref{Name: "Embedded"}},
+		{Name: "Spring MVC", Category: api.Ref{Name: "Embedded"}},
+		{Name: "Spring MVC", Category: api.Ref{Name: "MVC"}},
+		{Name: "Spring MVC", Category: api.Ref{Name: "View"}},
+		{Name: "Spring Web", Category: api.Ref{Name: "Embedded"}},
+		{Name: "Spring Web", Category: api.Ref{Name: "View"}},
+		{Name: "Spring Web", Category: api.Ref{Name: "Web"}},
 	},
 }
