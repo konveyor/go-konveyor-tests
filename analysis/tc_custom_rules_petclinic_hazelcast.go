@@ -496,5 +496,9 @@ var PetclinicHazelcast = TC{
 		{Name: "Servlet", Category: api.Ref{Name: "Java EE"}},
 		{Name: "Spring", Category: api.Ref{Name: "Embedded"}},
 		{Name: "Spring", Category: api.Ref{Name: "Execute"}},
+		{Name: "Spring JMX", Category: api.Ref{Name: "Embedded"}},
+		{Name: "Spring JMX", Category: api.Ref{Name: "Observability"}},
+		{Name: "Spring JMX", Category: api.Ref{Name: "Sustain"}},
+
 	},
 }
