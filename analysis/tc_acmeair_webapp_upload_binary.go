@@ -7,10 +7,6 @@ import (
 )
 
 var AcmeairWebappBinary = TC{
-	SkipTest: SkipTestConfig{
-		Reason: "Skip binary test. https://github.com/konveyor/analyzer-lsp/issues/905",
-		Skip:   true,
-	},
 	Name:        "acmeair-webapp",
 	Application: data.UploadBinary,
 	Task:        Analyze,
