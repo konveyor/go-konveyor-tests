@@ -192,43 +192,48 @@ func TestApplicationAnalysis(t *testing.T) {
 				}
 			}
 
-			tc.Task.State = "Ready"
-			assert.Should(t, RichClient.Task.Update(&tc.Task))
-
-			// Wait until task finishes
 			var task *api.Task
-			for i := 0; i < Retry; i++ {
-				task, err = RichClient.Task.Get(tc.Task.ID)
-				if err != nil || task.State == "Succeeded" || task.State == "Failed" {
-					break
-				}
-				time.Sleep(Wait)
-			}
+			t.Run("Task", func(t *testing.T) {
+				tc.Task.State = "Ready"
+				assert.Should(t, RichClient.Task.Update(&tc.Task))
 
-			if task.State == "Running" {
-				t.Error("Timed out running the test. Details:")
-				err = printTask(task, debugDirectory)
-				if err != nil {
-					t.Error(err)
+				// Wait until task finishes
+				for i := 0; i < Retry; i++ {
+					task, err = RichClient.Task.Get(tc.Task.ID)
+					if err != nil || task.State == "Succeeded" || task.State == "Failed" {
+						break
+					}
+					time.Sleep(Wait)
 				}
-				//if this is still running after timeout, then we should move on, this wont work
-				return
-			}
 
-			if task.State != "Succeeded" || len(task.Errors) > 0 {
-				t.Error("Analyze Task failed. Details:")
-				err = printTask(task, debugDirectory)
-				if err != nil {
-					t.Error(err)
+				if task.State == "Running" {
+					t.Errorf("Timed out running the test. Errors: %s\nActivity: %+v", formatTaskErrors(task.Errors), task.Activity)
+					err = printTask(task, debugDirectory)
+					if err != nil {
+						t.Error(err)
+					}
+					// if this is still running after timeout, then we should move on, this wont work
+					return
 				}
-				// If the task was unsuccessful there is no reason to continue execution.
-				return
-			}
 
-			verifyAnalysis(
-				TaskTest{T: t, task: task},
-				tc,
-				debug)
+				if task.State != "Succeeded" || len(task.Errors) > 0 {
+					t.Errorf("Analyze Task failed. Errors: %s\nActivity: %+v", formatTaskErrors(task.Errors), task.Activity)
+					err = printTask(task, debugDirectory)
+					if err != nil {
+						t.Error(err)
+					}
+					// If the task was unsuccessful there is no reason to continue execution.
+					return
+				}
+				fmt.Println("Task succeeded.")
+			})
+
+			t.Run("Results", func(t *testing.T) {
+				verifyAnalysis(
+					TaskTest{T: t, task: task},
+					tc,
+					debug)
+			})
 		})
 		if debug {
 			err := printTasks(TmpOutputDir)
@@ -458,6 +463,18 @@ func dumpTaskAttachments(task *api.Task, dir string) (err error) {
 	}
 	return
 }
+// formatTaskErrors formats task errors for better readability
+func formatTaskErrors(errors []api.TaskError) string {
+	if len(errors) == 0 {
+		return "none"
+	}
+	var result strings.Builder
+	result.WriteString("\n")
+	for i, err := range errors {
+		result.WriteString(fmt.Sprintf("  [%d] Severity: %s, Description: %s\n", i+1, err.Severity, err.Description))
+	}
+	return result.String()
+}
 
 // create dir, set filename
 func printTask(task *api.Task, destDir string) (err error) {
@@ -484,8 +501,8 @@ func printTasks(debugDirectory string) (err error) {
 	if err != nil {
 		return
 	}
-	tasksDir := path.Join(debugDirectory, "ALL-TASKS")
-	_ = os.Mkdir(tasksDir, 0750) // The directory might exist already
+	tasksDir, _ := filepath.Abs(path.Join(debugDirectory, "ALL-TASKS"))
+	_ = os.Mkdir(tasksDir, 0o750) // The directory might exist already
 	for i := range tasks {
 		err = printTask(&tasks[i], tasksDir)
 		if err != nil {
