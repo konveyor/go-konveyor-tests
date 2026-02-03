@@ -47,11 +47,8 @@ var TackleTestappPublicPackageFilter = TC{
 		},
 	},
 	AnalysisTags: []api.Tag{
-		{Name: "EJB XML", Category: api.Ref{Name: "Bean"}},
 		{Name: "Properties", Category: api.Ref{Name: "Other"}},
-		{Name: "EJB XML", Category: api.Ref{Name: "Java EE"}},
 		{Name: "Properties", Category: api.Ref{Name: "Sustain"}},
-		{Name: "EJB XML", Category: api.Ref{Name: "Connect"}},
 		{Name: "Properties", Category: api.Ref{Name: "Embedded"}},
 	},
 }

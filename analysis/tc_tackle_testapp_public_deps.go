@@ -562,7 +562,6 @@ var TackleTestappPublicWithDeps = TC{
 		},
 	},
 	AnalysisTags: []api.Tag{
-		{Name: "EJB XML", Category: api.Ref{Name: "Bean"}},
 		{Name: "Servlet", Category: api.Ref{Name: "HTTP"}},
 		{Name: "Micrometer", Category: api.Ref{Name: "Integration"}},
 		{Name: "Spring DI", Category: api.Ref{Name: "Inversion of Control"}},
@@ -573,10 +572,8 @@ var TackleTestappPublicWithDeps = TC{
 		{Name: "Spring Web", Category: api.Ref{Name: "Web"}},
 		{Name: "Spring DI", Category: api.Ref{Name: "Execute"}},
 		{Name: "Micrometer", Category: api.Ref{Name: "Execute"}},
-		{Name: "EJB XML", Category: api.Ref{Name: "Connect"}},
 		{Name: "Servlet", Category: api.Ref{Name: "Connect"}},
 		{Name: "Servlet", Category: api.Ref{Name: "Java EE"}},
-		{Name: "EJB XML", Category: api.Ref{Name: "Java EE"}},
 		{Name: "JPA named queries", Category: api.Ref{Name: "Java EE"}},
 		{Name: "Properties", Category: api.Ref{Name: "Sustain"}},
 		{Name: "Spring Boot Actuator", Category: api.Ref{Name: "Sustain"}},
