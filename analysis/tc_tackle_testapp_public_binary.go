@@ -55,9 +55,6 @@ var TackleTestappPublicBinary = TC{
 		},
 	},
 	AnalysisTags: []api.Tag{
-		{Name: "EJB XML", Category: api.Ref{Name: "Bean"}},
-		{Name: "EJB XML", Category: api.Ref{Name: "Connect"}},
-		{Name: "EJB XML", Category: api.Ref{Name: "Java EE"}},
 		{Name: "Servlet", Category: api.Ref{Name: "HTTP"}},
 		{Name: "Servlet", Category: api.Ref{Name: "Java EE"}},
 		{Name: "Servlet", Category: api.Ref{Name: "Connect"}},
