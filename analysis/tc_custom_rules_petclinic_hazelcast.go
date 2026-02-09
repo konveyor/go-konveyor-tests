@@ -28,7 +28,7 @@ var PetclinicHazelcast = TC{
 		},
 	},
 	Analysis: api.Analysis{
-		Effort: 20,
+		Effort: 21,
 		Insights: []api.Insight{
 			{
 				Category:    "mandatory",
@@ -60,6 +60,20 @@ var PetclinicHazelcast = TC{
 							config.getKubernetesConfig().setEnabled(true)
 							 .setProperty("namespace", "namespace")
 							 .setProperty("service-name", "hazelcast-service");`,
+					},
+				},
+			},
+			{
+				Category:    "mandatory",
+				Description: "Embedded Hazelcast dependencies",
+				Effort:      1,
+				RuleSet:     "files",
+				Rule:        "hazelcast-cloud-readiness-hz002",
+				Incidents: []api.Incident{
+					{
+						File:    "/shared/source/spring-framework-petclinic/pom.xml",
+						Line:    216,
+						Message: "The project uses hazelcast with the version between 2.0.0 and less than 5.0.0. Please use hazelcast 5.0 or above.",
 					},
 				},
 			},
@@ -496,5 +510,14 @@ var PetclinicHazelcast = TC{
 		{Name: "Spring JMX", Category: api.Ref{Name: "Embedded"}},
 		{Name: "Spring JMX", Category: api.Ref{Name: "Observability"}},
 		{Name: "Spring JMX", Category: api.Ref{Name: "Sustain"}},
+		{Name: "Spring DI", Category: api.Ref{Name: "Inversion of Control"}},
+		{Name: "Spring DI", Category: api.Ref{Name: "Execute"}},
+		{Name: "Spring DI", Category: api.Ref{Name: "Embedded"}},
+		{Name: "Spring MVC", Category: api.Ref{Name: "MVC"}},
+		{Name: "Spring MVC", Category: api.Ref{Name: "Embedded"}},
+		{Name: "Spring MVC", Category: api.Ref{Name: "View"}},
+		{Name: "Spring Web", Category: api.Ref{Name: "Web"}},
+		{Name: "Spring Web", Category: api.Ref{Name: "View"}},
+		{Name: "Spring Web", Category: api.Ref{Name: "Embedded"}},
 	},
 }
