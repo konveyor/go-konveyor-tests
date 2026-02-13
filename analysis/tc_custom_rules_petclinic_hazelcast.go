@@ -474,7 +474,6 @@ var PetclinicHazelcast = TC{
 	AnalysisTags: []api.Tag{
 		{Name: "EJB XML", Category: api.Ref{Name: "Bean"}},
 		{Name: "Servlet", Category: api.Ref{Name: "HTTP"}},
-		{Name: "Spring", Category: api.Ref{Name: "Inversion of Control"}},
 		{Name: "Common Annotations", Category: api.Ref{Name: "Other"}},
 		{Name: "Properties", Category: api.Ref{Name: "Other"}},
 		{Name: "JPA named queries", Category: api.Ref{Name: "Persistence"}},
@@ -494,8 +493,6 @@ var PetclinicHazelcast = TC{
 		{Name: "Properties", Category: api.Ref{Name: "Sustain"}},
 		{Name: "Bean Validation", Category: api.Ref{Name: "Store"}},
 		{Name: "Servlet", Category: api.Ref{Name: "Java EE"}},
-		{Name: "Spring", Category: api.Ref{Name: "Embedded"}},
-		{Name: "Spring", Category: api.Ref{Name: "Execute"}},
 		{Name: "Spring JMX", Category: api.Ref{Name: "Embedded"}},
 		{Name: "Spring JMX", Category: api.Ref{Name: "Observability"}},
 		{Name: "Spring JMX", Category: api.Ref{Name: "Sustain"}},
