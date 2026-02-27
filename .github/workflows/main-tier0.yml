@@ -11,10 +11,25 @@ on:
       - "**.md"
 
 jobs:
+  get_tag:
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.set_tag.outputs.tag }}
+    steps:
+      - name: set tag
+        id: set_tag
+        run: |
+          if "${{ github.base_ref || github.ref }}" == "main" ]; then
+            echo "tag=latest" >> $GITHUB_OUTPUT
+          else
+            echo "tag=${{ github.base_ref || github.ref }}" >> $GITHUB_OUTPUT
+          fi
+        
   test-tier0:
+    needs: get_tag
     uses: konveyor/ci/.github/workflows/global-ci-bundle.yml@main
     with:
-      operator_bundle: quay.io/konveyor/tackle2-operator-bundle:latest
+      operator_bundle: quay.io/konveyor/tackle2-operator-bundle:${{ needs.get_tag.outputs.tag }}
       api_tests_ref: ${{ github.ref }}
       run_api_tests: true
       run_ui_tests: false
