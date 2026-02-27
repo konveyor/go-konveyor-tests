@@ -756,5 +756,8 @@ var Tomcat = TC{
 		{Name: "Spring Boot Actuator", Category: api.Ref{Name: "Embedded"}},
 		{Name: "Spring Data JPA", Category: api.Ref{Name: "Embedded"}},
 		{Name: "Spring MVC", Category: api.Ref{Name: "Embedded"}},
+		{Name: "Application Properties File", Category: api.Ref{Name: "Configuration Management"}},
+		{Name: "Application Properties File", Category: api.Ref{Name: "Sustain"}},
+		{Name: "Application Properties File", Category: api.Ref{Name: "Embedded"}},
 	},
 }
