@@ -2,34 +2,22 @@ name: Test TIER0 release braches
 
 on:
   pull_request:
-    branches: ["release-0.7", "release-0.8"]
+    branches: ["release-*"]
     paths-ignore:
       - "**.md"
   push:
-    branches: ["release-0.7", "release-0.8"]
+    branches: ["release-*"]
     paths-ignore:
       - "**.md"
 
 jobs:
-  test-tier0-release07:
+  test-tier0:
     uses: konveyor/ci/.github/workflows/global-ci.yml@main
-    if: ${{ github.ref == 'refs/heads/release-0.7' || github.event.pull_request.base.ref == 'release-0.7' }}
     with:
-      tag: release-0.7
-      operator_tag: v0.6.2  # TODO: update when operator tag for 0.7 is created
-      api_tests_ref: ${{ github.ref }}
+      tag: ${{ github.base_ref || github.ref_name }} # Use the target branch: base_ref for PRs (empty for push), fallback to ref_name for pushes
+      operator_tag: ${{ github.base_ref || github.ref_name }}
+      api_tests_ref: ${{ github.ref }} # The source branch being tested: PR source branch for PRs, pushed branch for pushes
       api_tests_tiers: DEBUG=1 make test-tier0
       run_api_tests: true
       run_ui_tests: false
-      api_hub_tests_ref: "release-0.7"
-  test-tier0-release08:
-    uses: konveyor/ci/.github/workflows/global-ci.yml@main
-    if: ${{ github.ref == 'refs/heads/release-0.8' || github.event.pull_request.base.ref == 'release-0.8' }}
-    with:
-      tag: release-0.8
-      operator_tag: v0.8.0-beta.4
-      api_tests_ref: ${{ github.ref }}
-      api_tests_tiers: DEBUG=1 make test-tier0
-      run_api_tests: true
-      run_ui_tests: false
-      api_hub_tests_ref: "release-0.8"
+      api_hub_tests_ref: ${{ github.base_ref || github.ref_name }}
