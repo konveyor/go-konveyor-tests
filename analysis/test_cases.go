@@ -10,6 +10,7 @@ var Tier0TestCases = []TC{
 	DaytraderWithDeps,
 	AcmeairWebappBinary,          // Binary upload
 	TackleTestappPublicBinary,    // Binary fetched from tackle-testapp-public maven registry
+	PetclinicHazelcast,           // Test case with custom rules
 }
 
 // Tier 1 Analysis test cases - should work.
@@ -19,13 +20,11 @@ var Tier1TestCases = []TC{
 	BookServerSource,
 	CoolstoreWithDepsQuarkus,
 	AdministracionEfectivoBinary, // Binary upload
-
 }
 
 // Tier 2 Analysis test cases - great if works.
 // List of applications with expected analysis outputs.
 var Tier2TestCases = []TC{
-	PetclinicHazelcast,
 	SeamBooking,
 }
 
