@@ -7,10 +7,6 @@ import (
 )
 
 var SeamBooking = TC{
-	SkipTest: SkipTestConfig{
-		Reason: "Skip test. Investigate on changes and fix https://github.com/konveyor/go-konveyor-tests/issues/353",
-		Skip:   true,
-	},
 	Name:        "Seam booking",
 	Application: data.SeamBooking,
 	Task:        Analyze,
@@ -291,6 +287,39 @@ var SeamBooking = TC{
 						File:    "/shared/source/windup/test-files/seam-booking-5.2/view/edit.xhtml",
 						Line:    14,
 						Message: "There is no direct mapping for <s:validateAll> in JSF UI controls, but you can achieve a similar effect by using <f:validateBean> or Richfaces <rich:validator>.	",
+					},
+				},
+			},
+			{
+				Category:    "potential",
+				Description: "The groupId 'javax' has been replaced by 'jakarta' in JBoss EAP 7.3, or later",
+				Effort:      1,
+				RuleSet:     "eap7/weblogic/tests/data",
+				Rule:        "maven-javax-to-jakarta-00004",
+				Incidents: []api.Incident{
+					{
+						File:    "/shared/source/windup/test-files/seam-booking-5.2/pom.xml",
+						Line:    24,
+						Message: "If you migrate your application to JBoss EAP 7.3, or later, and want to ensure its Maven building, running or testing works as expected, use instead the Jakarta EE dependency - groupId `jakarta.`.",
+					},
+				},
+			},
+			{
+				Category:    "potential",
+				Description: "web.xml element references a javax-prefixed class name",
+				Effort:      1,
+				RuleSet:     "eap8/eap7",
+				Rule:        "javax-to-jakarta-servlet-00130",
+				Incidents: []api.Incident{
+					{
+						File:    "/shared/source/windup/test-files/seam-booking-5.2/resources/WEB-INF/web.xml",
+						Line:    40,
+						Message: "web.xml element references a javax-prefixed class name",
+					},
+					{
+						File:    "/shared/source/windup/test-files/seam-booking-5.2/resources/WEB-INF/web.xml",
+						Line:    51,
+						Message: "web.xml element references a javax-prefixed class name",
 					},
 				},
 			},
