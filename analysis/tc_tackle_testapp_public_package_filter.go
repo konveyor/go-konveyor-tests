@@ -2,6 +2,7 @@ package analysis
 
 import (
 	"github.com/konveyor/go-konveyor-tests/data"
+	"github.com/konveyor/go-konveyor-tests/data/identity"
 	"github.com/konveyor/go-konveyor-tests/hack/addon"
 	"github.com/konveyor/tackle2-hub/api"
 )
@@ -17,7 +18,9 @@ var TackleTestappPublicPackageFilter = TC{
 			"konveyor.io/target=linux",
 		},
 	},
-	Identities: []api.Identity{},
+	Identities: []api.Identity{
+		identity.TackleTestappPublicMaven,
+	},
 	Scope: &addon.Scope{
 		Packages: struct {
 			Included []string "json:\"included,omitempty\""
