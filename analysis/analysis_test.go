@@ -226,7 +226,7 @@ func TestApplicationAnalysis(t *testing.T) {
 			}
 
 			if tc.ShouldHaveErrors && task.State == "Succeeded" && len(task.Errors) == 0 {
-				t.Error("Analyze task was succesfully, when it should have reported errors")
+				t.Error("Analyze task succeeded when it should have reported errors")
 				err = printTask(task, debugDirectory)
 				if err != nil {
 					t.Error(err)
