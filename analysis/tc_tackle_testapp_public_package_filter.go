@@ -51,4 +51,5 @@ var TackleTestappPublicPackageFilter = TC{
 		{Name: "Properties", Category: api.Ref{Name: "Sustain"}},
 		{Name: "Properties", Category: api.Ref{Name: "Embedded"}},
 	},
+	ShouldHaveErrors: true,
 }

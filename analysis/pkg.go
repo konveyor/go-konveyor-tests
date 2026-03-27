@@ -66,7 +66,8 @@ type TC struct {
 	AnalysisTags  []api.Tag
 
 	// Skip test if true.
-	SkipTest SkipTestConfig
+	SkipTest         SkipTestConfig
+	ShouldHaveErrors bool
 }
 
 func DumpAnalysis(t *testing.T, tc TC, analysis api.Analysis) {

@@ -215,13 +215,22 @@ func TestApplicationAnalysis(t *testing.T) {
 				return
 			}
 
-			if task.State != "Succeeded" || len(task.Errors) > 0 {
+			if !tc.ShouldHaveErrors && (task.State != "Succeeded" || len(task.Errors) > 0) {
 				t.Error("Analyze Task failed. Details:")
 				err = printTask(task, debugDirectory)
 				if err != nil {
 					t.Error(err)
 				}
 				// If the task was unsuccessful there is no reason to continue execution.
+				return
+			}
+
+			if tc.ShouldHaveErrors && task.State == "Succeeded" && len(task.Errors) == 0 {
+				t.Error("Analyze task succeeded when it should have reported errors")
+				err = printTask(task, debugDirectory)
+				if err != nil {
+					t.Error(err)
+				}
 				return
 			}
 
