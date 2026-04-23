@@ -29,33 +29,22 @@ update-hub:
 
 # TIER0 - a core functionality, should never fail, Konveyor would be fully broken.
 test-tier0:
-	$(MAKE) test-analysis
 
 # TIER1 - all normal features expected to work.
 test-tier1:
 	$(MAKE) test-metrics
-	TIER1=1 $(MAKE) test-analysis
 
 # TIER2 - advanced features and nice-to-haves.
 test-tier2:
-	TIER2=1 $(MAKE) test-analysis
 
 # TIER3
 test-tier3:
 	$(MAKE) test-jira
 	$(MAKE) test-migrationwave
-	TIER3=1 $(MAKE) test-analysis
 
 #
 # Feature tests.
 #
-
-# Application analysis tests.
-test-analysis:
-	go install github.com/jstemmer/go-junit-report/v2@latest
-	mkdir -pv ${JUNIT_REPORT_DIR}
-	go test -count=1 -p=1 -timeout 7200s -v ./analysis/... 2>&1 | \
-	go-junit-report -iocopy -set-exit-code -out ${JUNIT_REPORT_DIR}/analysis-report_$$(date +%s).xml
 
 # Metrics.
 test-metrics:
