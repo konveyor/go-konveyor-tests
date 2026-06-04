@@ -1,8 +1,7 @@
 package addon
 
 import (
-	"github.com/konveyor/tackle2-addon/repository"
-	"github.com/konveyor/tackle2-hub/api"
+	"github.com/konveyor/tackle2-hub/shared/api"
 )
 
 //
@@ -30,10 +29,9 @@ type Data struct {
 
 // Mode settings.
 type Mode struct {
-	Binary     bool   `json:"binary"`
-	Artifact   string `json:"artifact"`
-	WithDeps   bool   `json:"withDeps"`
-	Repository repository.SCM
+	Binary   bool   `json:"binary"`
+	Artifact string `json:"artifact"`
+	WithDeps bool   `json:"withDeps"`
 	//
 	//path struct {
 	//	appDir string

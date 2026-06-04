@@ -2,8 +2,8 @@ package utils
 
 import (
 	"github.com/jortel/go-utils/logr"
-	"github.com/konveyor/tackle2-hub/binding"
-	"github.com/konveyor/tackle2-hub/test/api/client"
+	"github.com/konveyor/tackle2-hub/shared/binding"
+	"github.com/konveyor/go-konveyor-tests/utils/testutil"
 )
 
 const (
@@ -12,7 +12,7 @@ const (
 
 var (
 	Log           = logr.WithName("test")
-	Client        *binding.Client
+	Client        binding.RestClient
 	RichClient    *binding.RichClient
 	Application   binding.Application
 	Tracker       binding.Tracker
@@ -24,7 +24,7 @@ var (
 func init() {
 
 	// Prepare RichClient and login to Hub API (configured from env variables).
-	RichClient = client.PrepareRichClient()
+	RichClient = testutil.PrepareRichClient()
 
 	// Access REST client directly (some test API call need it)
 	Client = RichClient.Client

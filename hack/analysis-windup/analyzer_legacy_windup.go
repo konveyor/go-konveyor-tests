@@ -9,8 +9,8 @@ import (
 
 	"github.com/konveyor/go-konveyor-tests/analysis"
 	"github.com/konveyor/go-konveyor-tests/hack/addonwindup"
-	"github.com/konveyor/tackle2-hub/api"
-	"github.com/konveyor/tackle2-hub/test/assert"
+	"github.com/konveyor/tackle2-hub/shared/api"
+	"github.com/konveyor/go-konveyor-tests/utils/testutil"
 )
 
 var AnalyzeWindup = api.Task{
@@ -54,12 +54,12 @@ var defaultWindupData = addonwindup.Data{
 func GetReportText(t *testing.T, tc *analysis.TC, path string) (text string) {
 	// Get report file.
 	dirName, err := os.MkdirTemp("/tmp", tc.Name)
-	assert.Must(t, err)
+	testutil.Must(t, err)
 	fileName := filepath.Join(dirName, filepath.Base(path))
 	err = RichClient.Application.Bucket(tc.Application.ID).Get(path, dirName)
-	assert.Must(t, err)
+	testutil.Must(t, err)
 	content, err := os.ReadFile(fileName)
-	assert.Must(t, err)
+	testutil.Must(t, err)
 
 	// Prepare content - strip tags etc.
 	tags := regexp.MustCompile(`<.*?>`)

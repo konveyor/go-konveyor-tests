@@ -4,7 +4,7 @@ import (
 	"github.com/konveyor/go-konveyor-tests/data"
 	"github.com/konveyor/go-konveyor-tests/data/identity"
 	"github.com/konveyor/go-konveyor-tests/hack/addon"
-	"github.com/konveyor/tackle2-hub/api"
+	"github.com/konveyor/tackle2-hub/shared/api"
 )
 
 var CoolstoreWithDepsQuarkus = TC{

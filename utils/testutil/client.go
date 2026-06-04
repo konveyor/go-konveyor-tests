@@ -1,0 +1,41 @@
+package testutil
+
+import (
+	"os"
+
+	"github.com/konveyor/tackle2-hub/shared/binding"
+	"github.com/konveyor/tackle2-hub/shared/binding/auth"
+	"github.com/konveyor/tackle2-hub/shared/settings"
+	"k8s.io/utils/env"
+)
+
+const (
+	Username = "HUB_USERNAME"
+	Password = "HUB_PASSWORD"
+)
+
+// PrepareRichClient creates a RichClient to interact with Hub API.
+// Parameters are read from environment variables:
+//
+//	HUB_BASE_URL (required)
+//	HUB_USERNAME, HUB_PASSWORD (optional, depends on Require Auth option in Konveyor installation)
+func PrepareRichClient() (richClient *binding.RichClient) {
+	// Prepare RichClient and login to Hub API
+	richClient = binding.New(
+		env.GetString(
+			settings.EnvHubBaseURL,
+			"http://localhost:8080"))
+
+	// Set up Basic auth if credentials provided
+	username := os.Getenv(Username)
+	password := os.Getenv(Password)
+	if username != "" && password != "" {
+		basicAuth := auth.NewBasic(username, password)
+		richClient.UseAuth(basicAuth)
+	}
+
+	// Disable HTTP requests retry for network-related errors to fail quickly.
+	richClient.Client.SetRetry(uint8(1))
+
+	return
+}

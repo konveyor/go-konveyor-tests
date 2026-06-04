@@ -1,3 +1,7 @@
+//go:build legacy_windup
+// +build legacy_windup
+
+// Legacy Windup analyzer tests - requires legacy_windup build tag
 package analysiswindup
 
 import (
@@ -9,8 +13,8 @@ import (
 	"github.com/konveyor/go-konveyor-tests/hack/addonwindup"
 	"github.com/konveyor/go-konveyor-tests/hack/uniq"
 	"github.com/konveyor/go-konveyor-tests/hack/windupreport"
-	"github.com/konveyor/tackle2-hub/api"
-	"github.com/konveyor/tackle2-hub/test/assert"
+	"github.com/konveyor/tackle2-hub/shared/api"
+	"github.com/konveyor/go-konveyor-tests/utils/testutil"
 )
 
 // Test application analysis
@@ -37,7 +41,7 @@ func TestApplicationAnalysis(t *testing.T) {
 
 			// Create the application.
 			uniq.ApplicationName(&tc.Application)
-			assert.Should(t, RichClient.Application.Create(&tc.Application))
+			testutil.Should(t, RichClient.Application.Create(&tc.Application))
 
 			// Prepare custom rules.
 			for i := range tc.CustomRules {
@@ -47,7 +51,7 @@ func TestApplicationAnalysis(t *testing.T) {
 				rules := []api.Rule{}
 				for _, rule := range r.Rules {
 					ruleFile, err := RichClient.File.Put(rule.File.Name)
-					assert.Should(t, err)
+					testutil.Should(t, err)
 					rules = append(rules, api.Rule{
 						File: &api.Ref{
 							ID: ruleFile.ID,
@@ -56,7 +60,7 @@ func TestApplicationAnalysis(t *testing.T) {
 					// ruleFiles = append(ruleFiles, *ruleFile)
 				}
 				r.Rules = rules
-				assert.Should(t, RichClient.RuleSet.Create(r))
+				testutil.Should(t, RichClient.RuleSet.Create(r))
 			}
 
 			// Prepare and submit the analyze task.
@@ -79,7 +83,7 @@ func TestApplicationAnalysis(t *testing.T) {
 			//	taskData.Rules = tc.Rules
 			//}
 			tc.Task.Data = taskData
-			assert.Should(t, RichClient.Task.Create(&tc.Task))
+			testutil.Should(t, RichClient.Task.Create(&tc.Task))
 
 			// Wait until task finishes
 			var task *api.Task
@@ -113,13 +117,13 @@ func TestApplicationAnalysis(t *testing.T) {
 				return
 			}
 			// Cleanup Application.
-			assert.Must(t, RichClient.Application.Delete(tc.Application.ID))
+			testutil.Must(t, RichClient.Application.Delete(tc.Application.ID))
 
 			// Cleanup custom rules and their files.
 			for _, r := range tc.CustomRules {
-				assert.Should(t, RichClient.RuleSet.Delete(r.ID))
+				testutil.Should(t, RichClient.RuleSet.Delete(r.ID))
 				for _, rl := range r.Rules {
-					assert.Should(t, RichClient.File.Delete(rl.File.ID))
+					testutil.Should(t, RichClient.File.Delete(rl.File.ID))
 				}
 			}
 		})

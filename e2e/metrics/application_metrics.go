@@ -8,7 +8,7 @@ import (
 	. "github.com/onsi/gomega"
 
 	"github.com/konveyor/go-konveyor-tests/utils"
-	"github.com/konveyor/tackle2-hub/api"
+	"github.com/konveyor/tackle2-hub/shared/api"
 )
 
 var (

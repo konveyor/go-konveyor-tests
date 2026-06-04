@@ -1,6 +1,6 @@
 package analysis
 
-import "github.com/konveyor/tackle2-hub/api"
+import "github.com/konveyor/tackle2-hub/shared/api"
 
 var BookServerSource = TC{
 	SkipTest: SkipTestConfig{

@@ -5,7 +5,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/konveyor/tackle2-hub/api"
+	"github.com/konveyor/tackle2-hub/shared/api"
 )
 
 var r = rand.New(rand.NewSource(time.Now().UnixNano()))

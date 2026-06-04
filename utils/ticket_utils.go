@@ -3,7 +3,7 @@ package utils
 import (
 	"time"
 
-	"github.com/konveyor/tackle2-hub/api"
+	"github.com/konveyor/tackle2-hub/shared/api"
 )
 
 func WaitForReference(ticket *api.Ticket) string {
