@@ -3,13 +3,13 @@ package analysiswindup
 import (
 	"time"
 
-	"github.com/konveyor/tackle2-hub/binding"
-	"github.com/konveyor/tackle2-hub/test/api/client"
+	"github.com/konveyor/tackle2-hub/shared/binding"
+	"github.com/konveyor/go-konveyor-tests/utils/testutil"
 )
 
 var (
 	// Setup Hub API client
-	Client     *binding.Client
+	Client     binding.RestClient
 	RichClient *binding.RichClient
 
 	// Analysis waiting loop 5 minutes (60 * 5s)
@@ -19,7 +19,7 @@ var (
 
 func init() {
 	// Prepare RichClient and login to Hub API (configured from env variables).
-	RichClient = client.PrepareRichClient()
+	RichClient = testutil.PrepareRichClient()
 
 	// Access REST client directly (some test API call need it)
 	Client = RichClient.Client

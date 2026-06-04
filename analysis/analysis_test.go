@@ -17,9 +17,9 @@ import (
 	"github.com/k0kubun/pp"
 	"github.com/konveyor/go-konveyor-tests/hack/uniq"
 	"github.com/konveyor/go-konveyor-tests/utils"
-	"github.com/konveyor/tackle2-hub/api"
-	"github.com/konveyor/tackle2-hub/binding"
-	"github.com/konveyor/tackle2-hub/test/assert"
+	"github.com/konveyor/go-konveyor-tests/utils/testutil"
+	"github.com/konveyor/tackle2-hub/shared/api"
+	"github.com/konveyor/tackle2-hub/shared/binding/client"
 	"gopkg.in/yaml.v3"
 )
 
@@ -85,11 +85,7 @@ func TestApplicationAnalysis(t *testing.T) {
 				t.Parallel()
 			}
 
-			// Ensure API Login and tokens for each test_case
-			err := RichClient.Login(os.Getenv(Username), os.Getenv(Password))
-			if err != nil {
-				panic(fmt.Sprintf("Cannot login to API: %v.", err.Error()))
-			}
+			// Authentication is already set up in pkg.go init() via testutil.PrepareRichClient()
 
 			// Prepare TC debug output directory
 			debugDirectory := path.Join(TmpOutputDir, preparePathName(testcase.Name))
@@ -135,7 +131,7 @@ func TestApplicationAnalysis(t *testing.T) {
 					identity.Settings = strings.Replace(identity.Settings, "GITHUB_TOKEN", mvnToken, 1)
 					t.Logf("using mvn user %s", mvnUser)
 				}
-				assert.Should(t, RichClient.Identity.Create(&identity))
+				testutil.Should(t, RichClient.Identity.Create(&identity))
 				tc.Application.Identities = append(
 					tc.Application.Identities,
 					api.IdentityRef{ID: identity.ID, Role: "maven"})
@@ -143,7 +139,7 @@ func TestApplicationAnalysis(t *testing.T) {
 
 			// Create the application.
 			uniq.ApplicationName(&tc.Application)
-			assert.Should(t, RichClient.Application.Create(&tc.Application))
+			testutil.Should(t, RichClient.Application.Create(&tc.Application))
 
 			// Prepare and submit the analyze task.
 			// tc.Task.Addon = analyzerAddon
@@ -173,7 +169,7 @@ func TestApplicationAnalysis(t *testing.T) {
 
 			taskData.Mode.Artifact = tc.Artifact
 			tc.Task.Data = taskData
-			assert.Should(t, RichClient.Task.Create(&tc.Task))
+			testutil.Should(t, RichClient.Task.Create(&tc.Task))
 
 			bucketContent := RichClient.Bucket.Content(tc.Task.Bucket.ID)
 			dataDir := "data"
@@ -188,12 +184,12 @@ func TestApplicationAnalysis(t *testing.T) {
 				for _, rule := range r.Rules {
 					// Upload rule file into the application bucket
 					err := bucketContent.Put(dataDir+rule.File.Name, rule.File.Name)
-					assert.Should(t, err)
+					testutil.Should(t, err)
 				}
 			}
 
 			tc.Task.State = "Ready"
-			assert.Should(t, RichClient.Task.Update(&tc.Task))
+			testutil.Should(t, RichClient.Task.Update(&tc.Task))
 
 			// Wait until task finishes
 			var task *api.Task
@@ -261,13 +257,13 @@ func verifyAnalysis(t TaskTest, tc TC, debug bool) {
 	var gotAnalysis api.Analysis
 
 	// Get LSP analysis directly from Hub API
-	analysisPath := binding.Path(api.AppAnalysesRoot).Inject(binding.Params{api.ID: tc.Application.ID})
-	assert.Should(t.T, Client.Get(analysisPath, &gotAppAnalyses))
+	analysisPath := client.Path(api.AppAnalysesRoute).Inject(client.Params{api.ID: tc.Application.ID})
+	testutil.Should(t.T, Client.Get(analysisPath, &gotAppAnalyses))
 	if len(gotAppAnalyses) < 1 {
 		t.Fatalf("Analysis result not present in Hub.")
 	}
-	analysisDetailPath := binding.Path(api.AnalysisRoot).Inject(binding.Params{api.ID: gotAppAnalyses[len(gotAppAnalyses)-1].ID})
-	assert.Should(t.T, Client.Get(analysisDetailPath, &gotAnalysis))
+	analysisDetailPath := client.Path(api.AnalysisRoute).Inject(client.Params{api.ID: gotAppAnalyses[len(gotAppAnalyses)-1].ID})
+	testutil.Should(t.T, Client.Get(analysisDetailPath, &gotAnalysis))
 
 	// Test issues.
 	filterIssues(&gotAnalysis)
@@ -420,17 +416,17 @@ func verifyAnalysis(t TaskTest, tc TC, debug bool) {
 
 	// Cleanup Identities.
 	for _, r := range tc.Application.Identities {
-		assert.Should(t.T, RichClient.Identity.Delete(r.ID))
+		testutil.Should(t.T, RichClient.Identity.Delete(r.ID))
 	}
 
 	// Cleanup Application.
-	assert.Must(t.T, RichClient.Application.Delete(tc.Application.ID))
+	testutil.Must(t.T, RichClient.Application.Delete(tc.Application.ID))
 
 	// Cleanup custom rules and their files.
 	for _, r := range tc.CustomRules {
-		assert.Should(t.T, RichClient.RuleSet.Delete(r.ID))
+		testutil.Should(t.T, RichClient.RuleSet.Delete(r.ID))
 		for _, rl := range r.Rules {
-			assert.Should(t.T, RichClient.File.Delete(rl.File.ID))
+			testutil.Should(t.T, RichClient.File.Delete(rl.File.ID))
 		}
 	}
 }

@@ -1,3 +1,9 @@
+//go:build legacy_windup
+// +build legacy_windup
+
+// Package windupreport contains legacy Windup report parsing code.
+// This code uses deprecated API types (api.Issue) that no longer exist in tackle2-hub/shared.
+// Build with `-tags legacy_windup` to include this package.
 package windupreport
 
 import (
@@ -12,10 +18,9 @@ import (
 	"testing"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/konveyor/tackle2-hub/api"
-	"github.com/konveyor/tackle2-hub/binding"
-	"github.com/konveyor/tackle2-hub/test/api/client"
-	"github.com/konveyor/tackle2-hub/test/assert"
+	"github.com/konveyor/go-konveyor-tests/utils/testutil"
+	"github.com/konveyor/tackle2-hub/shared/api"
+	"github.com/konveyor/tackle2-hub/shared/binding"
 )
 
 // Setup Hub API client
@@ -23,7 +28,7 @@ var RichClient *binding.RichClient
 
 func init() {
 	// Prepare RichClient and login to Hub API (configured from env variables).
-	RichClient = client.PrepareRichClient()
+	RichClient = testutil.PrepareRichClient()
 }
 
 func matchIncident(re *regexp.Regexp, rawIncident string) (match string) {
@@ -38,7 +43,7 @@ func matchIncident(re *regexp.Regexp, rawIncident string) (match string) {
 
 func findRuleset(t *testing.T, appId uint, ruleName string) (ruleset string) {
 	doc, err := goquery.NewDocumentFromReader(downloadReport(t, appId, "/windup/report/reports/windup_ruleproviders.html"))
-	assert.Must(t, err)
+	testutil.Must(t, err)
 	rulesetSection := doc.Find("a.anchor[name="+ruleName+"]").Closest("div.panel-primary")
 	ruleset = rulesetSection.Find("h3.panel-title").Text()
 	return
@@ -46,7 +51,7 @@ func findRuleset(t *testing.T, appId uint, ruleName string) (ruleset string) {
 
 func populateIncidents(t *testing.T, appId uint, appDetailPath string, issues *[]api.Issue) (incidentedIssues []api.Issue) {
 	doc, err := goquery.NewDocumentFromReader(downloadReport(t, appId, "/windup/report/reports/"+appDetailPath))
-	assert.Must(t, err)
+	testutil.Must(t, err)
 
 	incidentedIssues = *issues
 
@@ -57,7 +62,7 @@ func populateIncidents(t *testing.T, appId uint, appDetailPath string, issues *[
 		fileName := strings.ReplaceAll(filePath[0], ".html", "")
 		fileName = strings.ReplaceAll(fileName, "_", ".")
 		detailDoc, err := goquery.NewDocumentFromReader(downloadReport(t, appId, "/windup/report/reports/"+filePath[0]))
-		assert.Must(t, err)
+		testutil.Must(t, err)
 
 		// Source code LINE incidents - parsing javascript/jQuery code line-by-line
 		for _, incidentLine := range strings.Split(detailDoc.Text(), "\n") {
@@ -121,7 +126,7 @@ func populateIncidents(t *testing.T, appId uint, appDetailPath string, issues *[
 
 func ParseWindupReportIssues(t *testing.T, appId uint) (issues []api.Issue) {
 	doc, err := goquery.NewDocumentFromReader(downloadReport(t, appId, "/windup/report/reports/migration_issues.html"))
-	assert.Must(t, err)
+	testutil.Must(t, err)
 
 	// Populate categories
 	categories := []string{}
@@ -155,7 +160,7 @@ func ParseWindupReportIssues(t *testing.T, appId uint) (issues []api.Issue) {
 
 func Parse(t *testing.T, appId uint) (analysis api.Analysis) {
 	doc, err := goquery.NewDocumentFromReader(downloadReport(t, appId, "/windup/report/index.html"))
-	assert.Must(t, err)
+	testutil.Must(t, err)
 
 	doc.Find("div.stats").Each(func(i int, s *goquery.Selection) {
 		analysis.Effort, _ = strconv.Atoi(s.Find("span.points").Text())
@@ -176,9 +181,9 @@ func downloadReport(t *testing.T, appId uint, path string) (reader *bufio.Reader
 	fileName := filepath.Join(tempDir, filepath.Base(path))
 	// Download the file from bucket.
 	err = RichClient.Application.Bucket(appId).Get(path, tempDir)
-	assert.Must(t, err)
+	testutil.Must(t, err)
 	f, err := os.Open(fileName)
-	assert.Must(t, err)
+	testutil.Must(t, err)
 	// Return reader.
 	reader = bufio.NewReader(f)
 	return

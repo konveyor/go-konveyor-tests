@@ -9,7 +9,7 @@ import (
 
 	"github.com/konveyor/go-konveyor-tests/data/jira"
 	"github.com/konveyor/go-konveyor-tests/hack/uniq"
-	"github.com/konveyor/tackle2-hub/api"
+	"github.com/konveyor/tackle2-hub/shared/api"
 	"github.com/onsi/gomega"
 )
 

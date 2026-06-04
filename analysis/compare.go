@@ -3,7 +3,7 @@ package analysis
 import (
 	"fmt"
 
-	"github.com/konveyor/tackle2-hub/api"
+	"github.com/konveyor/tackle2-hub/shared/api"
 )
 
 // Compare diffs for resources collections relevant for Analysis

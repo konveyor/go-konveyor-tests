@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/konveyor/tackle2-hub/api"
+	"github.com/konveyor/tackle2-hub/shared/api"
 	"gopkg.in/yaml.v3"
 )
 
