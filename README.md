@@ -9,7 +9,6 @@
 [![Test nightly TIER0](https://github.com/konveyor/go-konveyor-tests/actions/workflows/nightly-tier0.yml/badge.svg)](https://github.com/konveyor/go-konveyor-tests/actions/workflows/nightly-tier0.yml)
 [![Test nightly TIER1](https://github.com/konveyor/go-konveyor-tests/actions/workflows/nightly-tier1.yml/badge.svg)](https://github.com/konveyor/go-konveyor-tests/actions/workflows/nightly-tier1.yml)
 [![Test nightly TIER2](https://github.com/konveyor/go-konveyor-tests/actions/workflows/nightly-tier2.yml/badge.svg)](https://github.com/konveyor/go-konveyor-tests/actions/workflows/nightly-tier2.yml)
-[![Test nightly TIER3](https://img.shields.io/endpoint?url=https%3A%2F%2Fsajidmansoori12.pythonanywhere.com%2Fretrieve_data%3Fpipeline%3Dtier3-nightly&cacheSeconds=60)](https://jenkins-csb-migrationqe-main.dno.corp.redhat.com/view/MTA/job/mta/job/konveyor-tier3-nightly/)
 
 This repository contains application-level API test suite for Konveyor. That means test focusing on integration of multiple components and real-world Koveyor use-cases. Basic components tests should be placed and executed in their own repositories.
 
@@ -23,7 +22,7 @@ Background for this test suite come from Hub API tests [https://github.com/konve
 
 There is a `binding` package providing API client methods https://github.com/konveyor/tackle2-hub/tree/main/binding.
 
-Feel free to follow [application analysis integration test directory](https://github.com/konveyor/go-konveyor-tests/tree/main/analysis) as an example.
+Feel free to follow the [metrics integration tests directory](https://github.com/konveyor/go-konveyor-tests/tree/main/e2e/metrics) as an example.
 
 ## Konveyor CI status
 
@@ -67,16 +66,16 @@ Run test manually example:
 
 ```
 $ export HUB_BASE_URL="http://`minikube ip`/hub"
-$ go test -count=1 -v ./analysis/
+$ go test -count=1 -v ./e2e/metrics/
 ```
 
 ## Test tiers
 
-To provide maximum information about the project functionality, tests were separated into three tiers. From core functionality to nice to haves.
+To provide maximum information about the project functionality, tests were separated into four tiers. From core functionality to nice to haves.
 
 ### Tier 0
 
-Very basic and core functionality. A bug here would lead to mostly useless project. This tier should never fail. Examples: basic application analysis flow.
+Very basic and core functionality. A bug here would lead to mostly useless project. This tier should never fail. Currently no tests are assigned to this tier.
 
 ```
 $ make test-tier0
@@ -84,7 +83,7 @@ $ make test-tier0
 
 ### Tier 1
 
-Features of the project expected to work to satifly most of end-users expectations. Examples: real-world use cases of application analysis, Jira integrations or metrics.
+Features of the project expected to work to satifly most of end-users expectations. Currently runs the metrics tests.
 
 ```
 $ make test-tier1
@@ -92,7 +91,7 @@ $ make test-tier1
 
 ### Tier 2
 
-More advanced features like complex application analysis or some edge cases. This tier should be kept green, but a failure should not affect most of users.
+More advanced features and nice-to-haves. This tier should be kept green, but a failure should not affect most of users. Currently no tests are assigned to this tier.
 
 ```
 $ make test-tier2
@@ -100,7 +99,7 @@ $ make test-tier2
 
 ### Tier 3
 
-Tests involving credentials or private resources which are supplied as part of the test configuration. It should be excluded from PR runs and will be run through Jenkins.
+Tests involving credentials or private resources which are supplied as part of the test configuration. It should be excluded from PR runs and will be run through Jenkins. Currently runs the Jira integration and migration wave tests.
 
 ```
 $ make test-tier3
@@ -118,25 +117,9 @@ $ make test-hub-api
 
 ## Test execution options
 
-### DEBUG
-
-For debug output like printing full analysis results, set `export DEBUG=1`.
-
 ### KEEP
 
 For keep data created by test e.g. for debugging purposes, set `export KEEP=1`.
-
-### PARALLEL
-
-For parallel test execution, set `export PARALLEL=1`.
-
-### CI_REPO_URL
-
-For using a custom CI repository URL, set `export CI_REPO_URL=<repository-url>`. Defaults to `https://github.com/konveyor/ci`.
-
-### CI_REPO_BRANCH
-
-For using a custom branch of the CI repository clone, set `export CI_REPO_BRANCH=<branch-name>`. Defaults to `main`.
 
 ## Configuration
 
